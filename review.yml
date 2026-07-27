@@ -1,0 +1,475 @@
+aid: openadr-alliance
+name: OpenADR Alliance
+review:
+  question: >-
+    What does the OpenADR Alliance actually publish in public — specifications,
+    certification data, a developer portal, a real API — and what is gated?
+  answer: >-
+    The OpenADR 3 OpenAPI contract is real, parseable, and license-free, but the
+    Alliance itself publishes no developer portal, no hosted API, and no open
+    energy data. Its canonical specification repository is member-only and its
+    own distribution channel is a registration form.
+  date: '2026-07-27'
+  reviewer: API Evangelist
+  tier: industry-body-standards
+  homeMarket: United States
+  headquarters: 111 Deerwood Road, Suite 200, San Ramon, CA 94583, USA
+
+mandate:
+  regime: none
+  status: not-applicable
+  verbatim: >-
+    No consumer-data mandate applies to the OpenADR Alliance. It is a
+    mutual-benefit membership corporation that authors and certifies a protocol;
+    it is not a data holder, retailer, distributor, or accredited recipient
+    under any energy data-sharing regime. It is not a Green Button
+    implementer, it is not covered by the Ontario Green Button regulation, and
+    it is not a designated data holder under the Australian Consumer Data Right
+    (energy). It has no obligation to publish anyone's consumption data because
+    it holds none.
+  whyNotGreenButton: >-
+    Green Button / ESPI (NAESB REQ.21 / NIST-derived) is a retail customer
+    usage-data standard. OpenADR is a grid-signal and dispatch standard moving
+    the other direction — from utility/ISO/aggregator to the customer's devices.
+    The two occupy different layers of the same sector and the OpenADR Alliance
+    is not a party to Green Button in any form found during this review.
+  regulatoryRecognitionFound:
+    - claim: >-
+        The IEC approved the OpenADR 2.0b Profile Specification as a Publicly
+        Available Specification, IEC/PAS 62746-10-1, as the basis for a new
+        commission standard.
+      source: https://www.openadr.org/faq
+      status: 200
+      note: >-
+        This is standards-body recognition, not a data mandate. It obliges no
+        one to publish anything. Recorded as a fact about the specification, not
+        as an implementation.
+    - claim: >-
+        California Title 24 / OpenADR references and utility DR programme
+        requirements are frequently cited in the market as driving OpenADR
+        adoption.
+      status: not-verified
+      note: >-
+        No such requirement was verified from a primary regulatory source during
+        this review, so it is recorded as unverified and is NOT counted as a
+        mandate.
+  implementationVerified: false
+  implementationNote: >-
+    Not applicable — there is nothing for this organization to implement. What
+    WAS verified is that the Alliance's own specification artifact exists and
+    parses (four OpenAPI 3.0 documents, harvested below). A specification
+    existing is not the same as a utility having implemented it; certified
+    products in the Alliance's public database are the closest available
+    evidence of downstream implementation and are counted separately.
+
+dataStandard:
+  published:
+    - name: OpenADR 2.0a Profile Specification
+      shape: XML / OASIS Energy Interoperation profile
+      access: registration-form
+    - name: OpenADR 2.0b Profile Specification
+      shape: XML / OASIS Energy Interoperation profile
+      alsoKnownAs: IEC/PAS 62746-10-1
+      access: registration-form
+    - name: OpenADR 3.0.0
+      shape: OpenAPI 3.0 REST
+      access: registration-form (public Apache-2.0 copy exists)
+    - name: OpenADR 3.0.1
+      shape: OpenAPI 3.0 REST
+      access: registration-form (public Apache-2.0 copy exists)
+    - name: OpenADR 3.1.0
+      shape: OpenAPI 3.0 REST + MQTT notifier topics
+      access: registration-form (public Apache-2.0 copy exists)
+    - name: OpenADR 3.1.1
+      shape: OpenAPI 3.0 REST (in development)
+      access: registration-form (public Apache-2.0 copy exists)
+    - name: EcoPort / CTA-2045-B
+      shape: physical + logical modular communications interface for appliances
+      note: >-
+        The Alliance runs EcoPort certification (CTA-2045-B Level 1 and Level 2)
+        with its own public certified-product database at ecoport.openadr.org.
+  summary: >-
+    OpenADR 2.0a/2.0b (IEC/PAS 62746-10-1) and OpenADR 3.0/3.1 defined by
+    OpenAPI 3.0; EcoPort/CTA-2045-B for appliance interfaces.
+  relatedStandardsPositioning:
+    - OASIS Energy Interoperation 1.0 — OpenADR is a profile of it (per Alliance FAQ)
+    - OASIS EMIX and WS-Calendar — reused by OpenADR
+    - IEEE 2030.5 — the Alliance publishes a comparison FAQ ("Should I use OpenADR or IEEE 2030.5?")
+    - Liaisons announced with the Connectivity Standards Alliance and DLMS UA
+  freelyDownloadable: partly
+  freelyDownloadableNote: >-
+    The Alliance states the specifications are "license free but copyright of
+    the OpenADR Alliance. Terms and Conditions apply (see download form)". You
+    do not pay, but you must submit a form and accept terms, and the files
+    arrive by email. The canonical machine-readable source
+    (github.com/oadr3-org/specification) is private and requires Alliance
+    membership. A third party republishes the same Apache-2.0-licensed artifacts
+    publicly at github.com/grid-coordination/openadr3-specification.
+
+consumerVsMarketData:
+  consumerDataAPI: false
+  consumerDataNote: >-
+    The OpenADR Alliance holds no customer accounts and exposes no individual
+    usage or billing data. It authors the protocol by which a utility or
+    aggregator sends DR events, prices, and reports to a customer's Virtual End
+    Node. Any customer data that moves does so between an implementing utility
+    and an implementing device — never through the Alliance.
+  marketDataOpen: false
+  marketDataNote: >-
+    The Alliance publishes no grid, market, system, or emissions data. It is not
+    an ISO/RTO, not a data agency, and not a DNO. The only structured public
+    data it holds is its certification registry (which products are certified,
+    to which profile, at which security level), and that is browsable HTML
+    rather than a documented API.
+  theSplit: >-
+    Both sides are closed here, but for a structural reason rather than a
+    protective one: a standards body has neither consumer data nor market data
+    to publish. What it DOES have — the specification and the certification
+    registry — it publishes in a half-open way: the spec behind a form, the
+    registry as human-readable pages only.
+
+certificationDirectory:
+  openadr:
+    url: https://products.openadr.org/
+    proxiedAt: https://www.openadr.org/certified-products
+    status: 200
+    public: true
+    scale: 72 result pages at the default page size
+    facetsObserved:
+      - OpenADR Profile (2.0a, 2.0b, 2.0a+b, 3 CP Profile, 3 BL Profile, 2.0 and 3 CP, 2.0 and 3 BL)
+      - Security (Standard Security, High Security)
+      - Transport (Simple HTTP, Simple XMPP, Simple HTTP + XMPP)
+      - Mode (Pull, Push, Pull and Push)
+      - Product type (Thermostat, Water Heater, EV and EVSE, Battery, Solar, Storage, VPP, HVAC, DER, EMS, Gateway, Controller, Pool Pump, Lighting, Refrigeration, Cloud Based)
+      - Business type (Residential, Commercial, Industrial, Agricultural, SMB)
+    machineReadable: false
+    machineReadableNote: >-
+      No documented API. The site is WordPress and its default REST API is open
+      anonymously, but it exposes none of the product data — see the probe log.
+  ecoport:
+    url: https://ecoport.openadr.org/
+    status: 200
+    public: true
+    facetsObserved:
+      - Certification Type (CTA-2045-B Level 1, CTA-2045-B Level 2)
+      - AC or DC
+      - UCM or SGD
+      - Product Type (Water Heater, Thermostat, HVAC, Mini-split, Pool Pump, Space Conditioning)
+    machineReadable: false
+
+accessGate:
+  gate: licence-agreement
+  gated: true
+  whatADeveloperMustDo: >-
+    To get the OpenADR specification from the Alliance itself: go to
+    https://www.openadr.org/specification-download, complete the download form,
+    accept the terms and conditions, and wait for an email containing download
+    links (the page itself warns that some browser/email combinations mishandle
+    the links and that you may need to paste the plaintext URL). No payment, no
+    approval queue, but also no direct download and no anonymous access. To get
+    the canonical machine-readable source or to run conformance tests you must
+    join the Alliance (100+ member organizations) — github.com/oadr3-org is
+    private, and the online test tool at test-tool.openadr.org requires an
+    Alliance username and password plus a purchased test-tool licence.
+    Certification costs USD $1,250 per system tested, executed online with an
+    Alliance-assigned Certification Manager. A developer who does not want to
+    register at all can obtain the same Apache-2.0 OpenADR 3 artifacts from the
+    public third-party copy at
+    github.com/grid-coordination/openadr3-specification — which is how the
+    specs in openapi/ here were harvested.
+  tiers:
+    - tier: anonymous
+      gets: FAQ, certification process pages, certified-product and EcoPort databases (HTML)
+    - tier: registered (form + terms)
+      gets: OpenADR 2.0a/2.0b and OpenADR 3 specification documents by email
+    - tier: member
+      gets: canonical specification repository, online test tool, User Guide and test cases, early access, committee participation
+    - tier: member + paid licence
+      gets: downloadable test assets for CI/CD, certification testing (USD $1,250 per system)
+
+authModel:
+  organizationAuth:
+    - surface: www.openadr.org member area
+      scheme: username/password (MemberClicks-hosted Joomla site)
+      url: https://www.openadr.org/login
+    - surface: test-tool.openadr.org
+      scheme: username/password form login (Django app, CSRF token, built by Codibly; build string v3.0.1/3.1.0-72b6245)
+      note: Serves swagger-ui-dist assets behind the login; no spec is reachable anonymously.
+  protocolAuth:
+    standard: OAuth 2.0 client credentials + HTTP bearer JWT
+    declaredIn: components.securitySchemes of every harvested OpenADR 3 OpenAPI
+    tokenUrl: auth/token (relative — implementer-hosted)
+    schemes:
+      - name: oAuth2ClientCredentials
+        type: oauth2
+        flow: clientCredentials
+      - name: bearerAuth
+        type: http
+        scheme: bearer
+        bearerFormat: JWT
+    scopes_3_0_x:
+      - read_all
+      - write_programs
+      - write_events
+      - write_reports
+      - write_subscriptions
+      - write_vens
+    scopes_3_1_x:
+      - read_all
+      - read_bl
+      - read_targets
+      - read_ven_objects
+      - write_programs
+      - write_events
+      - write_reports
+      - write_subscriptions
+      - write_vens
+    note: >-
+      Scopes encode the role split: only Business Logic (VTN-side) clients may
+      write programs and events; only VENs may write reports; VENs may read only
+      objects matching their own clientID or their targets.
+  openidConfiguration:
+    url: https://www.openadr.org/.well-known/openid-configuration
+    status: 200
+    parsed: false
+    note: >-
+      Returns HTTP 200 but the body is the Joomla site HTML, not JSON. This is a
+      soft-200 catch-all, NOT an OpenID Provider metadata document. Recorded as
+      "no OIDC discovery document served".
+
+findings:
+  developerPortal:
+    exists: false
+    nearestThing: https://www.openadr.org/specification
+    confirmedSelfServe: false
+    note: >-
+      There is no developer portal. The specification page is marketing copy
+      pointing at a lead-capture download form. No subdomain resolves for
+      developer, developers, api, docs, or data.
+  hostedAPI:
+    exists: false
+    note: >-
+      OpenADR 3 is implementer-hosted. The servers block in the 3.0.x specs
+      points at http://localhost:8081/openadr3 (a reference base path) and in
+      the 3.1.x specs at a SwaggerHub auto-mocking URL
+      (https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0). Neither
+      is a production Alliance endpoint and neither was treated as a baseURL.
+  wordpressRestAPI:
+    url: https://products.openadr.org/wp-json/
+    status: 200
+    open: true
+    usefulData: false
+    note: >-
+      The certified-product database runs on WordPress and its default REST API
+      answers anonymously (namespaces oembed/1.0, wp/v2, wp-site-health/v1).
+      But wp/v2/types lists only post, page, attachment, and wp_block — there is
+      no custom post type for products. wp/v2/posts returns X-WP-Total: 0 and
+      wp/v2/search?search=thermostat returns an empty array, while the HTML
+      listing shows dozens of thermostats. The product records live outside the
+      WP content model, so this open API exposes nothing. Deliberately NOT
+      listed as an API in apis.yml: it is default platform plumbing that serves
+      no Alliance data.
+
+probeLog:
+  fetched: '2026-07-27'
+  entries:
+    - url: https://openadr.org/
+      status: 200
+      note: redirects to https://www.openadr.org/
+    - url: https://www.openadr.org/
+      status: 200
+    - url: https://www.openadr.org/robots.txt
+      status: 200
+    - url: https://www.openadr.org/sitemap.xml
+      status: 200
+      note: redirects to a com_xmap XML view; 414 bytes, zero <loc> entries
+    - url: https://developer.openadr.org/
+      status: 000
+      note: does not resolve
+    - url: https://developers.openadr.org/
+      status: 000
+      note: does not resolve
+    - url: https://api.openadr.org/
+      status: 000
+      note: does not resolve
+    - url: https://docs.openadr.org/
+      status: 000
+      note: does not resolve
+    - url: https://data.openadr.org/
+      status: 000
+      note: does not resolve
+    - url: https://www.openadr.org/openapi.json
+      status: 404
+    - url: https://www.openadr.org/swagger.json
+      status: 404
+    - url: https://www.openadr.org/api-docs
+      status: 404
+    - url: https://www.openadr.org/.well-known/openid-configuration
+      status: 200
+      note: HTML soft-200, not OIDC metadata
+    - url: https://www.openadr.org/specification
+      status: 200
+    - url: https://www.openadr.org/specification-download
+      status: 200
+      note: lead-capture form; spec delivered by email under terms and conditions
+    - url: https://www.openadr.org/openadr-3-certification
+      status: 200
+      note: USD $1,250 per certification test; member login for the test tool
+    - url: https://www.openadr.org/how-to-build-a-product
+      status: 200
+    - url: https://www.openadr.org/faq
+      status: 200
+    - url: https://www.openadr.org/ecoport
+      status: 200
+    - url: https://www.openadr.org/membership-benefits
+      status: 200
+    - url: https://www.openadr.org/openadr-alliance-blog
+      status: 200
+    - url: https://www.openadr.org/login
+      status: 200
+    - url: https://www.openadr.org/privacy-policy
+      status: 200
+    - url: https://www.openadr.org/contact-us
+      status: 200
+    - url: https://www.openadr.org/certified-products
+      status: 200
+      note: serves the products.openadr.org database
+    - url: https://www.openadr.org/openadr-certified-products
+      status: 404
+    - url: https://products.openadr.org/
+      status: 200
+    - url: https://products.openadr.org/wp-json/
+      status: 200
+      note: open anonymous WordPress REST API, no product data
+    - url: https://products.openadr.org/wp-json/wp/v2/types
+      status: 200
+      note: core types only — no product custom post type
+    - url: https://products.openadr.org/wp-json/wp/v2/posts?per_page=3
+      status: 200
+      note: 'X-WP-Total: 0'
+    - url: https://products.openadr.org/wp-json/wp/v2/search?search=thermostat
+      status: 200
+      note: empty array
+    - url: https://ecoport.openadr.org/
+      status: 200
+    - url: https://test-tool.openadr.org/
+      status: 200
+      note: login page only; swagger-ui assets referenced but no spec anonymously
+    - url: https://test-tool.openadr.org/openapi.json
+      status: 200
+      note: returns the login HTML, not a spec
+    - url: https://test-tool.openadr.org/swagger.json
+      status: 200
+      note: returns the login HTML, not a spec
+    - url: https://test-tool.openadr.org/docs
+      status: 200
+      note: returns the login HTML, not a spec
+    - url: https://api.github.com/orgs/oadr3-org
+      status: 200
+      note: GitHub org named "OpenADR Alliance"
+    - url: https://api.github.com/orgs/oadr3-org/repos
+      status: 200
+      note: empty array — zero public repositories
+    - url: https://api.github.com/repos/oadr3-org/specification
+      status: 404
+      note: private, membership-gated
+    - url: https://api.github.com/orgs/OpenADR
+      status: 200
+      note: unrelated 2018 org with a single "report" repo; not the Alliance
+    - url: https://api.github.com/repos/grid-coordination/openadr3-specification
+      status: 200
+      note: >-
+        Third-party public Apache-2.0 copy of the Alliance release; NOTICE
+        asserts the specification files are copyright the OpenADR Alliance.
+
+harvest:
+  method: >-
+    Direct raw.githubusercontent.com fetch from the public Apache-2.0 copy of
+    the OpenADR Alliance release. The Alliance's own distribution requires a
+    registration form and emails the files, so nothing could be harvested
+    anonymously from openadr.org. Provenance is recorded per file. Every file
+    was parsed with PyYAML before being committed.
+  specs:
+    - file: openapi/openadr-3-0-0-openapi.yaml
+      sourceURL: https://raw.githubusercontent.com/grid-coordination/openadr3-specification/main/3.0.0/openadr3.yaml
+      httpStatus: 200
+      fetched: '2026-07-27'
+      bytes: 73384
+      sha256: fa5de06f95e146845bde8b2796de12e4eb83058508c452d57abc65f7d621562c
+      openapi: 3.0.0
+      title: OpenADR 3.0.0 API
+      version: 3.0.0
+      paths: 13
+      operations: 31
+      parsed: true
+      note: >-
+        servers[0] is http://localhost:8081/openadr3 — a reference base path,
+        not a hosted endpoint.
+    - file: openapi/openadr-3-0-1-openapi.yaml
+      sourceURL: https://raw.githubusercontent.com/grid-coordination/openadr3-specification/main/3.0.1/openadr3.yaml
+      httpStatus: 200
+      fetched: '2026-07-27'
+      bytes: 83087
+      sha256: 3418d267d5a916265f5a1c7e08641da8c3507b39abf682d7902658b57fc2e7e7
+      openapi: 3.0.0
+      title: OpenADR 3 API
+      version: 3.0.1
+      paths: 13
+      operations: 31
+      parsed: true
+    - file: openapi/openadr-3-1-0-openapi.yaml
+      sourceURL: https://raw.githubusercontent.com/grid-coordination/openadr3-specification/main/3.1.0/openadr3-UPSTREAM.yaml
+      httpStatus: 200
+      fetched: '2026-07-27'
+      bytes: 90428
+      sha256: 0a85f28a91565b3e2c7488d2a7a7a9afb11ce3ef6b35afddb328484720077006
+      openapi: 3.0.0
+      title: OpenADR 3 API
+      version: 1.0.0
+      specVersion: 3.1.0
+      paths: 27
+      operations: 45
+      parsed: true
+      note: >-
+        The -UPSTREAM file was chosen deliberately — the mirror documents it as
+        a byte-for-byte copy of the OpenADR Alliance release, while the sibling
+        openadr3.yaml carries yamllint whitespace reformatting. Adds MQTT
+        notifier topic paths and an /auth/server endpoint.
+    - file: openapi/openadr-3-1-1-openapi.yaml
+      sourceURL: https://raw.githubusercontent.com/grid-coordination/openadr3-specification/main/3.1.1/openadr3.yaml
+      httpStatus: 200
+      fetched: '2026-07-27'
+      bytes: 91499
+      sha256: 4e881fdfb82b4c866c973f7213817ee58c94f1bcd7952b25dd57db409a2474cf
+      openapi: 3.0.0
+      title: OpenADR 3 API
+      version: 1.0.0
+      specVersion: 3.1.1
+      status: development
+      paths: 27
+      operations: 45
+      parsed: true
+      note: >-
+        The only version carrying declared tags (programs, reports, events,
+        subscriptions, vens, resources, Auth, notifiers, MQTT_notifier).
+  license:
+    spdx: Apache-2.0
+    copyright: OpenADR Alliance
+    evidence: https://raw.githubusercontent.com/grid-coordination/openadr3-specification/main/NOTICE
+
+honesty:
+  fabricated: false
+  notes:
+    - No host, endpoint, scope, or specification was invented.
+    - Every URL in apis.yml was probed and returned a live 200 on 2026-07-27.
+    - >-
+      No baseURL is claimed for OpenADR 3 because none exists — the protocol is
+      implementer-hosted and the specs' servers blocks point at localhost and a
+      SwaggerHub mock.
+    - >-
+      The harvested specs came from a public third-party mirror, not from
+      openadr.org. That provenance is stated on every file rather than being
+      presented as an Alliance-hosted download.
+    - >-
+      The open WordPress REST API at products.openadr.org was found, probed, and
+      deliberately excluded from apis.yml because it returns no Alliance data.

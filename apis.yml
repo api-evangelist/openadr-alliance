@@ -1,0 +1,116 @@
+aid: openadr-alliance
+url: https://raw.githubusercontent.com/api-evangelist/openadr-alliance/refs/heads/main/apis.yml
+name: OpenADR Alliance
+kind: company
+description: >-
+  The OpenADR Alliance is a San Ramon, California mutual-benefit membership
+  corporation that develops, certifies, and promotes OpenADR, the open
+  information-exchange model utilities, ISOs/RTOs, aggregators, and device
+  makers use to automate demand response and dispatch distributed energy
+  resources. It is a standards body, not a service operator: it publishes the
+  OpenADR 2.0a/2.0b profile specifications (approved by the IEC as
+  IEC/PAS 62746-10-1) and OpenADR 3.0/3.1, which abandoned the SOAP-era design
+  and is now defined entirely by an OpenAPI 3.0 contract covering programs,
+  events, reports, subscriptions, VENs, and resources, secured with OAuth 2.0
+  client credentials. It also runs the OpenADR and EcoPort (CTA-2045-B)
+  certification programmes and their public certified-product databases. Its API
+  posture is honest but narrow: the OpenADR 3 OpenAPI is a genuine, parseable
+  machine-readable contract, and the specifications are license-free, but the
+  Alliance itself operates no developer portal, no api./developer./docs.
+  subdomain, and no hosted API — its canonical specification repository
+  (github.com/oadr3-org) has zero public repositories and requires membership,
+  and the public route to the spec is a registration form that emails download
+  links under terms and conditions. It publishes no consumer energy data and no
+  open grid or market data; it defines the protocol that other parties
+  implement. Home market is the United States, with adoption across Europe,
+  Japan, Korea, and Australia.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/groq.png
+tags:
+- Energy
+- United States
+- Utilities
+- Electricity
+- Demand Response
+- Grid
+- DER
+- OpenADR
+- Standards
+- Smart Grid
+- EV Charging
+- Certification
+created: '2026-07-27'
+modified: '2026-07-27'
+specificationVersion: '0.19'
+apis:
+- aid: openadr-alliance:openadr-3-api
+  name: OpenADR 3 API
+  description: >-
+    OpenADR 3 is the RESTful third generation of the OpenADR protocol, defined
+    in full by a single OpenAPI 3.0 document published by the OpenADR Alliance.
+    It supports energy-retailer-to-energy-customer demand response programs
+    through operations to create, update, delete, and search programs, events,
+    reports, subscriptions, VENs (Virtual End Nodes), and VEN resources, plus an
+    /auth/token endpoint. Version 3.1.0 adds MQTT notifier topics, VEN-scoped
+    topics for object privacy, and VTN discovery. Security is OAuth 2.0 client
+    credentials with JWT bearer tokens and role-scoped grants that separate what
+    a Business Logic (BL/VTN) client may write from what a VEN may write. This
+    is a protocol contract, not an Alliance-hosted service — every implementer
+    (a utility, aggregator, or vendor VTN) stands up its own base URL, so no
+    single baseURL exists. The specification documents themselves are
+    distributed by the Alliance through a registration form; the OpenAPI files
+    harvested here came from a public Apache-2.0 copy of the Alliance release.
+  humanURL: https://www.openadr.org/specification
+  tags:
+  - Demand Response
+  - OpenADR
+  - Energy
+  - DER
+  properties:
+  - type: OpenAPI
+    url: openapi/openadr-3-1-1-openapi.yaml
+  - type: OpenAPI
+    url: openapi/openadr-3-1-0-openapi.yaml
+  - type: OpenAPI
+    url: openapi/openadr-3-0-1-openapi.yaml
+  - type: OpenAPI
+    url: openapi/openadr-3-0-0-openapi.yaml
+  - type: Documentation
+    url: https://www.openadr.org/specification
+  - type: Documentation
+    url: https://www.openadr.org/how-to-build-a-product
+  - type: Conformance
+    url: https://www.openadr.org/openadr-3-certification
+  - type: SourceCode
+    url: https://github.com/grid-coordination/openadr3-specification
+common:
+- type: Website
+  url: https://www.openadr.org/
+- type: Documentation
+  url: https://www.openadr.org/specification
+- type: Portal
+  url: https://www.openadr.org/specification-download
+- type: Conformance
+  url: https://www.openadr.org/openadr-3-certification
+- type: Tools
+  url: https://test-tool.openadr.org/
+- type: Directory
+  url: https://products.openadr.org/
+- type: Directory
+  url: https://ecoport.openadr.org/
+- type: Support
+  url: https://www.openadr.org/faq
+- type: Blog
+  url: https://www.openadr.org/openadr-alliance-blog
+- type: GitHubOrganization
+  url: https://github.com/oadr3-org
+- type: LinkedIn
+  url: https://www.linkedin.com/company/openadr-alliance
+- type: Login
+  url: https://www.openadr.org/login
+- type: PrivacyPolicy
+  url: https://www.openadr.org/privacy-policy
+- type: Support
+  url: https://www.openadr.org/contact-us
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
