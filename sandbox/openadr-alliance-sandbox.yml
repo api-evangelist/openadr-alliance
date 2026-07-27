@@ -1,0 +1,89 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://www.openadr.org/openadr-3-certification, https://www.openadr.org/cyber-security,
+  https://www.openadr.org/how-to-build-a-product, https://test-tool.openadr.org/,
+  openapi/openadr-3-1-1-openapi.yaml
+description: >-
+  Test and certification surface for OpenADR implementers. Because the Alliance hosts no
+  API, there is no test-mode API key and no test/live key-prefix separation. What it
+  publishes instead is a conformance test tool, downloadable test assets for CI, free test
+  PKI certificates, and a mock server named in the 3.1.x specification. No magic test values
+  (no test cards, no reserved identifiers) are published — nothing of that shape was found,
+  and none is invented here.
+test_live_separation:
+  key_prefixes: null
+  modes: null
+  note: >-
+    Not applicable. Credentials are issued by each implementer's own VTN authorization
+    server, not by the Alliance.
+online_test_tool:
+  name: OpenADR / EcoPort Online Test Tool
+  url: https://test-tool.openadr.org/
+  access: OpenADR Alliance members, using Alliance username/password
+  credential_recovery: https://www.openadr.org/login#/login
+  purpose: >-
+    "All certifications will be done with the Alliance online test tool." Members may also
+    use it for pre-certification testing under a test-tool licence.
+  member_content: User Guide and test cases, visible after member login
+  licences:
+  - {name: Test tool licence, note: 'grants access to the online test tool for testing purposes, plus a download of local test assets'}
+  - {name: Certification licence, note: 'required to run the certification pass'}
+  cost: purchased from the Alliance; pricing not published on the public page
+local_test_assets:
+  available: true
+  access: on purchase of a test tool licence, a member may request a download
+  purpose: >-
+    "These tests can be incorporated into a CI/CD pipeline or otherwise used during
+    development of VEN or VTN products."
+  source: https://www.openadr.org/openadr-3-certification
+test_certificates:
+  provider: Eonti Inc.
+  url: https://eonti.com/openadr
+  test_certificates:
+    cost: free
+    valid_for_production: false
+    note: >-
+      "Test Security Certificates - These certificates are not valid for real communication.
+      However, they can be used for free for testing purposes. They are also used during
+      certification testing." OpenADR 2.0 test security certificates must be used for OpenADR
+      testing.
+  production_certificates:
+    validity: 20 years
+    note: Should be used for real implementations; obtained from Eonti under the OpenADR Alliance Certificate Policy.
+  algorithms: [RSA, ECC]
+  registration_authority:
+    organisation: Eonti Inc.
+    address: 1345 Plaza Court North, Suite 3A, Lafayette, CO 80026, USA
+    phone: (303) 378-7693
+mock_server:
+  url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
+  operator: SwaggerHub (third party, not Alliance-operated)
+  declared_in: [openapi/openadr-3-1-0-openapi.yaml, openapi/openadr-3-1-1-openapi.yaml]
+  type: SwaggerHub API auto-mocking
+  note: >-
+    This is the servers[0] entry of the 3.1.x releases. It is an auto-generated mock of the
+    contract, not an Alliance service and not a production endpoint. The 3.0.x releases
+    instead name a reference base path of http://localhost:8081/openadr3.
+reference_implementation:
+  available: true
+  access: OpenADR Alliance members only
+  note: >-
+    "The OpenADR 3 Reference Implementation is available to OpenADR members only. Members of
+    the Alliance can also request direct access to the github repository once it is
+    established."
+  source: https://www.openadr.org/openadr-3-0
+certification_profiles:
+  note: >-
+    OpenADR 3 certification is profile-based rather than all-or-nothing, so an implementer
+    tests against the profile it targets.
+  available: [Continuous Pricing VEN, Baseline VEN]
+  possible_future: [EVSE Management VEN, Inverter Management VEN, country-specific profiles]
+  vtn_requirement: VTNs seeking certification must implement all features and all Certification Profiles.
+  ven_requirement: VENs may implement any combination, but at least one OpenADR 3 profile.
+  final_verification: must be conducted at an OpenADR Alliance appointed test house / endorsed test lab
+magic_test_values: []
+magic_test_values_note: >-
+  None published. Object identifiers in the specification examples (object-999, ResTOU,
+  group-1) are illustrative example values in the OpenAPI, not reserved test identifiers —
+  see examples/openadr-alliance-examples.yml.

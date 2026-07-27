@@ -52,16 +52,30 @@ This is a protocol contract, not an Alliance-hosted service. Every implementer �
 - [Documentation](https://www.openadr.org/how-to-build-a-product)
 - [Conformance](https://www.openadr.org/openadr-3-certification)
 - [Source Code](https://github.com/grid-coordination/openadr3-specification)
+- [AsyncAPI](asyncapi/openadr-alliance-notifications-asyncapi.yml) — derived event surface (webhook + MQTT)
+- [Webhooks](asyncapi/openadr-alliance-webhooks.yml) — notification catalog
+- [JSON Schema](json-schema/_index.yml) — the six Alliance-published 3.1.1 enumeration schemas
+- [Examples](examples/openadr-alliance-examples.yml)
+- [Data Model](data-model/openadr-alliance-data-model.yml)
+- [Error Catalog](errors/openadr-alliance-problem-types.yml)
+- [Tool Crosswalk](mcp/openadr-alliance-tool-crosswalk.yml)
+- [Overlays](overlays/) — one per specification release
 
 ## Common Properties
 
 - [Website](https://www.openadr.org/)
 - [Documentation](https://www.openadr.org/specification)
 - [Portal](https://www.openadr.org/specification-download)
+- [API Reference](https://www.openadr.org/specification)
+- [Getting Started](https://www.openadr.org/how-to-build-a-product)
 - [Conformance](https://www.openadr.org/openadr-3-certification)
 - [Tools](https://test-tool.openadr.org/)
+- [Tools](https://www.openadr.org/openadr-test-tool-store) — test tool store
 - [Directory](https://products.openadr.org/) — OpenADR certified product database
 - [Directory](https://ecoport.openadr.org/) — EcoPort (CTA-2045-B) certified product database
+- [Pricing](https://www.openadr.org/join) — membership dues
+- [Sign Up](https://www.openadr.org/join)
+- [Terms of Service](https://www.openadr.org/assets/docs/OpenADR%20Alliance%20Bylaws%20%26%20Member%20Agreement.zip) — bylaws, membership agreement, IPR policy
 - [Support](https://www.openadr.org/faq)
 - [Blog](https://www.openadr.org/openadr-alliance-blog)
 - [GitHub Organization](https://github.com/oadr3-org)
@@ -69,6 +83,35 @@ This is a protocol contract, not an Alliance-hosted service. Every implementer �
 - [Login](https://www.openadr.org/login)
 - [Privacy Policy](https://www.openadr.org/privacy-policy)
 - [Support](https://www.openadr.org/contact-us)
+
+## Enrichment Artifacts
+
+Round 2026-07-27. Provenance is recorded in each file's frontmatter (`method: searched | generated | derived | probed`).
+
+| Artifact | Method | Note |
+|---|---|---|
+| [`json-schema/`](json-schema/_index.yml) | searched | The six enumeration schemas shipped with OpenADR 3.1.1 — event interval payloads (38), report payloads (24), program attributes, VEN/resource attributes, reading types, units. Saved verbatim. |
+| [`changelog/`](changelog/openadr-alliance-changelog.yml) | searched | Structured from the Alliance `changeLog.md` and `VERSIONS.yaml`. 3.1.0 is explicitly **not** backwards compatible with 3.0.1. |
+| [`packages/`](packages/openadr-alliance-packages.yml) | searched | Seven third-party libraries; **zero first-party SDKs**. `github.com/oadr3-org` has no public repositories. |
+| [`plans/`](plans/openadr-alliance-plans.yml) | searched | Membership dues (revenue-banded $1.5k–$40k/yr), test tool licences, consulting packages. The specification itself is free. |
+| [`sandbox/`](sandbox/openadr-alliance-sandbox.yml) | searched | Online test tool, downloadable CI test assets, free Eonti test PKI certificates, SwaggerHub mock. No magic test values are published. |
+| [`conformance/`](conformance/openadr-alliance-conformance.yml) | searched | IEC/PAS 62746-10-1, OASIS Energy Interoperation, NIST Smart Grid, CTA-2045-B, ANSI-SCTE 267, MQTT, RFC 3339/8601. RFC 7807 is *partial* — right members, wrong media type. |
+| [`lifecycle/`](lifecycle/openadr-alliance-lifecycle.yml) | searched | Semver on the specification; no Sunset/Deprecation headers and no deprecation policy. The real transition commitment is the six-month certification grace period. |
+| [`well-known/`](well-known/openadr-alliance-well-known.yml) | probed | **Zero discovery documents.** Every 200 on `www.openadr.org` and `test-tool.openadr.org` is a soft-200 HTML catch-all. |
+| [`security/`](security/openadr-alliance-domain-security.yml) | probed | TLS 1.3 + HSTS on the website; no DNSSEC, no CAA, DMARC `p=none`. No security.txt, no VDP, no trust center. |
+| [`authentication/`](authentication/openadr-alliance-authentication.yml) · [`scopes/`](scopes/openadr-alliance-scopes.yml) | derived | OAuth 2.0 client credentials + JWT bearer; 9 role-encoded scopes in 3.1.1 (6 in 3.0.x). |
+| [`conventions/`](conventions/openadr-alliance-conventions.yml) | derived | skip/limit pagination capped at 50, no total, no next link. **No idempotency key anywhere** — a retried `createEvent` dispatches twice. No rate-limit contract and no 429. |
+| [`errors/`](errors/openadr-alliance-problem-types.yml) | derived | Zalando `problem` envelope on `application/json`; `authError` (RFC 6749 §5.2) on the token endpoint only. |
+| [`data-model/`](data-model/openadr-alliance-data-model.yml) | derived | Six addressable objects plus the value structures they compose. |
+| [`vocabulary/`](vocabulary/openadr-alliance-vocabulary.yml) | derived | 127 terms across 10 groups — objects, roles, operations, payload types, attributes, reading types, units. |
+| [`asyncapi/`](asyncapi/openadr-alliance-notifications-asyncapi.yml) | derived | AsyncAPI 3.0.0 for the webhook and MQTT notifier surface. **Not a normative Alliance artifact** — the Alliance publishes no AsyncAPI. |
+| [`examples/`](examples/openadr-alliance-examples.yml) | derived | 25 payloads assembled from the specification's own inline example values. |
+| [`overlays/`](overlays/) | generated | One Overlay 1.0.0 per release; declares the tag block missing from 3.0.0/3.0.1/3.1.0 and flags the non-production `servers[]` entry. |
+| [`skills/`](skills/_index.yml) | generated | Five Agent Skills — authenticate, dispatch an event, register a VEN, subscribe to notifications, report telemetry. Every step grounded in a real `operationId`. |
+| [`arazzo/`](arazzo/_index.yml) | generated | Two native workflows: BL-side dispatch, VEN-side onboard-and-subscribe. |
+| [`llms/`](llms/openadr-alliance-llms.txt) | generated | `https://www.openadr.org/llms.txt` returns 404. |
+| [`mcp/`](mcp/openadr-alliance-tool-crosswalk.yml) | derived | No Alliance-hosted MCP server exists. A 45-tool *candidate* surface is derived from 3.1.1 and crosswalked one-to-one to its backing operations. |
+| [`agentic-access/`](agentic-access/openadr-alliance-agentic-access.yml) | generated | 152 operations classified into recommended `x-agentic-access` contracts. |
 
 ## Access Posture
 

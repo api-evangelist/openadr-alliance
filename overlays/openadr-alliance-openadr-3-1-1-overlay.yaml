@@ -1,0 +1,24 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for OpenADR 3 API 1.0.0
+  version: 1.0.0
+extends: openapi/openadr-3-1-1-openapi.yaml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-slug: openadr-alliance
+    x-apievangelist-artifacts:
+      authentication: authentication/openadr-alliance-authentication.yml
+      scopes: scopes/openadr-alliance-scopes.yml
+      errors: errors/openadr-alliance-problem-types.yml
+      conventions: conventions/openadr-alliance-conventions.yml
+      data_model: data-model/openadr-alliance-data-model.yml
+      vocabulary: vocabulary/openadr-alliance-vocabulary.yml
+      lifecycle: lifecycle/openadr-alliance-lifecycle.yml
+    x-openadr-spec-version: 3.1.1
+    x-openadr-upstream: https://github.com/grid-coordination/openadr3-specification
+- target: $.servers[0]
+  update:
+    x-apievangelist-note: Not a production endpoint. OpenADR 3 is a protocol contract; each VTN operator
+      (utility, ISO/RTO, aggregator, vendor) hosts its own base URL. The URL published in the specification
+      is a reference base path (3.0.x) or a SwaggerHub auto-mock (3.1.x).

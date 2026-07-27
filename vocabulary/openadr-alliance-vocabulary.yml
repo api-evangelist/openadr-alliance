@@ -1,0 +1,396 @@
+generated: '2026-07-27'
+method: derived
+source: json-schema/openadr-3-1-1-*.schema.yaml (Alliance-published enumeration schemas) + openapi/openadr-3-1-1-openapi.yaml
+spec_version: 3.1.1
+description: 'Controlled vocabulary of the OpenADR 3 protocol: the addressable object types, the roles
+  the authorization model separates, and every enumerated payload type, attribute key, reading type, and
+  unit the Alliance publishes as normative enumeration schemas alongside the OpenAPI contract.'
+groups:
+- id: objects
+  title: OpenADR 3 objects
+  description: Core addressable objects and value structures of the OpenADR 3 information model.
+  source: openapi/openadr-3-1-1-openapi.yaml
+  terms:
+  - term: program
+    definition: Server provided representation of program
+  - term: event
+    definition: Server provided representation of event
+  - term: report
+    definition: Server provided representation of report
+  - term: subscription
+    definition: Server provided representation of subscription
+  - term: ven
+    definition: Server provided representation of ven
+  - term: resource
+    definition: Server provided representation of resource
+  - term: interval
+    definition: An object defining a temporal window and a list of valuesMaps. if intervalPeriod present
+      may set temporal aspects of interval or override event.intervalPeriod.
+  - term: intervalPeriod
+    definition: Defines temporal aspects of intervals. A start of "0001-01-01" or "0001-01-01T00:00:00"
+      may indicate 'now'. See User Guide. A duration of "P9999Y" may indicate infinity. See User Guide.
+      A randomizeStart indicates absolute range of client applied offset to start. See User Guide.
+  - term: valuesMap
+    definition: Represents one or more values associated with a type. See enumerations in Definitions
+      for defined string values, or use privately defined strings
+  - term: point
+    definition: A pair of floats typically used as a point on a 2 dimensional grid.
+  - term: eventPayloadDescriptor
+    definition: Contextual information used to interpret event valuesMap values. E.g. a PRICE payload
+      simply contains a price value, an associated descriptor provides necessary context such as units
+      and currency.
+  - term: reportPayloadDescriptor
+    definition: Contextual information used to interpret report payload values. E.g. a USAGE payload simply
+      contains a usage value, an associated descriptor provides necessary context such as units and data
+      quality.
+  - term: reportDescriptor
+    definition: An object that may be used to request a report from a VEN.
+  - term: notification
+    definition: VTN generated object included in request to subscription callbackUrl.
+  - term: target
+    definition: User generated target string.
+  - term: objectMetadata
+    definition: metadata common to all addressable objects. Values provided by VTN on object creation.
+- id: object_types
+  title: Object types
+  description: Types of objects addressable through the API (objectTypes enum).
+  source: openapi/openadr-3-1-1-openapi.yaml
+  terms:
+  - term: PROGRAM
+    definition: null
+  - term: EVENT
+    definition: null
+  - term: REPORT
+    definition: null
+  - term: SUBSCRIPTION
+    definition: null
+  - term: VEN
+    definition: null
+  - term: RESOURCE
+    definition: null
+- id: notification_operations
+  title: Notification operations
+  description: Operation on an object that triggers a notification.
+  source: openapi/openadr-3-1-1-openapi.yaml
+  terms:
+  - term: CREATE
+    definition: null
+  - term: READ
+    definition: null
+  - term: UPDATE
+    definition: null
+  - term: DELETE
+    definition: null
+- id: roles
+  title: OpenADR roles
+  description: Client roles the OpenADR 3 authorization model separates.
+  source: openapi/openadr-3-1-1-openapi.yaml (scope descriptions) + https://www.openadr.org/faq
+  terms:
+  - term: VTN
+    definition: Virtual Top Node. The server side of an OpenADR exchange; publishes programs and events
+      and receives reports. Operated by a utility, ISO/RTO, aggregator, or building management system.
+  - term: VEN
+    definition: Virtual End Node. The client side of an OpenADR exchange; subscribes to programs and events
+      and writes reports on behalf of the resources it manages.
+  - term: BL
+    definition: Business Logic client. The VTN-side client that writes programs and events; distinguished
+      from a VEN by the OAuth scopes it may request.
+  - term: resource
+    definition: A device or load managed by a VEN, addressable as a first-class object as of OpenADR 3.1.0.
+- id: event_interval_payload_types
+  title: Event-Interval-Payloads
+  description: Payload types that may appear in an event interval valuesMap.
+  source: json-schema/openadr-3-1-1-event-interval-payloads.schema.yaml
+  terms:
+  - term: SIMPLE
+    definition: 'An indication of the level of a basic demand response signal. Payload value is an integer
+      of 0, 1, 2, or 3. Note: An example mapping is normal operations, moderate load shed, high load shed,
+      and emergency load shed.'
+  - term: PRICE
+    definition: 'The price of energy. Payload value is a float. Units and currency defined in associated
+      eventPayloadDescriptor. Note: Can be used for any form of energy.'
+  - term: PRICE_ALTERNATE
+    definition: 'The price of a second form of energy, as defined by the program. Payload value is a float.
+      Units and currency defined in associated eventPayloadDescriptor. Note: Can be used for any form
+      of energy.'
+  - term: CHARGE_STATE_SETPOINT
+    definition: 'The state of charge of an energy storage resource. Payload value is indicated by units
+      in associated eventPayloadDescriptor. Note: Common units are percentage and kWh.'
+  - term: DISPATCH_SETPOINT
+    definition: 'The absolute amount of consumption by a resource. Payload value is a float and is indicated
+      by units in associated eventPayloadDescriptor. Note: This is used to dispatch resources.'
+  - term: DISPATCH_SETPOINT_RELATIVE
+    definition: 'The relative change of consumption by a resource. Payload value is a float and is indicated
+      by units in associated eventPayloadDescriptor. Note: This is used to dispatch a resource''s load.'
+  - term: DISPATCH_INSTRUCTION
+    definition: Implementation-specific instructions that can be mapped to resource-specific control actions
+      by VEN clients. Applicable values are communicated out of band by VTN administrators.
+  - term: CONTROL_SETPOINT
+    definition: Resource dependent setting, generally used for device control instructions. Payload value
+      type depends on application. The actual values to be used in this payload will be defined by program
+      providers.
+  - term: CONTROL_LEVEL_OFFSET
+    definition: Discrete integer levels that are relative to normal operations where 0 is normal operations.
+      There is no requirement to link the setpoints to specific load consumption values, but the intention
+      is that the higher the setpoint the less load is consumed (where negative values would indicate
+      higher load consumption). Payload value is an integer between -10 and +10 with no units.
+  - term: CONTROL_LEVEL_OFFSET_PERCENT
+    definition: Percentage change from normal operations, where 0 is normal operations. The percentage
+      does not refer to specific load consumptions values, but to load control operation levels. The lower
+      the percentage the less load is consumed. Negative values indicate higher load consumption. Common
+      payload values are floats from -1.0 to 1.0 with units of PERCENT, set in associated eventPayloadDescriptor.
+  - term: EXPORT_PRICE
+    definition: 'The price of energy exported (usually to the grid). Payload value is float and units
+      and currency are defined in associated eventPayloadDescriptor. Note: Can be used for any form of
+      energy.'
+  - term: GHG
+    definition: An estimate of marginal GreenHouse Gas emissions, in g/kWh. Payload value is float.
+  - term: CURVE
+    definition: A series of one or more Point objects representing a 2D curve drawn on an x/y graph. The
+      typical use is to represent a VoltVar or VoltWatt curve for customizing inverter control.
+  - term: OLS
+    definition: 'Optimum Load Shape. Payload values array contains a list of values 0.0 to 1.0 representing
+      percentage of usage over the set of intervals in the event. Note: See ANSI-SCTE 267.'
+  - term: IMPORT_CAPACITY_SUBSCRIPTION
+    definition: The amount of import capacity a customer has subscribed to in advance. Payload is a float,
+      and meaning is indicated by units in associated eventPayloadDescriptor.
+  - term: IMPORT_CAPACITY_RESERVATION
+    definition: The amount of additional import capacity that a customer has been granted by the VTN.
+      Payload is a float, and meaning is indicated by units in associated eventPayloadDescriptor.
+  - term: IMPORT_CAPACITY_RESERVATION_FEE
+    definition: The cost per unit of power of extra import capacity available for reservation. Payload
+      is a float, and meaning is indicated by units in associated eventPayloadDescriptor.
+  - term: IMPORT_CAPACITY_AVAILABLE
+    definition: The amount of extra import capacity available for reservation to the customer. Payload
+      is a float, and meaning is indicated by units in associated eventPayloadDescriptor.
+  - term: IMPORT_CAPACITY_AVAILABLE_PRICE
+    definition: The cost per unit of power of extra import capacity available for reservation. Payload
+      is a float, and meaning is indicated by units in associated eventPayloadDescriptor.
+  - term: EXPORT_CAPACITY_SUBSCRIPTION
+    definition: The amount of export capacity a customer has subscribed to in advance. Payload is a float,
+      and meaning is indicated by units in associated eventPayloadDescriptor.
+  - term: EXPORT_CAPACITY_RESERVATION
+    definition: The amount of additional export capacity that a customer has been granted by the VTN.
+      Payload is a float, and meaning is indicated by units in associated eventPayloadDescriptor.
+  - term: EXPORT_CAPACITY_RESERVATION_FEE
+    definition: The cost per unit of power of extra export capacity available for reservation. Payload
+      is a float, and meaning is indicated by units in associated eventPayloadDescriptor.
+  - term: EXPORT_CAPACITY_AVAILABLE
+    definition: The amount of extra export capacity available for reservation to the customer. Payload
+      is a float, and meaning is indicated by units in associated eventPayloadDescriptor.
+  - term: EXPORT_CAPACITY_AVAILABLE_PRICE
+    definition: The cost per unit of power of extra export capacity available for reservation. Payload
+      is a float, and meaning is indicated by units in associated eventPayloadDescriptor.
+  - term: IMPORT_CAPACITY_LIMIT
+    definition: The maximum import level for the site. Payload is a float and meaning is indicated by
+      units in associated eventPayloadDescriptor.
+  - term: EXPORT_CAPACITY_LIMIT
+    definition: The maximum export level for the site. Payload is a float and meaning is indicated by
+      units in associated eventPayloadDescriptor.
+  - term: ALERT_GRID_EMERGENCY
+    definition: There is an imminent risk of the grid failing to continue supplying power to some customers,
+      maintaining operational parameters (e.g. voltage), or ceasing to operate at all. Payload value contains
+      a human-readable string describing the alert.
+  - term: ALERT_BLACK_START
+    definition: The grid is in the process of resuming full operation. Devices should minimize electricity
+      use until the event is cleared. Payload value contains a human-readable string describing the alert.
+  - term: ALERT_POSSIBLE_OUTAGE
+    definition: 'Customers may lose grid power in the coming hours or days. Note: An example of this from
+      California is Public Service Power Shutoffs (usually from fire risk). Payload value contains a human-readable
+      string describing the alert.'
+  - term: ALERT_FLEX_ALERT
+    definition: 'Power supply will be scarce during the event. Devices should seek to shift load to times
+      before or after the event. Devices that can shed should do so during the event. Payload value contains
+      a human-readable string describing the alert. Note: See: flexalert.org'
+  - term: ALERT_FIRE
+    definition: There is a substantial risk of fire in the area which could interrupt electricity supply
+      in addition to being a danger to life and property. Payload value contains a human-readable string
+      describing the alert.
+  - term: ALERT_FREEZING
+    definition: There is (or is forecast to be) temperatures low enough to be of concern. Payload value
+      contains a human-readable string describing the alert.
+  - term: ALERT_WIND
+    definition: There is (or is forecast to be) wind speeds high enough to be of concern. Includes hurricanes.
+      Payload value contains a human-readable string describing the alert.
+  - term: ALERT_TSUNAMI
+    definition: Tsunami waves expected to hit the coastline. Payload value contains a human-readable string
+      describing the alert.
+  - term: ALERT_AIR_QUALITY
+    definition: Air quality is or is forecast to be. Payload value contains a human-readable string describing
+      the alert.
+  - term: ALERT_OTHER
+    definition: No specific definition. See associated text data element. Payload value contains a human-readable
+      string describing the alert.
+  - term: CTA2045_REBOOT
+    definition: Pass through for resources that support [CTA-2045B]. Payload value 0 = SOFT, 1 = HARD.
+      See [CTA-2045B] for definitions.
+  - term: CTA2045_SET_OVERRIDE_STATUS
+    definition: 'Pass through CTA-2045 Override status: 0 = No Override, 1 = Override. See [CTA-2045B].'
+- id: report_payload_types
+  title: Report-Payloads
+  description: Payload types that may appear in a report interval valuesMap.
+  source: json-schema/openadr-3-1-1-report-payloads.schema.yaml
+  terms:
+  - term: READING
+    definition: An instantaneous data point, as from a meter. Same as pulse count. Payload value is a
+      float and units are defined in payloadDescriptor.
+  - term: USAGE
+    definition: Energy usage over an interval. Payload value is a float and units are defined in payloadDescriptor.
+  - term: DEMAND
+    definition: Power usage for an interval, i.e. Real Power. Payload value is a float, units defined
+      in payloadDescriptor. Reading type indicates MEAN, PEAK, FORECAST.
+  - term: SETPOINT
+    definition: Current control setpoint of a resource, see CONTROL_SETPOINT in event interval payloads.
+      Payload values are determined by the application. The actual values to be used in this payload will
+      be defined by program providers.
+  - term: DELTA_USAGE
+    definition: Change in usage as compared to a baseline. Payload value is a float and units are defined
+      in payloadDescriptor.
+  - term: BASELINE
+    definition: Indicates energy or power consumption in the absence of load control. Payload value is
+      determined by reading type which may indicate usage or demand.
+  - term: OPERATING_STATE
+    definition: Payload values array includes a list of operating state enumerations, see below.
+  - term: UP_REGULATION_AVAILABLE
+    definition: Up Regulation capacity available for dispatch, in real power. Payload value is a float,
+      units defined in payloadDescriptor. Reading type indicates MEAN, PEAK, FORECAST.
+  - term: DOWN_REGULATION_AVAILABLE
+    definition: Down Regulation capacity available for dispatch, in real power. Payload value is a float,
+      units defined in payloadDescriptor. Reading type indicates MEAN, PEAK, FORECAST.
+  - term: REGULATION_SETPOINT
+    definition: Regulation setpoint as instructed as part of regulation services. Payload value is a float,
+      units defined in payloadDescriptor. Reading type indicates MEAN, PEAK, FORECAST.
+  - term: STORAGE_USABLE_CAPACITY
+    definition: Usable energy that the storage device can hold when fully charged. Payload value is a
+      float, units of energy defined in payloadDescriptor.
+  - term: STORAGE_CHARGE_LEVEL
+    definition: Current storage charge level expressed as a percentage, where 0% is empty and 100% is
+      full. Payload value is a float, units of PERCENT defined in payloadDescriptor.
+  - term: STORAGE_MAX_DISCHARGE_POWER
+    definition: The maximum sustainable power that can be discharged into an electricity network (injection).
+      Payload value is a float, units of power defined in payloadDescriptor.
+  - term: STORAGE_MAX_CHARGE_POWER
+    definition: The maximum sustainable power that can be charged from an electricity network (load).
+      Payload value is a float, units of power defined in payloadDescriptor.
+  - term: SIMPLE_LEVEL
+    definition: Simple level that a VEN resource is operating at for each Interval. Payload value is an
+      integer 0, 1, 2, 3 corresponding to values in SIMPLE events.
+  - term: USAGE_FORECAST
+    definition: Payload values array contains a single float indicating expected resource usage for the
+      associated interval. Units of energy defined in payloadDescriptor.
+  - term: STORAGE_DISPATCH_FORECAST
+    definition: Payload values array contains a single float indicating expected stored energy that could
+      be dispatched for the associated interval.
+  - term: LOAD_SHED_DELTA_AVAILABLE
+    definition: Payload values array contains a single float indicating expected increase or decrease
+      in load by a resource for the associated interval.
+  - term: GENERATION_DELTA_AVAILABLE
+    definition: Payload values array contains a single float indicating expected generation by a resource
+      for the associated interval.
+  - term: DATA_QUALITY
+    definition: Payload values array contains a string indicating data quality of companion report payload
+      in the same interval. Strings may be one of enumerated Data Quality enumerations.
+  - term: IMPORT_RESERVATION_CAPACITY
+    definition: Amount of additional import capacity requested. Payload values are a float.
+  - term: IMPORT_RESERVATION_FEE
+    definition: Amount per unit of import capacity that the VEN is willing to pay for the requested reservation.
+      Payload value is a float with currency defined in payloadDescriptor.
+  - term: EXPORT_RESERVATION_CAPACITY
+    definition: Amount of additional export capacity requested. Payload values are a float.
+  - term: EXPORT_RESERVATION_FEE
+    definition: Amount per unit of export capacity that the VEN is willing to pay for the requested reservation.
+      Payload value is a float with currency defined in payloadDescriptor.
+- id: program_attributes
+  title: Program Attributes
+  description: Attribute keys allowed on a program object.
+  source: json-schema/openadr-3-1-1-program-attributes.schema.yaml
+  terms:
+  - term: PROGRAM_LONG_NAME
+    definition: Long name of program for human readability.
+  - term: RETAILER_NAME
+    definition: Short name of energy retailer providing the program.
+  - term: RETAILER_LONG_NAME
+    definition: Long name of energy retailer for human readability.
+  - term: PROGRAM_TYPE
+    definition: A program defined categorization.
+  - term: COUNTRY
+    definition: Alpha-2 code per ISO 3166-1.
+  - term: PRINCIPAL_SUBDIVISION
+    definition: Coding per ISO 3166-2. E.g. state in US.
+  - term: BINDING_EVENTS
+    definition: True if events are fixed once transmitted.
+  - term: LOCAL
+    definition: Indicates that data in the program, e.g. price signals, have been created by a local VTN,
+      possibly adapting from a grid VTN. See the Local Scenarios chapter for more information.
+- id: ven_resource_attributes
+  title: Attributes
+  description: Attribute keys allowed on ven and resource objects.
+  source: json-schema/openadr-3-1-1-ven-resource-attributes.schema.yaml
+  terms:
+  - term: LOCATION
+    definition: Describes a single geographic point. Values[] contains 2 floats, generally representing
+      longitude and latitude. Demand Response programs may define their own use of these fields.
+  - term: AREA
+    definition: Describes a geographic area. Values[] contains application specific data. Demand Response
+      programs may define their own use of these fields, such as GeoJSON polygon data.
+  - term: MAX_POWER_CONSUMPTION
+    definition: Values contains a floating point number describing the maximum consumption, in kiloWatts.
+  - term: MAX_POWER_EXPORT
+    definition: Values contains a floating point number describing the maximum power the device can export,
+      in kiloWatts.
+  - term: DESCRIPTION
+    definition: Free-form text tersely describing a ven or resource.
+- id: reading_types
+  title: Reading-Types
+  description: Allowed readingType values on a report payload descriptor.
+  source: json-schema/openadr-3-1-1-reading-types.schema.yaml
+  terms:
+  - term: DIRECT_READ
+    definition: Payload values have been determined by direct measurement from a resource.
+  - term: ESTIMATED
+    definition: interval, but sufficient other data exist to make a reasonable estimate.
+  - term: SUMMED
+    definition: Payload value is the sum of multiple data sources.
+  - term: MEAN
+    definition: Payload value represents the mean measurements over an interval.
+  - term: PEAK
+    definition: Payload value represents the highest measurement over an interval.
+  - term: FORECAST
+    definition: actual data.
+  - term: AVERAGE
+    definition: Payload value represents the average of measurements over an interval.
+  - term: NORMAL
+    definition: currently being followed.
+  - term: ERROR
+    definition: Resource has self-reported an error or is not addressable by VEN.
+- id: units
+  title: Units
+  description: Allowed units values on an event payload descriptor.
+  source: json-schema/openadr-3-1-1-units.schema.yaml
+  terms:
+  - term: KWH
+    definition: kilowatt-hours (kWh)
+  - term: THERMS
+    definition: Therms == 100K BTU
+  - term: GHG
+    definition: 'Greenhouse gas emissions: g/kWh'
+  - term: VOLTS
+    definition: volts (V)
+  - term: AMPS
+    definition: Current (A)
+  - term: CELSIUS
+    definition: Temperature (C)
+  - term: FAHRENHEIT
+    definition: Temperature (F)
+  - term: PERCENT
+    definition: (0.0 to 1.0 in cases where negative values are irrelevant).
+  - term: KW
+    definition: kilowatts (kW)
+  - term: KVAH
+    definition: kilovolt-ampere hours (kVAh)
+  - term: KVARH
+    definition: kilovolt-amperes reactive hours (kVARh)
+  - term: KVA
+    definition: kilovolt-amperes (kVA)
+  - term: KVAR
+    definition: kilovolt-amperes reactive (kVAR)

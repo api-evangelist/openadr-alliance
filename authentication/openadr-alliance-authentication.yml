@@ -1,0 +1,32 @@
+generated: '2026-07-27'
+method: derived
+source: openapi/openadr-3-0-0-openapi.yaml, openapi/openadr-3-0-1-openapi.yaml, openapi/openadr-3-1-0-openapi.yaml,
+  openapi/openadr-3-1-1-openapi.yaml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: oAuth2ClientCredentials
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: auth/token
+    scopes: 6
+  description: Client credential flow.
+  sources:
+  - openapi/openadr-3-0-0-openapi.yaml
+  - openapi/openadr-3-0-1-openapi.yaml
+  - openapi/openadr-3-1-0-openapi.yaml
+  - openapi/openadr-3-1-1-openapi.yaml
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/openadr-3-0-0-openapi.yaml
+  - openapi/openadr-3-0-1-openapi.yaml
+  - openapi/openadr-3-1-0-openapi.yaml
+  - openapi/openadr-3-1-1-openapi.yaml

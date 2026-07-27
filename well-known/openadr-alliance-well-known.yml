@@ -1,0 +1,106 @@
+generated: '2026-07-27'
+method: probed
+source: live HTTP probes, 2026-07-27
+summary: >-
+  No real /.well-known/ discovery document exists on any OpenADR Alliance host.
+  Every 200 recorded below is a soft-200: www.openadr.org (Joomla/MemberClicks)
+  and test-tool.openadr.org (a Bootstrap SPA) both return their site HTML with
+  content-type text/html for any unmatched path, including every /.well-known/
+  path. products.openadr.org and ecoport.openadr.org return honest 404s, as does
+  the SwaggerHub mock host referenced by the 3.1.x specification servers[]. No
+  security.txt (RFC 9116), no OpenID Connect discovery, no RFC 8414
+  authorization-server metadata, no RFC 9727 api-catalog, no ai-plugin.json.
+  Nothing was saved to disk because nothing machine-readable was returned.
+documents_found: 0
+hosts:
+- host: https://www.openadr.org
+  role: website / specification portal
+  soft_200: true
+  note: >-
+    Returns HTTP 200 with the site HTML for every path under /.well-known/.
+    Treated as "not present", not as a hit.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/html; charset=utf-8
+    real: false
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: text/html; charset=utf-8
+    real: false
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: text/html; charset=utf-8
+    real: false
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: text/html; charset=utf-8
+    real: false
+  - path: /.well-known/api-catalog
+    status: 200
+    content_type: text/html; charset=utf-8
+    real: false
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    content_type: text/html; charset=utf-8
+    real: false
+- host: https://products.openadr.org
+  role: OpenADR certified-product database
+  soft_200: false
+  documents:
+  - {path: /.well-known/security.txt, status: 404, real: false}
+  - {path: /.well-known/openid-configuration, status: 404, real: false}
+  - {path: /.well-known/oauth-authorization-server, status: 404, real: false}
+  - {path: /.well-known/oauth-protected-resource, status: 404, real: false}
+  - {path: /.well-known/api-catalog, status: 404, real: false}
+  - {path: /.well-known/ai-plugin.json, status: 404, real: false}
+- host: https://ecoport.openadr.org
+  role: EcoPort (CTA-2045-B) certified-product database
+  soft_200: false
+  documents:
+  - {path: /.well-known/security.txt, status: 404, real: false}
+  - {path: /.well-known/openid-configuration, status: 404, real: false}
+  - {path: /.well-known/oauth-authorization-server, status: 404, real: false}
+  - {path: /.well-known/oauth-protected-resource, status: 404, real: false}
+  - {path: /.well-known/api-catalog, status: 404, real: false}
+  - {path: /.well-known/ai-plugin.json, status: 404, real: false}
+- host: https://test-tool.openadr.org
+  role: OpenADR / EcoPort online test and certification tool (member login)
+  soft_200: true
+  note: Bootstrap single-page app; serves index.html for unmatched paths.
+  documents:
+  - {path: /.well-known/security.txt, status: 200, content_type: 'text/html; charset=utf-8', real: false}
+  - {path: /.well-known/openid-configuration, status: 200, content_type: 'text/html; charset=utf-8', real: false}
+  - {path: /.well-known/oauth-authorization-server, status: 200, content_type: 'text/html; charset=utf-8', real: false}
+  - {path: /.well-known/oauth-protected-resource, status: 200, content_type: 'text/html; charset=utf-8', real: false}
+  - {path: /.well-known/api-catalog, status: 200, content_type: 'text/html; charset=utf-8', real: false}
+  - {path: /.well-known/ai-plugin.json, status: 200, content_type: 'text/html; charset=utf-8', real: false}
+- host: https://virtserver.swaggerhub.com
+  role: SwaggerHub auto-mock host named in the 3.1.x specification servers[] (third-party, not Alliance-operated)
+  soft_200: false
+  documents:
+  - {path: /.well-known/security.txt, status: 404, real: false}
+  - {path: /.well-known/openid-configuration, status: 404, real: false}
+  - {path: /.well-known/oauth-authorization-server, status: 404, real: false}
+  - {path: /.well-known/oauth-protected-resource, status: 404, real: false}
+  - {path: /.well-known/api-catalog, status: 404, real: false}
+  - {path: /.well-known/ai-plugin.json, status: 404, real: false}
+protocol_level_discovery:
+  note: >-
+    OpenADR 3.1 does define its own in-protocol discovery surface in place of
+    /.well-known/ metadata. These are operations on an implementer's VTN, not on
+    an Alliance host, so they cannot be probed here — but they are the OpenADR
+    analogue of RFC 8414 authorization-server metadata and of an event catalog.
+  operations:
+  - operationId: getAuthServerInfo
+    path: GET /auth/server
+    returns: authServerInfo — the URL of the VTN token endpoint
+    analogue: RFC 8414 /.well-known/oauth-authorization-server
+  - operationId: listAllNotifiers
+    path: GET /notifiers
+    returns: notifiersResponse — which notifier bindings the VTN supports (WEBHOOK always, MQTT optionally, with broker URIs, serialization and authentication)
+    analogue: event/notification transport discovery
+  - operationId: listAllMqttNotifierTopicsPrograms
+    path: GET /notifiers/mqtt/topics/programs
+    returns: notifierTopicsResponse — VTN-assigned MQTT topic names per operation
+    analogue: channel catalog

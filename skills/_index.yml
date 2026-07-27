@@ -1,0 +1,42 @@
+generated: '2026-07-27'
+method: generated
+source: openapi/openadr-3-1-1-openapi.yaml + conventions/ + errors/ + json-schema/
+description: >-
+  Packaged Agent Skills for OpenADR 3, one per marquee flow of the protocol. Every step is
+  grounded in an operationId that exists verbatim in the OpenADR 3.1.1 OpenAPI, and every
+  enumerated value cited comes from the Alliance-published enumeration schemas. These are
+  API Evangelist artifacts — the OpenADR Alliance publishes no agent skills or AGENTS.md.
+  Note that these skills target an implementer's VTN: the Alliance hosts no API, so the
+  base URL is always supplied out of band.
+skills:
+- file: openadr-alliance-authenticate.md
+  name: Authenticate against an OpenADR 3 VTN
+  api: openapi/openadr-3-1-1-openapi.yaml
+  role: any
+  operations: [getAuthServerInfo, fetchToken]
+- file: openadr-alliance-dispatch-a-demand-response-event.md
+  name: Publish a program and dispatch a demand response event
+  api: openapi/openadr-3-1-1-openapi.yaml
+  role: BL (business logic / VTN side)
+  operations: [fetchToken, createProgram, searchAllPrograms, searchProgramByProgramId, createEvent, searchAllEvents, searchEventsByID, updateEvent, deleteEvent]
+- file: openadr-alliance-register-ven-and-resources.md
+  name: Register a VEN and its resources
+  api: openapi/openadr-3-1-1-openapi.yaml
+  role: BL or VEN
+  operations: [fetchToken, createVen, searchVens, searchVenByID, updateVen, createResource, searchVenResources, searchVenResourceByID, updateVenResource]
+- file: openadr-alliance-subscribe-to-notifications.md
+  name: Subscribe to VTN notifications over webhook or MQTT
+  api: openapi/openadr-3-1-1-openapi.yaml
+  role: BL or VEN
+  operations: [fetchToken, listAllNotifiers, createSubscription, searchSubscriptions, searchSubscriptionByID, updateSubscription, deleteSubscription, listAllMqttNotifierTopicsEvents, listAllMqttNotifierTopicsPrograms, listAllMqttNotifierTopicsProgramEvents, listAllMqttNotifierTopicsReports, listAllMqttNotifierTopicsSubscriptions, listAllMqttNotifierTopicsVens, listAllMqttNotifierTopicsVen, listAllMqttNotifierTopicsResources, listAllMqttNotifierTopicsVenEvents, listAllMqttNotifierTopicsVenPrograms, listAllMqttNotifierTopicsVenResources]
+- file: openadr-alliance-report-telemetry.md
+  name: Report telemetry back to a VTN
+  api: openapi/openadr-3-1-1-openapi.yaml
+  role: VEN
+  operations: [fetchToken, searchAllEvents, searchEventsByID, createReport, searchAllReports, searchReportsByReportID, updateReport, deleteReport]
+cross_cutting_rules:
+- No idempotency key exists in OpenADR 3 — search before retrying any create.
+- All updates are full-object PUTs; there is no PATCH.
+- Pagination is skip/limit, server-capped at 50, with no total and no next link.
+- Errors use the problem envelope served as application/json, except POST /auth/token which returns an RFC 6749 authError.
+- Scopes encode role — a 403 on a write is usually a role mismatch, not a bad token.

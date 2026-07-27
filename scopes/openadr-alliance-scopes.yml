@@ -1,0 +1,105 @@
+generated: '2026-07-27'
+method: derived
+source: openapi/openadr-3-0-0-openapi.yaml, openapi/openadr-3-0-1-openapi.yaml, openapi/openadr-3-1-0-openapi.yaml,
+  openapi/openadr-3-1-1-openapi.yaml
+schemes:
+- name: oAuth2ClientCredentials
+  source: openapi/openadr-3-0-0-openapi.yaml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: auth/token
+  description: Client credential flow.
+- name: oAuth2ClientCredentials
+  source: openapi/openadr-3-0-1-openapi.yaml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: auth/token
+  description: Client credential flow.
+- name: oAuth2ClientCredentials
+  source: openapi/openadr-3-1-0-openapi.yaml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: auth/token
+  description: Client credential flow.
+- name: oAuth2ClientCredentials
+  source: openapi/openadr-3-1-1-openapi.yaml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: auth/token
+  description: Client credential flow.
+scopes:
+- scope: read_all
+  description: VENs and BL can read all resources
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/openadr-3-0-0-openapi.yaml
+  - openapi/openadr-3-0-1-openapi.yaml
+  - openapi/openadr-3-1-0-openapi.yaml
+  - openapi/openadr-3-1-1-openapi.yaml
+- scope: read_bl
+  description: BL can read BL-scoped notifier topic metadata
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/openadr-3-1-0-openapi.yaml
+  - openapi/openadr-3-1-1-openapi.yaml
+- scope: read_targets
+  description: VENs may only read objects with targets by providing matching targets
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/openadr-3-1-0-openapi.yaml
+  - openapi/openadr-3-1-1-openapi.yaml
+- scope: read_ven_objects
+  description: VENs may only read objects whose clientID matches their own
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/openadr-3-1-0-openapi.yaml
+  - openapi/openadr-3-1-1-openapi.yaml
+- scope: write_events
+  description: Only BL can write to events
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/openadr-3-0-0-openapi.yaml
+  - openapi/openadr-3-0-1-openapi.yaml
+  - openapi/openadr-3-1-0-openapi.yaml
+  - openapi/openadr-3-1-1-openapi.yaml
+- scope: write_programs
+  description: Only BL can write to programs
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/openadr-3-0-0-openapi.yaml
+  - openapi/openadr-3-0-1-openapi.yaml
+  - openapi/openadr-3-1-0-openapi.yaml
+  - openapi/openadr-3-1-1-openapi.yaml
+- scope: write_reports
+  description: only VENs can write to reports
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/openadr-3-0-0-openapi.yaml
+  - openapi/openadr-3-0-1-openapi.yaml
+  - openapi/openadr-3-1-0-openapi.yaml
+  - openapi/openadr-3-1-1-openapi.yaml
+- scope: write_subscriptions
+  description: VENs and BL can write to subscriptions
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/openadr-3-0-0-openapi.yaml
+  - openapi/openadr-3-0-1-openapi.yaml
+  - openapi/openadr-3-1-0-openapi.yaml
+  - openapi/openadr-3-1-1-openapi.yaml
+- scope: write_vens
+  description: VENS and BL can write to vens and resources
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/openadr-3-0-0-openapi.yaml
+  - openapi/openadr-3-0-1-openapi.yaml
+  - openapi/openadr-3-1-0-openapi.yaml
+  - openapi/openadr-3-1-1-openapi.yaml

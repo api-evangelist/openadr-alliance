@@ -1,0 +1,102 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  npm registry search, PyPI JSON API, https://www.openadr.org/get-implementation-help,
+  https://www.openadr.org/how-to-build-a-product, https://github.com/oadr3-org
+summary: >-
+  The OpenADR Alliance publishes NO first-party client libraries. Its canonical
+  GitHub organisation (github.com/oadr3-org) has zero public repositories, and
+  the OpenADR 3 Reference Implementation is described on the Alliance site as
+  available to members only. Every package below is third-party — built by
+  implementers, national labs, or vendors against the Alliance specification —
+  so none carries official: true. Recorded here because they are the real
+  on-ramp for developers, and because the absence of a first-party SDK is itself
+  a finding about this provider's developer surface.
+first_party_sdks: 0
+packages:
+- language: python
+  registry: pypi
+  name: openleadr
+  url: https://pypi.org/project/openleadr/
+  install: pip install openleadr
+  official: false
+  vendor: OpenLEADR project (LF Energy)
+  repository: https://github.com/openleadr/openleadr-python
+  homepage: https://openleadr.org
+  protocol_version: '2.0b'
+  description: Python 3 library for building OpenADR 2.0b clients (VENs) and servers (VTNs).
+- language: python
+  registry: pypi
+  name: openadr3-client
+  url: https://pypi.org/project/openadr3-client/
+  install: pip install openadr3-client
+  official: false
+  vendor: ElaadNL
+  repository: https://github.com/ElaadNL/openadr3-client
+  protocol_version: '3'
+  description: OpenADR 3 client library published by ElaadNL, the Dutch EV-charging knowledge centre.
+- language: python
+  registry: pypi
+  name: openadr3
+  url: https://pypi.org/project/openadr3/
+  install: pip install openadr3
+  official: false
+  vendor: Clark Communications Corporation
+  repository: https://github.com/grid-coordination/python-oa3
+  homepage: https://grid-coordination.energy
+  protocol_version: '3'
+  description: OpenADR 3 entity API library, from the same party that publishes the public Apache-2.0 copy of the OpenADR 3 specification.
+- language: python
+  registry: pypi
+  name: pyopenadr
+  url: https://pypi.org/project/pyopenadr/
+  install: pip install pyopenadr
+  official: false
+  vendor: OpenLEADR project
+  protocol_version: '2.0b'
+  status: renamed
+  description: Former name of openleadr; retained on PyPI as a pointer to the renamed package.
+- language: javascript
+  registry: npm
+  name: '@celabs/openadr-ven'
+  url: https://www.npmjs.com/package/@celabs/openadr-ven
+  install: npm install @celabs/openadr-ven
+  official: false
+  vendor: Community (based on an EPRI implementation)
+  repository: https://gitlab.com/rtwheato/openadr-ven
+  protocol_version: '2.0b'
+  description: Implementation of EPRI's OpenADR Virtual End Node client.
+- language: javascript
+  registry: npm
+  name: node-red-contrib-openadr
+  url: https://www.npmjs.com/package/node-red-contrib-openadr
+  install: npm install node-red-contrib-openadr
+  official: false
+  vendor: MTU IMES Lab
+  repository: https://github.com/MTU-IMES-LAB/OpenADR
+  protocol_version: '2.0'
+  description: Node-RED node for an OpenADR VEN.
+- language: javascript
+  registry: npm
+  name: '@anl-ioc/node-red-contrib-oadr-ven'
+  url: https://www.npmjs.com/package/@anl-ioc/node-red-contrib-oadr-ven
+  install: npm install @anl-ioc/node-red-contrib-oadr-ven
+  official: false
+  vendor: Argonne National Laboratory (IOC)
+  protocol_version: '2.0b'
+  description: OpenADR 2.0b VEN node for Node-RED.
+registries_probed:
+- registry: npm
+  query: openadr
+  result: 6 third-party packages, 0 published by the OpenADR Alliance
+- registry: pypi
+  query: openadr / openleadr / openadr3 / pyopenadr / openadr3-client
+  result: 4 third-party packages, 0 published by the OpenADR Alliance
+- registry: github
+  query: https://api.github.com/orgs/oadr3-org/repos
+  result: empty array — the canonical Alliance organisation has zero public repositories
+alliance_position: >-
+  The Alliance sells implementation support rather than shipping code: a free
+  30-minute consultation for new members, then paid 2h ($450), 5h ($1,050) and
+  10h ($2,000) implementation-support packages, plus a members-only OpenADR 3
+  Reference Implementation. See https://www.openadr.org/get-implementation-help.

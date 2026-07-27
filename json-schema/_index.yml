@@ -1,0 +1,48 @@
+generated: '2026-07-27'
+method: searched
+source: https://github.com/grid-coordination/openadr3-specification/tree/main/3.1.1/enumerations
+description: >-
+  Enumeration schemas published as part of the OpenADR 3.1.1 specification
+  release. These files define the allowed values (and, for payload types, the
+  shape of each valuesMap entry) referenced from the OpenADR 3 OpenAPI contract
+  but not enumerated inline in it. Harvested verbatim from the public Apache-2.0
+  copy of the Alliance release; copyright OpenADR Alliance.
+license: Apache-2.0
+spec_version: 3.1.1
+schemas:
+- file: openadr-3-1-1-event-interval-payloads.schema.yaml
+  title: Event-Interval-Payloads
+  description: >-
+    Payload types allowed in an event interval valuesMap — pricing, dispatch and
+    control setpoints, capacity subscription/reservation/limit, grid alerts, and
+    CTA-2045 pass-through commands.
+  definitions: 38
+- file: openadr-3-1-1-report-payloads.schema.yaml
+  title: Report-Payloads
+  description: >-
+    Payload types allowed in a report interval valuesMap — readings, usage,
+    demand, setpoints, baselines, operating state, regulation availability,
+    storage state, forecasts, and data quality.
+  definitions: 24
+- file: openadr-3-1-1-program-attributes.schema.yaml
+  title: Program Attributes
+  description: >-
+    Attribute keys allowed on a program object — long name, retailer name,
+    program type, country, principal subdivision, binding events, local flag.
+  definitions: 8
+- file: openadr-3-1-1-ven-resource-attributes.schema.yaml
+  title: Attributes (VEN / resource)
+  description: >-
+    Attribute keys allowed on ven and resource objects — location, area, max
+    power consumption, max power export, description.
+  definitions: 5
+- file: openadr-3-1-1-reading-types.schema.yaml
+  title: Reading-Types
+  description: Allowed readingType values on a report payload descriptor.
+  definitions: 0
+  enum_values: 9
+- file: openadr-3-1-1-units.schema.yaml
+  title: Units
+  description: Allowed units values on an event payload descriptor.
+  definitions: 0
+  enum_values: 13

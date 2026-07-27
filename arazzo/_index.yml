@@ -1,0 +1,20 @@
+generated: '2026-07-27'
+method: generated
+source: openapi/openadr-3-1-1-openapi.yaml
+description: >-
+  Native Arazzo 1.0.1 workflows stitching OpenADR 3.1.1 operations into runnable multi-step
+  flows. Every operationId is verified verbatim against the specification. These run against
+  an implementer's VTN — the OpenADR Alliance hosts no API, so supply the base URL yourself.
+workflows:
+- file: openadr-alliance-dispatch-event.yml
+  workflowId: dispatch-demand-response-event
+  title: Publish a program and dispatch a demand response event
+  summary: BL-side — authenticate, create a program, publish an event on it, verify.
+  role: BL (business logic / VTN side)
+  operations: [getAuthServerInfo, fetchToken, createProgram, createEvent, searchEventsByID]
+- file: openadr-alliance-ven-onboard-and-subscribe.yml
+  workflowId: onboard-ven-and-subscribe
+  title: Onboard a VEN, attach a resource, and subscribe to event notifications
+  summary: VEN-side — authenticate, register VEN and resource, discover notifiers, subscribe via webhook.
+  role: VEN
+  operations: [fetchToken, createVen, createResource, listAllNotifiers, createSubscription]

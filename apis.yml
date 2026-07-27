@@ -2,29 +2,23 @@ aid: openadr-alliance
 url: https://raw.githubusercontent.com/api-evangelist/openadr-alliance/refs/heads/main/apis.yml
 name: OpenADR Alliance
 kind: company
-description: >-
-  The OpenADR Alliance is a San Ramon, California mutual-benefit membership
-  corporation that develops, certifies, and promotes OpenADR, the open
-  information-exchange model utilities, ISOs/RTOs, aggregators, and device
-  makers use to automate demand response and dispatch distributed energy
-  resources. It is a standards body, not a service operator: it publishes the
-  OpenADR 2.0a/2.0b profile specifications (approved by the IEC as
-  IEC/PAS 62746-10-1) and OpenADR 3.0/3.1, which abandoned the SOAP-era design
-  and is now defined entirely by an OpenAPI 3.0 contract covering programs,
-  events, reports, subscriptions, VENs, and resources, secured with OAuth 2.0
-  client credentials. It also runs the OpenADR and EcoPort (CTA-2045-B)
-  certification programmes and their public certified-product databases. Its API
-  posture is honest but narrow: the OpenADR 3 OpenAPI is a genuine, parseable
-  machine-readable contract, and the specifications are license-free, but the
-  Alliance itself operates no developer portal, no api./developer./docs.
-  subdomain, and no hosted API — its canonical specification repository
-  (github.com/oadr3-org) has zero public repositories and requires membership,
-  and the public route to the spec is a registration form that emails download
-  links under terms and conditions. It publishes no consumer energy data and no
-  open grid or market data; it defines the protocol that other parties
-  implement. Home market is the United States, with adoption across Europe,
-  Japan, Korea, and Australia.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/groq.png
+description: 'The OpenADR Alliance is a San Ramon, California mutual-benefit membership corporation
+  that develops, certifies, and promotes OpenADR, the open information-exchange model utilities,
+  ISOs/RTOs, aggregators, and device makers use to automate demand response and dispatch distributed
+  energy resources. It is a standards body, not a service operator: it publishes the OpenADR
+  2.0a/2.0b profile specifications (approved by the IEC as IEC/PAS 62746-10-1) and OpenADR 3.0/3.1,
+  which abandoned the SOAP-era design and is now defined entirely by an OpenAPI 3.0 contract
+  covering programs, events, reports, subscriptions, VENs, and resources, secured with OAuth
+  2.0 client credentials. It also runs the OpenADR and EcoPort (CTA-2045-B) certification programmes
+  and their public certified-product databases. Its API posture is honest but narrow: the OpenADR
+  3 OpenAPI is a genuine, parseable machine-readable contract, and the specifications are license-free,
+  but the Alliance itself operates no developer portal, no api./developer./docs. subdomain,
+  and no hosted API — its canonical specification repository (github.com/oadr3-org) has zero
+  public repositories and requires membership, and the public route to the spec is a registration
+  form that emails download links under terms and conditions. It publishes no consumer energy
+  data and no open grid or market data; it defines the protocol that other parties implement.
+  Home market is the United States, with adoption across Europe, Japan, Korea, and Australia.'
+image: https://www.openadr.org/assets/site/openadrlogo347x75.png
 tags:
 - Energy
 - United States
@@ -44,21 +38,18 @@ specificationVersion: '0.19'
 apis:
 - aid: openadr-alliance:openadr-3-api
   name: OpenADR 3 API
-  description: >-
-    OpenADR 3 is the RESTful third generation of the OpenADR protocol, defined
-    in full by a single OpenAPI 3.0 document published by the OpenADR Alliance.
-    It supports energy-retailer-to-energy-customer demand response programs
-    through operations to create, update, delete, and search programs, events,
-    reports, subscriptions, VENs (Virtual End Nodes), and VEN resources, plus an
-    /auth/token endpoint. Version 3.1.0 adds MQTT notifier topics, VEN-scoped
-    topics for object privacy, and VTN discovery. Security is OAuth 2.0 client
-    credentials with JWT bearer tokens and role-scoped grants that separate what
-    a Business Logic (BL/VTN) client may write from what a VEN may write. This
-    is a protocol contract, not an Alliance-hosted service — every implementer
-    (a utility, aggregator, or vendor VTN) stands up its own base URL, so no
-    single baseURL exists. The specification documents themselves are
-    distributed by the Alliance through a registration form; the OpenAPI files
-    harvested here came from a public Apache-2.0 copy of the Alliance release.
+  description: OpenADR 3 is the RESTful third generation of the OpenADR protocol, defined in
+    full by a single OpenAPI 3.0 document published by the OpenADR Alliance. It supports energy-retailer-to-energy-customer
+    demand response programs through operations to create, update, delete, and search programs,
+    events, reports, subscriptions, VENs (Virtual End Nodes), and VEN resources, plus an /auth/token
+    endpoint. Version 3.1.0 adds MQTT notifier topics, VEN-scoped topics for object privacy,
+    and VTN discovery. Security is OAuth 2.0 client credentials with JWT bearer tokens and role-scoped
+    grants that separate what a Business Logic (BL/VTN) client may write from what a VEN may
+    write. This is a protocol contract, not an Alliance-hosted service — every implementer (a
+    utility, aggregator, or vendor VTN) stands up its own base URL, so no single baseURL exists.
+    The specification documents themselves are distributed by the Alliance through a registration
+    form; the OpenAPI files harvested here came from a public Apache-2.0 copy of the Alliance
+    release.
   humanURL: https://www.openadr.org/specification
   tags:
   - Demand Response
@@ -82,7 +73,52 @@ apis:
     url: https://www.openadr.org/openadr-3-certification
   - type: SourceCode
     url: https://github.com/grid-coordination/openadr3-specification
+  - type: Overlay
+    url: overlays/openadr-alliance-openadr-3-1-1-overlay.yaml
+    name: OpenADR 3.1.1 enhancements
+  - type: Overlay
+    url: overlays/openadr-alliance-openadr-3-1-0-overlay.yaml
+    name: OpenADR 3.1.0 enhancements
+  - type: Overlay
+    url: overlays/openadr-alliance-openadr-3-0-1-overlay.yaml
+    name: OpenADR 3.0.1 enhancements
+  - type: Overlay
+    url: overlays/openadr-alliance-openadr-3-0-0-overlay.yaml
+    name: OpenADR 3.0.0 enhancements
+  - type: AsyncAPI
+    url: asyncapi/openadr-alliance-notifications-asyncapi.yml
+    name: OpenADR 3 object operation notifications
+  - type: Webhooks
+    url: asyncapi/openadr-alliance-webhooks.yml
+    name: OpenADR 3 webhook and notifier catalog
+  - type: JSONSchema
+    url: json-schema/_index.yml
+    name: OpenADR 3.1.1 enumeration schemas
+  - type: Examples
+    url: examples/openadr-alliance-examples.yml
+    name: Example payloads from the specification
+  - type: DataModel
+    url: data-model/openadr-alliance-data-model.yml
+    name: OpenADR 3 entity-relationship graph
+  - type: ErrorCatalog
+    url: errors/openadr-alliance-problem-types.yml
+    name: OpenADR 3 problem types
+  - type: ToolCrosswalk
+    url: mcp/openadr-alliance-tool-crosswalk.yml
+    name: MCP tool to OpenAPI operation crosswalk
+  - type: MCPCandidate
+    url: mcp/openadr-alliance-mcp.yml
+    name: Candidate MCP tool surface derived from the OpenADR 3.1.1 contract (no Alliance-hosted
+      MCP server exists)
 common:
+- type: AgenticAccess
+  url: agentic-access/openadr-alliance-agentic-access.yml
+- type: DomainSecurity
+  url: security/openadr-alliance-domain-security.yml
+- type: Authentication
+  url: authentication/openadr-alliance-authentication.yml
+- type: OAuthScopes
+  url: scopes/openadr-alliance-scopes.yml
 - type: Website
   url: https://www.openadr.org/
 - type: Documentation
@@ -111,6 +147,71 @@ common:
   url: https://www.openadr.org/privacy-policy
 - type: Support
   url: https://www.openadr.org/contact-us
+- type: Packages
+  url: packages/openadr-alliance-packages.yml
+  name: Client library inventory (all third-party)
+- type: LLMsTxt
+  url: llms/openadr-alliance-llms.txt
+  name: llms.txt for the OpenADR Alliance
+- type: Conformance
+  url: conformance/openadr-alliance-conformance.yml
+  name: Standards conformance assessment
+- type: Lifecycle
+  url: lifecycle/openadr-alliance-lifecycle.yml
+  name: Specification and certification lifecycle
+- type: Conventions
+  url: conventions/openadr-alliance-conventions.yml
+  name: OpenADR 3 cross-cutting conventions
+- type: ChangeLog
+  url: changelog/openadr-alliance-changelog.yml
+  name: OpenADR 3 specification change log
+- type: Sandbox
+  url: sandbox/openadr-alliance-sandbox.yml
+  name: Test tool, test assets and test certificates
+- type: Vocabulary
+  url: vocabulary/openadr-alliance-vocabulary.yml
+  name: OpenADR 3 controlled vocabulary
+- type: AgentSkill
+  url: skills/_index.yml
+  name: Packaged Agent Skills for OpenADR 3
+- type: Arazzo
+  url: arazzo/openadr-alliance-dispatch-event.yml
+  name: Publish a program and dispatch a demand response event
+- type: Arazzo
+  url: arazzo/openadr-alliance-ven-onboard-and-subscribe.yml
+  name: Onboard a VEN, attach a resource, and subscribe
+- type: Plans
+  url: plans/openadr-alliance-plans.yml
+  name: Membership dues, test tool and consulting pricing
+- type: DeveloperPortal
+  url: https://www.openadr.org/specification-download
+- type: APIReference
+  url: https://www.openadr.org/specification
+- type: GettingStarted
+  url: https://www.openadr.org/how-to-build-a-product
+- type: Pricing
+  url: https://www.openadr.org/join
+- type: Pricing
+  url: https://www.openadr.org/openadr-test-tool-store
+- type: TermsOfService
+  url: https://www.openadr.org/assets/docs/OpenADR%20Alliance%20Bylaws%20%26%20Member%20Agreement.zip
+- type: SignUp
+  url: https://www.openadr.org/join
+- type: Tools
+  url: https://www.openadr.org/openadr-test-tool-store
+- type: Training
+  url: https://www.openadr.org/openadr-training
+- type: CaseStudies
+  url: https://www.openadr.org/case-studies
+- type: PressReleases
+  url: https://www.openadr.org/press-releases
+- type: Events
+  url: https://www.openadr.org/event-conference-calendar
+- type: SourceCode
+  url: https://github.com/grid-coordination/openadr3-specification
+- type: Probe
+  url: well-known/openadr-alliance-well-known.yml
+  name: .well-known probe results (no discovery documents found)
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

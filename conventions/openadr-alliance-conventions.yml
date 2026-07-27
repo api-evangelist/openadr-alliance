@@ -1,0 +1,130 @@
+generated: '2026-07-27'
+method: derived
+source: >-
+  openapi/openadr-3-1-1-openapi.yaml (+ 3.1.0 / 3.0.1 / 3.0.0),
+  https://www.openadr.org/openadr-3-0, https://www.openadr.org/cyber-security
+description: >-
+  Cross-cutting request/response semantics of the OpenADR 3 contract, derived from the
+  specification and the Alliance's published guidance. Every implementer VTN inherits
+  these; nothing here is implementer-specific.
+authentication:
+  style: OAuth 2.0 client credentials, JWT bearer
+  token_endpoint: POST /auth/token (operationId fetchToken, application/x-www-form-urlencoded)
+  discovery_endpoint: GET /auth/server (operationId getAuthServerInfo) — returns the token endpoint URL
+  header: 'Authorization: Bearer <JWT>'
+  unauthenticated_operations: [fetchToken, getAuthServerInfo]
+  role_model: >-
+    Scopes encode role, not just permission: BL (business-logic/VTN) clients write programs
+    and events, VENs write reports, both write subscriptions and vens. Read scopes were
+    split in 3.1.0 so a VEN can only read objects that match its own clientID
+    (read_ven_objects) or its targets (read_targets), while read_all remains BL-only.
+  transport_security: >-
+    The Alliance operates its own PKI for device certificates (RSA and ECC), issued through
+    Eonti and governed by the OpenADR Alliance Certificate Policy. 3.1.0 issue 128 is
+    explicitly "TLS hardening". MQTT notifier bindings may authenticate anonymously, with an
+    OAuth2 bearer token, or with a certificate.
+  see: [authentication/openadr-alliance-authentication.yml, scopes/openadr-alliance-scopes.yml]
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    No Idempotency-Key header, no idempotency parameter, no retry-safety contract anywhere in
+    the four specification releases. Creates are POST-and-assign-server-id, so a retried
+    create produces a duplicate object. PUT updates and DELETE are naturally idempotent by
+    HTTP method; POST /programs, /events, /reports, /subscriptions, /vens and /resources are
+    not. This is a real gap for a protocol whose write path dispatches grid load, and worth
+    raising with the Alliance rather than papering over.
+pagination:
+  style: offset
+  params:
+  - {name: skip, in: query, type: integer, minimum: 0, description: number of records to skip}
+  - {name: limit, in: query, type: integer, minimum: 0, maximum: 50, description: maximum number of records to return}
+  applies_to: [searchAllPrograms, searchAllEvents, searchAllReports, searchSubscriptions, searchVens, searchVenResources]
+  response_shape: bare JSON array of objects
+  total_count: false
+  cursors: false
+  note: >-
+    No envelope, no total, no next-link — a client cannot tell a full last page from a
+    truncated one except by comparing the returned count to limit. The server-side cap is 50.
+filtering:
+  targets:
+    param: targets
+    type: array of strings
+    note: >-
+      3.1.0 refactored targets from valuesMap objects to plain strings (issue 316) and made
+      them an access-control mechanism, not just a filter: a VEN holding read_targets may
+      only read objects whose targets it can match. Removed from /subscriptions queries in
+      3.1.0 (issue 312).
+  other:
+  - {operation: searchAllEvents, param: programID, description: filter events to one program}
+  - {operation: searchAllEvents, param: active, type: boolean, description: 'ignore events that have transpired (added 3.1.0, issue 234)'}
+  - {operation: searchAllReports, param: programID}
+  - {operation: searchAllReports, param: eventID}
+  - {operation: searchAllReports, param: clientName}
+  - {operation: searchVens, param: venName}
+  - {operation: searchVenResources, param: resourceName}
+  - {operation: searchVenResources, param: venID}
+  - {operation: searchSubscriptions, param: programID}
+  - {operation: searchSubscriptions, param: clientName}
+  - {operation: searchSubscriptions, param: objects}
+field_expansion:
+  supported: false
+  note: No expand, fields, or include parameters. Objects are returned whole.
+metadata:
+  supported: true
+  shape: >-
+    objectMetadata (id, createdDateTime, modificationDateTime, objectType) is composed into
+    every addressable object via allOf and is read-only/server-assigned. Separately, program,
+    ven and resource objects carry an attributes[] valuesMap whose allowed keys are published
+    as enumeration schemas (json-schema/).
+  see: vocabulary/openadr-alliance-vocabulary.yml
+request_tracing:
+  request_id_header: null
+  correlation: >-
+    None specified. The problem envelope carries an instance URI member intended to identify
+    the specific occurrence, which is the closest thing to a trace handle, but no header is
+    defined and no VTN behaviour is required.
+versioning:
+  style: semver on the specification document
+  in_url: false
+  in_header: false
+  see: lifecycle/openadr-alliance-lifecycle.yml
+error_envelope:
+  schema: problem
+  media_type: application/json
+  standard_shape: RFC 7807 / RFC 9457 member set (Zalando problem schema), served as application/json
+  members: [type, title, status, detail, instance]
+  auth_errors: authError (RFC 6749 section 5.2) on POST /auth/token only
+  see: errors/openadr-alliance-problem-types.yml
+rate_limiting:
+  documented: false
+  headers: null
+  note: >-
+    No rate-limit contract, no 429 response on any operation in any release, and no
+    Retry-After or RateLimit-* header semantics. An implementer VTN may impose its own;
+    nothing is negotiated at the protocol level.
+notifications:
+  bindings: [WEBHOOK (mandatory), MQTT (optional, added 3.1.0)]
+  webhook: >-
+    Each subscription.objectOperations[] entry registers its own callbackUrl and an optional
+    subscriber-supplied bearerToken; the VTN POSTs a notification object
+    (objectType + operation + object + targets) to it and the receiver returns 200. The
+    callback is declared as the notifyEvent callback on POST /subscriptions with
+    security [{}], so the bearer token is described in the subscription schema but is not
+    modelled on the callback operation, and there is no payload signature or replay defence.
+  mqtt: >-
+    The VEN discovers broker URIs and authentication via GET /notifiers, then discovers
+    VTN-assigned topic names per object and per operation via the twelve
+    GET /notifiers/mqtt/topics/* operations. Topic names are not fixed by the specification;
+    object privacy is enforced by giving each VEN its own scoped topics.
+  operations_enum: [CREATE, READ, UPDATE, DELETE]
+  see: asyncapi/openadr-alliance-notifications-asyncapi.yml
+content_negotiation:
+  request: application/json (application/x-www-form-urlencoded on the token endpoint)
+  response: application/json
+  alternatives: none
+naming:
+  case: camelCase (changed from snake_case in 3.1.0, issue 217)
+  ids: server-assigned objectID strings; no typed prefixes
+  datetimes: RFC 3339 date-time; '0001-01-01T00:00:00' may mean "now"
+  durations: ISO 8601; 'P9999Y' may mean infinity

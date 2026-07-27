@@ -1,0 +1,492 @@
+generated: '2026-07-27'
+method: derived
+status: candidate
+source: openapi/openadr-3-1-1-openapi.yaml
+note: The OpenADR Alliance publishes no MCP server. OpenADR 3 is a protocol contract implemented by each
+  VTN operator, so any MCP server would be stood up against an implementer's own base URL, not an Alliance-hosted
+  one. The tool list below is a candidate surface derived one-to-one from the OpenADR 3.1.1 OpenAPI operations,
+  for an implementer who wants to expose their VTN to agents.
+server:
+  name: openadr3
+  transport: http
+  url: null
+  base_url: implementer-hosted (each VTN publishes its own base URL)
+  authentication: OAuth 2.0 client credentials against the VTN /auth/token endpoint; JWT bearer on every
+    call
+tool_count: 45
+tools:
+- name: search_all_programs
+  description: searches all programs
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#searchAllPrograms
+  method: GET
+  path: /programs
+  input_from:
+    query_parameters:
+    - targets
+    - skip
+    - limit
+    request_body: false
+  scopes:
+  - read_targets
+- name: create_program
+  description: create a program
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#createProgram
+  method: POST
+  path: /programs
+  input_from:
+    query_parameters: []
+    request_body: true
+  scopes:
+  - write_programs
+- name: search_program_by_program_id
+  description: searches programs by program ID
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#searchProgramByProgramId
+  method: GET
+  path: /programs/{programID}
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_targets
+- name: update_program
+  description: update a program
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#updateProgram
+  method: PUT
+  path: /programs/{programID}
+  input_from:
+    query_parameters: []
+    request_body: true
+  scopes:
+  - write_programs
+- name: delete_program
+  description: delete a program
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#deleteProgram
+  method: DELETE
+  path: /programs/{programID}
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - write_programs
+- name: search_all_reports
+  description: searches all reports
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#searchAllReports
+  method: GET
+  path: /reports
+  input_from:
+    query_parameters:
+    - programID
+    - eventID
+    - clientName
+    - skip
+    - limit
+    request_body: false
+  scopes:
+  - read_ven_objects
+- name: create_report
+  description: add a report
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#createReport
+  method: POST
+  path: /reports
+  input_from:
+    query_parameters: []
+    request_body: true
+  scopes:
+  - write_reports
+- name: search_reports_by_report_i_d
+  description: searches reports by reportID
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#searchReportsByReportID
+  method: GET
+  path: /reports/{reportID}
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_ven_objects
+- name: update_report
+  description: update a report
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#updateReport
+  method: PUT
+  path: /reports/{reportID}
+  input_from:
+    query_parameters: []
+    request_body: true
+  scopes:
+  - write_reports
+- name: delete_report
+  description: delete a report
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#deleteReport
+  method: DELETE
+  path: /reports/{reportID}
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - write_reports
+- name: search_all_events
+  description: searches all events
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#searchAllEvents
+  method: GET
+  path: /events
+  input_from:
+    query_parameters:
+    - programID
+    - targets
+    - skip
+    - limit
+    - active
+    request_body: false
+  scopes:
+  - read_targets
+- name: create_event
+  description: create an event
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#createEvent
+  method: POST
+  path: /events
+  input_from:
+    query_parameters: []
+    request_body: true
+  scopes:
+  - write_events
+- name: search_events_by_i_d
+  description: search events by ID
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#searchEventsByID
+  method: GET
+  path: /events/{eventID}
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_targets
+- name: update_event
+  description: update an event
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#updateEvent
+  method: PUT
+  path: /events/{eventID}
+  input_from:
+    query_parameters: []
+    request_body: true
+  scopes:
+  - write_events
+- name: delete_event
+  description: delete an event
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#deleteEvent
+  method: DELETE
+  path: /events/{eventID}
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - write_events
+- name: search_subscriptions
+  description: search subscriptions
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#searchSubscriptions
+  method: GET
+  path: /subscriptions
+  input_from:
+    query_parameters:
+    - programID
+    - clientName
+    - objects
+    - skip
+    - limit
+    request_body: false
+  scopes:
+  - read_ven_objects
+- name: create_subscription
+  description: create subscription
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#createSubscription
+  method: POST
+  path: /subscriptions
+  input_from:
+    query_parameters: []
+    request_body: true
+  scopes:
+  - write_subscriptions
+- name: search_subscription_by_i_d
+  description: search subscriptions by ID
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#searchSubscriptionByID
+  method: GET
+  path: /subscriptions/{subscriptionID}
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_ven_objects
+- name: update_subscription
+  description: update subscription
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#updateSubscription
+  method: PUT
+  path: /subscriptions/{subscriptionID}
+  input_from:
+    query_parameters: []
+    request_body: true
+  scopes:
+  - write_subscriptions
+- name: delete_subscription
+  description: delete subscription
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#deleteSubscription
+  method: DELETE
+  path: /subscriptions/{subscriptionID}
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - write_subscriptions
+- name: search_vens
+  description: search vens
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#searchVens
+  method: GET
+  path: /vens
+  input_from:
+    query_parameters:
+    - venName
+    - targets
+    - skip
+    - limit
+    request_body: false
+  scopes:
+  - read_ven_objects
+- name: create_ven
+  description: create ven
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#createVen
+  method: POST
+  path: /vens
+  input_from:
+    query_parameters: []
+    request_body: true
+  scopes:
+  - write_vens
+- name: search_ven_by_i_d
+  description: search vens by ID
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#searchVenByID
+  method: GET
+  path: /vens/{venID}
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_ven_objects
+- name: update_ven
+  description: update ven
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#updateVen
+  method: PUT
+  path: /vens/{venID}
+  input_from:
+    query_parameters: []
+    request_body: true
+  scopes:
+  - write_vens
+- name: delete_ven
+  description: delete ven
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#deleteVen
+  method: DELETE
+  path: /vens/{venID}
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - write_vens
+- name: search_ven_resources
+  description: search ven resources
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#searchVenResources
+  method: GET
+  path: /resources
+  input_from:
+    query_parameters:
+    - resourceName
+    - venID
+    - targets
+    - skip
+    - limit
+    request_body: false
+  scopes:
+  - read_ven_objects
+- name: create_resource
+  description: create resource
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#createResource
+  method: POST
+  path: /resources
+  input_from:
+    query_parameters: []
+    request_body: true
+  scopes:
+  - write_vens
+- name: search_ven_resource_by_i_d
+  description: search ven resources by ID
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#searchVenResourceByID
+  method: GET
+  path: /resources/{resourceID}
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_ven_objects
+- name: update_ven_resource
+  description: update ven resource
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#updateVenResource
+  method: PUT
+  path: /resources/{resourceID}
+  input_from:
+    query_parameters: []
+    request_body: true
+  scopes:
+  - write_vens
+- name: delete_ven_resource
+  description: delete ven resource
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#deleteVenResource
+  method: DELETE
+  path: /resources/{resourceID}
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - write_vens
+- name: get_auth_server_info
+  description: fetch server info
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#getAuthServerInfo
+  method: GET
+  path: /auth/server
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes: []
+- name: fetch_token
+  description: fetch a token
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#fetchToken
+  method: POST
+  path: /auth/token
+  input_from:
+    query_parameters: []
+    request_body: true
+  scopes: []
+- name: list_all_notifiers
+  description: List all notifier bindings
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#listAllNotifiers
+  method: GET
+  path: /notifiers
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_all
+- name: list_all_mqtt_notifier_topics_programs
+  description: List all MQTT notifier topic names for operations on programs
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#listAllMqttNotifierTopicsPrograms
+  method: GET
+  path: /notifiers/mqtt/topics/programs
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_all
+- name: list_all_mqtt_notifier_topics_program
+  description: List all MQTT binding topic names for operations on a program
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#listAllMqttNotifierTopicsProgram
+  method: GET
+  path: /notifiers/mqtt/topics/programs/{programID}
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_all
+- name: list_all_mqtt_notifier_topics_events
+  description: List all MQTT binding topic names for operations on all events
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#listAllMqttNotifierTopicsEvents
+  method: GET
+  path: /notifiers/mqtt/topics/events
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_bl
+- name: list_all_mqtt_notifier_topics_program_events
+  description: List all MQTT binding topic names for operations on events for a program
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#listAllMqttNotifierTopicsProgramEvents
+  method: GET
+  path: /notifiers/mqtt/topics/programs/{programID}/events
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_all
+- name: list_all_mqtt_notifier_topics_reports
+  description: List all MQTT binding topic names for operations on all reports
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#listAllMqttNotifierTopicsReports
+  method: GET
+  path: /notifiers/mqtt/topics/reports
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_bl
+- name: list_all_mqtt_notifier_topics_subscriptions
+  description: List all MQTT binding topic names for operations on all subscriptions
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#listAllMqttNotifierTopicsSubscriptions
+  method: GET
+  path: /notifiers/mqtt/topics/subscriptions
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_bl
+- name: list_all_mqtt_notifier_topics_vens
+  description: List all MQTT binding topic names for operations on vens
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#listAllMqttNotifierTopicsVens
+  method: GET
+  path: /notifiers/mqtt/topics/vens
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_bl
+- name: list_all_mqtt_notifier_topics_ven
+  description: List all MQTT binding topic names for operations on a ven
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#listAllMqttNotifierTopicsVen
+  method: GET
+  path: /notifiers/mqtt/topics/vens/{venID}
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_ven_objects
+- name: list_all_mqtt_notifier_topics_resources
+  description: List all MQTT binding topic names for operations on resources
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#listAllMqttNotifierTopicsResources
+  method: GET
+  path: /notifiers/mqtt/topics/resources
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_bl
+- name: list_all_mqtt_notifier_topics_ven_events
+  description: List all MQTT binding topic names for operations on events targeted for a ven
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#listAllMqttNotifierTopicsVenEvents
+  method: GET
+  path: /notifiers/mqtt/topics/vens/{venID}/events
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_ven_objects
+- name: list_all_mqtt_notifier_topics_ven_programs
+  description: List all MQTT binding topic names for operations on programs targeted for a ven
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#listAllMqttNotifierTopicsVenPrograms
+  method: GET
+  path: /notifiers/mqtt/topics/vens/{venID}/programs
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_ven_objects
+- name: list_all_mqtt_notifier_topics_ven_resources
+  description: List all MQTT binding topic names for operations on resources for a ven
+  source_operation: openapi/openadr-3-1-1-openapi.yaml#listAllMqttNotifierTopicsVenResources
+  method: GET
+  path: /notifiers/mqtt/topics/vens/{venID}/resources
+  input_from:
+    query_parameters: []
+    request_body: false
+  scopes:
+  - read_ven_objects

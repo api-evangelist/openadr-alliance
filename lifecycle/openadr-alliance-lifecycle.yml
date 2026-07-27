@@ -1,0 +1,93 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://www.openadr.org/specification, https://www.openadr.org/openadr-3-0,
+  https://www.openadr.org/openadr-3-certification,
+  https://github.com/grid-coordination/openadr3-specification/blob/main/VERSIONS.yaml,
+  openapi/*.yaml
+description: >-
+  Lifecycle posture of the OpenADR 3 contract. This is a specification lifecycle, not a
+  service lifecycle: the OpenADR Alliance operates no hosted API, so there is nothing to
+  put a status page or an SLA on. What it does run is a versioned specification train and
+  a certification programme with a published transition policy.
+versioning:
+  scheme: semver
+  applies_to: specification releases
+  current: 3.1.1
+  current_status: development
+  latest_released: 3.1.0
+  releases: ['3.0.0', '3.0.1', '3.1.0', '3.1.1']
+  in_url: false
+  in_url_note: >-
+    The contract carries no version segment. The 3.0.1 release put the version in the
+    reference server base path (http://localhost:8081/openadr3/3.0.1) but 3.1.x dropped
+    that; each implementer chooses its own base URL and therefore its own version
+    addressing. There is no version header and no version query parameter.
+  docs: https://www.openadr.org/specification
+  machine_readable: https://github.com/grid-coordination/openadr3-specification/blob/main/VERSIONS.yaml
+  normative_source: >-
+    "OpenADR 3 OpenAPI YAML (SwaggerDoc) Specification: This is the normative reference
+    for OADR 3 and supersedes any statements made in other documentation."
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  deprecated_operations: []
+  note: >-
+    No RFC 8594 Sunset support, no Deprecation header, no deprecated: true flag on any
+    operation in any of the four releases, and no published API deprecation policy. Breaking
+    change is handled by minor version instead: 3.1.0 is explicitly declared NOT backwards
+    compatible with 3.0.1 (endpoints, request bodies and query params all changed), with no
+    overlap window defined at the protocol level.
+  removed_in_3_1_0:
+  - path: /vens/{venID}/resources
+    replaced_by: /resources
+    reason: 'issue 306 — make resource a first-level object'
+  - path: /vens/{venID}/resources/{resourceID}
+    replaced_by: /resources/{resourceID}
+    reason: 'issue 306 — make resource a first-level object'
+certification_transition_policy:
+  source: https://www.openadr.org/openadr-3-0
+  note: >-
+    The one genuine deprecation-style commitment the Alliance publishes is on the
+    certification side, not the API side.
+  rules:
+  - The requirement for VTNs to implement OpenADR 2.0a has been dropped.
+  - VTNs can currently still be certified by implementing OpenADR 2.0a and 2.0b.
+  - >-
+    After a grace period of six months from publication of the initial set of Certification
+    Profiles, commercial VTNs must implement both OpenADR 2.0b and OpenADR 3 to obtain
+    certification.
+  - >-
+    Closed-system VTNs (utility, aggregator, government, in-building) not intended for
+    resale may certify against 2.0b or 3 alone.
+  - VENs may implement any combination of profiles but at least one OpenADR 3 profile.
+  - >-
+    Certificates do not expire if membership lapses, but the public web listing is amended
+    to read "Certification no longer maintained".
+  - OpenADR 3 is additive: it is "not intended to replace the OpenADR 2.0a/b Profile Specifications".
+sla: null
+sla_note: No SLA — the Alliance runs no API service. Availability is a property of each implementer's VTN.
+status_page: null
+status_page_note: >-
+  No status page exists and none would be meaningful. The nearest operational surfaces are
+  the member-login test tool (https://test-tool.openadr.org/) and the two certified-product
+  databases (https://products.openadr.org/, https://ecoport.openadr.org/), none of which
+  publish uptime.
+support:
+  channels:
+  - {type: FAQ, url: 'https://www.openadr.org/faq'}
+  - {type: Contact, url: 'https://www.openadr.org/contact-us'}
+  - {type: PaidImplementationSupport, url: 'https://www.openadr.org/get-implementation-help'}
+  spec_feedback: >-
+    Inconsistencies between the OpenAPI YAML and the other documents are to be reported to
+    the Alliance technical contact address published on https://www.openadr.org/openadr-3-0.
+distribution:
+  spec_download: https://www.openadr.org/specification-download
+  gate: registration form; download links emailed; terms and conditions apply
+  cost: license-free, copyright OpenADR Alliance
+  canonical_repository: https://github.com/oadr3-org
+  canonical_repository_public_repos: 0
+  canonical_repository_note: Membership-gated; zero public repositories as of 2026-07-27.
+  public_mirror: https://github.com/grid-coordination/openadr3-specification
+  public_mirror_license: Apache-2.0

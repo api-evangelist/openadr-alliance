@@ -1,0 +1,166 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://www.openadr.org/faq, https://www.openadr.org/cyber-security,
+  https://www.openadr.org/openadr-3-0, https://www.openadr.org/openadr-3-certification,
+  openapi/openadr-3-1-1-openapi.yaml
+description: >-
+  Cross-cutting and industry standards the OpenADR 3 contract conforms to, or is
+  itself standardised as. Note the direction of travel here is unusual for this
+  catalog: the OpenADR Alliance is a standards body, so most rows describe the
+  standards OpenADR is built on or has been adopted into, not a vendor's
+  compliance posture.
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: >-
+    All four harvested specification releases (3.0.0, 3.0.1, 3.1.0, 3.1.1) declare
+    openapi: 3.0.0 and parse. The Alliance states the OpenAPI YAML "is the normative
+    reference for OADR 3 and supersedes any statements made in other documentation".
+  source: https://www.openadr.org/openadr-3-0
+- id: oauth2
+  conforms: true
+  evidence: >-
+    components.securitySchemes.oAuth2ClientCredentials, type oauth2, clientCredentials
+    flow with tokenUrl auth/token and 9 role-scoped scopes in 3.1.1.
+  source: openapi/openadr-3-1-1-openapi.yaml
+- id: oauth2-client-credentials-rfc6749
+  conforms: true
+  evidence: >-
+    POST /auth/token accepts application/x-www-form-urlencoded clientCredentialRequest
+    and returns clientCredentialResponse; the 400 response is an authError object
+    matching the RFC 6749 section 5.2 error format.
+  source: openapi/openadr-3-1-1-openapi.yaml
+- id: jwt-bearer-rfc6750
+  conforms: true
+  evidence: 'securityScheme bearerAuth: type http, scheme bearer, bearerFormat JWT, applied to every non-auth operation.'
+  source: openapi/openadr-3-1-1-openapi.yaml
+- id: oauth-authorization-server-metadata-rfc8414
+  conforms: false
+  evidence: >-
+    No /.well-known/oauth-authorization-server document is served on any Alliance host
+    (soft-200 HTML only). OpenADR 3.1 instead defines its own in-protocol equivalent,
+    GET /auth/server (operationId getAuthServerInfo), which returns the token endpoint URL.
+  source: well-known/openadr-alliance-well-known.yml
+- id: openid-connect
+  conforms: false
+  evidence: No openIdConnect security scheme and no OIDC discovery document; the model is plain OAuth 2.0 client credentials, machine-to-machine only.
+- id: rfc7807-problem-details
+  conforms: partial
+  evidence: >-
+    Every 4xx/5xx response uses the "problem" schema, taken verbatim from
+    https://opensource.zalando.com/problem/schema.yaml — the RFC 7807 / RFC 9457
+    member set (type, title, status, detail, instance). But the responses declare
+    content type application/json, not application/problem+json, so a client cannot
+    negotiate or detect problem documents by media type.
+  source: errors/openadr-alliance-problem-types.yml
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Same as rfc7807 — right member set, wrong media type, and no extension members or type URI registry published.
+- id: iec-pas-62746-10-1
+  conforms: true
+  evidence: >-
+    "The International Electrotechnical Commission (IEC) has approved the OpenADR 2.0b
+    Profile Specification as a Publicly Available Specification (PAS) IEC/PAS 62746-10-1
+    as a basis for a new commission standard to be developed." Applies to OpenADR 2.0b,
+    not to the OpenADR 3 REST contract.
+  source: https://www.openadr.org/faq
+- id: oasis-energy-interoperation
+  conforms: true
+  evidence: >-
+    The Alliance states OpenADR is built on existing OASIS standards including Energy
+    Interoperation, Energy Information Exchange (EMIX) and WS-Calendar. Applies to the
+    2.0 profile lineage.
+  source: https://www.openadr.org/faq
+- id: nist-smart-grid
+  conforms: true
+  evidence: >-
+    "OpenADR is being further developed through the NIST Smart Grid-standards effort";
+    the Alliance operates its own PKI specifically "in order to fulfill industry security
+    requirements, IEC, and NIST Cyber Security guidelines".
+  source: https://www.openadr.org/cyber-security
+- id: cta-2045-b
+  conforms: true
+  evidence: >-
+    The Alliance runs the EcoPort certification programme and public certified-product
+    database for CTA-2045-B, and the OpenADR 3.1.1 event-interval payload enumeration
+    includes CTA2045_REBOOT and CTA2045_SET_OVERRIDE_STATUS pass-through commands.
+  source: https://ecoport.openadr.org/ + json-schema/openadr-3-1-1-event-interval-payloads.schema.yaml
+- id: ansi-scte-267
+  conforms: true
+  evidence: The OLS (Optimum Load Shape) event interval payload type cites ANSI-SCTE 267 as its normative reference.
+  source: json-schema/openadr-3-1-1-event-interval-payloads.schema.yaml
+- id: rfc3339-datetimes
+  conforms: true
+  evidence: >-
+    The dateTime schema is format date-time; issue 339 in the 3.1.0 changelog changed the
+    sentinel value from 0000-00-00 to 0000-01-01 precisely because the former is not legal RFC 3339.
+  source: changelog/openadr-alliance-changelog.yml
+- id: iso8601-durations
+  conforms: true
+  evidence: The duration schema is a pattern-constrained ISO 8601 duration (PT1H, P9999Y for "infinity").
+  source: openapi/openadr-3-1-1-openapi.yaml
+- id: mqtt
+  conforms: true
+  evidence: >-
+    OpenADR 3.1.0 added an MQTT notifier binding — mqttNotifierBindingObject carries broker
+    URIS, JSON serialization, and anonymous / OAuth2 bearer / certificate authentication —
+    plus 12 GET /notifiers/mqtt/topics/* operations for topic discovery.
+  source: asyncapi/openadr-alliance-notifications-asyncapi.yml
+- id: webhooks
+  conforms: true
+  evidence: >-
+    POST /subscriptions declares a notifyEvent callback against
+    '{$request.body#/callbackUrl}' carrying the notification schema. The WEBHOOK notifier
+    binding is mandatory for every VTN (notifiersResponse.WEBHOOK "currently MUST be true").
+  source: openapi/openadr-3-1-1-openapi.yaml
+- id: mdns-dns-sd
+  conforms: partial
+  evidence: >-
+    Issue 315 in the 3.1.0 changelog, "Recommending mDNS support for local VENs and VTNs" —
+    a recommendation for VTN discovery on a local network, not a mandatory requirement.
+  source: changelog/openadr-alliance-changelog.yml
+- id: tls
+  conforms: true
+  evidence: >-
+    Issue 128 in the 3.1.0 changelog is "TLS hardening". Separately the Alliance operates
+    its own PKI for OpenADR 2.0/3 device certificates (RSA and ECC), issued through Eonti,
+    governed by the OpenADR Alliance Certificate Policy.
+  source: https://www.openadr.org/cyber-security
+- id: idempotency
+  conforms: false
+  evidence: No Idempotency-Key header, parameter, or documented retry-safety contract anywhere in the four specification releases.
+  source: conventions/openadr-alliance-conventions.yml
+- id: json-api
+  conforms: false
+  evidence: Plain JSON resource collections; no JSON:API document structure, no top-level data/errors envelope.
+- id: odata
+  conforms: false
+- id: scim
+  conforms: false
+- id: fhir
+  conforms: false
+- id: fapi
+  conforms: false
+- id: psd2
+  conforms: false
+certification_programmes_operated:
+  note: >-
+    The Alliance does not publish a compliance posture for itself (no SOC 2, ISO 27001,
+    PCI, HIPAA or FedRAMP claims, no trust center). What it publishes is conformance
+    certification for OTHER parties' products against its own specifications.
+  programmes:
+  - name: OpenADR 2.0a / 2.0b Certification
+    directory: https://products.openadr.org/
+  - name: OpenADR 3 Certification
+    url: https://www.openadr.org/openadr-3-certification
+    directory: https://products.openadr.org/
+    profiles_available: [Continuous Pricing VEN, Baseline VEN]
+    note: >-
+      Profile-based rather than all-or-nothing. VTNs seeking certification must implement all
+      features and profiles; VENs may implement any combination but at least one profile.
+      Final verification must be conducted at an Alliance-appointed test house.
+  - name: EcoPort (CTA-2045-B) Certification
+    url: https://www.openadr.org/ecoport-info
+    directory: https://ecoport.openadr.org/
+  test_tool: https://test-tool.openadr.org/

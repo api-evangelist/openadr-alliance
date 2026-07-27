@@ -1,0 +1,96 @@
+arazzo: 1.0.1
+info:
+  title: Publish a program and dispatch a demand response event
+  version: 1.0.0
+  description: >-
+    BL/VTN-side flow against an OpenADR 3.1.1 VTN: authenticate with the client-credentials
+    grant, create (or reuse) a program, publish an event carrying priced intervals against
+    it, then read the event back. Every operationId is verified against the OpenADR 3.1.1
+    specification. The base URL is implementer-supplied — the OpenADR Alliance hosts no API.
+sourceDescriptions:
+- name: openadr3
+  url: ../openapi/openadr-3-1-1-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: dispatch-demand-response-event
+  summary: Authenticate, create a program, publish an event on it, and verify.
+  description: >-
+    Requires a token with write_programs, write_events and read_all — that is a BL client.
+    NOTE - OpenADR 3 has no idempotency key; step 3 will create a second event if replayed.
+  inputs:
+    type: object
+    required: [clientID, clientSecret, programName]
+    properties:
+      clientID: {type: string, description: OAuth 2.0 client id issued by the VTN}
+      clientSecret: {type: string, description: OAuth 2.0 client secret issued by the VTN}
+      programName: {type: string, description: 'short program handle, e.g. ResTOU'}
+      eventName: {type: string, description: human label for the event}
+      targets: {type: array, items: {type: string}, description: target strings the event applies to}
+  steps:
+  - stepId: discover-auth-server
+    description: Ask the VTN where its token endpoint is (3.1.0+; skip on a 3.0.x VTN).
+    operationId: getAuthServerInfo
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: get-token
+    description: Client-credentials grant. Body is application/x-www-form-urlencoded, not JSON.
+    operationId: fetchToken
+    requestBody:
+      contentType: application/x-www-form-urlencoded
+      payload:
+        grant_type: client_credentials
+        client_id: $inputs.clientID
+        client_secret: $inputs.clientSecret
+        scope: read_all write_programs write_events
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      accessToken: $response.body#/access_token
+  - stepId: create-program
+    description: Create the demand response program the event will hang off.
+    operationId: createProgram
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $steps.get-token.outputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        programName: $inputs.programName
+        targets: $inputs.targets
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      programID: $response.body#/id
+  - stepId: publish-event
+    description: Publish the event. This dispatches real load — do not replay blindly.
+    operationId: createEvent
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $steps.get-token.outputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        programID: $steps.create-program.outputs.programID
+        eventName: $inputs.eventName
+        targets: $inputs.targets
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      eventID: $response.body#/id
+  - stepId: verify-event
+    description: Read the event back to confirm the VTN accepted it as published.
+    operationId: searchEventsByID
+    parameters:
+    - name: eventID
+      in: path
+      value: $steps.publish-event.outputs.eventID
+    - name: Authorization
+      in: header
+      value: Bearer $steps.get-token.outputs.accessToken
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    programID: $steps.create-program.outputs.programID
+    eventID: $steps.publish-event.outputs.eventID

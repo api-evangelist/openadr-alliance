@@ -1,0 +1,117 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://github.com/grid-coordination/openadr3-specification/blob/main/VERSIONS.yaml,
+  https://github.com/grid-coordination/openadr3-specification/blob/main/3.1.1/changeLog.md,
+  https://github.com/grid-coordination/openadr3-specification/blob/main/3.1.0/changeLog.md
+description: >-
+  OpenADR 3 specification change log. The Alliance ships a changeLog.md inside each
+  specification release from 3.1.0 onward and a machine-readable VERSIONS.yaml in the
+  public Apache-2.0 copy of the release. There is no dated web changelog and no
+  changelog for the 3.0.x releases — the earliest two versions shipped the OpenAPI YAML
+  alone. Issue numbers reference the canonical (membership-gated) oadr3-org/specification
+  repository.
+scheme: semver
+current_version: 3.1.1
+current_status: development
+scope: >-
+  These are specification releases, not deployments. The Alliance operates no hosted API,
+  so a version change here propagates only when an implementer ships a new VTN or VEN.
+versions:
+- version: 3.1.1
+  status: development
+  artifacts: [openadr3.yaml, Definition.md, User_Guide.md, changeLog.md, enumerations/]
+  breaking: false
+  highlights:
+  - The 3.1.1 changeLog.md lists no changes of its own yet — it restates the 3.1.0 delta.
+  - >-
+    Editorial/tooling cleanup landed upstream (commits 426c867 "Consistent indentation" and
+    417c53b "correct Redocly and yamllint warnings").
+  - >-
+    Two real contract fixes are observable against 3.1.0: the read_bl scope, which 3.1.0
+    operations already required but never declared, is now declared in the
+    clientCredentials flow scopes map; and the document-level tags[] block is now present,
+    declaring all nine tag groups that operations were already using.
+  operations: 45
+- version: 3.1.0
+  status: released
+  artifacts: [openadr3.yaml, Definition.md, User_Guide.md, changeLog.md, enumerations/]
+  breaking: true
+  breaking_note: >-
+    "3.1.0 is NOT backwards compatible with 3.0.1 as some changes to API endpoints
+    (e.g. /resources), request bodies (e.g. vens and resources), and query params
+    (e.g. targets) have been introduced to make the interface more secure, compact,
+    and easier to use."
+  operations: 45
+  headline_changes:
+  - {issue: 114, title: 'Message queue notifications (MQTT notifier binding, pub/sub)'}
+  - {issue: 272, title: 'Object privacy: limit read scopes for VENs'}
+  - {issue: 287, title: 'Object privacy: events specific and private to a VEN'}
+  - {issue: 321, title: 'Object privacy: extend target access control to resources'}
+  - {issue: 328, title: 'Object privacy: generalize use of clientID'}
+  - {issue: 238, title: 'Compact representation of serial event data such as PRICE'}
+  - {issue: 271, title: 'Additional reporting features: augment event and report timing'}
+  - {issue: 316, title: 'Simpler targeting: refactor targets from valuesMap to strings'}
+  - {issue: 331, title: 'Simpler targeting: remove target enumerations from Definitions'}
+  - {issue: 128, title: 'Security hardening: TLS hardening'}
+  - {issue: 226, title: 'Security hardening: add /auth/auth_service endpoint'}
+  additions:
+  - {issue: 306, title: 'Make resource a first-level object (/resources replaces /vens/{venID}/resources)'}
+  - {issue: 313, title: 'Add notifier/topics endpoints to support the object-privacy feature'}
+  - {issue: 315, title: 'Recommend mDNS support for local VEN and VTN discovery'}
+  - {issue: 314, title: 'Support sending the price of natural gas in addition to electricity'}
+  - {issue: 320, title: 'Add attributes property to program'}
+  - {issue: 234, title: 'Add query params to filter for active events'}
+  - {issue: 267, title: 'Event interval payload type for special dispatch instructions'}
+  - {issue: 263, title: 'New event interval payloads to maintain parity with OpenADR 2.0b'}
+  - {issue: 159, title: 'Create schema files describing enumerations'}
+  - {issue: 204, title: 'Add enumerations_schema folder to the 3.1.0 release'}
+  - {issue: 207, title: 'Replace Word-format documentation with markdown'}
+  - {issue: 311, title: 'Reference enumeration tables from the OpenAPI'}
+  - {issue: 309, title: 'Contact information in the OpenAPI'}
+  contract_changes:
+  - {issue: 187, title: 'Restructure schemas to properly distinguish requests from responses (programRequest, eventRequest, venRequest, BlVenRequest, VenVenRequest, ...)'}
+  - {issue: 217, title: 'Change snake_case schemas to camelCase'}
+  - {issue: 209, title: 'Change notification operations from HTTP verbs to CRUD (CREATE/READ/UPDATE/DELETE)'}
+  - {issue: 253, title: 'Remove programId from report'}
+  - {issue: 231, title: 'Make subscription.programID optional so a VEN can subscribe to its own ven object'}
+  - {issue: 312, title: 'Remove targets from /subscriptions queries'}
+  - {issue: 339, title: '0000-00-00 is not legal RFC 3339; changed to 0000-01-01'}
+  fixes:
+  - {issue: 160, title: 'Incorrect definition of the CURVE payload in Definitions'}
+  - {issue: 270, title: 'Correct interpretation for CONTROL_SETPOINT payload type'}
+  - {issue: 310, title: 'Improve description for the localPrice field'}
+  - {issue: 202, title: 'Units and typos in the User Guide'}
+  - {issue: 203, title: 'User Guide figure 47 typo'}
+  - {issue: 285, title: 'Update OpenADR 3 references in the 3.1.0 documents'}
+  - {issue: 208, title: 'Update to version 3.1.0'}
+- version: 3.0.1
+  status: released
+  artifacts: [openadr3.yaml]
+  breaking: false
+  operations: 31
+  note: >-
+    Patch release with bug fixes and clarifications (VERSIONS.yaml). No changeLog.md
+    shipped. Observable deltas against 3.0.0: /auth/token becomes POST (was GET),
+    clientCredentialRequest / clientCredentialResponse / authError schemas added, 404
+    responses added across the single-object operations, and the notifyEvent callback
+    added to POST /subscriptions.
+- version: 3.0.0
+  status: released
+  artifacts: [openadr3.yaml]
+  breaking: false
+  operations: 31
+  note: Initial release of OpenADR 3 (VERSIONS.yaml). No changeLog.md shipped.
+lineage:
+  note: >-
+    OpenADR 3 does not replace OpenADR 2.0 — "it provides an additional, simplified way
+    to add OpenADR functionalities". The 2.0a/2.0b profile specifications remain current
+    and separately certified.
+  earlier_families:
+  - {family: 'OpenADR 2.0a / 2.0b', style: SOAP/XML, status: current, iec: IEC/PAS 62746-10-1 (2.0b)}
+  - {family: 'OpenADR 1.0', style: pre-standard framework, status: superseded}
+public_changelog_url: null
+public_changelog_note: >-
+  The Alliance publishes no dated changelog page on openadr.org. Version news appears
+  only in press releases (https://www.openadr.org/press-releases) and the blog
+  (https://www.openadr.org/openadr-alliance-blog).

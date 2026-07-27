@@ -1,0 +1,130 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://www.openadr.org/join, https://www.openadr.org/openadr-test-tool-store,
+  https://www.openadr.org/get-implementation-help, https://www.openadr.org/specification-download
+description: >-
+  What the OpenADR Alliance charges for. There is no API pricing here — the Alliance hosts
+  no API, and the OpenADR 2.0/3 specifications themselves are license-free. What is priced is
+  membership, test tooling, certification and implementation consulting. Every figure below
+  is published verbatim on the Alliance website.
+currency: USD
+specification_access:
+  cost: free
+  license: license-free but copyright OpenADR Alliance; terms and conditions apply
+  gate: registration form at https://www.openadr.org/specification-download; download links emailed
+  note: >-
+    The canonical repository (github.com/oadr3-org) is membership-gated with zero public
+    repositories. A public Apache-2.0 copy of the OpenADR 3 release is mirrored at
+    https://github.com/grid-coordination/openadr3-specification.
+plans:
+- name: Contributor Member
+  category: membership
+  audience: Vendor organizations offering hardware, software or services that want to certify a product.
+  billing: annual
+  pricing_model: revenue-banded
+  tiers:
+  - {price: 7500, period: year, condition: 'company revenue > USD 100M'}
+  - {price: 5000, period: year, condition: 'company revenue USD 10M - 100M'}
+  - {price: 3000, period: year, condition: 'company revenue USD 1M - 10M (requires revenue/sales verification)'}
+  - {price: 1500, period: year, condition: 'company revenue < USD 1M (requires revenue/sales verification)'}
+  entitlements:
+  - Participation in Alliance programs, committees and initiatives
+  - Vote on policy, strategic and technical issues in Committees and Task Groups
+  - Use of the Alliance IPR for design, deployment, manufacturing and integration
+  - Right to test and certify products for conformance to the OpenADR standard
+  - Access to technical support, training and tools
+  - Listing on the OpenADR website and use of the OpenADR logo
+  - Access to the member-only website and discussion forums
+  url: https://www.openadr.org/join
+- name: Adopter Member
+  category: membership
+  audience: >-
+    Non-manufacturers — consumer and government organizations, research agencies, test houses,
+    regulatory bodies.
+  billing: annual
+  price: 1500
+  period: year
+  entitlements:
+  - Participation in Alliance programs, committees and initiatives
+  - Vote on policy, strategic and technical issues in Committees and Task Groups
+  - Access to technical support, training and tools
+  - Listing on the OpenADR website and use of the OpenADR logo
+  - Access to the member-only website and discussion forums
+  - Test houses may apply for approved test house status
+  excludes: [product certification, IPR use for manufacturing]
+  url: https://www.openadr.org/join
+- name: Sponsor Member
+  category: membership
+  audience: Industry stakeholders approved by the Board; limited to the first nine approved.
+  billing: annual
+  price: 40000
+  period: year
+  entitlements:
+  - Automatic participation on the Board of Directors
+  - Everything in Contributor, plus a prominent website listing
+  url: https://www.openadr.org/join
+- name: OpenADR 2.0 a/b Development and Test Tool
+  category: tooling
+  vendor_partner: QualityLogic
+  current_version: 1.1.7
+  price_member: 6500
+  price_non_member: 17500
+  billing: one-time licence (upgrades require a Software Maintenance Contract)
+  delivery: download link within 48 hours of payment
+  url: https://www.openadr.org/openadr-test-tool-store
+- name: OpenADR 3.x Online Test Tool
+  category: tooling
+  price_member: 2250
+  price_member_note: for either VTN or VEN testing
+  price_member_both: 3500
+  price_member_both_note: for VTN + VEN testing
+  price_non_member: null
+  price_non_member_note: >-
+    The 3.x tool licence is currently only available to members through the store; non-members
+    must email the Alliance.
+  billing: usage licence, log in at any time
+  url: https://test-tool.openadr.org/
+- name: EcoPort (CTA-2045) Test Tool
+  category: tooling
+  includes_hardware: true
+  vendor_partner: SkyCentrics
+  price_member: 3999
+  price_non_member: 9999
+  components:
+  - {name: AC SGD, price: 300}
+  - {name: AC UCM, price: 150}
+  - {name: DC SGD, price: 200}
+  - {name: DC UCM, price: 150}
+  url: https://store.skycentrics.com/cta-2045-ecoport-test-tool-hardware-software-package/
+- name: Implementation Support — free consultation
+  category: consulting
+  price: 0
+  eligibility: new members only, one 30-minute session with an external consultant, paid for by the Alliance
+  url: https://www.openadr.org/get-implementation-help
+- name: Implementation Support — 2 hours
+  category: consulting
+  price: 450
+  applies_to: [OpenADR 2.0, OpenADR 3.0]
+  url: https://www.openadr.org/get-implementation-help
+- name: Implementation Support — 5 hours
+  category: consulting
+  price: 1050
+  applies_to: [OpenADR 2.0, OpenADR 3.0]
+  url: https://www.openadr.org/get-implementation-help
+- name: Implementation Support — 10 hours
+  category: consulting
+  price: 2000
+  applies_to: [OpenADR 2.0, OpenADR 3.0]
+  url: https://www.openadr.org/get-implementation-help
+certification:
+  requirement: Manufacturers must at least be a Contributor member; membership must be maintained to keep certification current.
+  certification_licence: purchased separately from the Alliance; price not published publicly
+  test_lab: final testing must be conducted at an Alliance-endorsed test lab / appointed test house
+  test_certificates:
+    test: free, from Eonti (https://eonti.com/openadr)
+    production: 20-year validity, priced by Eonti
+  note: >-
+    "Issued certificates do not expire if membership lapses. However, the web listing will be
+    amended to say 'Certification no longer maintained'."
+  url: https://www.openadr.org/how-to-build-a-product

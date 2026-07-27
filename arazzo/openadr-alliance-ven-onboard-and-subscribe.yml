@@ -1,0 +1,111 @@
+arazzo: 1.0.1
+info:
+  title: Onboard a VEN, attach a resource, and subscribe to event notifications
+  version: 1.0.0
+  description: >-
+    VEN-side onboarding against an OpenADR 3.1.1 VTN: authenticate, register the VEN, attach
+    a controllable resource, ask the VTN which notifier bindings it supports, and register a
+    webhook subscription for event notifications. Every operationId is verified against the
+    OpenADR 3.1.1 specification.
+sourceDescriptions:
+- name: openadr3
+  url: ../openapi/openadr-3-1-1-openapi.yaml
+  type: openapi
+workflows:
+- workflowId: onboard-ven-and-subscribe
+  summary: Authenticate, register a VEN and resource, then subscribe to EVENT notifications.
+  description: >-
+    Requires a token with write_vens, write_subscriptions and a VEN read scope. The VEN
+    variants of the request bodies are used (VenVenRequest / VenResourceRequest) — a VEN may
+    not set clientID, venID or targets.
+  inputs:
+    type: object
+    required: [clientID, clientSecret, venName, resourceName, callbackUrl]
+    properties:
+      clientID: {type: string}
+      clientSecret: {type: string}
+      venName: {type: string}
+      resourceName: {type: string}
+      callbackUrl: {type: string, format: uri, description: HTTPS endpoint the VTN will POST notifications to}
+      callbackBearerToken: {type: string, description: token the VTN presents back so the receiver can authenticate its calls}
+  steps:
+  - stepId: get-token
+    operationId: fetchToken
+    requestBody:
+      contentType: application/x-www-form-urlencoded
+      payload:
+        grant_type: client_credentials
+        client_id: $inputs.clientID
+        client_secret: $inputs.clientSecret
+        scope: read_ven_objects write_vens write_subscriptions
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      accessToken: $response.body#/access_token
+  - stepId: register-ven
+    description: VEN-side body — objectType and venName only.
+    operationId: createVen
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $steps.get-token.outputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        objectType: VEN
+        venName: $inputs.venName
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      venID: $response.body#/id
+  - stepId: attach-resource
+    description: Attach a controllable device. On 3.1.x resources are first-level at /resources.
+    operationId: createResource
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $steps.get-token.outputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        objectType: RESOURCE
+        resourceName: $inputs.resourceName
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      resourceID: $response.body#/id
+  - stepId: list-notifiers
+    description: Which notifier bindings does this VTN support? WEBHOOK is always true; MQTT is optional.
+    operationId: listAllNotifiers
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $steps.get-token.outputs.accessToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      webhookSupported: $response.body#/WEBHOOK
+  - stepId: subscribe-to-events
+    description: Register the webhook. callbackUrl and bearerToken sit inside objectOperations, not at the root.
+    operationId: createSubscription
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $steps.get-token.outputs.accessToken
+    requestBody:
+      contentType: application/json
+      payload:
+        clientName: $inputs.venName
+        objectOperations:
+        - objects: [EVENT]
+          operations: [CREATE, UPDATE, DELETE]
+          callbackUrl: $inputs.callbackUrl
+          bearerToken: $inputs.callbackBearerToken
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      subscriptionID: $response.body#/id
+  outputs:
+    venID: $steps.register-ven.outputs.venID
+    resourceID: $steps.attach-resource.outputs.resourceID
+    subscriptionID: $steps.subscribe-to-events.outputs.subscriptionID

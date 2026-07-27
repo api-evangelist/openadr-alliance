@@ -1,0 +1,393 @@
+generated: '2026-07-27'
+method: derived
+source: mcp/openadr-alliance-mcp.yml + openapi/openadr-3-1-1-openapi.yaml
+description: Crosswalk binding each candidate MCP tool to the OpenADR 3.1.1 OpenAPI operation that backs
+  it. Because the tool set is derived one-to-one from the specification, every tool has a real backing
+  operation and inherits that operation's parameters and requestBody as its input schema; there are no
+  MCP-only or REST-only divergences.
+surfaces:
+  openapi: openapi/openadr-3-1-1-openapi.yaml
+  graphql: null
+  mcp:
+    url: null
+    status: candidate
+    note: no Alliance-hosted MCP server; tools/list could not be probed because none exists
+coverage:
+  tools_named: 45
+  tools_bound: 45
+  mcp_only: 0
+  rest_ops_total: 45
+  rest_ops_with_tool: 45
+  by_category:
+    programs: 5
+    reports: 5
+    events: 5
+    subscriptions: 5
+    vens: 5
+    resources: 5
+    Auth: 2
+    notifiers: 1
+    MQTT_notifier: 12
+crosswalk:
+- tool: search_all_programs
+  category: programs
+  rest:
+  - searchAllPrograms
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: create_program
+  category: programs
+  rest:
+  - createProgram
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: search_program_by_program_id
+  category: programs
+  rest:
+  - searchProgramByProgramId
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: update_program
+  category: programs
+  rest:
+  - updateProgram
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: delete_program
+  category: programs
+  rest:
+  - deleteProgram
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: search_all_reports
+  category: reports
+  rest:
+  - searchAllReports
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: create_report
+  category: reports
+  rest:
+  - createReport
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: search_reports_by_report_i_d
+  category: reports
+  rest:
+  - searchReportsByReportID
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: update_report
+  category: reports
+  rest:
+  - updateReport
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: delete_report
+  category: reports
+  rest:
+  - deleteReport
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: search_all_events
+  category: events
+  rest:
+  - searchAllEvents
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: create_event
+  category: events
+  rest:
+  - createEvent
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: search_events_by_i_d
+  category: events
+  rest:
+  - searchEventsByID
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: update_event
+  category: events
+  rest:
+  - updateEvent
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: delete_event
+  category: events
+  rest:
+  - deleteEvent
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: search_subscriptions
+  category: subscriptions
+  rest:
+  - searchSubscriptions
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: create_subscription
+  category: subscriptions
+  rest:
+  - createSubscription
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: search_subscription_by_i_d
+  category: subscriptions
+  rest:
+  - searchSubscriptionByID
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: update_subscription
+  category: subscriptions
+  rest:
+  - updateSubscription
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: delete_subscription
+  category: subscriptions
+  rest:
+  - deleteSubscription
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: search_vens
+  category: vens
+  rest:
+  - searchVens
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: create_ven
+  category: vens
+  rest:
+  - createVen
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: search_ven_by_i_d
+  category: vens
+  rest:
+  - searchVenByID
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: update_ven
+  category: vens
+  rest:
+  - updateVen
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: delete_ven
+  category: vens
+  rest:
+  - deleteVen
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: search_ven_resources
+  category: resources
+  rest:
+  - searchVenResources
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: create_resource
+  category: resources
+  rest:
+  - createResource
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: search_ven_resource_by_i_d
+  category: resources
+  rest:
+  - searchVenResourceByID
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: update_ven_resource
+  category: resources
+  rest:
+  - updateVenResource
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: delete_ven_resource
+  category: resources
+  rest:
+  - deleteVenResource
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: get_auth_server_info
+  category: Auth
+  rest:
+  - getAuthServerInfo
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: fetch_token
+  category: Auth
+  rest:
+  - fetchToken
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: list_all_notifiers
+  category: notifiers
+  rest:
+  - listAllNotifiers
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: list_all_mqtt_notifier_topics_programs
+  category: MQTT_notifier
+  rest:
+  - listAllMqttNotifierTopicsPrograms
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: list_all_mqtt_notifier_topics_program
+  category: MQTT_notifier
+  rest:
+  - listAllMqttNotifierTopicsProgram
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: list_all_mqtt_notifier_topics_events
+  category: MQTT_notifier
+  rest:
+  - listAllMqttNotifierTopicsEvents
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: list_all_mqtt_notifier_topics_program_events
+  category: MQTT_notifier
+  rest:
+  - listAllMqttNotifierTopicsProgramEvents
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: list_all_mqtt_notifier_topics_reports
+  category: MQTT_notifier
+  rest:
+  - listAllMqttNotifierTopicsReports
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: list_all_mqtt_notifier_topics_subscriptions
+  category: MQTT_notifier
+  rest:
+  - listAllMqttNotifierTopicsSubscriptions
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: list_all_mqtt_notifier_topics_vens
+  category: MQTT_notifier
+  rest:
+  - listAllMqttNotifierTopicsVens
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: list_all_mqtt_notifier_topics_ven
+  category: MQTT_notifier
+  rest:
+  - listAllMqttNotifierTopicsVen
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: list_all_mqtt_notifier_topics_resources
+  category: MQTT_notifier
+  rest:
+  - listAllMqttNotifierTopicsResources
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: list_all_mqtt_notifier_topics_ven_events
+  category: MQTT_notifier
+  rest:
+  - listAllMqttNotifierTopicsVenEvents
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: list_all_mqtt_notifier_topics_ven_programs
+  category: MQTT_notifier
+  rest:
+  - listAllMqttNotifierTopicsVenPrograms
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+- tool: list_all_mqtt_notifier_topics_ven_resources
+  category: MQTT_notifier
+  rest:
+  - listAllMqttNotifierTopicsVenResources
+  binding: rest
+  confidence: high
+  note: 'one-to-one: the candidate tool is generated from this operation, so it inherits its parameters
+    and requestBody verbatim as its inputSchema'
+mcp_only: []
+rest_only: []

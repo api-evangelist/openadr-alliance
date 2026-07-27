@@ -1,0 +1,84 @@
+generated: '2026-07-27'
+method: derived
+source: >-
+  openapi/openadr-3-1-1-openapi.yaml (+ 3.1.0 / 3.0.1),
+  https://github.com/grid-coordination/openadr3-specification/blob/main/doc/
+description: >-
+  Webhook / notification catalog for OpenADR 3. Notifications are subscription-driven
+  rather than a fixed list of named event types: a client creates a subscription naming the
+  object types and operations it wants, and the VTN delivers a notification envelope for
+  each matching change. The catalog below is therefore the cross-product of objectTypes and
+  operations that a VTN can deliver, plus the two transport bindings.
+mandatory_for_implementers: true
+mandatory_note: 'notifiersResponse.WEBHOOK is documented as "Currently MUST be true" — every OpenADR 3 VTN has to support the webhook binding.'
+subscription_model:
+  create_operation: createSubscription (POST /subscriptions)
+  registration_field: subscription.objectOperations[].callbackUrl
+  registration_note: >-
+    callbackUrl is set per objectOperations entry, not once per subscription, so one
+    subscription can fan different object/operation combinations out to different endpoints.
+  filter_fields: [objectOperations.objects, objectOperations.operations, targets]
+  filter_note: >-
+    Target-based filtering works on the webhook binding only. The MQTT binding cannot do
+    fine-grained target filtering; object privacy there is enforced with VEN-scoped topics.
+  discovery_operations:
+  - {operationId: listAllNotifiers, path: 'GET /notifiers', returns: which notifier bindings the VTN supports}
+  since: '3.0.1 (the notifyEvent callback first appears in the 3.0.1 release)'
+delivery:
+  method: POST
+  content_type: application/json
+  payload_schema: notification
+  payload_members: [objectType, operation, object, targets]
+  success_response: '200 — "Your server returns this code if it accepts the callback."'
+  failure_response: '400 — problem document'
+  authentication:
+    mechanism: subscriber-supplied bearer token
+    field: subscription.objectOperations[].bearerToken
+    required: false
+    default: null
+    spec_text: >-
+      "User provided token. To avoid custom integrations, callback endpoints should accept
+      the provided bearer token to authenticate VTN requests."
+    gap: >-
+      The notifyEvent callback itself declares security: [{}] in the OpenAPI, so the bearer
+      token is documented in the subscription schema but not modelled on the callback
+      operation. There is no payload signature, no timestamp, and no replay defence — the
+      token is a shared secret the receiver must compare itself.
+  retries: not specified
+  ordering: not specified
+  deduplication: not specified
+event_types:
+  note: >-
+    Every combination below is expressible; which ones a client receives is set by the
+    objectOperations on its subscription.
+  object_types: [PROGRAM, EVENT, REPORT, SUBSCRIPTION, VEN, RESOURCE]
+  operations: [CREATE, READ, UPDATE, DELETE]
+  operations_note: >-
+    3.1.0 issue 209 changed notification operations from HTTP verbs to CRUD names. READ is in
+    the enum but is not a state change; CREATE, UPDATE and DELETE are the meaningful ones.
+bindings:
+- name: WEBHOOK
+  required: true
+  transport: HTTPS POST to subscriber callbackUrl
+  filtering: object type, operation, and targets
+- name: MQTT
+  required: false
+  since: '3.1.0'
+  transport: MQTT broker advertised by the VTN
+  serialization: JSON
+  authentication: [anonymous, oauth2 bearer token, certificate]
+  filtering: object type and operation, via VTN-assigned (optionally VEN-scoped) topics
+  topic_discovery_operations:
+  - listAllMqttNotifierTopicsPrograms
+  - listAllMqttNotifierTopicsProgram
+  - listAllMqttNotifierTopicsEvents
+  - listAllMqttNotifierTopicsProgramEvents
+  - listAllMqttNotifierTopicsReports
+  - listAllMqttNotifierTopicsSubscriptions
+  - listAllMqttNotifierTopicsVens
+  - listAllMqttNotifierTopicsVen
+  - listAllMqttNotifierTopicsResources
+  - listAllMqttNotifierTopicsVenEvents
+  - listAllMqttNotifierTopicsVenPrograms
+  - listAllMqttNotifierTopicsVenResources
+asyncapi: asyncapi/openadr-alliance-notifications-asyncapi.yml

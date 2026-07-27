@@ -1,0 +1,213 @@
+generated: '2026-07-27'
+method: derived
+source: openapi/openadr-3-1-1-openapi.yaml
+spec_version: 3.1.1
+description: 'Entity-relationship graph of the OpenADR 3 information model, derived from the OpenAPI component
+  schemas: six addressable objects (program, event, report, subscription, ven, resource) plus the value
+  structures they compose.'
+id_convention:
+  field: id
+  schema: objectID
+  pattern: ^[a-zA-Z0-9_-]*$
+  note: Server-assigned; objectID is a constrained string, not a typed prefix.
+addressable_paths:
+  program:
+  - /programs
+  - /programs/{programID}
+  event:
+  - /events
+  - /events/{eventID}
+  report:
+  - /reports
+  - /reports/{reportID}
+  subscription:
+  - /subscriptions
+  - /subscriptions/{subscriptionID}
+  ven:
+  - /vens
+  - /vens/{venID}
+  resource:
+  - /resources
+  - /resources/{resourceID}
+entities:
+- entity: program
+  description: Server provided representation of program
+  is_addressable: true
+  required: []
+  properties: []
+  relationships: []
+- entity: event
+  description: Server provided representation of event
+  is_addressable: true
+  required: []
+  properties: []
+  relationships: []
+- entity: report
+  description: Server provided representation of report
+  is_addressable: true
+  required: []
+  properties: []
+  relationships: []
+- entity: subscription
+  description: Server provided representation of subscription
+  is_addressable: true
+  required: []
+  properties: []
+  relationships: []
+- entity: ven
+  description: Server provided representation of ven
+  is_addressable: true
+  required: []
+  properties: []
+  relationships: []
+- entity: resource
+  description: Server provided representation of resource
+  is_addressable: true
+  required: []
+  properties: []
+  relationships: []
+- entity: interval
+  description: An object defining a temporal window and a list of valuesMaps. if intervalPeriod present
+    may set temporal aspects of interval or override event.intervalPeriod.
+  is_addressable: false
+  required:
+  - id
+  - payloads
+  properties:
+  - id
+  - intervalPeriod
+  - payloads
+  relationships:
+  - to: intervalPeriod
+    kind: has_one
+    via: intervalPeriod
+  - to: valuesMap
+    kind: has_many
+    via: payloads
+- entity: intervalPeriod
+  description: Defines temporal aspects of intervals. A start of "0001-01-01" or "0001-01-01T00:00:00"
+    may indicate 'now'. See User Guide. A duration of "P9999Y" may indicate infinity. See User Guide.
+    A randomizeStart indicates absolute range of client applied offset to start. See User Guide.
+  is_addressable: false
+  required: []
+  properties:
+  - duration
+  - randomizeStart
+  - start
+  relationships: []
+- entity: valuesMap
+  description: Represents one or more values associated with a type. See enumerations in Definitions for
+    defined string values, or use privately defined strings
+  is_addressable: false
+  required:
+  - type
+  - values
+  properties:
+  - type
+  - values
+  relationships:
+  - to: point
+    kind: has_many
+    via: values
+- entity: point
+  description: A pair of floats typically used as a point on a 2 dimensional grid.
+  is_addressable: false
+  required:
+  - x
+  - y
+  properties:
+  - x
+  - y
+  relationships: []
+- entity: eventPayloadDescriptor
+  description: Contextual information used to interpret event valuesMap values. E.g. a PRICE payload simply
+    contains a price value, an associated descriptor provides necessary context such as units and currency.
+  is_addressable: false
+  required:
+  - objectType
+  - payloadType
+  properties:
+  - currency
+  - objectType
+  - payloadType
+  - units
+  relationships: []
+- entity: reportPayloadDescriptor
+  description: Contextual information used to interpret report payload values. E.g. a USAGE payload simply
+    contains a usage value, an associated descriptor provides necessary context such as units and data
+    quality.
+  is_addressable: false
+  required:
+  - objectType
+  - payloadType
+  properties:
+  - accuracy
+  - confidence
+  - objectType
+  - payloadType
+  - readingType
+  - units
+  relationships: []
+- entity: reportDescriptor
+  description: An object that may be used to request a report from a VEN.
+  is_addressable: false
+  required:
+  - payloadType
+  properties:
+  - aggregate
+  - frequency
+  - historical
+  - numIntervals
+  - payloadType
+  - readingType
+  - repeat
+  - reportIntervals
+  - startInterval
+  - targets
+  - units
+  relationships: []
+- entity: notification
+  description: VTN generated object included in request to subscription callbackUrl.
+  is_addressable: false
+  required:
+  - objectType
+  - operation
+  - object
+  properties:
+  - object
+  - objectType
+  - operation
+  - targets
+  relationships:
+  - to: event
+    kind: has_one
+    via: object
+  - to: program
+    kind: has_one
+    via: object
+  - to: report
+    kind: has_one
+    via: object
+  - to: resource
+    kind: has_one
+    via: object
+  - to: subscription
+    kind: has_one
+    via: object
+  - to: ven
+    kind: has_one
+    via: object
+- entity: objectMetadata
+  description: metadata common to all addressable objects. Values provided by VTN on object creation.
+  is_addressable: false
+  required:
+  - id
+  - createdDateTime
+  - modificationDateTime
+  - objectType
+  properties:
+  - createdDateTime
+  - id
+  - modificationDateTime
+  - objectType
+  relationships: []
