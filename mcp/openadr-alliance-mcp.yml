@@ -490,3 +490,9 @@ tools:
     request_body: false
   scopes:
   - read_ven_objects
+deployment:
+  mode: none
+  verified: derived
+  tools: 45
+  checked: '2026-08-12'
+  source: catalog MCP census
