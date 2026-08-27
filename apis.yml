@@ -36,35 +36,15 @@ created: '2026-07-27'
 modified: '2026-07-27'
 specificationVersion: '0.23'
 apis:
-- aid: openadr-alliance:openadr-3-api
-  name: OpenADR 3 API
-  description: OpenADR 3 is the RESTful third generation of the OpenADR protocol, defined in
-    full by a single OpenAPI 3.0 document published by the OpenADR Alliance. It supports energy-retailer-to-energy-customer
-    demand response programs through operations to create, update, delete, and search programs,
-    events, reports, subscriptions, VENs (Virtual End Nodes), and VEN resources, plus an /auth/token
-    endpoint. Version 3.1.0 adds MQTT notifier topics, VEN-scoped topics for object privacy,
-    and VTN discovery. Security is OAuth 2.0 client credentials with JWT bearer tokens and role-scoped
-    grants that separate what a Business Logic (BL/VTN) client may write from what a VEN may
-    write. This is a protocol contract, not an Alliance-hosted service — every implementer (a
-    utility, aggregator, or vendor VTN) stands up its own base URL, so no single baseURL exists.
-    The specification documents themselves are distributed by the Alliance through a registration
-    form; the OpenAPI files harvested here came from a public Apache-2.0 copy of the Alliance
-    release.
+- aid: openadr-alliance:openadr-alliance-auth-api
+  name: OpenADR Alliance Auth API
+  description: The Auth API from OpenADR Alliance — 2 operation(s) for auth.
   humanURL: https://www.openadr.org/specification
   tags:
-  - Demand Response
-  - OpenADR
-  - Energy
-  - DER
+  - Auth
   properties:
   - type: OpenAPI
-    url: openapi/openadr-3-1-1-openapi.yaml
-  - type: OpenAPI
-    url: openapi/openadr-3-1-0-openapi.yaml
-  - type: OpenAPI
-    url: openapi/openadr-3-0-1-openapi.yaml
-  - type: OpenAPI
-    url: openapi/openadr-3-0-0-openapi.yaml
+    url: openapi/openadr-alliance-auth-api-openapi.yml
   - type: Documentation
     url: https://www.openadr.org/specification
   - type: Documentation
@@ -73,44 +53,295 @@ apis:
     url: https://www.openadr.org/openadr-3-certification
   - type: SourceCode
     url: https://github.com/grid-coordination/openadr3-specification
-  - type: Overlay
-    url: overlays/openadr-alliance-openadr-3-1-1-overlay.yaml
-    name: OpenADR 3.1.1 enhancements
-  - type: Overlay
-    url: overlays/openadr-alliance-openadr-3-1-0-overlay.yaml
-    name: OpenADR 3.1.0 enhancements
-  - type: Overlay
-    url: overlays/openadr-alliance-openadr-3-0-1-overlay.yaml
-    name: OpenADR 3.0.1 enhancements
-  - type: Overlay
-    url: overlays/openadr-alliance-openadr-3-0-0-overlay.yaml
-    name: OpenADR 3.0.0 enhancements
   - type: AsyncAPI
     url: asyncapi/openadr-alliance-notifications-asyncapi.yml
-    name: OpenADR 3 object operation notifications
   - type: Webhooks
     url: asyncapi/openadr-alliance-webhooks.yml
-    name: OpenADR 3 webhook and notifier catalog
   - type: JSONSchema
     url: json-schema/_index.yml
-    name: OpenADR 3.1.1 enumeration schemas
   - type: Examples
     url: examples/openadr-alliance-examples.yml
-    name: Example payloads from the specification
   - type: DataModel
     url: data-model/openadr-alliance-data-model.yml
-    name: OpenADR 3 entity-relationship graph
   - type: ErrorCatalog
     url: errors/openadr-alliance-problem-types.yml
-    name: OpenADR 3 problem types
   - type: ToolCrosswalk
     url: mcp/openadr-alliance-tool-crosswalk.yml
-    name: MCP tool to OpenAPI operation crosswalk
   - type: MCPCandidate
     url: mcp/openadr-alliance-mcp.yml
-    name: Candidate MCP tool surface derived from the OpenADR 3.1.1 contract (no Alliance-hosted
-      MCP server exists)
+- aid: openadr-alliance:openadr-alliance-events-api
+  name: OpenADR Alliance Events API
+  description: The events API from OpenADR Alliance — 2 operation(s) for events.
+  humanURL: https://www.openadr.org/specification
+  tags:
+  - events
+  properties:
+  - type: OpenAPI
+    url: openapi/openadr-alliance-events-api-openapi.yml
+  - type: Documentation
+    url: https://www.openadr.org/specification
+  - type: Documentation
+    url: https://www.openadr.org/how-to-build-a-product
+  - type: Conformance
+    url: https://www.openadr.org/openadr-3-certification
+  - type: SourceCode
+    url: https://github.com/grid-coordination/openadr3-specification
+  - type: AsyncAPI
+    url: asyncapi/openadr-alliance-notifications-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/openadr-alliance-webhooks.yml
+  - type: JSONSchema
+    url: json-schema/_index.yml
+  - type: Examples
+    url: examples/openadr-alliance-examples.yml
+  - type: DataModel
+    url: data-model/openadr-alliance-data-model.yml
+  - type: ErrorCatalog
+    url: errors/openadr-alliance-problem-types.yml
+  - type: ToolCrosswalk
+    url: mcp/openadr-alliance-tool-crosswalk.yml
+  - type: MCPCandidate
+    url: mcp/openadr-alliance-mcp.yml
+- aid: openadr-alliance:openadr-alliance-mqtt-notifier-api
+  name: OpenADR Alliance MQTT Notifier API
+  description: The MQTT_notifier API from OpenADR Alliance — 12 operation(s) for mqtt_notifier.
+  humanURL: https://www.openadr.org/specification
+  tags:
+  - MQTT_notifier
+  properties:
+  - type: OpenAPI
+    url: openapi/openadr-alliance-mqtt-notifier-api-openapi.yml
+  - type: Documentation
+    url: https://www.openadr.org/specification
+  - type: Documentation
+    url: https://www.openadr.org/how-to-build-a-product
+  - type: Conformance
+    url: https://www.openadr.org/openadr-3-certification
+  - type: SourceCode
+    url: https://github.com/grid-coordination/openadr3-specification
+  - type: AsyncAPI
+    url: asyncapi/openadr-alliance-notifications-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/openadr-alliance-webhooks.yml
+  - type: JSONSchema
+    url: json-schema/_index.yml
+  - type: Examples
+    url: examples/openadr-alliance-examples.yml
+  - type: DataModel
+    url: data-model/openadr-alliance-data-model.yml
+  - type: ErrorCatalog
+    url: errors/openadr-alliance-problem-types.yml
+  - type: ToolCrosswalk
+    url: mcp/openadr-alliance-tool-crosswalk.yml
+  - type: MCPCandidate
+    url: mcp/openadr-alliance-mcp.yml
+- aid: openadr-alliance:openadr-alliance-notifiers-api
+  name: OpenADR Alliance Notifiers API
+  description: The notifiers API from OpenADR Alliance — 1 operation(s) for notifiers.
+  humanURL: https://www.openadr.org/specification
+  tags:
+  - notifiers
+  properties:
+  - type: OpenAPI
+    url: openapi/openadr-alliance-notifiers-api-openapi.yml
+  - type: Documentation
+    url: https://www.openadr.org/specification
+  - type: Documentation
+    url: https://www.openadr.org/how-to-build-a-product
+  - type: Conformance
+    url: https://www.openadr.org/openadr-3-certification
+  - type: SourceCode
+    url: https://github.com/grid-coordination/openadr3-specification
+  - type: AsyncAPI
+    url: asyncapi/openadr-alliance-notifications-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/openadr-alliance-webhooks.yml
+  - type: JSONSchema
+    url: json-schema/_index.yml
+  - type: Examples
+    url: examples/openadr-alliance-examples.yml
+  - type: DataModel
+    url: data-model/openadr-alliance-data-model.yml
+  - type: ErrorCatalog
+    url: errors/openadr-alliance-problem-types.yml
+  - type: ToolCrosswalk
+    url: mcp/openadr-alliance-tool-crosswalk.yml
+  - type: MCPCandidate
+    url: mcp/openadr-alliance-mcp.yml
+- aid: openadr-alliance:openadr-alliance-programs-api
+  name: OpenADR Alliance Programs API
+  description: The programs API from OpenADR Alliance — 2 operation(s) for programs.
+  humanURL: https://www.openadr.org/specification
+  tags:
+  - programs
+  properties:
+  - type: OpenAPI
+    url: openapi/openadr-alliance-programs-api-openapi.yml
+  - type: Documentation
+    url: https://www.openadr.org/specification
+  - type: Documentation
+    url: https://www.openadr.org/how-to-build-a-product
+  - type: Conformance
+    url: https://www.openadr.org/openadr-3-certification
+  - type: SourceCode
+    url: https://github.com/grid-coordination/openadr3-specification
+  - type: AsyncAPI
+    url: asyncapi/openadr-alliance-notifications-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/openadr-alliance-webhooks.yml
+  - type: JSONSchema
+    url: json-schema/_index.yml
+  - type: Examples
+    url: examples/openadr-alliance-examples.yml
+  - type: DataModel
+    url: data-model/openadr-alliance-data-model.yml
+  - type: ErrorCatalog
+    url: errors/openadr-alliance-problem-types.yml
+  - type: ToolCrosswalk
+    url: mcp/openadr-alliance-tool-crosswalk.yml
+  - type: MCPCandidate
+    url: mcp/openadr-alliance-mcp.yml
+- aid: openadr-alliance:openadr-alliance-reports-api
+  name: OpenADR Alliance Reports API
+  description: The reports API from OpenADR Alliance — 2 operation(s) for reports.
+  humanURL: https://www.openadr.org/specification
+  tags:
+  - reports
+  properties:
+  - type: OpenAPI
+    url: openapi/openadr-alliance-reports-api-openapi.yml
+  - type: Documentation
+    url: https://www.openadr.org/specification
+  - type: Documentation
+    url: https://www.openadr.org/how-to-build-a-product
+  - type: Conformance
+    url: https://www.openadr.org/openadr-3-certification
+  - type: SourceCode
+    url: https://github.com/grid-coordination/openadr3-specification
+  - type: AsyncAPI
+    url: asyncapi/openadr-alliance-notifications-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/openadr-alliance-webhooks.yml
+  - type: JSONSchema
+    url: json-schema/_index.yml
+  - type: Examples
+    url: examples/openadr-alliance-examples.yml
+  - type: DataModel
+    url: data-model/openadr-alliance-data-model.yml
+  - type: ErrorCatalog
+    url: errors/openadr-alliance-problem-types.yml
+  - type: ToolCrosswalk
+    url: mcp/openadr-alliance-tool-crosswalk.yml
+  - type: MCPCandidate
+    url: mcp/openadr-alliance-mcp.yml
+- aid: openadr-alliance:openadr-alliance-resources-api
+  name: OpenADR Alliance Resources API
+  description: The resources API from OpenADR Alliance — 2 operation(s) for resources.
+  humanURL: https://www.openadr.org/specification
+  tags:
+  - resources
+  properties:
+  - type: OpenAPI
+    url: openapi/openadr-alliance-resources-api-openapi.yml
+  - type: Documentation
+    url: https://www.openadr.org/specification
+  - type: Documentation
+    url: https://www.openadr.org/how-to-build-a-product
+  - type: Conformance
+    url: https://www.openadr.org/openadr-3-certification
+  - type: SourceCode
+    url: https://github.com/grid-coordination/openadr3-specification
+  - type: AsyncAPI
+    url: asyncapi/openadr-alliance-notifications-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/openadr-alliance-webhooks.yml
+  - type: JSONSchema
+    url: json-schema/_index.yml
+  - type: Examples
+    url: examples/openadr-alliance-examples.yml
+  - type: DataModel
+    url: data-model/openadr-alliance-data-model.yml
+  - type: ErrorCatalog
+    url: errors/openadr-alliance-problem-types.yml
+  - type: ToolCrosswalk
+    url: mcp/openadr-alliance-tool-crosswalk.yml
+  - type: MCPCandidate
+    url: mcp/openadr-alliance-mcp.yml
+- aid: openadr-alliance:openadr-alliance-subscriptions-api
+  name: OpenADR Alliance Subscriptions API
+  description: The subscriptions API from OpenADR Alliance — 2 operation(s) for subscriptions.
+  humanURL: https://www.openadr.org/specification
+  tags:
+  - subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/openadr-alliance-subscriptions-api-openapi.yml
+  - type: Documentation
+    url: https://www.openadr.org/specification
+  - type: Documentation
+    url: https://www.openadr.org/how-to-build-a-product
+  - type: Conformance
+    url: https://www.openadr.org/openadr-3-certification
+  - type: SourceCode
+    url: https://github.com/grid-coordination/openadr3-specification
+  - type: AsyncAPI
+    url: asyncapi/openadr-alliance-notifications-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/openadr-alliance-webhooks.yml
+  - type: JSONSchema
+    url: json-schema/_index.yml
+  - type: Examples
+    url: examples/openadr-alliance-examples.yml
+  - type: DataModel
+    url: data-model/openadr-alliance-data-model.yml
+  - type: ErrorCatalog
+    url: errors/openadr-alliance-problem-types.yml
+  - type: ToolCrosswalk
+    url: mcp/openadr-alliance-tool-crosswalk.yml
+  - type: MCPCandidate
+    url: mcp/openadr-alliance-mcp.yml
+- aid: openadr-alliance:openadr-alliance-vens-api
+  name: OpenADR Alliance Vens API
+  description: The vens API from OpenADR Alliance — 4 operation(s) for vens.
+  humanURL: https://www.openadr.org/specification
+  tags:
+  - vens
+  properties:
+  - type: OpenAPI
+    url: openapi/openadr-alliance-vens-api-openapi.yml
+  - type: Documentation
+    url: https://www.openadr.org/specification
+  - type: Documentation
+    url: https://www.openadr.org/how-to-build-a-product
+  - type: Conformance
+    url: https://www.openadr.org/openadr-3-certification
+  - type: SourceCode
+    url: https://github.com/grid-coordination/openadr3-specification
+  - type: AsyncAPI
+    url: asyncapi/openadr-alliance-notifications-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/openadr-alliance-webhooks.yml
+  - type: JSONSchema
+    url: json-schema/_index.yml
+  - type: Examples
+    url: examples/openadr-alliance-examples.yml
+  - type: DataModel
+    url: data-model/openadr-alliance-data-model.yml
+  - type: ErrorCatalog
+    url: errors/openadr-alliance-problem-types.yml
+  - type: ToolCrosswalk
+    url: mcp/openadr-alliance-tool-crosswalk.yml
+  - type: MCPCandidate
+    url: mcp/openadr-alliance-mcp.yml
 common:
+- type: Overlay
+  url: overlays/openadr-alliance-openadr-3-1-1-overlay.yaml
+- type: Overlay
+  url: overlays/openadr-alliance-openadr-3-1-0-overlay.yaml
+- type: Overlay
+  url: overlays/openadr-alliance-openadr-3-0-1-overlay.yaml
+- type: Overlay
+  url: overlays/openadr-alliance-openadr-3-0-0-overlay.yaml
 - type: License
   name: Apache-2.0
   url: https://github.com/grid-coordination/openadr3-specification/blob/main/LICENSE
