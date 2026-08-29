@@ -348,6 +348,9 @@ apis:
   - type: MCPCandidate
     url: mcp/openadr-alliance-mcp.yml
 common:
+- type: CapabilityMap
+  url: capabilities/openadr-alliance-capability-edges.yml
+  name: OpenADR Alliance Business Capability Map
 - type: IssueTracker
   url: https://github.com/grid-coordination/openadr3-specification/issues
 - type: Overlay
