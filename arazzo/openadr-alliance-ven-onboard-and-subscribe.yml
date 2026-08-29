@@ -8,8 +8,20 @@ info:
     webhook subscription for event notifications. Every operationId is verified against the
     OpenADR 3.1.1 specification.
 sourceDescriptions:
-- name: openadr3
-  url: ../openapi/openadr-3-1-1-openapi.yaml
+- name: authApi
+  url: ../openapi/openadr-alliance-auth-api-openapi.yml
+  type: openapi
+- name: notifiersApi
+  url: ../openapi/openadr-alliance-notifiers-api-openapi.yml
+  type: openapi
+- name: resourcesApi
+  url: ../openapi/openadr-alliance-resources-api-openapi.yml
+  type: openapi
+- name: subscriptionsApi
+  url: ../openapi/openadr-alliance-subscriptions-api-openapi.yml
+  type: openapi
+- name: vensApi
+  url: ../openapi/openadr-alliance-vens-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: onboard-ven-and-subscribe

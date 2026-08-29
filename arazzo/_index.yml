@@ -1,7 +1,7 @@
-generated: '2026-07-27'
-method: generated
-source: openapi/openadr-3-1-1-openapi.yaml
-description: >-
+x-generated: '2026-07-27'
+x-method: generated
+x-source: openapi/openadr-3-1-1-openapi.yaml
+x-description: >-
   Native Arazzo 1.0.1 workflows stitching OpenADR 3.1.1 operations into runnable multi-step
   flows. Every operationId is verified verbatim against the specification. These run against
   an implementer's VTN — the OpenADR Alliance hosts no API, so supply the base URL yourself.

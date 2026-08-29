@@ -8,8 +8,14 @@ info:
     it, then read the event back. Every operationId is verified against the OpenADR 3.1.1
     specification. The base URL is implementer-supplied — the OpenADR Alliance hosts no API.
 sourceDescriptions:
-- name: openadr3
-  url: ../openapi/openadr-3-1-1-openapi.yaml
+- name: authApi
+  url: ../openapi/openadr-alliance-auth-api-openapi.yml
+  type: openapi
+- name: eventsApi
+  url: ../openapi/openadr-alliance-events-api-openapi.yml
+  type: openapi
+- name: programsApi
+  url: ../openapi/openadr-alliance-programs-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: dispatch-demand-response-event
