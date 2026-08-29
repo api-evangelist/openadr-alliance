@@ -18,6 +18,20 @@ description: 'The OpenADR Alliance is a San Ramon, California mutual-benefit mem
   form that emails download links under terms and conditions. It publishes no consumer energy
   data and no open grid or market data; it defines the protocol that other parties implement.
   Home market is the United States, with adoption across Europe, Japan, Korea, and Australia.'
+deliveryModel:
+  model: open-core
+  license: Apache-2.0
+  open_source: true
+  commercial: true
+  callable_host: true
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.openadr.org/assets/site/openadrlogo347x75.png
 tags:
 - Energy
@@ -334,6 +348,8 @@ apis:
   - type: MCPCandidate
     url: mcp/openadr-alliance-mcp.yml
 common:
+- type: IssueTracker
+  url: https://github.com/grid-coordination/openadr3-specification/issues
 - type: Overlay
   url: overlays/openadr-alliance-openadr-3-1-1-overlay.yaml
 - type: Overlay
