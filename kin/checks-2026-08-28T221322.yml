@@ -2,19 +2,17 @@
 kin_checks:
   slug: openadr-alliance
   schema_version: 0.15.1
-  scored_at: '2026-08-27'
-  run_ts: 2026-08-27T140727
+  scored_at: '2026-08-28'
+  run_ts: 2026-08-28T221322
   note: Actionable checks only (missed + partial). earned/na are every other check
     in rubric/scoring-0.15.1.yml; counts below let you verify that.
   counts:
     total: 130
-    earned: 38
-    partial: 12
-    missed: 42
-    na: 38
+    earned: 49
+    partial: 18
+    missed: 47
+    na: 16
   checks:
-  - id: multiple_apis
-    status: missed
   - id: base_url_per_api
     status: missed
   - id: well_known_published
@@ -23,6 +21,12 @@ kin_checks:
     status: missed
   - id: apis_json_self_hosted
     status: missed
+  - id: openapi_3_2
+    status: missed
+    detail: 0 of 9 openapi documents pass
+  - id: openapi_3_1
+    status: missed
+    detail: 0 of 9 openapi documents pass
   - id: json_schema_per_resource
     status: missed
   - id: json_ld_present
@@ -73,6 +77,14 @@ kin_checks:
     status: missed
   - id: reg_mandate_verified
     status: missed
+  - id: os_security_policy
+    status: missed
+  - id: os_contribution_guide
+    status: missed
+  - id: os_releases
+    status: missed
+  - id: os_code_of_conduct
+    status: missed
   - id: reversibility_documented
     status: missed
   - id: mcp_server
@@ -97,12 +109,40 @@ kin_checks:
     status: missed
   - id: agentic_commerce
     status: missed
+  - id: info_complete
+    status: partial
+    earned: 1.33
+    detail: 3 of 9 openapi documents pass
+  - id: servers_defined
+    status: partial
+    earned: 1.0
+    detail: 3 of 9 openapi documents pass
   - id: servers_resolvable
     status: partial
     earned: 2.5
+  - id: operations_operation_ids
+    status: partial
+    earned: 3.56
+    detail: 8 of 9 openapi documents pass
+  - id: error_responses_documented
+    status: partial
+    earned: 3.56
+    detail: 8 of 9 openapi documents pass
   - id: examples_present
     status: partial
     earned: 1.0
+  - id: components_reuse
+    status: partial
+    earned: 2.67
+    detail: 8 of 9 openapi documents pass
+  - id: security_applied
+    status: partial
+    earned: 2.67
+    detail: 8 of 9 openapi documents pass
+  - id: webhooks_or_callbacks
+    status: partial
+    earned: 0.22
+    detail: 1 of 9 openapi documents pass
   - id: vocabulary_published
     status: partial
     earned: 1.25
@@ -123,16 +163,12 @@ kin_checks:
     detail: 'authorship: derived'
   - id: auth_clarity
     status: partial
-    earned: 3.5
-    detail: 'grade: bearer'
-  - id: error_semantics
-    status: partial
-    earned: 4.0
-    detail: 'grade: documented'
+    earned: 7.5
+    detail: 'grade: negotiable'
   - id: openapi_examples
     status: partial
-    earned: 1.75
-    detail: 'grade: documented'
+    earned: 3.5
+    detail: 'grade: partial'
   - id: event_surface_described
     status: partial
     earned: 1.5
