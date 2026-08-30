@@ -55,6 +55,8 @@ apis:
   description: The Auth API from OpenADR Alliance — 2 operation(s) for auth.
   humanURL: https://www.openadr.org/specification
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -88,6 +90,8 @@ apis:
   description: The events API from OpenADR Alliance — 2 operation(s) for events.
   humanURL: https://www.openadr.org/specification
   tags:
+  - Event
+  tags_raw:
   - events
   properties:
   - type: OpenAPI
@@ -154,6 +158,8 @@ apis:
   description: The notifiers API from OpenADR Alliance — 1 operation(s) for notifiers.
   humanURL: https://www.openadr.org/specification
   tags:
+  - Notifiers
+  tags_raw:
   - notifiers
   properties:
   - type: OpenAPI
@@ -187,6 +193,8 @@ apis:
   description: The programs API from OpenADR Alliance — 2 operation(s) for programs.
   humanURL: https://www.openadr.org/specification
   tags:
+  - Programs
+  tags_raw:
   - programs
   properties:
   - type: OpenAPI
@@ -220,6 +228,8 @@ apis:
   description: The reports API from OpenADR Alliance — 2 operation(s) for reports.
   humanURL: https://www.openadr.org/specification
   tags:
+  - Reports
+  tags_raw:
   - reports
   properties:
   - type: OpenAPI
@@ -253,6 +263,8 @@ apis:
   description: The resources API from OpenADR Alliance — 2 operation(s) for resources.
   humanURL: https://www.openadr.org/specification
   tags:
+  - Resources
+  tags_raw:
   - resources
   properties:
   - type: OpenAPI
@@ -286,6 +298,8 @@ apis:
   description: The subscriptions API from OpenADR Alliance — 2 operation(s) for subscriptions.
   humanURL: https://www.openadr.org/specification
   tags:
+  - Subscription
+  tags_raw:
   - subscriptions
   properties:
   - type: OpenAPI
