@@ -1,0 +1,228 @@
+openapi: 3.2.0
+info:
+  title: Openadr Alliance Notifiers API
+  version: 1.0.0
+  contact:
+    email: info@openadr.org
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: 'Operations tagged notifiers across 2 of this provider''s published API definitions: openadr-3-1-0-openapi.yaml, openadr-3-1-1-openapi.yaml. Each path carries the servers of the definition it was published in.'
+servers:
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
+tags:
+- name: notifiers
+paths:
+  /notifiers:
+    get:
+      tags:
+      - notifiers
+      summary: List all notifier bindings
+      operationId: listAllNotifiers
+      description: 'List all notifier bindings supported by the server
+
+        '
+      security:
+      - oAuth2ClientCredentials:
+        - read_all
+      - bearerAuth: []
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notifiersResponse'
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
+components:
+  schemas:
+    mqttNotifierAuthenticationOauth2BearerToken:
+      type: object
+      description: MQTT broker OAuth2 Bearer Token authentication details
+      required:
+      - method
+      - username
+      properties:
+        method:
+          type: string
+          enum:
+          - OAUTH2_BEARER_TOKEN
+          description: Specifies OAuth2 bearer token authentication
+        username:
+          type: string
+          description: Either the distinguished string "{clientID}", or any other literal string
+    mqttNotifierAuthenticationCertificate:
+      type: object
+      description: MQTT broker mTLS client certificate authentication details
+      required:
+      - method
+      - caCert
+      - clientCert
+      - clientKey
+      properties:
+        method:
+          type: string
+          enum:
+          - CERTIFICATE
+          description: Specifies certificate authentication
+        caCert:
+          type: string
+          description: String containing the Certificate Authority certificate
+        clientCert:
+          type: string
+          description: String containing the Client certificate
+        clientKey:
+          type: string
+          description: String containing the client certificate private key
+    mqttNotifierAuthenticationAnonymous:
+      type: object
+      description: MQTT broker anonymous authentication details
+      required:
+      - method
+      properties:
+        method:
+          type: string
+          enum:
+          - ANONYMOUS
+          description: Specifies anonymous authentication
+    notifiersResponse:
+      type: object
+      description: Provides details of each notifier binding supported
+      required:
+      - WEBHOOK
+      properties:
+        WEBHOOK:
+          type: boolean
+          description: Currently MUST be true
+          example: true
+        MQTT:
+          $ref: '#/components/schemas/mqttNotifierBindingObject'
+    mqttNotifierBindingObject:
+      type: object
+      description: Details of MQTT binding for messaging protocol support
+      required:
+      - URIS
+      - serialization
+      - authentication
+      properties:
+        URIS:
+          type: array
+          items:
+            type: string
+            format: uri
+            description: URIs for connection to MQTT broker
+            example: mqtts://broker.vtn.company.com
+        serialization:
+          type: string
+          description: Currently always JSON, perhaps other formats supported in future
+          enum:
+          - JSON
+        authentication:
+          oneOf:
+          - $ref: '#/components/schemas/mqttNotifierAuthenticationAnonymous'
+          - $ref: '#/components/schemas/mqttNotifierAuthenticationOauth2BearerToken'
+          - $ref: '#/components/schemas/mqttNotifierAuthenticationCertificate'
+          description: Authentication method supported for connection to MQTT broker
+    problem:
+      type: object
+      description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
+
+        '
+      properties:
+        type:
+          type: string
+          format: uri
+          minLength: 2
+          maxLength: 8000
+          description: 'An absolute URI that identifies the problem type.
+
+            When dereferenced, it SHOULD provide human-readable documentation for the problem type
+
+            (e.g., using HTML).
+
+            '
+          default: about:blank
+          example: https://zalando.github.io/problem/constraint-violation
+        title:
+          type: string
+          description: 'A short, summary of the problem type. Written in english and readable
+
+            for engineers (usually not suited for non technical stakeholders and
+
+            not localized); example: Service Unavailable.
+
+            '
+        status:
+          type: integer
+          format: int32
+          description: 'The HTTP status code generated by the origin server for this occurrence
+
+            of the problem.
+
+            '
+          minimum: 100
+          example: 503
+          exclusiveMaximum: 600
+        detail:
+          type: string
+          description: 'A human readable explanation specific to this occurrence of the
+
+            problem.
+
+            '
+          example: Connection to database timed out
+        instance:
+          type: string
+          minLength: 3
+          maxLength: 8000
+          format: uri
+          description: 'An absolute URI that identifies the specific occurrence of the problem.
+
+            It may or may not yield further information if dereferenced.
+
+            '
+  responses:
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem'
+    unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem'
+    badRequest:
+      description: The request is malformed or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem'
+  securitySchemes:
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: Client credential flow.
+      flows:
+        clientCredentials:
+          tokenUrl: auth/token
+          scopes:
+            read_all: BL can read all resources
+            read_targets: VENs may only read objects with targets by providing matching targets
+            read_ven_objects: VENs may only read objects whose clientID matches their own
+            write_programs: Only BL can write to programs
+            write_events: Only BL can write to events
+            write_reports: only VENs can write to reports
+            write_subscriptions: VENs and BL can write to subscriptions
+            write_vens: VENS and BL can write to vens and resources
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-refined-from:
+- openadr-3-1-0-openapi.yaml
+- openadr-3-1-1-openapi.yaml

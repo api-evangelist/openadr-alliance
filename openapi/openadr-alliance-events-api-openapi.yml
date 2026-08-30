@@ -1,0 +1,1781 @@
+openapi: 3.2.0
+info:
+  title: Openadr Alliance Events API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: '1.0'
+  description: 'Operations tagged events across 4 of this provider''s published API definitions: openadr-3-0-0-openapi.yaml, openadr-3-0-1-openapi.yaml, openadr-3-1-0-openapi.yaml, openadr-3-1-1-openapi.yaml. Each path carries the servers of the definition it was published in.'
+servers:
+- description: base path
+  url: http://localhost:8081/openadr3
+- description: base path
+  url: http://localhost:8081/openadr3/3.0.1
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
+tags:
+- name: events
+paths:
+  /events:
+    get:
+      tags:
+      - events
+      summary: searches all events
+      operationId: searchAllEvents
+      description: 'List all events known to the server. May filter results by programID query param.
+
+        Use skip and pagination query params to limit response size.
+
+        '
+      security:
+      - oAuth2ClientCredentials:
+        - read_all
+      - bearerAuth: []
+      parameters:
+      - name: programID
+        in: query
+        schema:
+          $ref: '#/components/schemas/objectID'
+        required: false
+        description: filter results to events with programID.
+        example: program-999
+      - name: targetType
+        in: query
+        description: Indicates targeting type, e.g. GROUP
+        required: false
+        schema:
+          type: string
+      - name: targetValues
+        in: query
+        description: List of target values, e.g. group names
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: skip
+        in: query
+        description: number of records to skip for pagination.
+        required: false
+        schema:
+          type: integer
+          format: int32
+          minimum: 0
+      - name: limit
+        in: query
+        description: maximum number of records to return.
+        required: false
+        schema:
+          type: integer
+          format: int32
+          maximum: 50
+          minimum: 0
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/event'
+        '400':
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '403':
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+    post:
+      tags:
+      - events
+      summary: create an event
+      operationId: createEvent
+      description: Create a new event in the server.
+      security:
+      - oAuth2ClientCredentials:
+        - write_events
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/event'
+        description: Event item to add.
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/event'
+        '400':
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '403':
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '409':
+          description: Conflict. Implementation dependent response if event with  same name already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+    servers:
+    - description: base path
+      url: http://localhost:8081/openadr3
+  /events/{eventID}:
+    parameters:
+    - name: eventID
+      in: path
+      schema:
+        $ref: '#/components/schemas/objectID'
+      description: object ID of event.
+      required: true
+    get:
+      tags:
+      - events
+      summary: search events by ID
+      operationId: searchEventsByID
+      description: 'Fetch event associated with the eventID in path.
+
+        '
+      security:
+      - oAuth2ClientCredentials:
+        - read_all
+      - bearerAuth: []
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/event'
+        '400':
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '403':
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+    put:
+      tags:
+      - events
+      summary: update an event
+      operationId: updateEvent
+      description: Update the event specified by the eventID in path.
+      security:
+      - oAuth2ClientCredentials:
+        - write_events
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/event'
+        description: event item to update.
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/event'
+        '400':
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '403':
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '409':
+          description: Conflict. Implementation dependent response if program with the same programName exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+    delete:
+      tags:
+      - events
+      summary: delete an event
+      operationId: deleteEvent
+      description: 'Delete the event specified by the eventID in path.
+
+        '
+      security:
+      - oAuth2ClientCredentials:
+        - write_events
+      - bearerAuth: []
+      responses:
+        '200':
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/event'
+        '400':
+          description: Bad Request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '403':
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+    servers:
+    - description: base path
+      url: http://localhost:8081/openadr3
+components:
+  schemas:
+    reportDescriptor:
+      type: object
+      description: 'An object that may be used to request a report from a VEN.
+
+        See OpenADR REST User Guide for detailed description of how configure a report request.
+
+        '
+      required:
+      - payloadType
+      properties:
+        payloadType:
+          type: string
+          description: Enumerated or private string signifying the nature of values.
+          example: USAGE
+        readingType:
+          type: string
+          description: Enumerated or private string signifying the type of reading.
+          example: DIRECT_READ
+          default: DIRECT_READ
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects.
+          default: null
+          items:
+            $ref: '#/components/schemas/valuesMap'
+        aggregate:
+          type: boolean
+          description: 'True if report should aggregate results from all targeted resources.
+
+            False if report includes results for each resource.
+
+            '
+          example: false
+          default: false
+        startInterval:
+          type: integer
+          format: int32
+          description: 'The interval on which to generate a report.
+
+            -1 indicates generate report at end of last interval.
+
+            '
+          example: -1
+          default: -1
+        numIntervals:
+          type: integer
+          format: int32
+          description: 'The number of intervals to include in a report.
+
+            -1 indicates that all intervals are to be included.
+
+            '
+          example: -1
+          default: -1
+        historical:
+          type: boolean
+          description: 'True indicates report on intervals preceding startInterval.
+
+            False indicates report on intervals following startInterval (e.g. forecast).
+
+            '
+          example: true
+          default: true
+        frequency:
+          type: integer
+          format: int32
+          description: 'Number of intervals that elapse between reports.
+
+            -1 indicates same as numIntervals.
+
+            '
+          example: -1
+          default: -1
+        repeat:
+          type: integer
+          format: int32
+          description: 'Number of times to repeat report.
+
+            1 indicates generate one report.
+
+            -1 indicates repeat indefinitely.
+
+            '
+          example: 1
+          default: 1
+    valuesMap:
+      type: object
+      description: 'Represents one or more values associated with a type.
+
+        E.g. a type of PRICE contains a single float value.
+
+        '
+      required:
+      - type
+      - values
+      properties:
+        type:
+          type: string
+          description: 'Enumerated or private string signifying the nature of values.
+
+            E.G. "PRICE" indicates value is to be interpreted as a currency.
+
+            '
+          example: PRICE
+        values:
+          type: array
+          description: A list of data points. Most often a singular value such as a price.
+          example:
+          - 0.17
+          items:
+            anyOf:
+            - type: number
+            - type: integer
+            - type: string
+            - type: boolean
+            - $ref: '#/components/schemas/point'
+    dateTime:
+      type:
+      - string
+      - 'null'
+      description: datetime in ISO 8601 format
+      example: 2023-06-15 09:30:00+00:00
+      default: null
+    intervalPeriod:
+      type: object
+      description: 'Defines temporal aspects of intervals.
+
+        A duration of default null indicates infinity.
+
+        A randomizeStart of default null indicates no randomization.
+
+        '
+      required:
+      - start
+      properties:
+        start:
+          $ref: '#/components/schemas/dateTime'
+        duration:
+          $ref: '#/components/schemas/duration'
+        randomizeStart:
+          $ref: '#/components/schemas/duration'
+    problem:
+      type: object
+      description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
+
+        '
+      properties:
+        type:
+          type: string
+          format: uri
+          description: 'An absolute URI that identifies the problem type.
+
+            When dereferenced, it SHOULD provide human-readable documentation for the problem type
+
+            (e.g., using HTML).
+
+            '
+          default: about:blank
+          example: https://zalando.github.io/problem/constraint-violation
+        title:
+          type: string
+          description: 'A short, summary of the problem type. Written in english and readable
+
+            for engineers (usually not suited for non technical stakeholders and
+
+            not localized); example: Service Unavailable.
+
+            '
+        status:
+          type: integer
+          format: int32
+          description: 'The HTTP status code generated by the origin server for this occurrence
+
+            of the problem.
+
+            '
+          minimum: 100
+          example: 503
+          exclusiveMaximum: 600
+        detail:
+          type: string
+          description: 'A human readable explanation specific to this occurrence of the
+
+            problem.
+
+            '
+          example: Connection to database timed out
+        instance:
+          type: string
+          format: uri
+          description: 'An absolute URI that identifies the specific occurrence of the problem.
+
+            It may or may not yield further information if dereferenced.
+
+            '
+    duration:
+      type:
+      - string
+      - 'null'
+      description: duration in ISO 8601 format
+      example: PT1H
+      default: null
+    event:
+      type: object
+      description: 'Event object to communicate a Demand Response request to VEN.
+
+        If intervalPeriod is present, sets start time and duration of intervals.
+
+        '
+      required:
+      - programID
+      - intervals
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime'
+        objectType:
+          type: string
+          description: Used as discriminator, e.g. notification.object
+          enum:
+          - EVENT
+        programID:
+          $ref: '#/components/schemas/objectID'
+        eventName:
+          type:
+          - string
+          - 'null'
+          description: User defined string for use in debugging or User Interface.
+          example: price event 11-18-2022
+          default: null
+        priority:
+          type:
+          - integer
+          - 'null'
+          description: Relative priority of event. A lower number is a higher priority.
+          example: 0
+          default: null
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects.
+          default: null
+          items:
+            $ref: '#/components/schemas/valuesMap'
+        reportDescriptors:
+          type:
+          - array
+          - 'null'
+          description: A list of reportDescriptor objects. Used to request reports from VEN.
+          default: null
+          items:
+            $ref: '#/components/schemas/reportDescriptor'
+        payloadDescriptors:
+          type:
+          - array
+          - 'null'
+          description: A list of payloadDescriptor objects.
+          default: null
+          items:
+            $ref: '#/components/schemas/eventPayloadDescriptor'
+        intervalPeriod:
+          $ref: '#/components/schemas/intervalPeriod'
+        intervals:
+          type: array
+          description: A list of interval objects.
+          items:
+            $ref: '#/components/schemas/interval'
+    objectID:
+      type: string
+      pattern: ^[a-zA-Z0-9_-]*$
+      minLength: 1
+      maxLength: 128
+      description: URL safe VTN assigned object ID.
+      example: object-999
+    eventPayloadDescriptor:
+      type: object
+      description: 'Contextual information used to interpret event valuesMap values.
+
+        E.g. a PRICE payload simply contains a price value, an
+
+        associated descriptor provides necessary context such as units and currency.
+
+        '
+      required:
+      - payloadType
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator, e.g. program.payloadDescriptors
+          default: EVENT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: Enumerated or private string signifying the nature of values.
+          example: PRICE
+        units:
+          type: string
+          description: Units of measure.
+          example: KWH
+          default: KWH
+        currency:
+          type: string
+          description: Currency of price payload.
+          example: USD
+          default: USD
+    point:
+      type: object
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
+      required:
+      - x
+      - y
+      properties:
+        x:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+          default: null
+        y:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+          default: null
+    interval:
+      type: object
+      description: 'An object defining a temporal window and a list of valuesMaps.
+
+        if intervalPeriod present may set temporal aspects of interval or override event.intervalPeriod.
+
+        '
+      required:
+      - id
+      - payloads
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: A client generated number assigned an interval object. Not a sequence number.
+          example: 0
+        intervalPeriod:
+          $ref: '#/components/schemas/intervalPeriod'
+        payloads:
+          type: array
+          description: A list of valuesMap objects.
+          items:
+            $ref: '#/components/schemas/valuesMap'
+    reportDescriptor_2:
+      type: object
+      description: 'An object that may be used to request a report from a VEN.
+
+        '
+      required:
+      - payloadType
+      properties:
+        payloadType:
+          type: string
+          description: Enumerated or private string signifying the nature of values.
+          minLength: 1
+          maxLength: 128
+          example: USAGE
+        readingType:
+          type:
+          - string
+          - 'null'
+          description: Enumerated or private string signifying the type of reading.
+          example: DIRECT_READ
+          default: null
+        units:
+          type:
+          - string
+          - 'null'
+          description: Units of measure.
+          example: KWH
+          default: null
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects.
+          items:
+            $ref: '#/components/schemas/valuesMap_2'
+          default: null
+        aggregate:
+          type: boolean
+          description: 'True if report should aggregate results from all targeted resources.
+
+            False if report includes results for each resource.
+
+            '
+          example: false
+          default: false
+        startInterval:
+          type: integer
+          format: int32
+          description: 'The interval on which to generate a report.
+
+            -1 indicates generate report at end of last interval.
+
+            '
+          example: -1
+          default: -1
+        numIntervals:
+          type: integer
+          format: int32
+          description: 'The number of intervals to include in a report.
+
+            -1 indicates that all intervals are to be included.
+
+            '
+          example: -1
+          default: -1
+        historical:
+          type: boolean
+          description: 'True indicates report on intervals preceding startInterval.
+
+            False indicates report on intervals following startInterval (e.g. forecast).
+
+            '
+          example: true
+          default: true
+        frequency:
+          type: integer
+          format: int32
+          description: 'Number of intervals that elapse between reports.
+
+            -1 indicates same as numIntervals.
+
+            '
+          example: -1
+          default: -1
+        repeat:
+          type: integer
+          format: int32
+          description: 'Number of times to repeat report.
+
+            1 indicates generate one report.
+
+            -1 indicates repeat indefinitely.
+
+            '
+          example: 1
+          default: 1
+    valuesMap_2:
+      type: object
+      description: 'Represents one or more values associated with a type.
+
+        E.g. a type of PRICE contains a single float value.
+
+        '
+      required:
+      - type
+      - values
+      properties:
+        type:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: 'Enumerated or private string signifying the nature of values.
+
+            E.G. "PRICE" indicates value is to be interpreted as a currency.
+
+            '
+          example: PRICE
+        values:
+          type: array
+          description: A list of data points. Most often a singular value such as a price.
+          example:
+          - 0.17
+          items:
+            anyOf:
+            - type: number
+            - type: integer
+            - type: string
+            - type: boolean
+            - $ref: '#/components/schemas/point_2'
+    dateTime_2:
+      type: string
+      format: date-time
+      description: datetime in ISO 8601 format
+      example: 2023-06-15 09:30:00+00:00
+    intervalPeriod_2:
+      type: object
+      description: 'Defines temporal aspects of intervals.
+
+        A duration of default PT0S indicates instantaneous or infinity, depending on payloadType.
+
+        A randomizeStart of default null indicates no randomization.
+
+        '
+      required:
+      - start
+      properties:
+        start:
+          $ref: '#/components/schemas/dateTime_2'
+        duration:
+          $ref: '#/components/schemas/duration_2'
+        randomizeStart:
+          $ref: '#/components/schemas/duration_2'
+    duration_2:
+      type: string
+      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
+      description: duration in ISO 8601 format
+      example: PT1H
+      default: PT0S
+    event_2:
+      type: object
+      description: 'Event object to communicate a Demand Response request to VEN.
+
+        If intervalPeriod is present, sets default start time and duration of intervals.
+
+        '
+      required:
+      - programID
+      - intervals
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime_2'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime_2'
+        objectType:
+          type: string
+          description: Used as discriminator
+          enum:
+          - EVENT
+        programID:
+          $ref: '#/components/schemas/objectID'
+        eventName:
+          type:
+          - string
+          - 'null'
+          description: User defined string for use in debugging or User Interface.
+          example: price event 11-18-2022
+          default: null
+        priority:
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+          description: Relative priority of event. A lower number is a higher priority.
+          example: 0
+          default: null
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects.
+          items:
+            $ref: '#/components/schemas/valuesMap_2'
+          default: null
+        reportDescriptors:
+          type:
+          - array
+          - 'null'
+          description: A list of reportDescriptor objects. Used to request reports from VEN.
+          items:
+            $ref: '#/components/schemas/reportDescriptor_2'
+          default: null
+        payloadDescriptors:
+          type:
+          - array
+          - 'null'
+          description: A list of payloadDescriptor objects.
+          items:
+            $ref: '#/components/schemas/eventPayloadDescriptor_2'
+          default: null
+        intervalPeriod:
+          $ref: '#/components/schemas/intervalPeriod_2'
+        intervals:
+          type: array
+          description: A list of interval objects.
+          items:
+            $ref: '#/components/schemas/interval'
+    eventPayloadDescriptor_2:
+      type: object
+      description: 'Contextual information used to interpret event valuesMap values.
+
+        E.g. a PRICE payload simply contains a price value, an
+
+        associated descriptor provides necessary context such as units and currency.
+
+        '
+      required:
+      - payloadType
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - EVENT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: Enumerated or private string signifying the nature of values.
+          minLength: 1
+          maxLength: 128
+          example: PRICE
+        units:
+          type:
+          - string
+          - 'null'
+          description: Units of measure.
+          example: KWH
+          default: null
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Currency of price payload.
+          example: USD
+          default: null
+    point_2:
+      type: object
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
+      required:
+      - x
+      - y
+      properties:
+        x:
+          type: number
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+        y:
+          type: number
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+    reportDescriptor_3:
+      type: object
+      description: 'An object that may be used to request a report from a VEN.
+
+        '
+      required:
+      - payloadType
+      properties:
+        payloadType:
+          type: string
+          description: 'Represents the nature of values.
+
+
+            See enumerations in Definitions for defined string values, or use privately defined strings
+
+            '
+          minLength: 1
+          maxLength: 128
+          example: USAGE
+        readingType:
+          $ref: '#/components/schemas/readingType'
+        units:
+          $ref: '#/components/schemas/units'
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of targets.
+          items:
+            $ref: '#/components/schemas/target'
+          default: null
+        aggregate:
+          type: boolean
+          description: 'True if report should aggregate results from all targeted resources.
+
+            False if report includes results for each resource.
+
+            '
+          example: false
+          default: false
+        startInterval:
+          type: integer
+          format: int32
+          description: 'The interval on which to generate a report.
+
+            -1 indicates generate report at end of last interval.
+
+            '
+          example: -1
+          default: -1
+        numIntervals:
+          type: integer
+          format: int32
+          description: 'The number of intervals to include in a report.
+
+            -1 indicates that all intervals are to be included.
+
+            '
+          example: -1
+          default: -1
+        historical:
+          type: boolean
+          description: 'True indicates report on intervals preceding startInterval.
+
+            False indicates report on intervals following startInterval (e.g. forecast).
+
+            '
+          example: true
+          default: true
+        frequency:
+          type: integer
+          format: int32
+          description: 'Number of intervals that elapse between reports.
+
+            -1 indicates same as numIntervals.
+
+            '
+          example: -1
+          default: -1
+        repeat:
+          type: integer
+          format: int32
+          description: 'Number of times to repeat report.
+
+            1 indicates generate one report.
+
+            -1 indicates repeat indefinitely.
+
+            '
+          example: 1
+          default: 1
+        reportIntervals:
+          type: string
+          description: Indicates VEN report interval options. See User Guide.
+          example: INTERVALS
+          enum:
+          - INTERVALS
+          - SUB_INTERVALS
+          - OPEN_INTERVALS
+          default: INTERVALS
+    valuesMap_3:
+      type: object
+      description: 'Represents one or more values associated with a type.
+
+
+        See enumerations in Definitions for defined string values, or use privately defined strings
+
+        '
+      required:
+      - type
+      - values
+      properties:
+        type:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: 'Represents the nature of values.
+
+
+            See enumerations in Definitions for defined string values, or use privately defined strings
+
+            '
+          example: PRICE
+        values:
+          type: array
+          description: A list of data points. Most often a singular value such as a price.
+          example:
+          - 0.17
+          items:
+            anyOf:
+            - type: number
+            - type: integer
+            - type: string
+            - type: boolean
+            - $ref: '#/components/schemas/point_3'
+    eventRequest:
+      type: object
+      description: 'Event object to communicate a Demand Response request to VEN.
+
+        If intervalPeriod is present, sets default start time and duration of intervals.
+
+        '
+      required:
+      - programID
+      properties:
+        programID:
+          $ref: '#/components/schemas/objectID'
+        eventName:
+          type:
+          - string
+          - 'null'
+          description: User defined string for use in debugging or User Interface.
+          example: price event 11-18-2022
+          default: null
+        duration:
+          $ref: '#/components/schemas/duration_3'
+        priority:
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+          description: Relative priority of event. A lower number is a higher priority.
+          example: 0
+          default: null
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of targets.
+          items:
+            $ref: '#/components/schemas/target'
+          default: null
+        reportDescriptors:
+          type:
+          - array
+          - 'null'
+          description: A list of reportDescriptor objects. Used to request reports from VEN.
+          items:
+            $ref: '#/components/schemas/reportDescriptor_3'
+          default: null
+        payloadDescriptors:
+          type:
+          - array
+          - 'null'
+          description: A list of payloadDescriptor objects.
+          items:
+            $ref: '#/components/schemas/eventPayloadDescriptor_3'
+          default: null
+        intervalPeriod:
+          $ref: '#/components/schemas/intervalPeriod_3'
+        intervals:
+          type: array
+          description: A list of interval objects.
+          items:
+            $ref: '#/components/schemas/interval'
+    target:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: User generated target string.
+      example: group-1
+    readingType:
+      type:
+      - string
+      - 'null'
+      description: 'Represents the type of reading.
+
+
+        See enumerations in Definitions for defined string values, or use privately defined strings
+
+        '
+      example: DIRECT_READ
+      minLength: 1
+      maxLength: 128
+      default: null
+    objectTypes:
+      type: string
+      description: Types of objects addressable through API.
+      example: EVENT
+      enum:
+      - PROGRAM
+      - EVENT
+      - REPORT
+      - SUBSCRIPTION
+      - VEN
+      - RESOURCE
+    objectMetadata:
+      type: object
+      description: metadata common to all addressable objects. Values provided by VTN on object creation.
+      required:
+      - id
+      - createdDateTime
+      - modificationDateTime
+      - objectType
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime_3'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime_3'
+        objectType:
+          $ref: '#/components/schemas/objectTypes'
+    duration_3:
+      type: string
+      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
+      description: duration in ISO 8601 format
+      example: PT1H
+      default: PT0S
+    units:
+      type:
+      - string
+      - 'null'
+      description: Units of measure.
+      example: KWH
+      default: null
+      minLength: 1
+      maxLength: 128
+    point_3:
+      type: object
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
+      required:
+      - x
+      - y
+      properties:
+        x:
+          type: number
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+        y:
+          type: number
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+    dateTime_3:
+      type: string
+      format: date-time
+      description: datetime in RFC 3339 format
+      example: 2023-06-15 09:30:00+00:00
+    intervalPeriod_3:
+      type: object
+      description: 'Defines temporal aspects of intervals.
+
+        A start of "0001-01-01" or "0001-01-01T00:00:00" may indicate ''now''. See User Guide.
+
+        A duration of "P9999Y" may indicate infinity. See User Guide.
+
+        A randomizeStart indicates absolute range of client applied offset to start. See User Guide.
+
+        '
+      properties:
+        start:
+          $ref: '#/components/schemas/dateTime_3'
+        duration:
+          $ref: '#/components/schemas/duration_3'
+        randomizeStart:
+          $ref: '#/components/schemas/duration_3'
+    event_3:
+      type: object
+      description: Server provided representation of event
+      allOf:
+      - $ref: '#/components/schemas/objectMetadata'
+      - $ref: '#/components/schemas/eventRequest'
+    problem_2:
+      type: object
+      description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
+
+        '
+      properties:
+        type:
+          type: string
+          format: uri
+          minLength: 2
+          maxLength: 8000
+          description: 'An absolute URI that identifies the problem type.
+
+            When dereferenced, it SHOULD provide human-readable documentation for the problem type
+
+            (e.g., using HTML).
+
+            '
+          default: about:blank
+          example: https://zalando.github.io/problem/constraint-violation
+        title:
+          type: string
+          description: 'A short, summary of the problem type. Written in english and readable
+
+            for engineers (usually not suited for non technical stakeholders and
+
+            not localized); example: Service Unavailable.
+
+            '
+        status:
+          type: integer
+          format: int32
+          description: 'The HTTP status code generated by the origin server for this occurrence
+
+            of the problem.
+
+            '
+          minimum: 100
+          example: 503
+          exclusiveMaximum: 600
+        detail:
+          type: string
+          description: 'A human readable explanation specific to this occurrence of the
+
+            problem.
+
+            '
+          example: Connection to database timed out
+        instance:
+          type: string
+          minLength: 3
+          maxLength: 8000
+          format: uri
+          description: 'An absolute URI that identifies the specific occurrence of the problem.
+
+            It may or may not yield further information if dereferenced.
+
+            '
+    eventPayloadDescriptor_3:
+      type: object
+      description: 'Contextual information used to interpret event valuesMap values.
+
+        E.g. a PRICE payload simply contains a price value, an
+
+        associated descriptor provides necessary context such as units and currency.
+
+        '
+      required:
+      - objectType
+      - payloadType
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - EVENT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: 'Represents the nature of values.
+
+
+            See enumerations in Definitions for defined string values, or use privately defined strings
+
+            '
+          minLength: 1
+          maxLength: 128
+          example: PRICE
+        units:
+          $ref: '#/components/schemas/units'
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Currency of price payload.
+          example: USD
+          default: null
+    reportDescriptor_4:
+      type: object
+      description: 'An object that may be used to request a report from a VEN.
+
+        '
+      required:
+      - payloadType
+      properties:
+        payloadType:
+          type: string
+          description: 'Represents the nature of values.
+
+
+            See enumerations in Definitions for defined string values, or use privately defined strings
+
+            '
+          minLength: 1
+          maxLength: 128
+          example: USAGE
+        readingType:
+          $ref: '#/components/schemas/readingType'
+        units:
+          $ref: '#/components/schemas/units'
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of targets.
+          items:
+            $ref: '#/components/schemas/target'
+        aggregate:
+          type: boolean
+          description: 'True if report should aggregate results from all targeted resources.
+
+            False if report includes results for each resource.
+
+            '
+          example: false
+          default: false
+        startInterval:
+          type: integer
+          format: int32
+          description: 'The interval on which to generate a report.
+
+            -1 indicates generate report at end of last interval.
+
+            '
+          example: -1
+          default: -1
+        numIntervals:
+          type: integer
+          format: int32
+          description: 'The number of intervals to include in a report.
+
+            -1 indicates that all intervals are to be included.
+
+            '
+          example: -1
+          default: -1
+        historical:
+          type: boolean
+          description: 'True indicates report on intervals preceding startInterval.
+
+            False indicates report on intervals following startInterval (e.g. forecast).
+
+            '
+          example: true
+          default: true
+        frequency:
+          type: integer
+          format: int32
+          description: 'Number of intervals that elapse between reports.
+
+            -1 indicates same as numIntervals.
+
+            '
+          example: -1
+          default: -1
+        repeat:
+          type: integer
+          format: int32
+          description: 'Number of times to repeat report.
+
+            1 indicates generate one report.
+
+            -1 indicates repeat indefinitely.
+
+            '
+          example: 1
+          default: 1
+        reportIntervals:
+          type: string
+          description: Indicates VEN report interval options. See User Guide.
+          example: INTERVALS
+          enum:
+          - INTERVALS
+          - SUB_INTERVALS
+          - OPEN_INTERVALS
+          default: INTERVALS
+    valuesMap_4:
+      type: object
+      description: 'Represents one or more values associated with a type.
+
+
+        See enumerations in Definitions for defined string values, or use privately defined strings
+
+        '
+      required:
+      - type
+      - values
+      properties:
+        type:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: 'Represents the nature of values.
+
+
+            See enumerations in Definitions for defined string values, or use privately defined strings
+
+            '
+          example: PRICE
+        values:
+          type: array
+          description: A list of data points. Most often a singular value such as a price.
+          example:
+          - 0.17
+          items:
+            anyOf:
+            - type: number
+            - type: integer
+            - type: string
+            - type: boolean
+            - $ref: '#/components/schemas/point_4'
+    eventRequest_2:
+      type: object
+      description: 'Event object to communicate a Demand Response request to VEN.
+
+        If intervalPeriod is present, sets default start time and duration of intervals.
+
+        '
+      required:
+      - programID
+      properties:
+        programID:
+          $ref: '#/components/schemas/objectID'
+        eventName:
+          type:
+          - string
+          - 'null'
+          description: User defined string for use in debugging or User Interface.
+          example: price event 11-18-2022
+          default: null
+        duration:
+          $ref: '#/components/schemas/duration_4'
+        priority:
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+          description: Relative priority of event. A lower number is a higher priority.
+          example: 0
+          default: null
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of targets.
+          items:
+            $ref: '#/components/schemas/target'
+        reportDescriptors:
+          type:
+          - array
+          - 'null'
+          description: A list of reportDescriptor objects. Used to request reports from VEN.
+          items:
+            $ref: '#/components/schemas/reportDescriptor_4'
+          default: null
+        payloadDescriptors:
+          type:
+          - array
+          - 'null'
+          description: A list of payloadDescriptor objects.
+          items:
+            $ref: '#/components/schemas/eventPayloadDescriptor_4'
+          default: null
+        intervalPeriod:
+          $ref: '#/components/schemas/intervalPeriod_4'
+        intervals:
+          type: array
+          description: A list of interval objects.
+          items:
+            $ref: '#/components/schemas/interval'
+    objectMetadata_2:
+      type: object
+      description: metadata common to all addressable objects. Values provided by VTN on object creation.
+      required:
+      - id
+      - createdDateTime
+      - modificationDateTime
+      - objectType
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime_4'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime_4'
+        objectType:
+          $ref: '#/components/schemas/objectTypes'
+    duration_4:
+      type: string
+      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
+      description: duration in ISO 8601 format
+      example: PT1H
+      default: PT0S
+    point_4:
+      type: object
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
+      required:
+      - x
+      - y
+      properties:
+        x:
+          type: number
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+        y:
+          type: number
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+    dateTime_4:
+      type: string
+      format: date-time
+      description: datetime in RFC 3339 format
+      example: 2023-06-15 09:30:00+00:00
+    intervalPeriod_4:
+      type: object
+      description: 'Defines temporal aspects of intervals.
+
+        A start of "0001-01-01" or "0001-01-01T00:00:00" may indicate ''now''. See User Guide.
+
+        A duration of "P9999Y" may indicate infinity. See User Guide.
+
+        A randomizeStart indicates absolute range of client applied offset to start. See User Guide.
+
+        '
+      properties:
+        start:
+          $ref: '#/components/schemas/dateTime_4'
+        duration:
+          $ref: '#/components/schemas/duration_4'
+        randomizeStart:
+          $ref: '#/components/schemas/duration_4'
+    event_4:
+      type: object
+      description: Server provided representation of event
+      allOf:
+      - $ref: '#/components/schemas/objectMetadata_2'
+      - $ref: '#/components/schemas/eventRequest_2'
+    problem_3:
+      type: object
+      description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
+
+        '
+      properties:
+        type:
+          type: string
+          format: uri
+          minLength: 2
+          maxLength: 8000
+          description: 'An absolute URI that identifies the problem type.
+
+            When dereferenced, it SHOULD provide human-readable documentation for the problem type
+
+            (e.g., using HTML).
+
+            '
+          default: about:blank
+          example: https://zalando.github.io/problem/constraint-violation
+        title:
+          type: string
+          description: 'A short, summary of the problem type. Written in english and readable
+
+            for engineers (usually not suited for non technical stakeholders and
+
+            not localized); example: Service Unavailable.
+
+            '
+        status:
+          type: integer
+          format: int32
+          description: 'The HTTP status code generated by the origin server for this occurrence
+
+            of the problem.
+
+            '
+          minimum: 100
+          example: 503
+          exclusiveMaximum: 600
+        detail:
+          type: string
+          description: 'A human readable explanation specific to this occurrence of the
+
+            problem.
+
+            '
+          example: Connection to database timed out
+        instance:
+          type: string
+          minLength: 3
+          maxLength: 8000
+          format: uri
+          description: 'An absolute URI that identifies the specific occurrence of the problem.
+
+            It may or may not yield further information if dereferenced.
+
+            '
+    eventPayloadDescriptor_4:
+      type: object
+      description: 'Contextual information used to interpret event valuesMap values.
+
+        E.g. a PRICE payload simply contains a price value, an
+
+        associated descriptor provides necessary context such as units and currency.
+
+        '
+      required:
+      - objectType
+      - payloadType
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - EVENT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: 'Represents the nature of values.
+
+
+            See enumerations in Definitions for defined string values, or use privately defined strings
+
+            '
+          minLength: 1
+          maxLength: 128
+          example: PRICE
+        units:
+          $ref: '#/components/schemas/units'
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Currency of price payload.
+          example: USD
+          default: null
+  responses:
+    internalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
+    unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
+    conflict:
+      description: Conflict. Could for example be a violation of a foreign key constraint or of a unique constraint on a name or id.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
+    notFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
+    badRequest:
+      description: The request is malformed or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
+    internalServerError_2:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_3'
+    unauthorized_2:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_3'
+    forbidden_2:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_3'
+    conflict_2:
+      description: 'Conflict. Could for example be a violation of a foreign key constraint
+
+        or of a unique constraint on a name or id.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_3'
+    notFound_2:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_3'
+    badRequest_2:
+      description: The request is malformed or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_3'
+  securitySchemes:
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: Client credential flow.
+      flows:
+        clientCredentials:
+          tokenUrl: auth/token
+          scopes:
+            read_all: VENs and BL can read all resources
+            write_programs: Only BL can write to programs
+            write_events: Only BL can write to events
+            write_reports: only VENs can write to reports
+            write_subscriptions: VENs and BL can write to subscriptions
+            write_vens: VENS and BL can write to vens and resources
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-refined-from:
+- openadr-3-0-0-openapi.yaml
+- openadr-3-0-1-openapi.yaml
+- openadr-3-1-0-openapi.yaml
+- openadr-3-1-1-openapi.yaml
