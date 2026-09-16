@@ -1,488 +1,23 @@
-generated: '2026-07-27'
+generated: '2026-09-16'
 method: generated
-source: openapi/openadr-3-0-0-openapi.yaml, openapi/openadr-3-0-1-openapi.yaml, openapi/openadr-3-1-0-openapi.yaml,
-  openapi/openadr-3-1-1-openapi.yaml
+source: openapi/openadr-alliance-auth-api-openapi.yml, openapi/openadr-alliance-events-api-openapi.yml,
+  openapi/openadr-alliance-mqtt-notifier-api-openapi.yml, openapi/openadr-alliance-notifiers-api-openapi.yml,
+  openapi/openadr-alliance-programs-api-openapi.yml, openapi/openadr-alliance-reports-api-openapi.yml,
+  openapi/openadr-alliance-resources-api-openapi.yml, openapi/openadr-alliance-subscriptions-api-openapi.yml,
+  openapi/openadr-alliance-vens-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 152
+  operations: 51
   by_action_class:
-    connected: 77
-    acting: 75
+    connected: 29
+    acting: 22
   by_consequence:
-    read: 77
-    write: 75
+    read: 29
+    write: 22
   human_in_the_loop_required: 0
 operations:
-- path: /programs
-  method: get
-  operationId: searchAllPrograms
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /programs
-  method: post
-  operationId: createProgram
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_programs
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /programs/{programID}
-  method: get
-  operationId: searchProgramByProgramId
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /programs/{programID}
-  method: put
-  operationId: updateProgram
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_programs
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /programs/{programID}
-  method: delete
-  operationId: deleteProgram
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_programs
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /reports
-  method: get
-  operationId: searchAllReports
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /reports
-  method: post
-  operationId: createReport
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_reports
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /reports/{reportID}
-  method: get
-  operationId: searchReportsByReportID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /reports/{reportID}
-  method: put
-  operationId: updateReport
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_reports
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /reports/{reportID}
-  method: delete
-  operationId: deleteReport
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_reports
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /events
-  method: get
-  operationId: searchAllEvents
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /events
-  method: post
-  operationId: createEvent
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_events
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /events/{eventID}
-  method: get
-  operationId: searchEventsByID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /events/{eventID}
-  method: put
-  operationId: updateEvent
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_events
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /events/{eventID}
-  method: delete
-  operationId: deleteEvent
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_events
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /subscriptions
-  method: get
-  operationId: searchSubscriptions
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /subscriptions
-  method: post
-  operationId: createSubscription
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_subscriptions
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /subscriptions/{subscriptionID}
-  method: get
-  operationId: searchSubscriptionByID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /subscriptions/{subscriptionID}
-  method: put
-  operationId: updateSubscription
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_subscriptions
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /subscriptions/{subscriptionID}
-  method: delete
-  operationId: deleteSubscription
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_subscriptions
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens
-  method: get
-  operationId: searchVens
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /vens
-  method: post
-  operationId: createVen
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens/{venID}
-  method: get
-  operationId: searchVenByID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /vens/{venID}
-  method: put
-  operationId: updateVen
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens/{venID}
-  method: delete
-  operationId: deleteVen
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens/{venID}/resources
-  method: get
-  operationId: searchVenResources
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /vens/{venID}/resources
-  method: post
-  operationId: createResource
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens/{venID}/resources/{resourceID}
-  method: get
-  operationId: searchVenResourceByID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /vens/{venID}/resources/{resourceID}
-  method: put
-  operationId: updateVenResource
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens/{venID}/resources/{resourceID}
-  method: delete
-  operationId: deleteVenResource
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /auth/token
   method: get
   operationId: fetchToken
@@ -493,474 +28,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /programs
-  method: get
-  operationId: searchAllPrograms
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /programs
-  method: post
-  operationId: createProgram
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_programs
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /programs/{programID}
-  method: get
-  operationId: searchProgramByProgramId
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /programs/{programID}
-  method: put
-  operationId: updateProgram
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_programs
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /programs/{programID}
-  method: delete
-  operationId: deleteProgram
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_programs
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /reports
-  method: get
-  operationId: searchAllReports
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /reports
-  method: post
-  operationId: createReport
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_reports
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /reports/{reportID}
-  method: get
-  operationId: searchReportsByReportID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /reports/{reportID}
-  method: put
-  operationId: updateReport
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_reports
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /reports/{reportID}
-  method: delete
-  operationId: deleteReport
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_reports
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /events
-  method: get
-  operationId: searchAllEvents
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /events
-  method: post
-  operationId: createEvent
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_events
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /events/{eventID}
-  method: get
-  operationId: searchEventsByID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /events/{eventID}
-  method: put
-  operationId: updateEvent
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_events
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /events/{eventID}
-  method: delete
-  operationId: deleteEvent
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_events
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /subscriptions
-  method: get
-  operationId: searchSubscriptions
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /subscriptions
-  method: post
-  operationId: createSubscription
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_subscriptions
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /subscriptions/{subscriptionID}
-  method: get
-  operationId: searchSubscriptionByID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /subscriptions/{subscriptionID}
-  method: put
-  operationId: updateSubscription
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_subscriptions
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /subscriptions/{subscriptionID}
-  method: delete
-  operationId: deleteSubscription
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_subscriptions
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens
-  method: get
-  operationId: searchVens
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /vens
-  method: post
-  operationId: createVen
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens/{venID}
-  method: get
-  operationId: searchVenByID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /vens/{venID}
-  method: put
-  operationId: updateVen
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens/{venID}
-  method: delete
-  operationId: deleteVen
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens/{venID}/resources
-  method: get
-  operationId: searchVenResources
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /vens/{venID}/resources
-  method: post
-  operationId: createResource
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens/{venID}/resources/{resourceID}
-  method: get
-  operationId: searchVenResourceByID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_all
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /vens/{venID}/resources/{resourceID}
-  method: put
-  operationId: updateVenResource
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens/{venID}/resources/{resourceID}
-  method: delete
-  operationId: deleteVenResource
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /auth/token
   method: post
   operationId: fetchToken
@@ -968,474 +35,6 @@ operations:
     action-class: acting
     consequence: write
     subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /programs
-  method: get
-  operationId: searchAllPrograms
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_targets
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /programs
-  method: post
-  operationId: createProgram
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_programs
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /programs/{programID}
-  method: get
-  operationId: searchProgramByProgramId
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_targets
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /programs/{programID}
-  method: put
-  operationId: updateProgram
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_programs
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /programs/{programID}
-  method: delete
-  operationId: deleteProgram
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_programs
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /reports
-  method: get
-  operationId: searchAllReports
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_ven_objects
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /reports
-  method: post
-  operationId: createReport
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_reports
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /reports/{reportID}
-  method: get
-  operationId: searchReportsByReportID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_ven_objects
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /reports/{reportID}
-  method: put
-  operationId: updateReport
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_reports
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /reports/{reportID}
-  method: delete
-  operationId: deleteReport
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_reports
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /events
-  method: get
-  operationId: searchAllEvents
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_targets
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /events
-  method: post
-  operationId: createEvent
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_events
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /events/{eventID}
-  method: get
-  operationId: searchEventsByID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_targets
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /events/{eventID}
-  method: put
-  operationId: updateEvent
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_events
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /events/{eventID}
-  method: delete
-  operationId: deleteEvent
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_events
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /subscriptions
-  method: get
-  operationId: searchSubscriptions
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_ven_objects
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /subscriptions
-  method: post
-  operationId: createSubscription
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_subscriptions
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /subscriptions/{subscriptionID}
-  method: get
-  operationId: searchSubscriptionByID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_ven_objects
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /subscriptions/{subscriptionID}
-  method: put
-  operationId: updateSubscription
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_subscriptions
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /subscriptions/{subscriptionID}
-  method: delete
-  operationId: deleteSubscription
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_subscriptions
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens
-  method: get
-  operationId: searchVens
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_ven_objects
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /vens
-  method: post
-  operationId: createVen
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens/{venID}
-  method: get
-  operationId: searchVenByID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_ven_objects
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /vens/{venID}
-  method: put
-  operationId: updateVen
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens/{venID}
-  method: delete
-  operationId: deleteVen
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /resources
-  method: get
-  operationId: searchVenResources
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_ven_objects
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /resources
-  method: post
-  operationId: createResource
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /resources/{resourceID}
-  method: get
-  operationId: searchVenResourceByID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_ven_objects
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /resources/{resourceID}
-  method: put
-  operationId: updateVenResource
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /resources/{resourceID}
-  method: delete
-  operationId: deleteVenResource
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
     audience: null
     token:
       max-ttl: 900
@@ -1455,25 +54,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /auth/token
-  method: post
-  operationId: fetchToken
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /notifiers
+- path: /events
   method: get
-  operationId: listAllNotifiers
+  operationId: searchAllEvents
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1483,6 +66,72 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /events
+  method: post
+  operationId: createEvent
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write_events
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /events/{eventID}
+  method: get
+  operationId: searchEventsByID
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /events/{eventID}
+  method: put
+  operationId: updateEvent
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write_events
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /events/{eventID}
+  method: delete
+  operationId: deleteEvent
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write_events
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /notifiers/mqtt/topics/programs
   method: get
   operationId: listAllMqttNotifierTopicsPrograms
@@ -1627,6 +276,18 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /notifiers
+  method: get
+  operationId: listAllNotifiers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - read_all
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /programs
   method: get
   operationId: searchAllPrograms
@@ -1635,7 +296,7 @@ operations:
     consequence: read
     subject: optional
     scope:
-    - read_targets
+    - read_all
     token:
       max-ttl: 3600
     audit: none
@@ -1665,7 +326,7 @@ operations:
     consequence: read
     subject: optional
     scope:
-    - read_targets
+    - read_all
     token:
       max-ttl: 3600
     audit: none
@@ -1713,7 +374,7 @@ operations:
     consequence: read
     subject: optional
     scope:
-    - read_ven_objects
+    - read_all
     token:
       max-ttl: 3600
     audit: none
@@ -1743,7 +404,7 @@ operations:
     consequence: read
     subject: optional
     scope:
-    - read_ven_objects
+    - read_all
     token:
       max-ttl: 3600
     audit: none
@@ -1774,240 +435,6 @@ operations:
     subject: required
     scope:
     - write_reports
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /events
-  method: get
-  operationId: searchAllEvents
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_targets
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /events
-  method: post
-  operationId: createEvent
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_events
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /events/{eventID}
-  method: get
-  operationId: searchEventsByID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_targets
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /events/{eventID}
-  method: put
-  operationId: updateEvent
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_events
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /events/{eventID}
-  method: delete
-  operationId: deleteEvent
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_events
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /subscriptions
-  method: get
-  operationId: searchSubscriptions
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_ven_objects
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /subscriptions
-  method: post
-  operationId: createSubscription
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_subscriptions
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /subscriptions/{subscriptionID}
-  method: get
-  operationId: searchSubscriptionByID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_ven_objects
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /subscriptions/{subscriptionID}
-  method: put
-  operationId: updateSubscription
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_subscriptions
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /subscriptions/{subscriptionID}
-  method: delete
-  operationId: deleteSubscription
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_subscriptions
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens
-  method: get
-  operationId: searchVens
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_ven_objects
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /vens
-  method: post
-  operationId: createVen
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens/{venID}
-  method: get
-  operationId: searchVenByID
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_ven_objects
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /vens/{venID}
-  method: put
-  operationId: updateVen
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /vens/{venID}
-  method: delete
-  operationId: deleteVen
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - write_vens
     audience: null
     token:
       max-ttl: 900
@@ -2095,23 +522,27 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /auth/server
+- path: /subscriptions
   method: get
-  operationId: getAuthServerInfo
+  operationId: searchSubscriptions
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
+    scope:
+    - read_all
     token:
       max-ttl: 3600
     audit: none
-- path: /auth/token
+- path: /subscriptions
   method: post
-  operationId: fetchToken
+  operationId: createSubscription
   x-agentic-access:
     action-class: acting
     consequence: write
     subject: required
+    scope:
+    - write_subscriptions
     audience: null
     token:
       max-ttl: 900
@@ -2121,9 +552,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /notifiers
+- path: /subscriptions/{subscriptionID}
   method: get
-  operationId: listAllNotifiers
+  operationId: searchSubscriptionByID
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2133,9 +564,45 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /notifiers/mqtt/topics/programs
+- path: /subscriptions/{subscriptionID}
+  method: put
+  operationId: updateSubscription
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write_subscriptions
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /subscriptions/{subscriptionID}
+  method: delete
+  operationId: deleteSubscription
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write_subscriptions
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /vens
   method: get
-  operationId: listAllMqttNotifierTopicsPrograms
+  operationId: searchVens
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2145,9 +612,27 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /notifiers/mqtt/topics/programs/{programID}
+- path: /vens
+  method: post
+  operationId: createVen
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write_vens
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /vens/{venID}
   method: get
-  operationId: listAllMqttNotifierTopicsProgram
+  operationId: searchVenByID
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2157,21 +642,45 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /notifiers/mqtt/topics/events
-  method: get
-  operationId: listAllMqttNotifierTopicsEvents
+- path: /vens/{venID}
+  method: put
+  operationId: updateVen
   x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
+    action-class: acting
+    consequence: write
+    subject: required
     scope:
-    - read_bl
+    - write_vens
+    audience: null
     token:
-      max-ttl: 3600
-    audit: none
-- path: /notifiers/mqtt/topics/programs/{programID}/events
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /vens/{venID}
+  method: delete
+  operationId: deleteVen
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write_vens
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /vens/{venID}/resources
   method: get
-  operationId: listAllMqttNotifierTopicsProgramEvents
+  operationId: searchVenResources
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2181,99 +690,69 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /notifiers/mqtt/topics/reports
+- path: /vens/{venID}/resources
+  method: post
+  operationId: createResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - write_vens
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /vens/{venID}/resources/{resourceID}
   method: get
-  operationId: listAllMqttNotifierTopicsReports
+  operationId: searchVenResourceByID
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
     scope:
-    - read_bl
+    - read_all
     token:
       max-ttl: 3600
     audit: none
-- path: /notifiers/mqtt/topics/subscriptions
-  method: get
-  operationId: listAllMqttNotifierTopicsSubscriptions
+- path: /vens/{venID}/resources/{resourceID}
+  method: put
+  operationId: updateVenResource
   x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
+    action-class: acting
+    consequence: write
+    subject: required
     scope:
-    - read_bl
+    - write_vens
+    audience: null
     token:
-      max-ttl: 3600
-    audit: none
-- path: /notifiers/mqtt/topics/vens
-  method: get
-  operationId: listAllMqttNotifierTopicsVens
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /vens/{venID}/resources/{resourceID}
+  method: delete
+  operationId: deleteVenResource
   x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
+    action-class: acting
+    consequence: write
+    subject: required
     scope:
-    - read_bl
+    - write_vens
+    audience: null
     token:
-      max-ttl: 3600
-    audit: none
-- path: /notifiers/mqtt/topics/vens/{venID}
-  method: get
-  operationId: listAllMqttNotifierTopicsVen
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_ven_objects
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /notifiers/mqtt/topics/resources
-  method: get
-  operationId: listAllMqttNotifierTopicsResources
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_bl
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /notifiers/mqtt/topics/vens/{venID}/events
-  method: get
-  operationId: listAllMqttNotifierTopicsVenEvents
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_ven_objects
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /notifiers/mqtt/topics/vens/{venID}/programs
-  method: get
-  operationId: listAllMqttNotifierTopicsVenPrograms
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_ven_objects
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /notifiers/mqtt/topics/vens/{venID}/resources
-  method: get
-  operationId: listAllMqttNotifierTopicsVenResources
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - read_ven_objects
-    token:
-      max-ttl: 3600
-    audit: none
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
