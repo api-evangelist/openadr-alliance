@@ -5,7 +5,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: '1.0'
-  description: 'Operations tagged vens across 4 of this provider''s published API definitions: openadr-3-0-0-openapi.yaml, openadr-3-0-1-openapi.yaml, openadr-3-1-0-openapi.yaml, openadr-3-1-1-openapi.yaml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged vens across 3 of this provider''s published API definitions: openadr-3-0-0-openapi.yaml, openadr-3-0-1-openapi.yaml, openadr-3-1-0-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - description: base path
   url: http://localhost:8081/openadr3
@@ -24,9 +24,7 @@ paths:
       operationId: searchVens
       description: 'List all vens.
 
-        Use skip and pagination query params to limit response size.
-
-        '
+        Use skip and pagination query params to limit response size.'
       security:
       - oAuth2ClientCredentials:
         - read_all
@@ -190,7 +188,7 @@ paths:
     put:
       tags:
       - vens
-      summary: update  ven
+      summary: update ven
       operationId: updateVen
       description: Update the ven specified by venID specified in path.
       security:
@@ -237,7 +235,7 @@ paths:
     delete:
       tags:
       - vens
-      summary: delete  ven
+      summary: delete ven
       operationId: deleteVen
       description: Delete the ven specified by venID specified in path.
       security:
@@ -453,7 +451,7 @@ paths:
     put:
       tags:
       - vens
-      summary: update  ven resource
+      summary: update ven resource
       operationId: updateVenResource
       description: Update the ven resource specified by venID and resourceID specified in path.
       security:
@@ -500,7 +498,7 @@ paths:
     delete:
       tags:
       - vens
-      summary: delete  ven resource
+      summary: delete ven resource
       operationId: deleteVenResource
       description: Delete the ven resource specified by venID and resourceID specified in path.
       security:
@@ -537,37 +535,44 @@ paths:
       url: http://localhost:8081/openadr3
 components:
   schemas:
-    valuesMap:
+    resource:
       type: object
-      description: 'Represents one or more values associated with a type.
-
-        E.g. a type of PRICE contains a single float value.
+      description: 'A resource is an energy device or system subject to control by a VEN.
 
         '
       required:
-      - type
-      - values
+      - resourceName
       properties:
-        type:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime'
+        objectType:
           type: string
-          description: 'Enumerated or private string signifying the nature of values.
-
-            E.G. "PRICE" indicates value is to be interpreted as a currency.
-
-            '
-          example: PRICE
-        values:
+          description: Used as discriminator, e.g. notification.object
+          enum:
+          - RESOURCE
+        resourceName:
+          type:
+          - string
+          - 'null'
+          description: User generated identifier, resource may be configured with identifier out-of-band.
+          example: RESOURCE-999
+          default: null
+        venID:
+          $ref: '#/components/schemas/objectID'
+        attributes:
           type: array
-          description: A list of data points. Most often a singular value such as a price.
-          example:
-          - 0.17
+          description: A list of valuesMap objects describing attributes.
           items:
-            anyOf:
-            - type: number
-            - type: integer
-            - type: string
-            - type: boolean
-            - $ref: '#/components/schemas/point'
+            $ref: '#/components/schemas/valuesMap'
+        targets:
+          type: array
+          description: A list of valuesMap objects describing target criteria.
+          items:
+            $ref: '#/components/schemas/valuesMap'
     ven:
       type: object
       description: Ven represents a client with the ven role.
@@ -610,6 +615,44 @@ components:
           default: null
           items:
             $ref: '#/components/schemas/resource'
+    objectID:
+      type: string
+      pattern: ^[a-zA-Z0-9_-]*$
+      minLength: 1
+      maxLength: 128
+      description: URL safe VTN assigned object ID.
+      example: object-999
+    valuesMap:
+      type: object
+      description: 'Represents one or more values associated with a type.
+
+        E.g. a type of PRICE contains a single float value.
+
+        '
+      required:
+      - type
+      - values
+      properties:
+        type:
+          type: string
+          description: 'Enumerated or private string signifying the nature of values.
+
+            E.G. "PRICE" indicates value is to be interpreted as a currency.
+
+            '
+          example: PRICE
+        values:
+          type: array
+          description: A list of data points. Most often a singular value such as a price.
+          example:
+          - 0.17
+          items:
+            anyOf:
+            - type: number
+            - type: integer
+            - type: string
+            - type: boolean
+            - $ref: '#/components/schemas/point'
     dateTime:
       type:
       - string
@@ -617,44 +660,29 @@ components:
       description: datetime in ISO 8601 format
       example: 2023-06-15 09:30:00+00:00
       default: null
-    resource:
+    point:
       type: object
-      description: 'A resource is an energy device or system subject to control by a VEN.
-
-        '
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
       required:
-      - resourceName
+      - x
+      - y
       properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime'
-        objectType:
-          type: string
-          description: Used as discriminator, e.g. notification.object
-          enum:
-          - RESOURCE
-        resourceName:
+        x:
           type:
-          - string
+          - number
           - 'null'
-          description: User generated identifier, resource may be configured with identifier out-of-band.
-          example: RESOURCE-999
+          format: float
+          description: A value on an x axis.
+          example: 1.0
           default: null
-        venID:
-          $ref: '#/components/schemas/objectID'
-        attributes:
-          type: array
-          description: A list of valuesMap objects describing attributes.
-          items:
-            $ref: '#/components/schemas/valuesMap'
-        targets:
-          type: array
-          description: A list of valuesMap objects describing target criteria.
-          items:
-            $ref: '#/components/schemas/valuesMap'
+        y:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+          default: null
     problem:
       type: object
       description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
@@ -709,69 +737,53 @@ components:
             It may or may not yield further information if dereferenced.
 
             '
-    objectID:
-      type: string
-      pattern: ^[a-zA-Z0-9_-]*$
-      minLength: 1
-      maxLength: 128
-      description: URL safe VTN assigned object ID.
-      example: object-999
-    point:
+    resource_2:
       type: object
-      description: A pair of floats typically used as a point on a 2 dimensional grid.
-      required:
-      - x
-      - y
-      properties:
-        x:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: A value on an x axis.
-          example: 1.0
-          default: null
-        y:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: A value on a y axis.
-          example: 2.0
-          default: null
-    valuesMap_2:
-      type: object
-      description: 'Represents one or more values associated with a type.
-
-        E.g. a type of PRICE contains a single float value.
+      description: 'A resource is an energy device or system subject to control by a VEN.
 
         '
       required:
-      - type
-      - values
+      - resourceName
       properties:
-        type:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime_2'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime_2'
+        objectType:
           type: string
-          minLength: 1
-          maxLength: 128
-          description: 'Enumerated or private string signifying the nature of values.
+          description: Used as discriminator.
+          enum:
+          - RESOURCE
+        resourceName:
+          type: string
+          description: 'User generated identifier, resource may be configured with identifier out-of-band.
 
-            E.G. "PRICE" indicates value is to be interpreted as a currency.
+            resourceName is expected to be unique within the scope of the associated VEN.
 
             '
-          example: PRICE
-        values:
-          type: array
-          description: A list of data points. Most often a singular value such as a price.
-          example:
-          - 0.17
+          minLength: 1
+          maxLength: 128
+          example: RESOURCE-999
+        venID:
+          $ref: '#/components/schemas/objectID'
+        attributes:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects describing attributes.
           items:
-            anyOf:
-            - type: number
-            - type: integer
-            - type: string
-            - type: boolean
-            - $ref: '#/components/schemas/point_2'
+            $ref: '#/components/schemas/valuesMap_2'
+          default: null
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects describing target criteria.
+          items:
+            $ref: '#/components/schemas/valuesMap_2'
+          default: null
     ven_2:
       type: object
       description: Ven represents a client with the ven role.
@@ -823,58 +835,44 @@ components:
           items:
             $ref: '#/components/schemas/resource_2'
           default: null
+    valuesMap_2:
+      type: object
+      description: 'Represents one or more values associated with a type.
+
+        E.g. a type of PRICE contains a single float value.
+
+        '
+      required:
+      - type
+      - values
+      properties:
+        type:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: 'Enumerated or private string signifying the nature of values.
+
+            E.G. "PRICE" indicates value is to be interpreted as a currency.
+
+            '
+          example: PRICE
+        values:
+          type: array
+          description: A list of data points. Most often a singular value such as a price.
+          example:
+          - 0.17
+          items:
+            anyOf:
+            - type: number
+            - type: integer
+            - type: string
+            - type: boolean
+            - $ref: '#/components/schemas/point_2'
     dateTime_2:
       type: string
       format: date-time
       description: datetime in ISO 8601 format
       example: 2023-06-15 09:30:00+00:00
-    resource_2:
-      type: object
-      description: 'A resource is an energy device or system subject to control by a VEN.
-
-        '
-      required:
-      - resourceName
-      properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime_2'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime_2'
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - RESOURCE
-        resourceName:
-          type: string
-          description: 'User generated identifier, resource may be configured with identifier out-of-band.
-
-            resourceName is expected to be unique within the scope of the associated VEN.
-
-            '
-          minLength: 1
-          maxLength: 128
-          example: RESOURCE-999
-        venID:
-          $ref: '#/components/schemas/objectID'
-        attributes:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects describing attributes.
-          items:
-            $ref: '#/components/schemas/valuesMap_2'
-          default: null
-        targets:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects describing target criteria.
-          items:
-            $ref: '#/components/schemas/valuesMap_2'
-          default: null
     point_2:
       type: object
       description: A pair of floats typically used as a point on a 2 dimensional grid.
@@ -892,41 +890,12 @@ components:
           format: float
           description: A value on a y axis.
           example: 2.0
-    valuesMap_3:
+    ven_3:
       type: object
-      description: 'Represents one or more values associated with a type.
-
-
-        See enumerations in Definitions for defined string values, or use privately defined strings
-
-        '
-      required:
-      - type
-      - values
-      properties:
-        type:
-          type: string
-          minLength: 1
-          maxLength: 128
-          description: 'Represents the nature of values.
-
-
-            See enumerations in Definitions for defined string values, or use privately defined strings
-
-            '
-          example: PRICE
-        values:
-          type: array
-          description: A list of data points. Most often a singular value such as a price.
-          example:
-          - 0.17
-          items:
-            anyOf:
-            - type: number
-            - type: integer
-            - type: string
-            - type: boolean
-            - $ref: '#/components/schemas/point_3'
+      description: Server provided representation of ven
+      allOf:
+      - $ref: '#/components/schemas/objectMetadata'
+      - $ref: '#/components/schemas/BlVenRequest'
     venRequest:
       oneOf:
       - $ref: '#/components/schemas/VenVenRequest'
@@ -937,135 +906,11 @@ components:
       maxLength: 128
       description: User generated target string.
       example: group-1
-    objectTypes:
-      type: string
-      description: Types of objects addressable through API.
-      example: EVENT
-      enum:
-      - PROGRAM
-      - EVENT
-      - REPORT
-      - SUBSCRIPTION
-      - VEN
-      - RESOURCE
-    objectMetadata:
-      type: object
-      description: metadata common to all addressable objects. Values provided by VTN on object creation.
-      required:
-      - id
-      - createdDateTime
-      - modificationDateTime
-      - objectType
-      properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime_3'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime_3'
-        objectType:
-          $ref: '#/components/schemas/objectTypes'
-    BlVenRequest:
-      type: object
-      description: Business Logic provided representation of ven.
-      required:
-      - objectType
-      - clientID
-      - venName
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - BL_VEN_REQUEST
-        clientID:
-          $ref: '#/components/schemas/clientID'
-        targets:
-          type:
-          - array
-          - 'null'
-          description: A list of targets.
-          items:
-            $ref: '#/components/schemas/target'
-          default: null          -
-        venName:
-          $ref: '#/components/schemas/venName'
-        attributes:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects describing attributes.
-          items:
-            $ref: '#/components/schemas/valuesMap_3'
-          default: null
-    point_3:
-      type: object
-      description: A pair of floats typically used as a point on a 2 dimensional grid.
-      required:
-      - x
-      - y
-      properties:
-        x:
-          type: number
-          format: float
-          description: A value on an x axis.
-          example: 1.0
-        y:
-          type: number
-          format: float
-          description: A value on a y axis.
-          example: 2.0
     dateTime_3:
       type: string
       format: date-time
       description: datetime in RFC 3339 format
       example: 2023-06-15 09:30:00+00:00
-    VenVenRequest:
-      type: object
-      description: VEN provided representation of ven.
-      required:
-      - objectType
-      - venName
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - VEN_VEN_REQUEST
-        venName:
-          $ref: '#/components/schemas/venName'
-        attributes:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects describing attributes.
-          items:
-            $ref: '#/components/schemas/valuesMap_3'
-          default: null
-    clientID:
-      type: string
-      description: 'ClientID as provisioned by Auhtentication Service and associated with client''s bearer token
-
-        '
-      minLength: 1
-      maxLength: 128
-      example: 249rj49jiej
-    venName:
-      type: string
-      description: 'User generated identifier, may be VEN identifier provisioned out-of-band.
-
-        venName is expected to be unique within the scope of a VTN
-
-        '
-      minLength: 1
-      maxLength: 128
-      example: VEN-999
-    ven_3:
-      type: object
-      description: Server provided representation of ven
-      allOf:
-      - $ref: '#/components/schemas/objectMetadata'
-      - $ref: '#/components/schemas/BlVenRequest'
     problem_2:
       type: object
       description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
@@ -1124,7 +969,74 @@ components:
             It may or may not yield further information if dereferenced.
 
             '
-    valuesMap_4:
+    objectMetadata:
+      type: object
+      description: metadata common to all addressable objects. Values provided by VTN on object creation.
+      required:
+      - id
+      - createdDateTime
+      - modificationDateTime
+      - objectType
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime_3'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime_3'
+        objectType:
+          $ref: '#/components/schemas/objectTypes'
+    VenVenRequest:
+      type: object
+      description: VEN provided representation of ven.
+      required:
+      - objectType
+      - venName
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - VEN_VEN_REQUEST
+        venName:
+          $ref: '#/components/schemas/venName'
+        attributes:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects describing attributes.
+          items:
+            $ref: '#/components/schemas/valuesMap_3'
+          default: null
+    point_3:
+      type: object
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
+      required:
+      - x
+      - y
+      properties:
+        x:
+          type: number
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+        y:
+          type: number
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+    objectTypes:
+      type: string
+      description: Types of objects addressable through API.
+      example: EVENT
+      enum:
+      - PROGRAM
+      - EVENT
+      - REPORT
+      - SUBSCRIPTION
+      - VEN
+      - RESOURCE
+    valuesMap_3:
       type: object
       description: 'Represents one or more values associated with a type.
 
@@ -1158,25 +1070,26 @@ components:
             - type: integer
             - type: string
             - type: boolean
-            - $ref: '#/components/schemas/point_4'
-    objectMetadata_2:
-      type: object
-      description: metadata common to all addressable objects. Values provided by VTN on object creation.
-      required:
-      - id
-      - createdDateTime
-      - modificationDateTime
-      - objectType
-      properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime_4'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime_4'
-        objectType:
-          $ref: '#/components/schemas/objectTypes'
-    BlVenRequest_2:
+            - $ref: '#/components/schemas/point_3'
+    clientID:
+      type: string
+      description: 'ClientID as provisioned by Auhtentication Service and associated with client''s bearer token
+
+        '
+      minLength: 1
+      maxLength: 128
+      example: 249rj49jiej
+    venName:
+      type: string
+      description: 'User generated identifier, may be VEN identifier provisioned out-of-band.
+
+        venName is expected to be unique within the scope of a VTN
+
+        '
+      minLength: 1
+      maxLength: 128
+      example: VEN-999
+    BlVenRequest:
       type: object
       description: Business Logic provided representation of ven.
       required:
@@ -1198,6 +1111,7 @@ components:
           description: A list of targets.
           items:
             $ref: '#/components/schemas/target'
+          default: null          -
         venName:
           $ref: '#/components/schemas/venName'
         attributes:
@@ -1206,116 +1120,8 @@ components:
           - 'null'
           description: A list of valuesMap objects describing attributes.
           items:
-            $ref: '#/components/schemas/valuesMap_4'
+            $ref: '#/components/schemas/valuesMap_3'
           default: null
-    point_4:
-      type: object
-      description: A pair of floats typically used as a point on a 2 dimensional grid.
-      required:
-      - x
-      - y
-      properties:
-        x:
-          type: number
-          format: float
-          description: A value on an x axis.
-          example: 1.0
-        y:
-          type: number
-          format: float
-          description: A value on a y axis.
-          example: 2.0
-    dateTime_4:
-      type: string
-      format: date-time
-      description: datetime in RFC 3339 format
-      example: 2023-06-15 09:30:00+00:00
-    VenVenRequest_2:
-      type: object
-      description: VEN provided representation of ven.
-      required:
-      - objectType
-      - venName
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - VEN_VEN_REQUEST
-        venName:
-          $ref: '#/components/schemas/venName'
-        attributes:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects describing attributes.
-          items:
-            $ref: '#/components/schemas/valuesMap_4'
-          default: null
-    ven_4:
-      type: object
-      description: Server provided representation of ven
-      allOf:
-      - $ref: '#/components/schemas/objectMetadata_2'
-      - $ref: '#/components/schemas/BlVenRequest_2'
-    problem_3:
-      type: object
-      description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
-
-        '
-      properties:
-        type:
-          type: string
-          format: uri
-          minLength: 2
-          maxLength: 8000
-          description: 'An absolute URI that identifies the problem type.
-
-            When dereferenced, it SHOULD provide human-readable documentation for the problem type
-
-            (e.g., using HTML).
-
-            '
-          default: about:blank
-          example: https://zalando.github.io/problem/constraint-violation
-        title:
-          type: string
-          description: 'A short, summary of the problem type. Written in english and readable
-
-            for engineers (usually not suited for non technical stakeholders and
-
-            not localized); example: Service Unavailable.
-
-            '
-        status:
-          type: integer
-          format: int32
-          description: 'The HTTP status code generated by the origin server for this occurrence
-
-            of the problem.
-
-            '
-          minimum: 100
-          example: 503
-          exclusiveMaximum: 600
-        detail:
-          type: string
-          description: 'A human readable explanation specific to this occurrence of the
-
-            problem.
-
-            '
-          example: Connection to database timed out
-        instance:
-          type: string
-          minLength: 3
-          maxLength: 8000
-          format: uri
-          description: 'An absolute URI that identifies the specific occurrence of the problem.
-
-            It may or may not yield further information if dereferenced.
-
-            '
   responses:
     internalServerError:
       description: Internal server error
@@ -1323,8 +1129,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/problem_2'
+    notFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
     unauthorized:
       description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
+    badRequest:
+      description: The request is malformed or invalid
       content:
         application/json:
           schema:
@@ -1341,58 +1159,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/problem_2'
-    notFound:
-      description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_2'
-    badRequest:
-      description: The request is malformed or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_2'
-    internalServerError_2:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_3'
-    unauthorized_2:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_3'
-    forbidden_2:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_3'
-    conflict_2:
-      description: 'Conflict. Could for example be a violation of a foreign key constraint
-
-        or of a unique constraint on a name or id.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_3'
-    notFound_2:
-      description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_3'
-    badRequest_2:
-      description: The request is malformed or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_3'
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2
@@ -1415,4 +1181,3 @@ x-refined-from:
 - openadr-3-0-0-openapi.yaml
 - openadr-3-0-1-openapi.yaml
 - openadr-3-1-0-openapi.yaml
-- openadr-3-1-1-openapi.yaml

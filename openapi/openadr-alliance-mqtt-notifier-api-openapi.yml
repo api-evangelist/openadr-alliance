@@ -1,13 +1,13 @@
 openapi: 3.2.0
 info:
-  title: Openadr Alliance MQTT Notifier API
+  title: OpenADR 3 MQTT Notifier API
   version: 1.0.0
+  description: The OpenADR 3 API supports energy retailer to energy customer Demand Response programs.
   contact:
     email: info@openadr.org
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  description: 'Operations tagged MQTT_notifier across 2 of this provider''s published API definitions: openadr-3-1-0-openapi.yaml, openadr-3-1-1-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - description: SwaggerHub API Auto Mocking
   url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
@@ -18,12 +18,7 @@ paths:
     get:
       tags:
       - MQTT_notifier
-      summary: 'List all MQTT notifier topic names for operations on programs
-
-        '
-      description: 'List all MQTT notifier topic names for operations on programs
-
-        '
+      summary: List all MQTT notifier topic names for operations on programs
       operationId: listAllMqttNotifierTopicsPrograms
       security:
       - oAuth2ClientCredentials:
@@ -40,9 +35,6 @@ paths:
           $ref: '#/components/responses/notFound'
         '500':
           $ref: '#/components/responses/internalServerError'
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
   /notifiers/mqtt/topics/programs/{programID}:
     parameters:
     - name: programID
@@ -54,12 +46,7 @@ paths:
     get:
       tags:
       - MQTT_notifier
-      summary: 'List all MQTT binding topic names for operations on a program
-
-        '
-      description: 'List all MQTT binding topic names for operations on a program
-
-        '
+      summary: List all MQTT binding topic names for operations on a program
       operationId: listAllMqttNotifierTopicsProgram
       security:
       - oAuth2ClientCredentials:
@@ -76,19 +63,11 @@ paths:
           $ref: '#/components/responses/notFound'
         '500':
           $ref: '#/components/responses/internalServerError'
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
   /notifiers/mqtt/topics/events:
     get:
       tags:
       - MQTT_notifier
-      summary: 'List all MQTT binding topic names for operations on all events
-
-        '
-      description: 'List all MQTT binding topic names for operations on all events
-
-        '
+      summary: List all MQTT binding topic names for operations on all events
       operationId: listAllMqttNotifierTopicsEvents
       security:
       - oAuth2ClientCredentials:
@@ -107,9 +86,6 @@ paths:
           $ref: '#/components/responses/notFound'
         '500':
           $ref: '#/components/responses/internalServerError'
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
   /notifiers/mqtt/topics/programs/{programID}/events:
     parameters:
     - name: programID
@@ -121,12 +97,7 @@ paths:
     get:
       tags:
       - MQTT_notifier
-      summary: 'List all MQTT binding topic names for operations on events for a program
-
-        '
-      description: 'List all MQTT binding topic names for operations on events for a program
-
-        '
+      summary: List all MQTT binding topic names for operations on events for a program
       operationId: listAllMqttNotifierTopicsProgramEvents
       security:
       - oAuth2ClientCredentials:
@@ -143,19 +114,11 @@ paths:
           $ref: '#/components/responses/notFound'
         '500':
           $ref: '#/components/responses/internalServerError'
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
   /notifiers/mqtt/topics/reports:
     get:
       tags:
       - MQTT_notifier
-      summary: 'List all MQTT binding topic names for operations on all reports
-
-        '
-      description: 'List all MQTT binding topic names for operations on all reports
-
-        '
+      summary: List all MQTT binding topic names for operations on all reports
       operationId: listAllMqttNotifierTopicsReports
       security:
       - oAuth2ClientCredentials:
@@ -174,19 +137,11 @@ paths:
           $ref: '#/components/responses/notFound'
         '500':
           $ref: '#/components/responses/internalServerError'
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
   /notifiers/mqtt/topics/subscriptions:
     get:
       tags:
       - MQTT_notifier
-      summary: 'List all MQTT binding topic names for operations on all subscriptions
-
-        '
-      description: 'List all MQTT binding topic names for operations on all subscriptions
-
-        '
+      summary: List all MQTT binding topic names for operations on all subscriptions
       operationId: listAllMqttNotifierTopicsSubscriptions
       security:
       - oAuth2ClientCredentials:
@@ -205,19 +160,11 @@ paths:
           $ref: '#/components/responses/notFound'
         '500':
           $ref: '#/components/responses/internalServerError'
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
   /notifiers/mqtt/topics/vens:
     get:
       tags:
       - MQTT_notifier
-      summary: 'List all MQTT binding topic names for operations on vens
-
-        '
-      description: 'List all MQTT binding topic names for operations on vens
-
-        '
+      summary: List all MQTT binding topic names for operations on vens
       operationId: listAllMqttNotifierTopicsVens
       security:
       - oAuth2ClientCredentials:
@@ -236,9 +183,6 @@ paths:
           $ref: '#/components/responses/notFound'
         '500':
           $ref: '#/components/responses/internalServerError'
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
   /notifiers/mqtt/topics/vens/{venID}:
     parameters:
     - name: venID
@@ -250,12 +194,7 @@ paths:
     get:
       tags:
       - MQTT_notifier
-      summary: 'List all MQTT binding topic names for operations on a ven
-
-        '
-      description: 'List all MQTT binding topic names for operations on a ven
-
-        '
+      summary: List all MQTT binding topic names for operations on a ven
       operationId: listAllMqttNotifierTopicsVen
       security:
       - oAuth2ClientCredentials:
@@ -274,19 +213,11 @@ paths:
           $ref: '#/components/responses/notFound'
         '500':
           $ref: '#/components/responses/internalServerError'
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
   /notifiers/mqtt/topics/resources:
     get:
       tags:
       - MQTT_notifier
-      summary: 'List all MQTT binding topic names for operations on resources
-
-        '
-      description: 'List all MQTT binding topic names for operations on resources
-
-        '
+      summary: List all MQTT binding topic names for operations on resources
       operationId: listAllMqttNotifierTopicsResources
       security:
       - oAuth2ClientCredentials:
@@ -305,9 +236,6 @@ paths:
           $ref: '#/components/responses/notFound'
         '500':
           $ref: '#/components/responses/internalServerError'
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
   /notifiers/mqtt/topics/vens/{venID}/events:
     parameters:
     - name: venID
@@ -319,12 +247,8 @@ paths:
     get:
       tags:
       - MQTT_notifier
-      summary: 'List all MQTT binding topic names for operations on events targeted for a ven
-
-        '
-      description: 'List all MQTT binding topic names for operations on events targated for a ven
-
-        '
+      summary: List all MQTT binding topic names for operations on events targeted for a ven
+      description: List all MQTT binding topic names for operations on events targated for a ven
       operationId: listAllMqttNotifierTopicsVenEvents
       security:
       - oAuth2ClientCredentials:
@@ -343,9 +267,6 @@ paths:
           $ref: '#/components/responses/notFound'
         '500':
           $ref: '#/components/responses/internalServerError'
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
   /notifiers/mqtt/topics/vens/{venID}/programs:
     parameters:
     - name: venID
@@ -357,12 +278,7 @@ paths:
     get:
       tags:
       - MQTT_notifier
-      summary: 'List all MQTT binding topic names for operations on programs targeted for a ven
-
-        '
-      description: 'List all MQTT binding topic names for operations on programs targeted for a ven
-
-        '
+      summary: List all MQTT binding topic names for operations on programs targeted for a ven
       operationId: listAllMqttNotifierTopicsVenPrograms
       security:
       - oAuth2ClientCredentials:
@@ -381,9 +297,6 @@ paths:
           $ref: '#/components/responses/notFound'
         '500':
           $ref: '#/components/responses/internalServerError'
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
   /notifiers/mqtt/topics/vens/{venID}/resources:
     parameters:
     - name: venID
@@ -395,12 +308,7 @@ paths:
     get:
       tags:
       - MQTT_notifier
-      summary: 'List all MQTT binding topic names for operations on resources for a ven
-
-        '
-      description: 'List all MQTT binding topic names for operations on resources for a ven
-
-        '
+      summary: List all MQTT binding topic names for operations on resources for a ven
       operationId: listAllMqttNotifierTopicsVenResources
       security:
       - oAuth2ClientCredentials:
@@ -419,11 +327,14 @@ paths:
           $ref: '#/components/responses/notFound'
         '500':
           $ref: '#/components/responses/internalServerError'
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
 components:
   responses:
+    unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem'
     forbidden:
       description: Forbidden
       content:
@@ -436,20 +347,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/notifierTopicsResponse'
-    notFound:
-      description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem'
     internalServerError:
       description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem'
-    unauthorized:
-      description: Unauthorized
       content:
         application/json:
           schema:
@@ -460,7 +359,50 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/problem'
+    notFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem'
   schemas:
+    objectID:
+      type: string
+      pattern: ^[a-zA-Z0-9_-]*$
+      minLength: 1
+      maxLength: 128
+      description: URL safe VTN assigned object ID.
+      example: object-999
+    notifierOperationsTopics:
+      type: object
+      description: MQTT notifier topic names for notifications of subscribable-object operations
+      required:
+      - UPDATE
+      - DELETE
+      properties:
+        CREATE:
+          type: string
+          description: "'Topic path for CREATE operations,\n not provided for notifications for a specific object ID,\n e.g. until programID foo is created, clients unable to\n request notifications of its creation'\n"
+          example: '{objectType}s/create'
+        UPDATE:
+          type: string
+          description: Topic path for UPDATE operations
+          example: '{objectType}s/update'
+        DELETE:
+          type: string
+          description: Topic path for DELETE operations
+          example: '{objectType}s/delete'
+        ALL:
+          type: string
+          description: Topic path for ALL operations, if supported by VTN
+          example: '{objectType}s/+'
+    notifierTopicsResponse:
+      type: object
+      required:
+      - topics
+      properties:
+        topics:
+          $ref: '#/components/schemas/notifierOperationsTopics'
     problem:
       type: object
       description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
@@ -519,43 +461,6 @@ components:
             It may or may not yield further information if dereferenced.
 
             '
-    notifierTopicsResponse:
-      type: object
-      required:
-      - topics
-      properties:
-        topics:
-          $ref: '#/components/schemas/notifierOperationsTopics'
-    objectID:
-      type: string
-      pattern: ^[a-zA-Z0-9_-]*$
-      minLength: 1
-      maxLength: 128
-      description: URL safe VTN assigned object ID.
-      example: object-999
-    notifierOperationsTopics:
-      type: object
-      description: MQTT notifier topic names for notifications of subscribable-object operations
-      required:
-      - UPDATE
-      - DELETE
-      properties:
-        CREATE:
-          type: string
-          description: "'Topic path for CREATE operations,\n not provided for notifications for a specific object ID,\n e.g. until programID foo is created, clients unable to\n request notifications of its creation'\n"
-          example: '{objectType}s/create'
-        UPDATE:
-          type: string
-          description: Topic path for UPDATE operations
-          example: '{objectType}s/update'
-        DELETE:
-          type: string
-          description: Topic path for DELETE operations
-          example: '{objectType}s/delete'
-        ALL:
-          type: string
-          description: Topic path for ALL operations, if supported by VTN
-          example: '{objectType}s/+'
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2
@@ -576,6 +481,3 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-x-refined-from:
-- openadr-3-1-0-openapi.yaml
-- openadr-3-1-1-openapi.yaml

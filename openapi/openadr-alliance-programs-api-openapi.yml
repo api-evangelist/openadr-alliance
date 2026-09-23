@@ -5,7 +5,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: '1.0'
-  description: 'Operations tagged programs across 4 of this provider''s published API definitions: openadr-3-0-0-openapi.yaml, openadr-3-0-1-openapi.yaml, openadr-3-1-0-openapi.yaml, openadr-3-1-1-openapi.yaml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged programs across 3 of this provider''s published API definitions: openadr-3-0-0-openapi.yaml, openadr-3-0-1-openapi.yaml, openadr-3-1-0-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - description: base path
   url: http://localhost:8081/openadr3
@@ -14,19 +14,17 @@ servers:
 - description: SwaggerHub API Auto Mocking
   url: https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0
 tags:
-- name: programs
+- name: Programs
 paths:
   /programs:
     get:
       tags:
-      - programs
+      - Programs
       summary: searches all programs
       operationId: searchAllPrograms
       description: 'List all programs known to the server.
 
-        Use skip and pagination query params to limit response size.
-
-        '
+        Use skip and pagination query params to limit response size.'
       security:
       - oAuth2ClientCredentials:
         - read_all
@@ -92,7 +90,7 @@ paths:
                 $ref: '#/components/schemas/problem'
     post:
       tags:
-      - programs
+      - Programs
       summary: create a program
       operationId: createProgram
       description: Create a new program in the server.
@@ -150,12 +148,10 @@ paths:
       description: Object ID of the program object.
     get:
       tags:
-      - programs
+      - Programs
       summary: searches programs by program ID
       operationId: searchProgramByProgramId
-      description: 'Fetch the program specified by the programID in path.
-
-        '
+      description: Fetch the program specified by the programID in path.
       security:
       - oAuth2ClientCredentials:
         - read_all
@@ -187,7 +183,7 @@ paths:
                 $ref: '#/components/schemas/problem'
     put:
       tags:
-      - programs
+      - Programs
       summary: update a program
       operationId: updateProgram
       description: Update an existing program with the programID in path.
@@ -234,7 +230,7 @@ paths:
                 $ref: '#/components/schemas/problem'
     delete:
       tags:
-      - programs
+      - Programs
       summary: delete a program
       operationId: deleteProgram
       description: Delete an existing program with the programID in path.
@@ -272,130 +268,36 @@ paths:
       url: http://localhost:8081/openadr3
 components:
   schemas:
-    valuesMap:
+    eventPayloadDescriptor:
       type: object
-      description: 'Represents one or more values associated with a type.
+      description: 'Contextual information used to interpret event valuesMap values.
 
-        E.g. a type of PRICE contains a single float value.
+        E.g. a PRICE payload simply contains a price value, an
+
+        associated descriptor provides necessary context such as units and currency.
 
         '
       required:
-      - type
-      - values
+      - payloadType
       properties:
-        type:
+        objectType:
           type: string
-          description: 'Enumerated or private string signifying the nature of values.
-
-            E.G. "PRICE" indicates value is to be interpreted as a currency.
-
-            '
+          description: Used as discriminator, e.g. program.payloadDescriptors
+          default: EVENT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: Enumerated or private string signifying the nature of values.
           example: PRICE
-        values:
-          type: array
-          description: A list of data points. Most often a singular value such as a price.
-          example:
-          - 0.17
-          items:
-            anyOf:
-            - type: number
-            - type: integer
-            - type: string
-            - type: boolean
-            - $ref: '#/components/schemas/point'
-    dateTime:
-      type:
-      - string
-      - 'null'
-      description: datetime in ISO 8601 format
-      example: 2023-06-15 09:30:00+00:00
-      default: null
-    intervalPeriod:
-      type: object
-      description: 'Defines temporal aspects of intervals.
-
-        A duration of default null indicates infinity.
-
-        A randomizeStart of default null indicates no randomization.
-
-        '
-      required:
-      - start
-      properties:
-        start:
-          $ref: '#/components/schemas/dateTime'
-        duration:
-          $ref: '#/components/schemas/duration'
-        randomizeStart:
-          $ref: '#/components/schemas/duration'
-    problem:
-      type: object
-      description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
-
-        '
-      properties:
-        type:
+        units:
           type: string
-          format: uri
-          description: 'An absolute URI that identifies the problem type.
-
-            When dereferenced, it SHOULD provide human-readable documentation for the problem type
-
-            (e.g., using HTML).
-
-            '
-          default: about:blank
-          example: https://zalando.github.io/problem/constraint-violation
-        title:
+          description: Units of measure.
+          example: KWH
+          default: KWH
+        currency:
           type: string
-          description: 'A short, summary of the problem type. Written in english and readable
-
-            for engineers (usually not suited for non technical stakeholders and
-
-            not localized); example: Service Unavailable.
-
-            '
-        status:
-          type: integer
-          format: int32
-          description: 'The HTTP status code generated by the origin server for this occurrence
-
-            of the problem.
-
-            '
-          minimum: 100
-          example: 503
-          exclusiveMaximum: 600
-        detail:
-          type: string
-          description: 'A human readable explanation specific to this occurrence of the
-
-            problem.
-
-            '
-          example: Connection to database timed out
-        instance:
-          type: string
-          format: uri
-          description: 'An absolute URI that identifies the specific occurrence of the problem.
-
-            It may or may not yield further information if dereferenced.
-
-            '
-    duration:
-      type:
-      - string
-      - 'null'
-      description: duration in ISO 8601 format
-      example: PT1H
-      default: null
-    objectID:
-      type: string
-      pattern: ^[a-zA-Z0-9_-]*$
-      minLength: 1
-      maxLength: 128
-      description: URL safe VTN assigned object ID.
-      example: object-999
+          description: Currency of price payload.
+          example: USD
+          default: USD
     reportPayloadDescriptor:
       type: object
       description: 'Contextual information used to interpret report payload values.
@@ -440,59 +342,51 @@ components:
           description: A quantification of the confidence in a set of payload values.
           example: 100
           default: 100
-    eventPayloadDescriptor:
+    objectID:
+      type: string
+      pattern: ^[a-zA-Z0-9_-]*$
+      minLength: 1
+      maxLength: 128
+      description: URL safe VTN assigned object ID.
+      example: object-999
+    valuesMap:
       type: object
-      description: 'Contextual information used to interpret event valuesMap values.
+      description: 'Represents one or more values associated with a type.
 
-        E.g. a PRICE payload simply contains a price value, an
-
-        associated descriptor provides necessary context such as units and currency.
+        E.g. a type of PRICE contains a single float value.
 
         '
       required:
-      - payloadType
+      - type
+      - values
       properties:
-        objectType:
+        type:
           type: string
-          description: Used as discriminator, e.g. program.payloadDescriptors
-          default: EVENT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: Enumerated or private string signifying the nature of values.
+          description: 'Enumerated or private string signifying the nature of values.
+
+            E.G. "PRICE" indicates value is to be interpreted as a currency.
+
+            '
           example: PRICE
-        units:
-          type: string
-          description: Units of measure.
-          example: KWH
-          default: KWH
-        currency:
-          type: string
-          description: Currency of price payload.
-          example: USD
-          default: USD
-    point:
-      type: object
-      description: A pair of floats typically used as a point on a 2 dimensional grid.
-      required:
-      - x
-      - y
-      properties:
-        x:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: A value on an x axis.
-          example: 1.0
-          default: null
-        y:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: A value on a y axis.
-          example: 2.0
-          default: null
+        values:
+          type: array
+          description: A list of data points. Most often a singular value such as a price.
+          example:
+          - 0.17
+          items:
+            anyOf:
+            - type: number
+            - type: integer
+            - type: string
+            - type: boolean
+            - $ref: '#/components/schemas/point'
+    dateTime:
+      type:
+      - string
+      - 'null'
+      description: datetime in ISO 8601 format
+      example: 2023-06-15 09:30:00+00:00
+      default: null
     program:
       type: object
       description: Provides program specific metadata from VTN to VEN.
@@ -605,49 +499,41 @@ components:
           default: null
           items:
             $ref: '#/components/schemas/valuesMap'
-    valuesMap_2:
+    duration:
+      type:
+      - string
+      - 'null'
+      description: duration in ISO 8601 format
+      example: PT1H
+      default: null
+    point:
       type: object
-      description: 'Represents one or more values associated with a type.
-
-        E.g. a type of PRICE contains a single float value.
-
-        '
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
       required:
-      - type
-      - values
+      - x
+      - y
       properties:
-        type:
-          type: string
-          minLength: 1
-          maxLength: 128
-          description: 'Enumerated or private string signifying the nature of values.
-
-            E.G. "PRICE" indicates value is to be interpreted as a currency.
-
-            '
-          example: PRICE
-        values:
-          type: array
-          description: A list of data points. Most often a singular value such as a price.
-          example:
-          - 0.17
-          items:
-            anyOf:
-            - type: number
-            - type: integer
-            - type: string
-            - type: boolean
-            - $ref: '#/components/schemas/point_2'
-    dateTime_2:
-      type: string
-      format: date-time
-      description: datetime in ISO 8601 format
-      example: 2023-06-15 09:30:00+00:00
-    intervalPeriod_2:
+        x:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+          default: null
+        y:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+          default: null
+    intervalPeriod:
       type: object
       description: 'Defines temporal aspects of intervals.
 
-        A duration of default PT0S indicates instantaneous or infinity, depending on payloadType.
+        A duration of default null indicates infinity.
 
         A randomizeStart of default null indicates no randomization.
 
@@ -656,17 +542,102 @@ components:
       - start
       properties:
         start:
-          $ref: '#/components/schemas/dateTime_2'
+          $ref: '#/components/schemas/dateTime'
         duration:
-          $ref: '#/components/schemas/duration_2'
+          $ref: '#/components/schemas/duration'
         randomizeStart:
-          $ref: '#/components/schemas/duration_2'
-    duration_2:
-      type: string
-      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
-      description: duration in ISO 8601 format
-      example: PT1H
-      default: PT0S
+          $ref: '#/components/schemas/duration'
+    problem:
+      type: object
+      description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
+
+        '
+      properties:
+        type:
+          type: string
+          format: uri
+          description: 'An absolute URI that identifies the problem type.
+
+            When dereferenced, it SHOULD provide human-readable documentation for the problem type
+
+            (e.g., using HTML).
+
+            '
+          default: about:blank
+          example: https://zalando.github.io/problem/constraint-violation
+        title:
+          type: string
+          description: 'A short, summary of the problem type. Written in english and readable
+
+            for engineers (usually not suited for non technical stakeholders and
+
+            not localized); example: Service Unavailable.
+
+            '
+        status:
+          type: integer
+          format: int32
+          description: 'The HTTP status code generated by the origin server for this occurrence
+
+            of the problem.
+
+            '
+          minimum: 100
+          example: 503
+          exclusiveMaximum: 600
+        detail:
+          type: string
+          description: 'A human readable explanation specific to this occurrence of the
+
+            problem.
+
+            '
+          example: Connection to database timed out
+        instance:
+          type: string
+          format: uri
+          description: 'An absolute URI that identifies the specific occurrence of the problem.
+
+            It may or may not yield further information if dereferenced.
+
+            '
+    eventPayloadDescriptor_2:
+      type: object
+      description: 'Contextual information used to interpret event valuesMap values.
+
+        E.g. a PRICE payload simply contains a price value, an
+
+        associated descriptor provides necessary context such as units and currency.
+
+        '
+      required:
+      - payloadType
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - EVENT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: Enumerated or private string signifying the nature of values.
+          minLength: 1
+          maxLength: 128
+          example: PRICE
+        units:
+          type:
+          - string
+          - 'null'
+          description: Units of measure.
+          example: KWH
+          default: null
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Currency of price payload.
+          example: USD
+          default: null
     reportPayloadDescriptor_2:
       type: object
       description: 'Contextual information used to interpret report payload values.
@@ -722,60 +693,44 @@ components:
           description: A quantification of the confidence in a set of payload values.
           example: 100
           default: null
-    eventPayloadDescriptor_2:
+    valuesMap_2:
       type: object
-      description: 'Contextual information used to interpret event valuesMap values.
+      description: 'Represents one or more values associated with a type.
 
-        E.g. a PRICE payload simply contains a price value, an
-
-        associated descriptor provides necessary context such as units and currency.
+        E.g. a type of PRICE contains a single float value.
 
         '
       required:
-      - payloadType
+      - type
+      - values
       properties:
-        objectType:
+        type:
           type: string
-          description: Used as discriminator.
-          enum:
-          - EVENT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: Enumerated or private string signifying the nature of values.
           minLength: 1
           maxLength: 128
+          description: 'Enumerated or private string signifying the nature of values.
+
+            E.G. "PRICE" indicates value is to be interpreted as a currency.
+
+            '
           example: PRICE
-        units:
-          type:
-          - string
-          - 'null'
-          description: Units of measure.
-          example: KWH
-          default: null
-        currency:
-          type:
-          - string
-          - 'null'
-          description: Currency of price payload.
-          example: USD
-          default: null
-    point_2:
-      type: object
-      description: A pair of floats typically used as a point on a 2 dimensional grid.
-      required:
-      - x
-      - y
-      properties:
-        x:
-          type: number
-          format: float
-          description: A value on an x axis.
-          example: 1.0
-        y:
-          type: number
-          format: float
-          description: A value on a y axis.
-          example: 2.0
+        values:
+          type: array
+          description: A list of data points. Most often a singular value such as a price.
+          example:
+          - 0.17
+          items:
+            anyOf:
+            - type: number
+            - type: integer
+            - type: string
+            - type: boolean
+            - $ref: '#/components/schemas/point_2'
+    dateTime_2:
+      type: string
+      format: date-time
+      description: datetime in ISO 8601 format
+      example: 2023-06-15 09:30:00+00:00
     program_2:
       type: object
       description: Provides program specific metadata from VTN to VEN.
@@ -894,105 +849,13 @@ components:
           items:
             $ref: '#/components/schemas/valuesMap_2'
           default: null
-    valuesMap_3:
-      type: object
-      description: 'Represents one or more values associated with a type.
-
-
-        See enumerations in Definitions for defined string values, or use privately defined strings
-
-        '
-      required:
-      - type
-      - values
-      properties:
-        type:
-          type: string
-          minLength: 1
-          maxLength: 128
-          description: 'Represents the nature of values.
-
-
-            See enumerations in Definitions for defined string values, or use privately defined strings
-
-            '
-          example: PRICE
-        values:
-          type: array
-          description: A list of data points. Most often a singular value such as a price.
-          example:
-          - 0.17
-          items:
-            anyOf:
-            - type: number
-            - type: integer
-            - type: string
-            - type: boolean
-            - $ref: '#/components/schemas/point_3'
-    target:
-      type: string
-      minLength: 1
-      maxLength: 128
-      description: User generated target string.
-      example: group-1
-    readingType:
-      type:
-      - string
-      - 'null'
-      description: 'Represents the type of reading.
-
-
-        See enumerations in Definitions for defined string values, or use privately defined strings
-
-        '
-      example: DIRECT_READ
-      minLength: 1
-      maxLength: 128
-      default: null
-    objectTypes:
-      type: string
-      description: Types of objects addressable through API.
-      example: EVENT
-      enum:
-      - PROGRAM
-      - EVENT
-      - REPORT
-      - SUBSCRIPTION
-      - VEN
-      - RESOURCE
-    objectMetadata:
-      type: object
-      description: metadata common to all addressable objects. Values provided by VTN on object creation.
-      required:
-      - id
-      - createdDateTime
-      - modificationDateTime
-      - objectType
-      properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime_3'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime_3'
-        objectType:
-          $ref: '#/components/schemas/objectTypes'
-    duration_3:
+    duration_2:
       type: string
       pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
       description: duration in ISO 8601 format
       example: PT1H
       default: PT0S
-    units:
-      type:
-      - string
-      - 'null'
-      description: Units of measure.
-      example: KWH
-      default: null
-      minLength: 1
-      maxLength: 128
-    point_3:
+    point_2:
       type: object
       description: A pair of floats typically used as a point on a 2 dimensional grid.
       required:
@@ -1009,6 +872,93 @@ components:
           format: float
           description: A value on a y axis.
           example: 2.0
+    intervalPeriod_2:
+      type: object
+      description: 'Defines temporal aspects of intervals.
+
+        A duration of default PT0S indicates instantaneous or infinity, depending on payloadType.
+
+        A randomizeStart of default null indicates no randomization.
+
+        '
+      required:
+      - start
+      properties:
+        start:
+          $ref: '#/components/schemas/dateTime_2'
+        duration:
+          $ref: '#/components/schemas/duration_2'
+        randomizeStart:
+          $ref: '#/components/schemas/duration_2'
+    target:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: User generated target string.
+      example: group-1
+    dateTime_3:
+      type: string
+      format: date-time
+      description: datetime in RFC 3339 format
+      example: 2023-06-15 09:30:00+00:00
+    problem_2:
+      type: object
+      description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
+
+        '
+      properties:
+        type:
+          type: string
+          format: uri
+          minLength: 2
+          maxLength: 8000
+          description: 'An absolute URI that identifies the problem type.
+
+            When dereferenced, it SHOULD provide human-readable documentation for the problem type
+
+            (e.g., using HTML).
+
+            '
+          default: about:blank
+          example: https://zalando.github.io/problem/constraint-violation
+        title:
+          type: string
+          description: 'A short, summary of the problem type. Written in english and readable
+
+            for engineers (usually not suited for non technical stakeholders and
+
+            not localized); example: Service Unavailable.
+
+            '
+        status:
+          type: integer
+          format: int32
+          description: 'The HTTP status code generated by the origin server for this occurrence
+
+            of the problem.
+
+            '
+          minimum: 100
+          example: 503
+          exclusiveMaximum: 600
+        detail:
+          type: string
+          description: 'A human readable explanation specific to this occurrence of the
+
+            problem.
+
+            '
+          example: Connection to database timed out
+        instance:
+          type: string
+          minLength: 3
+          maxLength: 8000
+          format: uri
+          description: 'An absolute URI that identifies the specific occurrence of the problem.
+
+            It may or may not yield further information if dereferenced.
+
+            '
     programRequest:
       type: object
       description: Client provided description of program
@@ -1068,29 +1018,61 @@ components:
           items:
             $ref: '#/components/schemas/target'
           default: null
-    dateTime_3:
-      type: string
-      format: date-time
-      description: datetime in RFC 3339 format
-      example: 2023-06-15 09:30:00+00:00
-    intervalPeriod_3:
+    objectMetadata:
       type: object
-      description: 'Defines temporal aspects of intervals.
+      description: metadata common to all addressable objects. Values provided by VTN on object creation.
+      required:
+      - id
+      - createdDateTime
+      - modificationDateTime
+      - objectType
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime_3'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime_3'
+        objectType:
+          $ref: '#/components/schemas/objectTypes'
+    eventPayloadDescriptor_3:
+      type: object
+      description: 'Contextual information used to interpret event valuesMap values.
 
-        A start of "0001-01-01" or "0001-01-01T00:00:00" may indicate ''now''. See User Guide.
+        E.g. a PRICE payload simply contains a price value, an
 
-        A duration of "P9999Y" may indicate infinity. See User Guide.
-
-        A randomizeStart indicates absolute range of client applied offset to start. See User Guide.
+        associated descriptor provides necessary context such as units and currency.
 
         '
+      required:
+      - objectType
+      - payloadType
       properties:
-        start:
-          $ref: '#/components/schemas/dateTime_3'
-        duration:
-          $ref: '#/components/schemas/duration_3'
-        randomizeStart:
-          $ref: '#/components/schemas/duration_3'
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - EVENT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: 'Represents the nature of values.
+
+
+            See enumerations in Definitions for defined string values, or use privately defined strings
+
+            '
+          minLength: 1
+          maxLength: 128
+          example: PRICE
+        units:
+          $ref: '#/components/schemas/units'
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Currency of price payload.
+          example: USD
+          default: null
     reportPayloadDescriptor_3:
       type: object
       description: 'Contextual information used to interpret report payload values.
@@ -1142,109 +1124,88 @@ components:
           description: A quantification of the confidence in a set of payload values.
           example: 100
           default: null
+    units:
+      type:
+      - string
+      - 'null'
+      description: Units of measure.
+      example: KWH
+      default: null
+      minLength: 1
+      maxLength: 128
     program_3:
       type: object
       description: Server provided representation of program
       allOf:
       - $ref: '#/components/schemas/objectMetadata'
       - $ref: '#/components/schemas/programRequest'
-    problem_2:
+    duration_3:
+      type: string
+      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
+      description: duration in ISO 8601 format
+      example: PT1H
+      default: PT0S
+    point_3:
       type: object
-      description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
-
-        '
-      properties:
-        type:
-          type: string
-          format: uri
-          minLength: 2
-          maxLength: 8000
-          description: 'An absolute URI that identifies the problem type.
-
-            When dereferenced, it SHOULD provide human-readable documentation for the problem type
-
-            (e.g., using HTML).
-
-            '
-          default: about:blank
-          example: https://zalando.github.io/problem/constraint-violation
-        title:
-          type: string
-          description: 'A short, summary of the problem type. Written in english and readable
-
-            for engineers (usually not suited for non technical stakeholders and
-
-            not localized); example: Service Unavailable.
-
-            '
-        status:
-          type: integer
-          format: int32
-          description: 'The HTTP status code generated by the origin server for this occurrence
-
-            of the problem.
-
-            '
-          minimum: 100
-          example: 503
-          exclusiveMaximum: 600
-        detail:
-          type: string
-          description: 'A human readable explanation specific to this occurrence of the
-
-            problem.
-
-            '
-          example: Connection to database timed out
-        instance:
-          type: string
-          minLength: 3
-          maxLength: 8000
-          format: uri
-          description: 'An absolute URI that identifies the specific occurrence of the problem.
-
-            It may or may not yield further information if dereferenced.
-
-            '
-    eventPayloadDescriptor_3:
-      type: object
-      description: 'Contextual information used to interpret event valuesMap values.
-
-        E.g. a PRICE payload simply contains a price value, an
-
-        associated descriptor provides necessary context such as units and currency.
-
-        '
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
       required:
-      - objectType
-      - payloadType
+      - x
+      - y
       properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - EVENT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: 'Represents the nature of values.
+        x:
+          type: number
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+        y:
+          type: number
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+    intervalPeriod_3:
+      type: object
+      description: 'Defines temporal aspects of intervals.
+
+        A start of "0001-01-01" or "0001-01-01T00:00:00" may indicate ''now''. See User Guide.
+
+        A duration of "P9999Y" may indicate infinity. See User Guide.
+
+        A randomizeStart indicates absolute range of client applied offset to start. See User Guide.
+
+        '
+      properties:
+        start:
+          $ref: '#/components/schemas/dateTime_3'
+        duration:
+          $ref: '#/components/schemas/duration_3'
+        randomizeStart:
+          $ref: '#/components/schemas/duration_3'
+    readingType:
+      type:
+      - string
+      - 'null'
+      description: 'Represents the type of reading.
 
 
-            See enumerations in Definitions for defined string values, or use privately defined strings
+        See enumerations in Definitions for defined string values, or use privately defined strings
 
-            '
-          minLength: 1
-          maxLength: 128
-          example: PRICE
-        units:
-          $ref: '#/components/schemas/units'
-        currency:
-          type:
-          - string
-          - 'null'
-          description: Currency of price payload.
-          example: USD
-          default: null
-    valuesMap_4:
+        '
+      example: DIRECT_READ
+      minLength: 1
+      maxLength: 128
+      default: null
+    objectTypes:
+      type: string
+      description: Types of objects addressable through API.
+      example: EVENT
+      enum:
+      - PROGRAM
+      - EVENT
+      - REPORT
+      - SUBSCRIPTION
+      - VEN
+      - RESOURCE
+    valuesMap_3:
       type: object
       description: 'Represents one or more values associated with a type.
 
@@ -1278,281 +1239,7 @@ components:
             - type: integer
             - type: string
             - type: boolean
-            - $ref: '#/components/schemas/point_4'
-    objectMetadata_2:
-      type: object
-      description: metadata common to all addressable objects. Values provided by VTN on object creation.
-      required:
-      - id
-      - createdDateTime
-      - modificationDateTime
-      - objectType
-      properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime_4'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime_4'
-        objectType:
-          $ref: '#/components/schemas/objectTypes'
-    duration_4:
-      type: string
-      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
-      description: duration in ISO 8601 format
-      example: PT1H
-      default: PT0S
-    point_4:
-      type: object
-      description: A pair of floats typically used as a point on a 2 dimensional grid.
-      required:
-      - x
-      - y
-      properties:
-        x:
-          type: number
-          format: float
-          description: A value on an x axis.
-          example: 1.0
-        y:
-          type: number
-          format: float
-          description: A value on a y axis.
-          example: 2.0
-    programRequest_2:
-      type: object
-      description: Client provided description of program
-      required:
-      - programName
-      properties:
-        programName:
-          type: string
-          description: Short name to uniquely identify program.
-          minLength: 1
-          maxLength: 128
-          example: ResTOU
-        intervalPeriod:
-          $ref: '#/components/schemas/intervalPeriod_4'
-        programDescriptions:
-          type:
-          - array
-          - 'null'
-          description: A list of programDescriptions
-          items:
-            required:
-            - URL
-            properties:
-              URL:
-                type: string
-                format: uri
-                minLength: 2
-                maxLength: 8000
-                description: A human or machine readable program description
-                example: https://www.myCorporation.com/myProgramDescription
-          default: null
-        payloadDescriptors:
-          type:
-          - array
-          - 'null'
-          description: A list of payloadDescriptors.
-          items:
-            anyOf:
-            - $ref: '#/components/schemas/eventPayloadDescriptor_4'
-            - $ref: '#/components/schemas/reportPayloadDescriptor_4'
-            discriminator:
-              propertyName: objectType
-          default: null
-        attributes:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects describing attributes.
-          items:
-            $ref: '#/components/schemas/valuesMap_4'
-          default: null
-        targets:
-          type:
-          - array
-          - 'null'
-          description: A list of targets.
-          items:
-            $ref: '#/components/schemas/target'
-    dateTime_4:
-      type: string
-      format: date-time
-      description: datetime in RFC 3339 format
-      example: 2023-06-15 09:30:00+00:00
-    intervalPeriod_4:
-      type: object
-      description: 'Defines temporal aspects of intervals.
-
-        A start of "0001-01-01" or "0001-01-01T00:00:00" may indicate ''now''. See User Guide.
-
-        A duration of "P9999Y" may indicate infinity. See User Guide.
-
-        A randomizeStart indicates absolute range of client applied offset to start. See User Guide.
-
-        '
-      properties:
-        start:
-          $ref: '#/components/schemas/dateTime_4'
-        duration:
-          $ref: '#/components/schemas/duration_4'
-        randomizeStart:
-          $ref: '#/components/schemas/duration_4'
-    reportPayloadDescriptor_4:
-      type: object
-      description: 'Contextual information used to interpret report payload values.
-
-        E.g. a USAGE payload simply contains a usage value, an
-
-        associated descriptor provides necessary context such as units and data quality.
-
-        '
-      required:
-      - objectType
-      - payloadType
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - REPORT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: 'Represents the nature of values.
-
-
-            See enumerations in Definitions for defined string values, or use privately defined strings
-
-            '
-          minLength: 1
-          maxLength: 128
-          example: USAGE
-        readingType:
-          $ref: '#/components/schemas/readingType'
-        units:
-          $ref: '#/components/schemas/units'
-        accuracy:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: A quantification of the accuracy of a set of payload values.
-          example: 0.0
-          default: null
-        confidence:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          minimum: 0
-          maximum: 100
-          description: A quantification of the confidence in a set of payload values.
-          example: 100
-          default: null
-    program_4:
-      type: object
-      description: Server provided representation of program
-      allOf:
-      - $ref: '#/components/schemas/objectMetadata_2'
-      - $ref: '#/components/schemas/programRequest_2'
-    problem_3:
-      type: object
-      description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
-
-        '
-      properties:
-        type:
-          type: string
-          format: uri
-          minLength: 2
-          maxLength: 8000
-          description: 'An absolute URI that identifies the problem type.
-
-            When dereferenced, it SHOULD provide human-readable documentation for the problem type
-
-            (e.g., using HTML).
-
-            '
-          default: about:blank
-          example: https://zalando.github.io/problem/constraint-violation
-        title:
-          type: string
-          description: 'A short, summary of the problem type. Written in english and readable
-
-            for engineers (usually not suited for non technical stakeholders and
-
-            not localized); example: Service Unavailable.
-
-            '
-        status:
-          type: integer
-          format: int32
-          description: 'The HTTP status code generated by the origin server for this occurrence
-
-            of the problem.
-
-            '
-          minimum: 100
-          example: 503
-          exclusiveMaximum: 600
-        detail:
-          type: string
-          description: 'A human readable explanation specific to this occurrence of the
-
-            problem.
-
-            '
-          example: Connection to database timed out
-        instance:
-          type: string
-          minLength: 3
-          maxLength: 8000
-          format: uri
-          description: 'An absolute URI that identifies the specific occurrence of the problem.
-
-            It may or may not yield further information if dereferenced.
-
-            '
-    eventPayloadDescriptor_4:
-      type: object
-      description: 'Contextual information used to interpret event valuesMap values.
-
-        E.g. a PRICE payload simply contains a price value, an
-
-        associated descriptor provides necessary context such as units and currency.
-
-        '
-      required:
-      - objectType
-      - payloadType
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - EVENT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: 'Represents the nature of values.
-
-
-            See enumerations in Definitions for defined string values, or use privately defined strings
-
-            '
-          minLength: 1
-          maxLength: 128
-          example: PRICE
-        units:
-          $ref: '#/components/schemas/units'
-        currency:
-          type:
-          - string
-          - 'null'
-          description: Currency of price payload.
-          example: USD
-          default: null
+            - $ref: '#/components/schemas/point_3'
   responses:
     internalServerError:
       description: Internal server error
@@ -1560,8 +1247,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/problem_2'
+    notFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
     unauthorized:
       description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
+    badRequest:
+      description: The request is malformed or invalid
       content:
         application/json:
           schema:
@@ -1578,58 +1277,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/problem_2'
-    notFound:
-      description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_2'
-    badRequest:
-      description: The request is malformed or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_2'
-    internalServerError_2:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_3'
-    unauthorized_2:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_3'
-    forbidden_2:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_3'
-    conflict_2:
-      description: 'Conflict. Could for example be a violation of a foreign key constraint
-
-        or of a unique constraint on a name or id.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_3'
-    notFound_2:
-      description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_3'
-    badRequest_2:
-      description: The request is malformed or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_3'
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2
@@ -1652,4 +1299,3 @@ x-refined-from:
 - openadr-3-0-0-openapi.yaml
 - openadr-3-0-1-openapi.yaml
 - openadr-3-1-0-openapi.yaml
-- openadr-3-1-1-openapi.yaml
