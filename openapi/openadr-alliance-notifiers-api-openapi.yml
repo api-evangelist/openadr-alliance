@@ -34,18 +34,6 @@ paths:
                 $ref: '#/components/schemas/notifiersResponse'
 components:
   schemas:
-    notifiersResponse:
-      type: object
-      description: Provides details of each notifier binding supported
-      required:
-      - WEBHOOK
-      properties:
-        WEBHOOK:
-          type: boolean
-          description: Currently MUST be true
-          example: true
-        MQTT:
-          $ref: '#/components/schemas/mqttNotifierBindingObject'
     mqttNotifierAuthenticationOauth2BearerToken:
       type: object
       description: MQTT broker OAuth2 Bearer Token authentication details
@@ -61,29 +49,6 @@ components:
         username:
           type: string
           description: Either the distinguished string "{clientID}", or any other literal string
-    mqttNotifierAuthenticationCertificate:
-      type: object
-      description: MQTT broker mTLS client certificate authentication details
-      required:
-      - method
-      - caCert
-      - clientCert
-      - clientKey
-      properties:
-        method:
-          type: string
-          enum:
-          - CERTIFICATE
-          description: Specifies certificate authentication
-        caCert:
-          type: string
-          description: String containing the Certificate Authority certificate
-        clientCert:
-          type: string
-          description: String containing the Client certificate
-        clientKey:
-          type: string
-          description: String containing the client certificate private key
     mqttNotifierAuthenticationAnonymous:
       type: object
       description: MQTT broker anonymous authentication details
@@ -121,6 +86,41 @@ components:
           - $ref: '#/components/schemas/mqttNotifierAuthenticationOauth2BearerToken'
           - $ref: '#/components/schemas/mqttNotifierAuthenticationCertificate'
           description: Authentication method supported for connection to MQTT broker
+    mqttNotifierAuthenticationCertificate:
+      type: object
+      description: MQTT broker mTLS client certificate authentication details
+      required:
+      - method
+      - caCert
+      - clientCert
+      - clientKey
+      properties:
+        method:
+          type: string
+          enum:
+          - CERTIFICATE
+          description: Specifies certificate authentication
+        caCert:
+          type: string
+          description: String containing the Certificate Authority certificate
+        clientCert:
+          type: string
+          description: String containing the Client certificate
+        clientKey:
+          type: string
+          description: String containing the client certificate private key
+    notifiersResponse:
+      type: object
+      description: Provides details of each notifier binding supported
+      required:
+      - WEBHOOK
+      properties:
+        WEBHOOK:
+          type: boolean
+          description: Currently MUST be true
+          example: true
+        MQTT:
+          $ref: '#/components/schemas/mqttNotifierBindingObject'
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

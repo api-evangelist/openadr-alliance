@@ -67,7 +67,7 @@ paths:
       tags:
       - Auth
       summary: fetch a token
-      operationId: fetchToken
+      operationId: postAuthToken
       description: Return an access token based on clientID and clientSecret.
       requestBody:
         required: true
@@ -100,6 +100,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/problem'
+      x-operation-id-source: normalized
+      x-operation-id-original: fetchToken
     servers:
     - description: base path
       url: http://localhost:8081/openadr3
@@ -178,6 +180,43 @@ components:
             It may or may not yield further information if dereferenced.
 
             '
+    clientCredentialResponse:
+      type: object
+      description: 'Body response from /auth/token. Note snake case per https://www.rfc-editor.org/rfc/rfc6749
+
+        '
+      required:
+      - access_token
+      - token_type
+      properties:
+        access_token:
+          type: string
+          minLength: 1
+          maxLength: 4096
+          description: access token povided by Authorization service
+          example: MTQ0NjJkZmQ5OTM2NDE1ZTZjNGZmZjI3
+        token_type:
+          type: string
+          description: token type, must be Bearer.
+          example: Bearer
+          enum:
+          - Bearer
+        expires_in:
+          type: integer
+          description: expiration period in seconds.
+          example: 3600
+        refresh_token:
+          type: string
+          minLength: 1
+          maxLength: 4096
+          description: refresh token povided by Authorization service
+          example: IwOGYzYTlmM2YxOTQ5MGE3YmNmMDFkNTVk
+        scope:
+          type: string
+          minLength: 0
+          maxLength: 4096
+          description: application defined scope.
+          example: read_all
     authError:
       type: object
       description: error reponse on HTTP 400 from auth/token per https://www.rfc-editor.org/rfc/rfc6749
@@ -238,43 +277,6 @@ components:
           maxLength: 4096
           description: application defined scope.
           example: read_all
-    clientCredentialResponse:
-      type: object
-      description: 'Body response from /auth/token. Note snake case per https://www.rfc-editor.org/rfc/rfc6749
-
-        '
-      required:
-      - access_token
-      - token_type
-      properties:
-        access_token:
-          type: string
-          minLength: 1
-          maxLength: 4096
-          description: access token povided by Authorization service
-          example: MTQ0NjJkZmQ5OTM2NDE1ZTZjNGZmZjI3
-        token_type:
-          type: string
-          description: token type, must be Bearer.
-          example: Bearer
-          enum:
-          - Bearer
-        expires_in:
-          type: integer
-          description: expiration period in seconds.
-          example: 3600
-        refresh_token:
-          type: string
-          minLength: 1
-          maxLength: 4096
-          description: refresh token povided by Authorization service
-          example: IwOGYzYTlmM2YxOTQ5MGE3YmNmMDFkNTVk
-        scope:
-          type: string
-          minLength: 0
-          maxLength: 4096
-          description: application defined scope.
-          example: read_all
     authServerInfo:
       type: object
       required:
@@ -286,43 +288,6 @@ components:
           minLength: 2
           maxLength: 8000
           description: URL of the token endpoint.
-    clientCredentialResponse_2:
-      type: object
-      description: 'Body response from /auth/token. Note snake case per https://www.rfc-editor.org/rfc/rfc6749
-
-        '
-      required:
-      - access_token
-      - token_type
-      properties:
-        access_token:
-          type: string
-          minLength: 1
-          maxLength: 4096
-          description: access token provided by Authorization service
-          example: MTQ0NjJkZmQ5OTM2NDE1ZTZjNGZmZjI3
-        token_type:
-          type: string
-          description: token type, must be Bearer.
-          example: Bearer
-          enum:
-          - Bearer
-        expires_in:
-          type: integer
-          description: expiration period in seconds.
-          example: 3600
-        refresh_token:
-          type: string
-          minLength: 1
-          maxLength: 4096
-          description: refresh token provided by Authorization service
-          example: IwOGYzYTlmM2YxOTQ5MGE3YmNmMDFkNTVk
-        scope:
-          type: string
-          minLength: 0
-          maxLength: 4096
-          description: application defined scope.
-          example: read_all
     problem_2:
       type: object
       description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
@@ -381,7 +346,50 @@ components:
             It may or may not yield further information if dereferenced.
 
             '
+    clientCredentialResponse_2:
+      type: object
+      description: 'Body response from /auth/token. Note snake case per https://www.rfc-editor.org/rfc/rfc6749
+
+        '
+      required:
+      - access_token
+      - token_type
+      properties:
+        access_token:
+          type: string
+          minLength: 1
+          maxLength: 4096
+          description: access token provided by Authorization service
+          example: MTQ0NjJkZmQ5OTM2NDE1ZTZjNGZmZjI3
+        token_type:
+          type: string
+          description: token type, must be Bearer.
+          example: Bearer
+          enum:
+          - Bearer
+        expires_in:
+          type: integer
+          description: expiration period in seconds.
+          example: 3600
+        refresh_token:
+          type: string
+          minLength: 1
+          maxLength: 4096
+          description: refresh token provided by Authorization service
+          example: IwOGYzYTlmM2YxOTQ5MGE3YmNmMDFkNTVk
+        scope:
+          type: string
+          minLength: 0
+          maxLength: 4096
+          description: application defined scope.
+          example: read_all
   responses:
+    notImplemented:
+      description: Not implemented
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
     unauthorized:
       description: Unauthorized
       content:
@@ -396,12 +404,6 @@ components:
             $ref: '#/components/schemas/problem_2'
     badRequest:
       description: The request is malformed or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_2'
-    notImplemented:
-      description: Not implemented
       content:
         application/json:
           schema:
