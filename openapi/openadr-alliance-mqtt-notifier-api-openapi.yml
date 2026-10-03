@@ -431,20 +431,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/problem'
-    forbidden:
-      description: Forbidden
+    internalServerError:
+      description: Internal server error
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/problem'
     unauthorized:
       description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem'
-    internalServerError:
-      description: Internal server error
       content:
         application/json:
           schema:
@@ -457,6 +451,12 @@ components:
             $ref: '#/components/schemas/notifierTopicsResponse'
     badRequest:
       description: The request is malformed or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem'
+    forbidden:
+      description: Forbidden
       content:
         application/json:
           schema:

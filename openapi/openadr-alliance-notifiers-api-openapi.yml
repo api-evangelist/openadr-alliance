@@ -34,32 +34,6 @@ paths:
                 $ref: '#/components/schemas/notifiersResponse'
 components:
   schemas:
-    mqttNotifierAuthenticationOauth2BearerToken:
-      type: object
-      description: MQTT broker OAuth2 Bearer Token authentication details
-      required:
-      - method
-      - username
-      properties:
-        method:
-          type: string
-          enum:
-          - OAUTH2_BEARER_TOKEN
-          description: Specifies OAuth2 bearer token authentication
-        username:
-          type: string
-          description: Either the distinguished string "{clientID}", or any other literal string
-    mqttNotifierAuthenticationAnonymous:
-      type: object
-      description: MQTT broker anonymous authentication details
-      required:
-      - method
-      properties:
-        method:
-          type: string
-          enum:
-          - ANONYMOUS
-          description: Specifies anonymous authentication
     mqttNotifierBindingObject:
       type: object
       description: Details of MQTT binding for messaging protocol support
@@ -121,6 +95,32 @@ components:
           example: true
         MQTT:
           $ref: '#/components/schemas/mqttNotifierBindingObject'
+    mqttNotifierAuthenticationAnonymous:
+      type: object
+      description: MQTT broker anonymous authentication details
+      required:
+      - method
+      properties:
+        method:
+          type: string
+          enum:
+          - ANONYMOUS
+          description: Specifies anonymous authentication
+    mqttNotifierAuthenticationOauth2BearerToken:
+      type: object
+      description: MQTT broker OAuth2 Bearer Token authentication details
+      required:
+      - method
+      - username
+      properties:
+        method:
+          type: string
+          enum:
+          - OAUTH2_BEARER_TOKEN
+          description: Specifies OAuth2 bearer token authentication
+        username:
+          type: string
+          description: Either the distinguished string "{clientID}", or any other literal string
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

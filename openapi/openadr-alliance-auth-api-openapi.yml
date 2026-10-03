@@ -217,32 +217,6 @@ components:
           maxLength: 4096
           description: application defined scope.
           example: read_all
-    authError:
-      type: object
-      description: error reponse on HTTP 400 from auth/token per https://www.rfc-editor.org/rfc/rfc6749
-      required:
-      - error
-      properties:
-        error:
-          type: string
-          description: As described in rfc6749 | invalid_request – The request is missing a parameter so the server can’t proceed with the request. This may also be returned if the request includes an unsupported parameter or repeats a parameter. invalid_client – Client authentication failed, such as if the request contains an invalid client ID or secret. Send an HTTP 401 response in this case. invalid_grant – The authorization code (or user’s password for the password grant type) is invalid or expired. This is also the error you would return if the redirect URL given in the authorization grant does not match the URL provided in this access token request. invalid_scope – For access token requests that include a scope (password or client_credentials grants), this error indicates an invalid scope value in the request. unauthorized_client – This client is not authorized to use the requested grant type. For example, if you restrict which applications can use the Implicit grant, you would return this error for the other apps. unsupported_grant_type – If a grant type is requested that the authorization server doesn’t recognize, use this code. Note that unknown grant types also use this specific error code rather than using the invalid_request above.
-          example: invalid_request
-          enum:
-          - invalid_request
-          - invalid_client
-          - invalid_grant
-          - invalid_scope
-          - unauthorized_client
-          - unsupported_grant_type
-        error_description:
-          type: string
-          description: Should be a sentence or two at most describing the circumstance of the error
-          example: Request was missing the 'client_id' parameter.
-        error_uri:
-          type: string
-          format: uri
-          description: Optional reference to more detailed error description
-          example: See the full API docs at https://authorization-server.com/docs/access_toke
     clientCredentialRequest:
       type: object
       description: 'Body of POST request to /auth/token. Note snake case per https://www.rfc-editor.org/rfc/rfc6749
@@ -277,17 +251,32 @@ components:
           maxLength: 4096
           description: application defined scope.
           example: read_all
-    authServerInfo:
+    authError:
       type: object
+      description: error reponse on HTTP 400 from auth/token per https://www.rfc-editor.org/rfc/rfc6749
       required:
-      - tokenURL
+      - error
       properties:
-        tokenURL:
+        error:
+          type: string
+          description: As described in rfc6749 | invalid_request – The request is missing a parameter so the server can’t proceed with the request. This may also be returned if the request includes an unsupported parameter or repeats a parameter. invalid_client – Client authentication failed, such as if the request contains an invalid client ID or secret. Send an HTTP 401 response in this case. invalid_grant – The authorization code (or user’s password for the password grant type) is invalid or expired. This is also the error you would return if the redirect URL given in the authorization grant does not match the URL provided in this access token request. invalid_scope – For access token requests that include a scope (password or client_credentials grants), this error indicates an invalid scope value in the request. unauthorized_client – This client is not authorized to use the requested grant type. For example, if you restrict which applications can use the Implicit grant, you would return this error for the other apps. unsupported_grant_type – If a grant type is requested that the authorization server doesn’t recognize, use this code. Note that unknown grant types also use this specific error code rather than using the invalid_request above.
+          example: invalid_request
+          enum:
+          - invalid_request
+          - invalid_client
+          - invalid_grant
+          - invalid_scope
+          - unauthorized_client
+          - unsupported_grant_type
+        error_description:
+          type: string
+          description: Should be a sentence or two at most describing the circumstance of the error
+          example: Request was missing the 'client_id' parameter.
+        error_uri:
           type: string
           format: uri
-          minLength: 2
-          maxLength: 8000
-          description: URL of the token endpoint.
+          description: Optional reference to more detailed error description
+          example: See the full API docs at https://authorization-server.com/docs/access_toke
     problem_2:
       type: object
       description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
@@ -383,6 +372,17 @@ components:
           maxLength: 4096
           description: application defined scope.
           example: read_all
+    authServerInfo:
+      type: object
+      required:
+      - tokenURL
+      properties:
+        tokenURL:
+          type: string
+          format: uri
+          minLength: 2
+          maxLength: 8000
+          description: URL of the token endpoint.
   responses:
     notImplemented:
       description: Not implemented
@@ -390,14 +390,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/problem_2'
-    unauthorized:
-      description: Unauthorized
+    internalServerError:
+      description: Internal server error
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/problem_2'
-    internalServerError:
-      description: Internal server error
+    unauthorized:
+      description: Unauthorized
       content:
         application/json:
           schema:
