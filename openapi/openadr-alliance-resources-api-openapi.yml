@@ -226,6 +226,103 @@ paths:
           $ref: '#/components/responses/internalServerError'
 components:
   schemas:
+    objectMetadata:
+      type: object
+      description: metadata common to all addressable objects. Values provided by VTN on object creation.
+      required:
+      - id
+      - createdDateTime
+      - modificationDateTime
+      - objectType
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime'
+        objectType:
+          $ref: '#/components/schemas/objectTypes'
+    target:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: User generated target string.
+      example: group-1
+    point:
+      type: object
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
+      required:
+      - x
+      - y
+      properties:
+        x:
+          type: number
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+        y:
+          type: number
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+    clientID:
+      type: string
+      description: 'ClientID as provisioned by Auhtentication Service and associated with client''s bearer token
+
+        '
+      minLength: 1
+      maxLength: 128
+      example: 249rj49jiej
+    BlResourceRequest:
+      type: object
+      description: 'Business Logic provided representation of ven resource.
+
+        '
+      required:
+      - objectType
+      - clientID
+      - resourceName
+      - venID
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - BL_RESOURCE_REQUEST
+        clientID:
+          $ref: '#/components/schemas/clientID'
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of targets.
+          items:
+            $ref: '#/components/schemas/target'
+          default: null
+        resourceName:
+          $ref: '#/components/schemas/resourceName'
+        venID:
+          $ref: '#/components/schemas/objectID'
+        attributes:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects describing attributes.
+          items:
+            $ref: '#/components/schemas/valuesMap'
+          default: null
+    resourceRequest:
+      oneOf:
+      - $ref: '#/components/schemas/BlResourceRequest'
+      - $ref: '#/components/schemas/VenResourceRequest'
+    objectID:
+      type: string
+      pattern: ^[a-zA-Z0-9_-]*$
+      minLength: 1
+      maxLength: 128
+      description: URL safe VTN assigned object ID.
+      example: object-999
     problem:
       type: object
       description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
@@ -284,6 +381,50 @@ components:
             It may or may not yield further information if dereferenced.
 
             '
+    resource:
+      type: object
+      description: Server provided representation of resource
+      allOf:
+      - $ref: '#/components/schemas/objectMetadata'
+      - $ref: '#/components/schemas/BlResourceRequest'
+    VenResourceRequest:
+      type: object
+      description: 'Business Logic provided representation of ven resource.
+
+        '
+      required:
+      - objectType
+      - resourceName
+      - venID
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - VEN_RESOURCE_REQUEST
+        resourceName:
+          $ref: '#/components/schemas/resourceName'
+        venID:
+          $ref: '#/components/schemas/objectID'
+        attributes:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects describing attributes.
+          items:
+            $ref: '#/components/schemas/valuesMap'
+          default: null
+    resourceName:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data
+      example: RESOURCE-999
+    dateTime:
+      type: string
+      format: date-time
+      description: datetime in RFC 3339 format
+      example: 2023-06-15 09:30:00+00:00
     objectTypes:
       type: string
       description: Types of objects addressable through API.
@@ -295,49 +436,6 @@ components:
       - SUBSCRIPTION
       - VEN
       - RESOURCE
-    objectID:
-      type: string
-      pattern: ^[a-zA-Z0-9_-]*$
-      minLength: 1
-      maxLength: 128
-      description: URL safe VTN assigned object ID.
-      example: object-999
-    clientID:
-      type: string
-      description: 'ClientID as provisioned by Auhtentication Service and associated with client''s bearer token
-
-        '
-      minLength: 1
-      maxLength: 128
-      example: 249rj49jiej
-    point:
-      type: object
-      description: A pair of floats typically used as a point on a 2 dimensional grid.
-      required:
-      - x
-      - y
-      properties:
-        x:
-          type: number
-          format: float
-          description: A value on an x axis.
-          example: 1.0
-        y:
-          type: number
-          format: float
-          description: A value on a y axis.
-          example: 2.0
-    dateTime:
-      type: string
-      format: date-time
-      description: datetime in RFC 3339 format
-      example: 2023-06-15 09:30:00+00:00
-    target:
-      type: string
-      minLength: 1
-      maxLength: 128
-      description: User generated target string.
-      example: group-1
     valuesMap:
       type: object
       description: 'Represents one or more values associated with a type.
@@ -373,107 +471,9 @@ components:
             - type: string
             - type: boolean
             - $ref: '#/components/schemas/point'
-    resourceName:
-      type: string
-      minLength: 1
-      maxLength: 128
-      description: User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data
-      example: RESOURCE-999
-    BlResourceRequest:
-      type: object
-      description: 'Business Logic provided representation of ven resource.
-
-        '
-      required:
-      - objectType
-      - clientID
-      - resourceName
-      - venID
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - BL_RESOURCE_REQUEST
-        clientID:
-          $ref: '#/components/schemas/clientID'
-        targets:
-          type:
-          - array
-          - 'null'
-          description: A list of targets.
-          items:
-            $ref: '#/components/schemas/target'
-          default: null
-        resourceName:
-          $ref: '#/components/schemas/resourceName'
-        venID:
-          $ref: '#/components/schemas/objectID'
-        attributes:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects describing attributes.
-          items:
-            $ref: '#/components/schemas/valuesMap'
-          default: null
-    VenResourceRequest:
-      type: object
-      description: 'Business Logic provided representation of ven resource.
-
-        '
-      required:
-      - objectType
-      - resourceName
-      - venID
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - VEN_RESOURCE_REQUEST
-        resourceName:
-          $ref: '#/components/schemas/resourceName'
-        venID:
-          $ref: '#/components/schemas/objectID'
-        attributes:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects describing attributes.
-          items:
-            $ref: '#/components/schemas/valuesMap'
-          default: null
-    objectMetadata:
-      type: object
-      description: metadata common to all addressable objects. Values provided by VTN on object creation.
-      required:
-      - id
-      - createdDateTime
-      - modificationDateTime
-      - objectType
-      properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime'
-        objectType:
-          $ref: '#/components/schemas/objectTypes'
-    resourceRequest:
-      oneOf:
-      - $ref: '#/components/schemas/BlResourceRequest'
-      - $ref: '#/components/schemas/VenResourceRequest'
-    resource:
-      type: object
-      description: Server provided representation of resource
-      allOf:
-      - $ref: '#/components/schemas/objectMetadata'
-      - $ref: '#/components/schemas/BlResourceRequest'
   responses:
-    internalServerError:
-      description: Internal server error
+    badRequest:
+      description: The request is malformed or invalid
       content:
         application/json:
           schema:
@@ -484,14 +484,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/problem'
-    forbidden:
-      description: Forbidden
+    notFound:
+      description: The specified resource was not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/problem'
-    notFound:
-      description: The specified resource was not found
+    forbidden:
+      description: Forbidden
       content:
         application/json:
           schema:
@@ -502,8 +502,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/problem'
-    badRequest:
-      description: The request is malformed or invalid
+    internalServerError:
+      description: Internal server error
       content:
         application/json:
           schema:

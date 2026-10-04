@@ -328,7 +328,51 @@ paths:
         '500':
           $ref: '#/components/responses/internalServerError'
 components:
+  responses:
+    badRequest:
+      description: The request is malformed or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem'
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem'
+    unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem'
+    notifiersTopicsResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/notifierTopicsResponse'
+    notFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem'
+    internalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem'
   schemas:
+    objectID:
+      type: string
+      pattern: ^[a-zA-Z0-9_-]*$
+      minLength: 1
+      maxLength: 128
+      description: URL safe VTN assigned object ID.
+      example: object-999
     problem:
       type: object
       description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
@@ -387,6 +431,13 @@ components:
             It may or may not yield further information if dereferenced.
 
             '
+    notifierTopicsResponse:
+      type: object
+      required:
+      - topics
+      properties:
+        topics:
+          $ref: '#/components/schemas/notifierOperationsTopics'
     notifierOperationsTopics:
       type: object
       description: MQTT notifier topic names for notifications of subscribable-object operations
@@ -410,57 +461,6 @@ components:
           type: string
           description: Topic path for ALL operations, if supported by VTN
           example: '{objectType}s/+'
-    notifierTopicsResponse:
-      type: object
-      required:
-      - topics
-      properties:
-        topics:
-          $ref: '#/components/schemas/notifierOperationsTopics'
-    objectID:
-      type: string
-      pattern: ^[a-zA-Z0-9_-]*$
-      minLength: 1
-      maxLength: 128
-      description: URL safe VTN assigned object ID.
-      example: object-999
-  responses:
-    notFound:
-      description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem'
-    internalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem'
-    unauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem'
-    notifiersTopicsResponse:
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/notifierTopicsResponse'
-    badRequest:
-      description: The request is malformed or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem'
-    forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem'
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

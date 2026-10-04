@@ -535,6 +535,55 @@ paths:
       url: http://localhost:8081/openadr3
 components:
   schemas:
+    ven:
+      type: object
+      description: Ven represents a client with the ven role.
+      required:
+      - venName
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime'
+        objectType:
+          type: string
+          description: Used as discriminator, e.g. notification.object.
+          enum:
+          - VEN
+        venName:
+          type:
+          - string
+          - 'null'
+          description: User generated identifier, may be VEN identifier provisioned during program enrollment.
+          example: VEN-999
+          default: null
+        attributes:
+          type: array
+          description: A list of valuesMap objects describing attributes.
+          items:
+            $ref: '#/components/schemas/valuesMap'
+        targets:
+          type: array
+          description: A list of valuesMap objects describing target criteria.
+          items:
+            $ref: '#/components/schemas/valuesMap'
+        resources:
+          type:
+          - array
+          - 'null'
+          description: A list of resource objects representing end-devices or systems.
+          default: null
+          items:
+            $ref: '#/components/schemas/resource'
+    objectID:
+      type: string
+      pattern: ^[a-zA-Z0-9_-]*$
+      minLength: 1
+      maxLength: 128
+      description: URL safe VTN assigned object ID.
+      example: object-999
     problem:
       type: object
       description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
@@ -634,13 +683,6 @@ components:
           description: A list of valuesMap objects describing target criteria.
           items:
             $ref: '#/components/schemas/valuesMap'
-    objectID:
-      type: string
-      pattern: ^[a-zA-Z0-9_-]*$
-      minLength: 1
-      maxLength: 128
-      description: URL safe VTN assigned object ID.
-      example: object-999
     point:
       type: object
       description: A pair of floats typically used as a point on a 2 dimensional grid.
@@ -664,48 +706,6 @@ components:
           description: A value on a y axis.
           example: 2.0
           default: null
-    ven:
-      type: object
-      description: Ven represents a client with the ven role.
-      required:
-      - venName
-      properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime'
-        objectType:
-          type: string
-          description: Used as discriminator, e.g. notification.object.
-          enum:
-          - VEN
-        venName:
-          type:
-          - string
-          - 'null'
-          description: User generated identifier, may be VEN identifier provisioned during program enrollment.
-          example: VEN-999
-          default: null
-        attributes:
-          type: array
-          description: A list of valuesMap objects describing attributes.
-          items:
-            $ref: '#/components/schemas/valuesMap'
-        targets:
-          type: array
-          description: A list of valuesMap objects describing target criteria.
-          items:
-            $ref: '#/components/schemas/valuesMap'
-        resources:
-          type:
-          - array
-          - 'null'
-          description: A list of resource objects representing end-devices or systems.
-          default: null
-          items:
-            $ref: '#/components/schemas/resource'
     valuesMap:
       type: object
       description: 'Represents one or more values associated with a type.
@@ -737,6 +737,57 @@ components:
             - type: string
             - type: boolean
             - $ref: '#/components/schemas/point'
+    ven_2:
+      type: object
+      description: Ven represents a client with the ven role.
+      required:
+      - venName
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime_2'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime_2'
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - VEN
+        venName:
+          type: string
+          description: 'User generated identifier, may be VEN identifier provisioned out-of-band.
+
+            venName is expected to be unique within the scope of a VTN
+
+            '
+          minLength: 1
+          maxLength: 128
+          example: VEN-999
+        attributes:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects describing attributes.
+          items:
+            $ref: '#/components/schemas/valuesMap_2'
+          default: null
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects describing target criteria.
+          items:
+            $ref: '#/components/schemas/valuesMap_2'
+          default: null
+        resources:
+          type:
+          - array
+          - 'null'
+          description: A list of resource objects representing end-devices or systems.
+          items:
+            $ref: '#/components/schemas/resource_2'
+          default: null
     dateTime_2:
       type: string
       format: date-time
@@ -806,57 +857,6 @@ components:
           format: float
           description: A value on a y axis.
           example: 2.0
-    ven_2:
-      type: object
-      description: Ven represents a client with the ven role.
-      required:
-      - venName
-      properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime_2'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime_2'
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - VEN
-        venName:
-          type: string
-          description: 'User generated identifier, may be VEN identifier provisioned out-of-band.
-
-            venName is expected to be unique within the scope of a VTN
-
-            '
-          minLength: 1
-          maxLength: 128
-          example: VEN-999
-        attributes:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects describing attributes.
-          items:
-            $ref: '#/components/schemas/valuesMap_2'
-          default: null
-        targets:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects describing target criteria.
-          items:
-            $ref: '#/components/schemas/valuesMap_2'
-          default: null
-        resources:
-          type:
-          - array
-          - 'null'
-          description: A list of resource objects representing end-devices or systems.
-          items:
-            $ref: '#/components/schemas/resource_2'
-          default: null
     valuesMap_2:
       type: object
       description: 'Represents one or more values associated with a type.
@@ -890,6 +890,82 @@ components:
             - type: string
             - type: boolean
             - $ref: '#/components/schemas/point_2'
+    objectMetadata:
+      type: object
+      description: metadata common to all addressable objects. Values provided by VTN on object creation.
+      required:
+      - id
+      - createdDateTime
+      - modificationDateTime
+      - objectType
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime_3'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime_3'
+        objectType:
+          $ref: '#/components/schemas/objectTypes'
+    target:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: User generated target string.
+      example: group-1
+    point_3:
+      type: object
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
+      required:
+      - x
+      - y
+      properties:
+        x:
+          type: number
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+        y:
+          type: number
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+    VenVenRequest:
+      type: object
+      description: VEN provided representation of ven.
+      required:
+      - objectType
+      - venName
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - VEN_VEN_REQUEST
+        venName:
+          $ref: '#/components/schemas/venName'
+        attributes:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects describing attributes.
+          items:
+            $ref: '#/components/schemas/valuesMap_3'
+          default: null
+    ven_3:
+      type: object
+      description: Server provided representation of ven
+      allOf:
+      - $ref: '#/components/schemas/objectMetadata'
+      - $ref: '#/components/schemas/BlVenRequest'
+    clientID:
+      type: string
+      description: 'ClientID as provisioned by Auhtentication Service and associated with client''s bearer token
+
+        '
+      minLength: 1
+      maxLength: 128
+      example: 249rj49jiej
     problem_2:
       type: object
       description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
@@ -948,6 +1024,58 @@ components:
             It may or may not yield further information if dereferenced.
 
             '
+    venRequest:
+      oneOf:
+      - $ref: '#/components/schemas/VenVenRequest'
+      - $ref: '#/components/schemas/BlVenRequest'
+    BlVenRequest:
+      type: object
+      description: Business Logic provided representation of ven.
+      required:
+      - objectType
+      - clientID
+      - venName
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - BL_VEN_REQUEST
+        clientID:
+          $ref: '#/components/schemas/clientID'
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of targets.
+          items:
+            $ref: '#/components/schemas/target'
+          default: null          -
+        venName:
+          $ref: '#/components/schemas/venName'
+        attributes:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects describing attributes.
+          items:
+            $ref: '#/components/schemas/valuesMap_3'
+          default: null
+    venName:
+      type: string
+      description: 'User generated identifier, may be VEN identifier provisioned out-of-band.
+
+        venName is expected to be unique within the scope of a VTN
+
+        '
+      minLength: 1
+      maxLength: 128
+      example: VEN-999
+    dateTime_3:
+      type: string
+      format: date-time
+      description: datetime in RFC 3339 format
+      example: 2023-06-15 09:30:00+00:00
     objectTypes:
       type: string
       description: Types of objects addressable through API.
@@ -959,70 +1087,6 @@ components:
       - SUBSCRIPTION
       - VEN
       - RESOURCE
-    clientID:
-      type: string
-      description: 'ClientID as provisioned by Auhtentication Service and associated with client''s bearer token
-
-        '
-      minLength: 1
-      maxLength: 128
-      example: 249rj49jiej
-    point_3:
-      type: object
-      description: A pair of floats typically used as a point on a 2 dimensional grid.
-      required:
-      - x
-      - y
-      properties:
-        x:
-          type: number
-          format: float
-          description: A value on an x axis.
-          example: 1.0
-        y:
-          type: number
-          format: float
-          description: A value on a y axis.
-          example: 2.0
-    dateTime_3:
-      type: string
-      format: date-time
-      description: datetime in RFC 3339 format
-      example: 2023-06-15 09:30:00+00:00
-    VenVenRequest:
-      type: object
-      description: VEN provided representation of ven.
-      required:
-      - objectType
-      - venName
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - VEN_VEN_REQUEST
-        venName:
-          $ref: '#/components/schemas/venName'
-        attributes:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects describing attributes.
-          items:
-            $ref: '#/components/schemas/valuesMap_3'
-          default: null
-    target:
-      type: string
-      minLength: 1
-      maxLength: 128
-      description: User generated target string.
-      example: group-1
-    ven_3:
-      type: object
-      description: Server provided representation of ven
-      allOf:
-      - $ref: '#/components/schemas/objectMetadata'
-      - $ref: '#/components/schemas/BlVenRequest'
     valuesMap_3:
       type: object
       description: 'Represents one or more values associated with a type.
@@ -1058,73 +1122,9 @@ components:
             - type: string
             - type: boolean
             - $ref: '#/components/schemas/point_3'
-    objectMetadata:
-      type: object
-      description: metadata common to all addressable objects. Values provided by VTN on object creation.
-      required:
-      - id
-      - createdDateTime
-      - modificationDateTime
-      - objectType
-      properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime_3'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime_3'
-        objectType:
-          $ref: '#/components/schemas/objectTypes'
-    venRequest:
-      oneOf:
-      - $ref: '#/components/schemas/VenVenRequest'
-      - $ref: '#/components/schemas/BlVenRequest'
-    venName:
-      type: string
-      description: 'User generated identifier, may be VEN identifier provisioned out-of-band.
-
-        venName is expected to be unique within the scope of a VTN
-
-        '
-      minLength: 1
-      maxLength: 128
-      example: VEN-999
-    BlVenRequest:
-      type: object
-      description: Business Logic provided representation of ven.
-      required:
-      - objectType
-      - clientID
-      - venName
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - BL_VEN_REQUEST
-        clientID:
-          $ref: '#/components/schemas/clientID'
-        targets:
-          type:
-          - array
-          - 'null'
-          description: A list of targets.
-          items:
-            $ref: '#/components/schemas/target'
-          default: null          -
-        venName:
-          $ref: '#/components/schemas/venName'
-        attributes:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects describing attributes.
-          items:
-            $ref: '#/components/schemas/valuesMap_3'
-          default: null
   responses:
-    internalServerError:
-      description: Internal server error
+    badRequest:
+      description: The request is malformed or invalid
       content:
         application/json:
           schema:
@@ -1135,14 +1135,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/problem_2'
-    forbidden:
-      description: Forbidden
+    notFound:
+      description: The specified resource was not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/problem_2'
-    notFound:
-      description: The specified resource was not found
+    forbidden:
+      description: Forbidden
       content:
         application/json:
           schema:
@@ -1153,8 +1153,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/problem_2'
-    badRequest:
-      description: The request is malformed or invalid
+    internalServerError:
+      description: Internal server error
       content:
         application/json:
           schema:

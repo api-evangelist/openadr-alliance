@@ -277,6 +277,17 @@ components:
           format: uri
           description: Optional reference to more detailed error description
           example: See the full API docs at https://authorization-server.com/docs/access_toke
+    authServerInfo:
+      type: object
+      required:
+      - tokenURL
+      properties:
+        tokenURL:
+          type: string
+          format: uri
+          minLength: 2
+          maxLength: 8000
+          description: URL of the token endpoint.
     problem_2:
       type: object
       description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
@@ -372,26 +383,15 @@ components:
           maxLength: 4096
           description: application defined scope.
           example: read_all
-    authServerInfo:
-      type: object
-      required:
-      - tokenURL
-      properties:
-        tokenURL:
-          type: string
-          format: uri
-          minLength: 2
-          maxLength: 8000
-          description: URL of the token endpoint.
   responses:
-    notImplemented:
-      description: Not implemented
+    badRequest:
+      description: The request is malformed or invalid
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/problem_2'
-    internalServerError:
-      description: Internal server error
+    notImplemented:
+      description: Not implemented
       content:
         application/json:
           schema:
@@ -402,8 +402,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/problem_2'
-    badRequest:
-      description: The request is malformed or invalid
+    internalServerError:
+      description: Internal server error
       content:
         application/json:
           schema:
