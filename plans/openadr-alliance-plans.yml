@@ -128,3 +128,73 @@ certification:
     "Issued certificates do not expire if membership lapses. However, the web listing will be
     amended to say 'Certification no longer maintained'."
   url: https://www.openadr.org/how-to-build-a-product
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - subscription
+  units: []
+  plans:
+  - name: Contributor Member
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Adopter Member
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - year
+  - name: Sponsor Member
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - year
+  - name: OpenADR 2.0 a/b Development and Test Tool
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: OpenADR 3.x Online Test Tool
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: EcoPort (CTA-2045) Test Tool
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Implementation Support — free consultation
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Implementation Support — 2 hours
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
+  - name: Implementation Support — 5 hours
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
+  - name: Implementation Support — 10 hours
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []

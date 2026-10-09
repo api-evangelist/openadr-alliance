@@ -42,7 +42,7 @@ workflows:
       callbackBearerToken: {type: string, description: token the VTN presents back so the receiver can authenticate its calls}
   steps:
   - stepId: get-token
-    operationId: fetchToken
+    operationId: postAuthToken
     requestBody:
       contentType: application/x-www-form-urlencoded
       payload:

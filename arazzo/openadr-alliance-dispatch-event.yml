@@ -51,7 +51,7 @@ workflows:
     - condition: $statusCode == 200
   - stepId: get-token
     description: Client-credentials grant. Body is application/x-www-form-urlencoded, not JSON.
-    operationId: fetchToken
+    operationId: postAuthToken
     requestBody:
       contentType: application/x-www-form-urlencoded
       payload:
