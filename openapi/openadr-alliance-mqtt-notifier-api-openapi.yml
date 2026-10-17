@@ -329,14 +329,8 @@ paths:
           $ref: '#/components/responses/internalServerError'
 components:
   responses:
-    badRequest:
-      description: The request is malformed or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem'
-    forbidden:
-      description: Forbidden
+    notFound:
+      description: The specified resource was not found
       content:
         application/json:
           schema:
@@ -347,14 +341,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/problem'
+    badRequest:
+      description: The request is malformed or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem'
     notifiersTopicsResponse:
       description: OK
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/notifierTopicsResponse'
-    notFound:
-      description: The specified resource was not found
+    forbidden:
+      description: Forbidden
       content:
         application/json:
           schema:
@@ -366,6 +366,29 @@ components:
           schema:
             $ref: '#/components/schemas/problem'
   schemas:
+    notifierOperationsTopics:
+      type: object
+      description: MQTT notifier topic names for notifications of subscribable-object operations
+      required:
+      - UPDATE
+      - DELETE
+      properties:
+        CREATE:
+          type: string
+          description: "'Topic path for CREATE operations,\n not provided for notifications for a specific object ID,\n e.g. until programID foo is created, clients unable to\n request notifications of its creation'\n"
+          example: '{objectType}s/create'
+        UPDATE:
+          type: string
+          description: Topic path for UPDATE operations
+          example: '{objectType}s/update'
+        DELETE:
+          type: string
+          description: Topic path for DELETE operations
+          example: '{objectType}s/delete'
+        ALL:
+          type: string
+          description: Topic path for ALL operations, if supported by VTN
+          example: '{objectType}s/+'
     objectID:
       type: string
       pattern: ^[a-zA-Z0-9_-]*$
@@ -373,6 +396,13 @@ components:
       maxLength: 128
       description: URL safe VTN assigned object ID.
       example: object-999
+    notifierTopicsResponse:
+      type: object
+      required:
+      - topics
+      properties:
+        topics:
+          $ref: '#/components/schemas/notifierOperationsTopics'
     problem:
       type: object
       description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
@@ -431,36 +461,6 @@ components:
             It may or may not yield further information if dereferenced.
 
             '
-    notifierTopicsResponse:
-      type: object
-      required:
-      - topics
-      properties:
-        topics:
-          $ref: '#/components/schemas/notifierOperationsTopics'
-    notifierOperationsTopics:
-      type: object
-      description: MQTT notifier topic names for notifications of subscribable-object operations
-      required:
-      - UPDATE
-      - DELETE
-      properties:
-        CREATE:
-          type: string
-          description: "'Topic path for CREATE operations,\n not provided for notifications for a specific object ID,\n e.g. until programID foo is created, clients unable to\n request notifications of its creation'\n"
-          example: '{objectType}s/create'
-        UPDATE:
-          type: string
-          description: Topic path for UPDATE operations
-          example: '{objectType}s/update'
-        DELETE:
-          type: string
-          description: Topic path for DELETE operations
-          example: '{objectType}s/delete'
-        ALL:
-          type: string
-          description: Topic path for ALL operations, if supported by VTN
-          example: '{objectType}s/+'
   securitySchemes:
     oAuth2ClientCredentials:
       type: oauth2

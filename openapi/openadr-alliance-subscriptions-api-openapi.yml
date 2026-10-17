@@ -309,58 +309,72 @@ paths:
       url: http://localhost:8081/openadr3
 components:
   schemas:
-    reportPayloadDescriptor:
+    interval:
       type: object
-      description: 'Contextual information used to interpret report payload values.
+      description: 'An object defining a temporal window and a list of valuesMaps.
 
-        E.g. a USAGE payload simply contains a usage value, an
-
-        associated descriptor provides necessary context such as units and data quality.
+        if intervalPeriod present may set temporal aspects of interval or override event.intervalPeriod.
 
         '
       required:
-      - payloadType
+      - id
+      - payloads
       properties:
-        objectType:
-          type: string
-          description: Used as discriminator, e.g. program.payloadDescriptors
-          default: REPORT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: Enumerated or private string signifying the nature of values.
-          example: USAGE
-        readingType:
-          type: string
-          description: Enumerated or private string signifying the type of reading.
-          example: DIRECT_READ
-          default: DIRECT_READ
-        units:
-          type: string
-          description: Units of measure.
-          example: KWH
-          default: KWH
-        accuracy:
-          type: number
-          format: float
-          description: A quantification of the accuracy of a set of payload values.
-          example: 0.0
-          default: 0.0
-        confidence:
+        id:
           type: integer
           format: int32
-          minimum: 0
-          maximum: 100
-          description: A quantification of the confidence in a set of payload values.
-          example: 100
-          default: 100
-    report:
+          description: A client generated number assigned an interval object. Not a sequence number.
+          example: 0
+        intervalPeriod:
+          $ref: '#/components/schemas/intervalPeriod'
+        payloads:
+          type: array
+          description: A list of valuesMap objects.
+          items:
+            $ref: '#/components/schemas/valuesMap'
+    objectTypes:
+      type: string
+      description: Types of objects addressable through API.
+      example: EVENT
+      enum:
+      - PROGRAM
+      - EVENT
+      - REPORT
+      - SUBSCRIPTION
+      - VEN
+      - RESOURCE
+    objectID:
+      type: string
+      pattern: ^[a-zA-Z0-9_-]*$
+      minLength: 1
+      maxLength: 128
+      description: URL safe VTN assigned object ID.
+      example: object-999
+    intervalPeriod:
       type: object
-      description: report object.
+      description: 'Defines temporal aspects of intervals.
+
+        A duration of default null indicates infinity.
+
+        A randomizeStart of default null indicates no randomization.
+
+        '
       required:
-      - programID
-      - eventID
-      - clientName
-      - resources
+      - start
+      properties:
+        start:
+          $ref: '#/components/schemas/dateTime'
+        duration:
+          $ref: '#/components/schemas/duration'
+        randomizeStart:
+          $ref: '#/components/schemas/duration'
+    resource:
+      type: object
+      description: 'A resource is an energy device or system subject to control by a VEN.
+
+        '
+      required:
+      - resourceName
       properties:
         id:
           $ref: '#/components/schemas/objectID'
@@ -372,57 +386,144 @@ components:
           type: string
           description: Used as discriminator, e.g. notification.object
           enum:
-          - REPORT
-        programID:
-          $ref: '#/components/schemas/objectID'
-        eventID:
-          $ref: '#/components/schemas/objectID'
-        clientName:
+          - RESOURCE
+        resourceName:
           type:
           - string
           - 'null'
-          description: User generated identifier; may be VEN ID provisioned during program enrollment.
-          example: VEN-999
+          description: User generated identifier, resource may be configured with identifier out-of-band.
+          example: RESOURCE-999
           default: null
-        reportName:
+        venID:
+          $ref: '#/components/schemas/objectID'
+        attributes:
+          type: array
+          description: A list of valuesMap objects describing attributes.
+          items:
+            $ref: '#/components/schemas/valuesMap'
+        targets:
+          type: array
+          description: A list of valuesMap objects describing target criteria.
+          items:
+            $ref: '#/components/schemas/valuesMap'
+    dateTime:
+      type:
+      - string
+      - 'null'
+      description: datetime in ISO 8601 format
+      example: 2023-06-15 09:30:00+00:00
+      default: null
+    event:
+      type: object
+      description: 'Event object to communicate a Demand Response request to VEN.
+
+        If intervalPeriod is present, sets start time and duration of intervals.
+
+        '
+      required:
+      - programID
+      - intervals
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime'
+        objectType:
+          type: string
+          description: Used as discriminator, e.g. notification.object
+          enum:
+          - EVENT
+        programID:
+          $ref: '#/components/schemas/objectID'
+        eventName:
           type:
           - string
           - 'null'
           description: User defined string for use in debugging or User Interface.
-          example: Battery_usage_04112023
+          example: price event 11-18-2022
           default: null
+        priority:
+          type:
+          - integer
+          - 'null'
+          description: Relative priority of event. A lower number is a higher priority.
+          example: 0
+          default: null
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects.
+          default: null
+          items:
+            $ref: '#/components/schemas/valuesMap'
+        reportDescriptors:
+          type:
+          - array
+          - 'null'
+          description: A list of reportDescriptor objects. Used to request reports from VEN.
+          default: null
+          items:
+            $ref: '#/components/schemas/reportDescriptor'
         payloadDescriptors:
           type:
           - array
           - 'null'
-          description: A list of reportPayloadDescriptors.
+          description: A list of payloadDescriptor objects.
           default: null
           items:
-            $ref: '#/components/schemas/reportPayloadDescriptor'
-        resources:
+            $ref: '#/components/schemas/eventPayloadDescriptor'
+        intervalPeriod:
+          $ref: '#/components/schemas/intervalPeriod'
+        intervals:
           type: array
-          description: A list of objects containing report data for a set of resources.
+          description: A list of interval objects.
           items:
-            type: object
-            description: Report data associated with a resource.
-            required:
-            - resourceName
-            - intervals
-            properties:
-              resourceName:
-                type:
-                - string
-                - 'null'
-                description: User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data
-                example: RESOURCE-999
-                default: null
-              intervalPeriod:
-                $ref: '#/components/schemas/intervalPeriod'
-              intervals:
-                type: array
-                description: A list of interval objects.
-                items:
-                  $ref: '#/components/schemas/interval'
+            $ref: '#/components/schemas/interval'
+    notification:
+      type: object
+      description: 'VTN generated object included in request to subscription callbackUrl.
+
+        '
+      required:
+      - objectType
+      - operation
+      - object
+      properties:
+        objectType:
+          $ref: '#/components/schemas/objectTypes'
+        operation:
+          type: string
+          description: the operation on on object that triggered the notification.
+          example: POST
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects.
+          default: null
+          items:
+            $ref: '#/components/schemas/valuesMap'
+        object:
+          type: object
+          description: the object that is the subject of the notification.
+          example: {}
+          oneOf:
+          - $ref: '#/components/schemas/program'
+          - $ref: '#/components/schemas/report'
+          - $ref: '#/components/schemas/event'
+          - $ref: '#/components/schemas/subscription'
+          - $ref: '#/components/schemas/ven'
+          - $ref: '#/components/schemas/resource'
+          discriminator:
+            propertyName: objectType
     reportDescriptor:
       type: object
       description: 'An object that may be used to request a report from a VEN.
@@ -510,147 +611,6 @@ components:
             '
           example: 1
           default: 1
-    eventPayloadDescriptor:
-      type: object
-      description: 'Contextual information used to interpret event valuesMap values.
-
-        E.g. a PRICE payload simply contains a price value, an
-
-        associated descriptor provides necessary context such as units and currency.
-
-        '
-      required:
-      - payloadType
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator, e.g. program.payloadDescriptors
-          default: EVENT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: Enumerated or private string signifying the nature of values.
-          example: PRICE
-        units:
-          type: string
-          description: Units of measure.
-          example: KWH
-          default: KWH
-        currency:
-          type: string
-          description: Currency of price payload.
-          example: USD
-          default: USD
-    point:
-      type: object
-      description: A pair of floats typically used as a point on a 2 dimensional grid.
-      required:
-      - x
-      - y
-      properties:
-        x:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: A value on an x axis.
-          example: 1.0
-          default: null
-        y:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: A value on a y axis.
-          example: 2.0
-          default: null
-    subscription:
-      type: object
-      description: 'An object created by a client to receive notification of operations on objects.
-
-        Clients may subscribe to be notified when a type of object is created,
-
-        updated, or deleted.
-
-        '
-      required:
-      - clientName
-      - programID
-      - objectOperations
-      properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime'
-        objectType:
-          type: string
-          description: Used as discriminator, e.g. notification.object
-          enum:
-          - SUBSCRIPTION
-        clientName:
-          type:
-          - string
-          - 'null'
-          description: User generated identifier, may be VEN identifier provisioned during program enrollment.
-          example: VEN-999
-          default: null
-        programID:
-          $ref: '#/components/schemas/objectID'
-        objectOperations:
-          type: array
-          description: list of objects and operations to subscribe to.
-          items:
-            type: object
-            description: object type, operations, and callbackUrl.
-            required:
-            - objects
-            - operations
-            - callbackUrl
-            properties:
-              objects:
-                type: array
-                description: list of objects to subscribe to.
-                items:
-                  $ref: '#/components/schemas/objectTypes'
-              operations:
-                type: array
-                description: list of operations to subscribe to.
-                items:
-                  type: string
-                  description: object operation to subscribe to.
-                  example: POST
-                  enum:
-                  - GET
-                  - POST
-                  - PUT
-                  - DELETE
-              callbackUrl:
-                type: string
-                format: uri
-                description: User provided webhook URL.
-                example: https://myserver.com/send/callback/here
-              bearerToken:
-                type:
-                - string
-                - 'null'
-                description: 'User provided token.
-
-                  To avoid custom integrations, callback endpoints
-
-                  should accept the provided bearer token to authenticate VTN requests.
-
-                  '
-                example: NCEJGI9E8ER9802UT9HUG
-                default: null
-        targets:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects. Used by server to filter callbacks.
-          default: null
-          items:
-            $ref: '#/components/schemas/valuesMap'
     program:
       type: object
       description: Provides program specific metadata from VTN to VEN.
@@ -763,131 +723,6 @@ components:
           default: null
           items:
             $ref: '#/components/schemas/valuesMap'
-    ven:
-      type: object
-      description: Ven represents a client with the ven role.
-      required:
-      - venName
-      properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime'
-        objectType:
-          type: string
-          description: Used as discriminator, e.g. notification.object.
-          enum:
-          - VEN
-        venName:
-          type:
-          - string
-          - 'null'
-          description: User generated identifier, may be VEN identifier provisioned during program enrollment.
-          example: VEN-999
-          default: null
-        attributes:
-          type: array
-          description: A list of valuesMap objects describing attributes.
-          items:
-            $ref: '#/components/schemas/valuesMap'
-        targets:
-          type: array
-          description: A list of valuesMap objects describing target criteria.
-          items:
-            $ref: '#/components/schemas/valuesMap'
-        resources:
-          type:
-          - array
-          - 'null'
-          description: A list of resource objects representing end-devices or systems.
-          default: null
-          items:
-            $ref: '#/components/schemas/resource'
-    duration:
-      type:
-      - string
-      - 'null'
-      description: duration in ISO 8601 format
-      example: PT1H
-      default: null
-    event:
-      type: object
-      description: 'Event object to communicate a Demand Response request to VEN.
-
-        If intervalPeriod is present, sets start time and duration of intervals.
-
-        '
-      required:
-      - programID
-      - intervals
-      properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime'
-        objectType:
-          type: string
-          description: Used as discriminator, e.g. notification.object
-          enum:
-          - EVENT
-        programID:
-          $ref: '#/components/schemas/objectID'
-        eventName:
-          type:
-          - string
-          - 'null'
-          description: User defined string for use in debugging or User Interface.
-          example: price event 11-18-2022
-          default: null
-        priority:
-          type:
-          - integer
-          - 'null'
-          description: Relative priority of event. A lower number is a higher priority.
-          example: 0
-          default: null
-        targets:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects.
-          default: null
-          items:
-            $ref: '#/components/schemas/valuesMap'
-        reportDescriptors:
-          type:
-          - array
-          - 'null'
-          description: A list of reportDescriptor objects. Used to request reports from VEN.
-          default: null
-          items:
-            $ref: '#/components/schemas/reportDescriptor'
-        payloadDescriptors:
-          type:
-          - array
-          - 'null'
-          description: A list of payloadDescriptor objects.
-          default: null
-          items:
-            $ref: '#/components/schemas/eventPayloadDescriptor'
-        intervalPeriod:
-          $ref: '#/components/schemas/intervalPeriod'
-        intervals:
-          type: array
-          description: A list of interval objects.
-          items:
-            $ref: '#/components/schemas/interval'
-    objectID:
-      type: string
-      pattern: ^[a-zA-Z0-9_-]*$
-      minLength: 1
-      maxLength: 128
-      description: URL safe VTN assigned object ID.
-      example: object-999
     problem:
       type: object
       description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
@@ -942,13 +777,49 @@ components:
             It may or may not yield further information if dereferenced.
 
             '
-    resource:
+    point:
       type: object
-      description: 'A resource is an energy device or system subject to control by a VEN.
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
+      required:
+      - x
+      - y
+      properties:
+        x:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+          default: null
+        y:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+          default: null
+    duration:
+      type:
+      - string
+      - 'null'
+      description: duration in ISO 8601 format
+      example: PT1H
+      default: null
+    subscription:
+      type: object
+      description: 'An object created by a client to receive notification of operations on objects.
+
+        Clients may subscribe to be notified when a type of object is created,
+
+        updated, or deleted.
 
         '
       required:
-      - resourceName
+      - clientName
+      - programID
+      - objectOperations
       properties:
         id:
           $ref: '#/components/schemas/objectID'
@@ -960,16 +831,168 @@ components:
           type: string
           description: Used as discriminator, e.g. notification.object
           enum:
-          - RESOURCE
-        resourceName:
+          - SUBSCRIPTION
+        clientName:
           type:
           - string
           - 'null'
-          description: User generated identifier, resource may be configured with identifier out-of-band.
-          example: RESOURCE-999
+          description: User generated identifier, may be VEN identifier provisioned during program enrollment.
+          example: VEN-999
           default: null
-        venID:
+        programID:
           $ref: '#/components/schemas/objectID'
+        objectOperations:
+          type: array
+          description: list of objects and operations to subscribe to.
+          items:
+            type: object
+            description: object type, operations, and callbackUrl.
+            required:
+            - objects
+            - operations
+            - callbackUrl
+            properties:
+              objects:
+                type: array
+                description: list of objects to subscribe to.
+                items:
+                  $ref: '#/components/schemas/objectTypes'
+              operations:
+                type: array
+                description: list of operations to subscribe to.
+                items:
+                  type: string
+                  description: object operation to subscribe to.
+                  example: POST
+                  enum:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+              callbackUrl:
+                type: string
+                format: uri
+                description: User provided webhook URL.
+                example: https://myserver.com/send/callback/here
+              bearerToken:
+                type:
+                - string
+                - 'null'
+                description: 'User provided token.
+
+                  To avoid custom integrations, callback endpoints
+
+                  should accept the provided bearer token to authenticate VTN requests.
+
+                  '
+                example: NCEJGI9E8ER9802UT9HUG
+                default: null
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects. Used by server to filter callbacks.
+          default: null
+          items:
+            $ref: '#/components/schemas/valuesMap'
+    eventPayloadDescriptor:
+      type: object
+      description: 'Contextual information used to interpret event valuesMap values.
+
+        E.g. a PRICE payload simply contains a price value, an
+
+        associated descriptor provides necessary context such as units and currency.
+
+        '
+      required:
+      - payloadType
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator, e.g. program.payloadDescriptors
+          default: EVENT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: Enumerated or private string signifying the nature of values.
+          example: PRICE
+        units:
+          type: string
+          description: Units of measure.
+          example: KWH
+          default: KWH
+        currency:
+          type: string
+          description: Currency of price payload.
+          example: USD
+          default: USD
+    reportPayloadDescriptor:
+      type: object
+      description: 'Contextual information used to interpret report payload values.
+
+        E.g. a USAGE payload simply contains a usage value, an
+
+        associated descriptor provides necessary context such as units and data quality.
+
+        '
+      required:
+      - payloadType
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator, e.g. program.payloadDescriptors
+          default: REPORT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: Enumerated or private string signifying the nature of values.
+          example: USAGE
+        readingType:
+          type: string
+          description: Enumerated or private string signifying the type of reading.
+          example: DIRECT_READ
+          default: DIRECT_READ
+        units:
+          type: string
+          description: Units of measure.
+          example: KWH
+          default: KWH
+        accuracy:
+          type: number
+          format: float
+          description: A quantification of the accuracy of a set of payload values.
+          example: 0.0
+          default: 0.0
+        confidence:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+          description: A quantification of the confidence in a set of payload values.
+          example: 100
+          default: 100
+    ven:
+      type: object
+      description: Ven represents a client with the ven role.
+      required:
+      - venName
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime'
+        objectType:
+          type: string
+          description: Used as discriminator, e.g. notification.object.
+          enum:
+          - VEN
+        venName:
+          type:
+          - string
+          - 'null'
+          description: User generated identifier, may be VEN identifier provisioned during program enrollment.
+          example: VEN-999
+          default: null
         attributes:
           type: array
           description: A list of valuesMap objects describing attributes.
@@ -980,107 +1003,84 @@ components:
           description: A list of valuesMap objects describing target criteria.
           items:
             $ref: '#/components/schemas/valuesMap'
-    interval:
-      type: object
-      description: 'An object defining a temporal window and a list of valuesMaps.
-
-        if intervalPeriod present may set temporal aspects of interval or override event.intervalPeriod.
-
-        '
-      required:
-      - id
-      - payloads
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: A client generated number assigned an interval object. Not a sequence number.
-          example: 0
-        intervalPeriod:
-          $ref: '#/components/schemas/intervalPeriod'
-        payloads:
-          type: array
-          description: A list of valuesMap objects.
-          items:
-            $ref: '#/components/schemas/valuesMap'
-    intervalPeriod:
-      type: object
-      description: 'Defines temporal aspects of intervals.
-
-        A duration of default null indicates infinity.
-
-        A randomizeStart of default null indicates no randomization.
-
-        '
-      required:
-      - start
-      properties:
-        start:
-          $ref: '#/components/schemas/dateTime'
-        duration:
-          $ref: '#/components/schemas/duration'
-        randomizeStart:
-          $ref: '#/components/schemas/duration'
-    notification:
-      type: object
-      description: 'VTN generated object included in request to subscription callbackUrl.
-
-        '
-      required:
-      - objectType
-      - operation
-      - object
-      properties:
-        objectType:
-          $ref: '#/components/schemas/objectTypes'
-        operation:
-          type: string
-          description: the operation on on object that triggered the notification.
-          example: POST
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-        targets:
+        resources:
           type:
           - array
           - 'null'
-          description: A list of valuesMap objects.
+          description: A list of resource objects representing end-devices or systems.
           default: null
           items:
-            $ref: '#/components/schemas/valuesMap'
-        object:
-          type: object
-          description: the object that is the subject of the notification.
-          example: {}
-          oneOf:
-          - $ref: '#/components/schemas/program'
-          - $ref: '#/components/schemas/report'
-          - $ref: '#/components/schemas/event'
-          - $ref: '#/components/schemas/subscription'
-          - $ref: '#/components/schemas/ven'
-          - $ref: '#/components/schemas/resource'
-          discriminator:
-            propertyName: objectType
-    dateTime:
-      type:
-      - string
-      - 'null'
-      description: datetime in ISO 8601 format
-      example: 2023-06-15 09:30:00+00:00
-      default: null
-    objectTypes:
-      type: string
-      description: Types of objects addressable through API.
-      example: EVENT
-      enum:
-      - PROGRAM
-      - EVENT
-      - REPORT
-      - SUBSCRIPTION
-      - VEN
-      - RESOURCE
+            $ref: '#/components/schemas/resource'
+    report:
+      type: object
+      description: report object.
+      required:
+      - programID
+      - eventID
+      - clientName
+      - resources
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime'
+        objectType:
+          type: string
+          description: Used as discriminator, e.g. notification.object
+          enum:
+          - REPORT
+        programID:
+          $ref: '#/components/schemas/objectID'
+        eventID:
+          $ref: '#/components/schemas/objectID'
+        clientName:
+          type:
+          - string
+          - 'null'
+          description: User generated identifier; may be VEN ID provisioned during program enrollment.
+          example: VEN-999
+          default: null
+        reportName:
+          type:
+          - string
+          - 'null'
+          description: User defined string for use in debugging or User Interface.
+          example: Battery_usage_04112023
+          default: null
+        payloadDescriptors:
+          type:
+          - array
+          - 'null'
+          description: A list of reportPayloadDescriptors.
+          default: null
+          items:
+            $ref: '#/components/schemas/reportPayloadDescriptor'
+        resources:
+          type: array
+          description: A list of objects containing report data for a set of resources.
+          items:
+            type: object
+            description: Report data associated with a resource.
+            required:
+            - resourceName
+            - intervals
+            properties:
+              resourceName:
+                type:
+                - string
+                - 'null'
+                description: User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data
+                example: RESOURCE-999
+                default: null
+              intervalPeriod:
+                $ref: '#/components/schemas/intervalPeriod'
+              intervals:
+                type: array
+                description: A list of interval objects.
+                items:
+                  $ref: '#/components/schemas/interval'
     valuesMap:
       type: object
       description: 'Represents one or more values associated with a type.
@@ -1112,69 +1112,86 @@ components:
             - type: string
             - type: boolean
             - $ref: '#/components/schemas/point'
-    reportPayloadDescriptor_2:
+    intervalPeriod_2:
       type: object
-      description: 'Contextual information used to interpret report payload values.
+      description: 'Defines temporal aspects of intervals.
 
-        E.g. a USAGE payload simply contains a usage value, an
+        A duration of default PT0S indicates instantaneous or infinity, depending on payloadType.
 
-        associated descriptor provides necessary context such as units and data quality.
+        A randomizeStart of default null indicates no randomization.
 
         '
       required:
-      - payloadType
+      - start
       properties:
+        start:
+          $ref: '#/components/schemas/dateTime_2'
+        duration:
+          $ref: '#/components/schemas/duration_2'
+        randomizeStart:
+          $ref: '#/components/schemas/duration_2'
+    resource_2:
+      type: object
+      description: 'A resource is an energy device or system subject to control by a VEN.
+
+        '
+      required:
+      - resourceName
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime_2'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime_2'
         objectType:
           type: string
           description: Used as discriminator.
           enum:
-          - REPORT_PAYLOAD_DESCRIPTOR
-        payloadType:
+          - RESOURCE
+        resourceName:
           type: string
-          description: Enumerated or private string signifying the nature of values.
+          description: 'User generated identifier, resource may be configured with identifier out-of-band.
+
+            resourceName is expected to be unique within the scope of the associated VEN.
+
+            '
           minLength: 1
           maxLength: 128
-          example: USAGE
-        readingType:
+          example: RESOURCE-999
+        venID:
+          $ref: '#/components/schemas/objectID'
+        attributes:
           type:
-          - string
+          - array
           - 'null'
-          description: Enumerated or private string signifying the type of reading.
-          example: DIRECT_READ
+          description: A list of valuesMap objects describing attributes.
+          items:
+            $ref: '#/components/schemas/valuesMap_2'
           default: null
-        units:
+        targets:
           type:
-          - string
+          - array
           - 'null'
-          description: Units of measure.
-          example: KWH
+          description: A list of valuesMap objects describing target criteria.
+          items:
+            $ref: '#/components/schemas/valuesMap_2'
           default: null
-        accuracy:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: A quantification of the accuracy of a set of payload values.
-          example: 0.0
-          default: null
-        confidence:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          minimum: 0
-          maximum: 100
-          description: A quantification of the confidence in a set of payload values.
-          example: 100
-          default: null
-    report_2:
+    dateTime_2:
+      type: string
+      format: date-time
+      description: datetime in ISO 8601 format
+      example: 2023-06-15 09:30:00+00:00
+    event_2:
       type: object
-      description: report object.
+      description: 'Event object to communicate a Demand Response request to VEN.
+
+        If intervalPeriod is present, sets default start time and duration of intervals.
+
+        '
       required:
       - programID
-      - eventID
-      - clientName
-      - resources
+      - intervals
       properties:
         id:
           $ref: '#/components/schemas/objectID'
@@ -1186,55 +1203,55 @@ components:
           type: string
           description: Used as discriminator
           enum:
-          - REPORT
+          - EVENT
         programID:
           $ref: '#/components/schemas/objectID'
-        eventID:
-          $ref: '#/components/schemas/objectID'
-        clientName:
-          type: string
-          description: User generated identifier; may be VEN ID provisioned out-of-band.
-          minLength: 1
-          maxLength: 128
-          example: VEN-999
-        reportName:
+        eventName:
           type:
           - string
           - 'null'
           description: User defined string for use in debugging or User Interface.
-          example: Battery_usage_04112023
+          example: price event 11-18-2022
+          default: null
+        priority:
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+          description: Relative priority of event. A lower number is a higher priority.
+          example: 0
+          default: null
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects.
+          items:
+            $ref: '#/components/schemas/valuesMap_2'
+          default: null
+        reportDescriptors:
+          type:
+          - array
+          - 'null'
+          description: A list of reportDescriptor objects. Used to request reports from VEN.
+          items:
+            $ref: '#/components/schemas/reportDescriptor_2'
           default: null
         payloadDescriptors:
           type:
           - array
           - 'null'
-          description: A list of reportPayloadDescriptors.
+          description: A list of payloadDescriptor objects.
           items:
-            $ref: '#/components/schemas/reportPayloadDescriptor_2'
+            $ref: '#/components/schemas/eventPayloadDescriptor_2'
           default: null
-        resources:
+        intervalPeriod:
+          $ref: '#/components/schemas/intervalPeriod_2'
+        intervals:
           type: array
-          description: A list of objects containing report data for a set of resources.
+          description: A list of interval objects.
           items:
-            type: object
-            description: Report data associated with a resource.
-            required:
-            - resourceName
-            - intervals
-            properties:
-              resourceName:
-                type: string
-                minLength: 1
-                maxLength: 128
-                description: User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data
-                example: RESOURCE-999
-              intervalPeriod:
-                $ref: '#/components/schemas/intervalPeriod_2'
-              intervals:
-                type: array
-                description: A list of interval objects.
-                items:
-                  $ref: '#/components/schemas/interval'
+            $ref: '#/components/schemas/interval'
     reportDescriptor_2:
       type: object
       description: 'An object that may be used to request a report from a VEN.
@@ -1331,147 +1348,6 @@ components:
             '
           example: 1
           default: 1
-    eventPayloadDescriptor_2:
-      type: object
-      description: 'Contextual information used to interpret event valuesMap values.
-
-        E.g. a PRICE payload simply contains a price value, an
-
-        associated descriptor provides necessary context such as units and currency.
-
-        '
-      required:
-      - payloadType
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - EVENT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: Enumerated or private string signifying the nature of values.
-          minLength: 1
-          maxLength: 128
-          example: PRICE
-        units:
-          type:
-          - string
-          - 'null'
-          description: Units of measure.
-          example: KWH
-          default: null
-        currency:
-          type:
-          - string
-          - 'null'
-          description: Currency of price payload.
-          example: USD
-          default: null
-    point_2:
-      type: object
-      description: A pair of floats typically used as a point on a 2 dimensional grid.
-      required:
-      - x
-      - y
-      properties:
-        x:
-          type: number
-          format: float
-          description: A value on an x axis.
-          example: 1.0
-        y:
-          type: number
-          format: float
-          description: A value on a y axis.
-          example: 2.0
-    subscription_2:
-      type: object
-      description: 'An object created by a client to receive notification of operations on objects.
-
-        Clients may subscribe to be notified when a type of object is created,
-
-        updated, or deleted.
-
-        '
-      required:
-      - clientName
-      - programID
-      - objectOperations
-      properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime_2'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime_2'
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - SUBSCRIPTION
-        clientName:
-          type: string
-          description: User generated identifier, may be VEN identifier provisioned out-of-band.
-          minLength: 1
-          maxLength: 128
-          example: VEN-999
-        programID:
-          $ref: '#/components/schemas/objectID'
-        objectOperations:
-          type: array
-          description: list of objects and operations to subscribe to.
-          items:
-            type: object
-            description: object type, operations, and callbackUrl.
-            required:
-            - objects
-            - operations
-            - callbackUrl
-            properties:
-              objects:
-                type: array
-                description: list of objects to subscribe to.
-                items:
-                  $ref: '#/components/schemas/objectTypes'
-              operations:
-                type: array
-                description: list of operations to subscribe to.
-                items:
-                  type: string
-                  description: object operation to subscribe to.
-                  example: CREATE
-                  enum:
-                  - READ
-                  - CREATE
-                  - UPDATE
-                  - DELETE
-              callbackUrl:
-                type: string
-                format: uri
-                description: User provided webhook URL.
-                example: https://myserver.com/send/callback/here
-              bearerToken:
-                type:
-                - string
-                - 'null'
-                description: 'User provided token.
-
-                  To avoid custom integrations, callback endpoints
-
-                  should accept the provided bearer token to authenticate VTN requests.
-
-                  '
-                example: NCEJGI9E8ER9802UT9HUG
-                default: null
-        targets:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects. Used by server to filter callbacks.
-          items:
-            $ref: '#/components/schemas/valuesMap_2'
-          default: null
     program_2:
       type: object
       description: Provides program specific metadata from VTN to VEN.
@@ -1590,6 +1466,208 @@ components:
           items:
             $ref: '#/components/schemas/valuesMap_2'
           default: null
+    point_2:
+      type: object
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
+      required:
+      - x
+      - y
+      properties:
+        x:
+          type: number
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+        y:
+          type: number
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+    duration_2:
+      type: string
+      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
+      description: duration in ISO 8601 format
+      example: PT1H
+      default: PT0S
+    subscription_2:
+      type: object
+      description: 'An object created by a client to receive notification of operations on objects.
+
+        Clients may subscribe to be notified when a type of object is created,
+
+        updated, or deleted.
+
+        '
+      required:
+      - clientName
+      - programID
+      - objectOperations
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime_2'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime_2'
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - SUBSCRIPTION
+        clientName:
+          type: string
+          description: User generated identifier, may be VEN identifier provisioned out-of-band.
+          minLength: 1
+          maxLength: 128
+          example: VEN-999
+        programID:
+          $ref: '#/components/schemas/objectID'
+        objectOperations:
+          type: array
+          description: list of objects and operations to subscribe to.
+          items:
+            type: object
+            description: object type, operations, and callbackUrl.
+            required:
+            - objects
+            - operations
+            - callbackUrl
+            properties:
+              objects:
+                type: array
+                description: list of objects to subscribe to.
+                items:
+                  $ref: '#/components/schemas/objectTypes'
+              operations:
+                type: array
+                description: list of operations to subscribe to.
+                items:
+                  type: string
+                  description: object operation to subscribe to.
+                  example: CREATE
+                  enum:
+                  - READ
+                  - CREATE
+                  - UPDATE
+                  - DELETE
+              callbackUrl:
+                type: string
+                format: uri
+                description: User provided webhook URL.
+                example: https://myserver.com/send/callback/here
+              bearerToken:
+                type:
+                - string
+                - 'null'
+                description: 'User provided token.
+
+                  To avoid custom integrations, callback endpoints
+
+                  should accept the provided bearer token to authenticate VTN requests.
+
+                  '
+                example: NCEJGI9E8ER9802UT9HUG
+                default: null
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects. Used by server to filter callbacks.
+          items:
+            $ref: '#/components/schemas/valuesMap_2'
+          default: null
+    eventPayloadDescriptor_2:
+      type: object
+      description: 'Contextual information used to interpret event valuesMap values.
+
+        E.g. a PRICE payload simply contains a price value, an
+
+        associated descriptor provides necessary context such as units and currency.
+
+        '
+      required:
+      - payloadType
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - EVENT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: Enumerated or private string signifying the nature of values.
+          minLength: 1
+          maxLength: 128
+          example: PRICE
+        units:
+          type:
+          - string
+          - 'null'
+          description: Units of measure.
+          example: KWH
+          default: null
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Currency of price payload.
+          example: USD
+          default: null
+    reportPayloadDescriptor_2:
+      type: object
+      description: 'Contextual information used to interpret report payload values.
+
+        E.g. a USAGE payload simply contains a usage value, an
+
+        associated descriptor provides necessary context such as units and data quality.
+
+        '
+      required:
+      - payloadType
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - REPORT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: Enumerated or private string signifying the nature of values.
+          minLength: 1
+          maxLength: 128
+          example: USAGE
+        readingType:
+          type:
+          - string
+          - 'null'
+          description: Enumerated or private string signifying the type of reading.
+          example: DIRECT_READ
+          default: null
+        units:
+          type:
+          - string
+          - 'null'
+          description: Units of measure.
+          example: KWH
+          default: null
+        accuracy:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: A quantification of the accuracy of a set of payload values.
+          example: 0.0
+          default: null
+        confidence:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+          maximum: 100
+          description: A quantification of the confidence in a set of payload values.
+          example: 100
+          default: null
     ven_2:
       type: object
       description: Ven represents a client with the ven role.
@@ -1641,22 +1719,14 @@ components:
           items:
             $ref: '#/components/schemas/resource_2'
           default: null
-    duration_2:
-      type: string
-      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
-      description: duration in ISO 8601 format
-      example: PT1H
-      default: PT0S
-    event_2:
+    report_2:
       type: object
-      description: 'Event object to communicate a Demand Response request to VEN.
-
-        If intervalPeriod is present, sets default start time and duration of intervals.
-
-        '
+      description: report object.
       required:
       - programID
-      - intervals
+      - eventID
+      - clientName
+      - resources
       properties:
         id:
           $ref: '#/components/schemas/objectID'
@@ -1668,125 +1738,55 @@ components:
           type: string
           description: Used as discriminator
           enum:
-          - EVENT
+          - REPORT
         programID:
           $ref: '#/components/schemas/objectID'
-        eventName:
+        eventID:
+          $ref: '#/components/schemas/objectID'
+        clientName:
+          type: string
+          description: User generated identifier; may be VEN ID provisioned out-of-band.
+          minLength: 1
+          maxLength: 128
+          example: VEN-999
+        reportName:
           type:
           - string
           - 'null'
           description: User defined string for use in debugging or User Interface.
-          example: price event 11-18-2022
-          default: null
-        priority:
-          type:
-          - integer
-          - 'null'
-          minimum: 0
-          description: Relative priority of event. A lower number is a higher priority.
-          example: 0
-          default: null
-        targets:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects.
-          items:
-            $ref: '#/components/schemas/valuesMap_2'
-          default: null
-        reportDescriptors:
-          type:
-          - array
-          - 'null'
-          description: A list of reportDescriptor objects. Used to request reports from VEN.
-          items:
-            $ref: '#/components/schemas/reportDescriptor_2'
+          example: Battery_usage_04112023
           default: null
         payloadDescriptors:
           type:
           - array
           - 'null'
-          description: A list of payloadDescriptor objects.
+          description: A list of reportPayloadDescriptors.
           items:
-            $ref: '#/components/schemas/eventPayloadDescriptor_2'
+            $ref: '#/components/schemas/reportPayloadDescriptor_2'
           default: null
-        intervalPeriod:
-          $ref: '#/components/schemas/intervalPeriod_2'
-        intervals:
+        resources:
           type: array
-          description: A list of interval objects.
+          description: A list of objects containing report data for a set of resources.
           items:
-            $ref: '#/components/schemas/interval'
-    resource_2:
-      type: object
-      description: 'A resource is an energy device or system subject to control by a VEN.
-
-        '
-      required:
-      - resourceName
-      properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime_2'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime_2'
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - RESOURCE
-        resourceName:
-          type: string
-          description: 'User generated identifier, resource may be configured with identifier out-of-band.
-
-            resourceName is expected to be unique within the scope of the associated VEN.
-
-            '
-          minLength: 1
-          maxLength: 128
-          example: RESOURCE-999
-        venID:
-          $ref: '#/components/schemas/objectID'
-        attributes:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects describing attributes.
-          items:
-            $ref: '#/components/schemas/valuesMap_2'
-          default: null
-        targets:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects describing target criteria.
-          items:
-            $ref: '#/components/schemas/valuesMap_2'
-          default: null
-    intervalPeriod_2:
-      type: object
-      description: 'Defines temporal aspects of intervals.
-
-        A duration of default PT0S indicates instantaneous or infinity, depending on payloadType.
-
-        A randomizeStart of default null indicates no randomization.
-
-        '
-      required:
-      - start
-      properties:
-        start:
-          $ref: '#/components/schemas/dateTime_2'
-        duration:
-          $ref: '#/components/schemas/duration_2'
-        randomizeStart:
-          $ref: '#/components/schemas/duration_2'
-    dateTime_2:
-      type: string
-      format: date-time
-      description: datetime in ISO 8601 format
-      example: 2023-06-15 09:30:00+00:00
+            type: object
+            description: Report data associated with a resource.
+            required:
+            - resourceName
+            - intervals
+            properties:
+              resourceName:
+                type: string
+                minLength: 1
+                maxLength: 128
+                description: User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data
+                example: RESOURCE-999
+              intervalPeriod:
+                $ref: '#/components/schemas/intervalPeriod_2'
+              intervals:
+                type: array
+                description: A list of interval objects.
+                items:
+                  $ref: '#/components/schemas/interval'
     valuesMap_2:
       type: object
       description: 'Represents one or more values associated with a type.
@@ -1820,100 +1820,121 @@ components:
             - type: string
             - type: boolean
             - $ref: '#/components/schemas/point_2'
-    objectMetadata:
+    BlResourceRequest:
       type: object
-      description: metadata common to all addressable objects. Values provided by VTN on object creation.
-      required:
-      - id
-      - createdDateTime
-      - modificationDateTime
-      - objectType
-      properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime_3'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime_3'
-        objectType:
-          $ref: '#/components/schemas/objectTypes'
-    readingType:
-      type:
-      - string
-      - 'null'
-      description: 'Represents the type of reading.
-
-
-        See enumerations in Definitions for defined string values, or use privately defined strings
-
-        '
-      example: DIRECT_READ
-      minLength: 1
-      maxLength: 128
-      default: null
-    reportPayloadDescriptor_3:
-      type: object
-      description: 'Contextual information used to interpret report payload values.
-
-        E.g. a USAGE payload simply contains a usage value, an
-
-        associated descriptor provides necessary context such as units and data quality.
+      description: 'Business Logic provided representation of ven resource.
 
         '
       required:
       - objectType
-      - payloadType
+      - clientID
+      - resourceName
+      - venID
       properties:
         objectType:
           type: string
           description: Used as discriminator.
           enum:
-          - REPORT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: 'Represents the nature of values.
-
-
-            See enumerations in Definitions for defined string values, or use privately defined strings
-
-            '
-          minLength: 1
-          maxLength: 128
-          example: USAGE
-        readingType:
-          $ref: '#/components/schemas/readingType'
-        units:
-          $ref: '#/components/schemas/units'
-        accuracy:
+          - BL_RESOURCE_REQUEST
+        clientID:
+          $ref: '#/components/schemas/clientID'
+        targets:
           type:
-          - number
+          - array
           - 'null'
-          format: float
-          description: A quantification of the accuracy of a set of payload values.
-          example: 0.0
+          description: A list of targets.
+          items:
+            $ref: '#/components/schemas/target'
           default: null
-        confidence:
+        resourceName:
+          $ref: '#/components/schemas/resourceName'
+        venID:
+          $ref: '#/components/schemas/objectID'
+        attributes:
           type:
-          - integer
+          - array
           - 'null'
-          format: int32
-          minimum: 0
-          maximum: 100
-          description: A quantification of the confidence in a set of payload values.
-          example: 100
+          description: A list of valuesMap objects describing attributes.
+          items:
+            $ref: '#/components/schemas/valuesMap_3'
           default: null
-    report_3:
+    intervalPeriod_3:
       type: object
-      description: Server provided representation of report
+      description: 'Defines temporal aspects of intervals.
+
+        A start of "0001-01-01" or "0001-01-01T00:00:00" may indicate ''now''. See User Guide.
+
+        A duration of "P9999Y" may indicate infinity. See User Guide.
+
+        A randomizeStart indicates absolute range of client applied offset to start. See User Guide.
+
+        '
+      properties:
+        start:
+          $ref: '#/components/schemas/dateTime_3'
+        duration:
+          $ref: '#/components/schemas/duration_3'
+        randomizeStart:
+          $ref: '#/components/schemas/duration_3'
+    resource_3:
+      type: object
+      description: Server provided representation of resource
       allOf:
       - $ref: '#/components/schemas/objectMetadata'
-      - $ref: '#/components/schemas/reportRequest'
-      - type: object
-        required:
-        - clientID
-        properties:
-          clientID:
-            $ref: '#/components/schemas/clientID'
+      - $ref: '#/components/schemas/BlResourceRequest'
+    dateTime_3:
+      type: string
+      format: date-time
+      description: datetime in RFC 3339 format
+      example: 2023-06-15 09:30:00+00:00
+    event_3:
+      type: object
+      description: Server provided representation of event
+      allOf:
+      - $ref: '#/components/schemas/objectMetadata'
+      - $ref: '#/components/schemas/eventRequest'
+    notification_2:
+      type: object
+      description: 'VTN generated object included in request to subscription callbackUrl.
+
+        '
+      required:
+      - objectType
+      - operation
+      - object
+      properties:
+        objectType:
+          $ref: '#/components/schemas/objectTypes'
+        operation:
+          type: string
+          description: the operation on on object that triggered the notification.
+          example: UPDATE
+          enum:
+          - CREATE
+          - READ
+          - UPDATE
+          - DELETE
+        object:
+          type: object
+          description: the object that is the subject of the notification.
+          example: {}
+          oneOf:
+          - $ref: '#/components/schemas/program_3'
+          - $ref: '#/components/schemas/report_3'
+          - $ref: '#/components/schemas/event_3'
+          - $ref: '#/components/schemas/subscription_3'
+          - $ref: '#/components/schemas/ven_3'
+          - $ref: '#/components/schemas/resource_3'
+          discriminator:
+            propertyName: objectType
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of targets.
+          items:
+            $ref: '#/components/schemas/target'
+          default: null
     reportDescriptor_3:
       type: object
       description: 'An object that may be used to request a report from a VEN.
@@ -2014,115 +2035,83 @@ components:
           - SUB_INTERVALS
           - OPEN_INTERVALS
           default: INTERVALS
-    eventPayloadDescriptor_3:
-      type: object
-      description: 'Contextual information used to interpret event valuesMap values.
-
-        E.g. a PRICE payload simply contains a price value, an
-
-        associated descriptor provides necessary context such as units and currency.
-
-        '
-      required:
-      - objectType
-      - payloadType
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - EVENT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: 'Represents the nature of values.
-
-
-            See enumerations in Definitions for defined string values, or use privately defined strings
-
-            '
-          minLength: 1
-          maxLength: 128
-          example: PRICE
-        units:
-          $ref: '#/components/schemas/units'
-        currency:
-          type:
-          - string
-          - 'null'
-          description: Currency of price payload.
-          example: USD
-          default: null
-    target:
-      type: string
-      minLength: 1
-      maxLength: 128
-      description: User generated target string.
-      example: group-1
-    point_3:
-      type: object
-      description: A pair of floats typically used as a point on a 2 dimensional grid.
-      required:
-      - x
-      - y
-      properties:
-        x:
-          type: number
-          format: float
-          description: A value on an x axis.
-          example: 1.0
-        y:
-          type: number
-          format: float
-          description: A value on a y axis.
-          example: 2.0
-    subscription_3:
-      type: object
-      description: Server provided representation of subscription
-      allOf:
-      - $ref: '#/components/schemas/objectMetadata'
-      - $ref: '#/components/schemas/subscriptionRequest'
-      - type: object
-        required:
-        - clientID
-        properties:
-          clientID:
-            $ref: '#/components/schemas/clientID'
     program_3:
       type: object
       description: Server provided representation of program
       allOf:
       - $ref: '#/components/schemas/objectMetadata'
       - $ref: '#/components/schemas/programRequest'
-    ven_3:
+    problem_2:
       type: object
-      description: Server provided representation of ven
-      allOf:
-      - $ref: '#/components/schemas/objectMetadata'
-      - $ref: '#/components/schemas/BlVenRequest'
-    clientID:
-      type: string
-      description: 'ClientID as provisioned by Auhtentication Service and associated with client''s bearer token
+      description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
 
         '
-      minLength: 1
-      maxLength: 128
-      example: 249rj49jiej
-    BlResourceRequest:
-      type: object
-      description: 'Business Logic provided representation of ven resource.
+      properties:
+        type:
+          type: string
+          format: uri
+          minLength: 2
+          maxLength: 8000
+          description: 'An absolute URI that identifies the problem type.
 
-        '
+            When dereferenced, it SHOULD provide human-readable documentation for the problem type
+
+            (e.g., using HTML).
+
+            '
+          default: about:blank
+          example: https://zalando.github.io/problem/constraint-violation
+        title:
+          type: string
+          description: 'A short, summary of the problem type. Written in english and readable
+
+            for engineers (usually not suited for non technical stakeholders and
+
+            not localized); example: Service Unavailable.
+
+            '
+        status:
+          type: integer
+          format: int32
+          description: 'The HTTP status code generated by the origin server for this occurrence
+
+            of the problem.
+
+            '
+          minimum: 100
+          example: 503
+          exclusiveMaximum: 600
+        detail:
+          type: string
+          description: 'A human readable explanation specific to this occurrence of the
+
+            problem.
+
+            '
+          example: Connection to database timed out
+        instance:
+          type: string
+          minLength: 3
+          maxLength: 8000
+          format: uri
+          description: 'An absolute URI that identifies the specific occurrence of the problem.
+
+            It may or may not yield further information if dereferenced.
+
+            '
+    BlVenRequest:
+      type: object
+      description: Business Logic provided representation of ven.
       required:
       - objectType
       - clientID
-      - resourceName
-      - venID
+      - venName
       properties:
         objectType:
           type: string
           description: Used as discriminator.
           enum:
-          - BL_RESOURCE_REQUEST
+          - BL_VEN_REQUEST
         clientID:
           $ref: '#/components/schemas/clientID'
         targets:
@@ -2132,11 +2121,9 @@ components:
           description: A list of targets.
           items:
             $ref: '#/components/schemas/target'
-          default: null
-        resourceName:
-          $ref: '#/components/schemas/resourceName'
-        venID:
-          $ref: '#/components/schemas/objectID'
+          default: null          -
+        venName:
+          $ref: '#/components/schemas/venName'
         attributes:
           type:
           - array
@@ -2145,18 +2132,6 @@ components:
           items:
             $ref: '#/components/schemas/valuesMap_3'
           default: null
-    duration_3:
-      type: string
-      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
-      description: duration in ISO 8601 format
-      example: PT1H
-      default: PT0S
-    event_3:
-      type: object
-      description: Server provided representation of event
-      allOf:
-      - $ref: '#/components/schemas/objectMetadata'
-      - $ref: '#/components/schemas/eventRequest'
     eventRequest:
       type: object
       description: 'Event object to communicate a Demand Response request to VEN.
@@ -2217,109 +2192,152 @@ components:
           description: A list of interval objects.
           items:
             $ref: '#/components/schemas/interval'
-    problem_2:
+    target:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: User generated target string.
+      example: group-1
+    reportRequest:
       type: object
-      description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
-
-        '
-      properties:
-        type:
-          type: string
-          format: uri
-          minLength: 2
-          maxLength: 8000
-          description: 'An absolute URI that identifies the problem type.
-
-            When dereferenced, it SHOULD provide human-readable documentation for the problem type
-
-            (e.g., using HTML).
-
-            '
-          default: about:blank
-          example: https://zalando.github.io/problem/constraint-violation
-        title:
-          type: string
-          description: 'A short, summary of the problem type. Written in english and readable
-
-            for engineers (usually not suited for non technical stakeholders and
-
-            not localized); example: Service Unavailable.
-
-            '
-        status:
-          type: integer
-          format: int32
-          description: 'The HTTP status code generated by the origin server for this occurrence
-
-            of the problem.
-
-            '
-          minimum: 100
-          example: 503
-          exclusiveMaximum: 600
-        detail:
-          type: string
-          description: 'A human readable explanation specific to this occurrence of the
-
-            problem.
-
-            '
-          example: Connection to database timed out
-        instance:
-          type: string
-          minLength: 3
-          maxLength: 8000
-          format: uri
-          description: 'An absolute URI that identifies the specific occurrence of the problem.
-
-            It may or may not yield further information if dereferenced.
-
-            '
-    resource_3:
-      type: object
-      description: Server provided representation of resource
-      allOf:
-      - $ref: '#/components/schemas/objectMetadata'
-      - $ref: '#/components/schemas/BlResourceRequest'
-    BlVenRequest:
-      type: object
-      description: Business Logic provided representation of ven.
+      description: report object.
       required:
-      - objectType
-      - clientID
-      - venName
+      - eventID
+      - clientName
+      - resources
       properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - BL_VEN_REQUEST
-        clientID:
-          $ref: '#/components/schemas/clientID'
-        targets:
+        eventID:
+          $ref: '#/components/schemas/objectID'
+        clientName:
+          $ref: '#/components/schemas/clientName'
+        reportName:
           type:
-          - array
+          - string
           - 'null'
-          description: A list of targets.
-          items:
-            $ref: '#/components/schemas/target'
-          default: null          -
-        venName:
-          $ref: '#/components/schemas/venName'
-        attributes:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects describing attributes.
-          items:
-            $ref: '#/components/schemas/valuesMap_3'
+          description: User defined string for use in debugging or User Interface.
+          example: Battery_usage_04112023
           default: null
+        payloadDescriptors:
+          type:
+          - array
+          - 'null'
+          description: A list of reportPayloadDescriptors.
+          items:
+            $ref: '#/components/schemas/reportPayloadDescriptor_3'
+          default: null
+        resources:
+          type: array
+          description: A list of objects containing report data for a set of resources.
+          items:
+            type: object
+            description: Report data associated with a resource.
+            required:
+            - resourceName
+            - intervals
+            properties:
+              resourceName:
+                $ref: '#/components/schemas/resourceName'
+              intervalPeriod:
+                $ref: '#/components/schemas/intervalPeriod_3'
+              intervals:
+                type: array
+                description: A list of interval objects.
+                items:
+                  $ref: '#/components/schemas/interval'
+    point_3:
+      type: object
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
+      required:
+      - x
+      - y
+      properties:
+        x:
+          type: number
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+        y:
+          type: number
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+    duration_3:
+      type: string
+      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
+      description: duration in ISO 8601 format
+      example: PT1H
+      default: PT0S
+    units:
+      type:
+      - string
+      - 'null'
+      description: Units of measure.
+      example: KWH
+      default: null
+      minLength: 1
+      maxLength: 128
     resourceName:
       type: string
       minLength: 1
       maxLength: 128
       description: User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data
       example: RESOURCE-999
+    clientName:
+      type: string
+      description: User generated identifier, may be VEN identifier provisioned out-of-band.
+      minLength: 1
+      maxLength: 128
+      example: VEN-999
+    subscription_3:
+      type: object
+      description: Server provided representation of subscription
+      allOf:
+      - $ref: '#/components/schemas/objectMetadata'
+      - $ref: '#/components/schemas/subscriptionRequest'
+      - type: object
+        required:
+        - clientID
+        properties:
+          clientID:
+            $ref: '#/components/schemas/clientID'
+    eventPayloadDescriptor_3:
+      type: object
+      description: 'Contextual information used to interpret event valuesMap values.
+
+        E.g. a PRICE payload simply contains a price value, an
+
+        associated descriptor provides necessary context such as units and currency.
+
+        '
+      required:
+      - objectType
+      - payloadType
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - EVENT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: 'Represents the nature of values.
+
+
+            See enumerations in Definitions for defined string values, or use privately defined strings
+
+            '
+          minLength: 1
+          maxLength: 128
+          example: PRICE
+        units:
+          $ref: '#/components/schemas/units'
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Currency of price payload.
+          example: USD
+          default: null
     venName:
       type: string
       description: 'User generated identifier, may be VEN identifier provisioned out-of-band.
@@ -2330,24 +2348,139 @@ components:
       minLength: 1
       maxLength: 128
       example: VEN-999
-    intervalPeriod_3:
+    objectMetadata:
       type: object
-      description: 'Defines temporal aspects of intervals.
+      description: metadata common to all addressable objects. Values provided by VTN on object creation.
+      required:
+      - id
+      - createdDateTime
+      - modificationDateTime
+      - objectType
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime_3'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime_3'
+        objectType:
+          $ref: '#/components/schemas/objectTypes'
+    reportPayloadDescriptor_3:
+      type: object
+      description: 'Contextual information used to interpret report payload values.
 
-        A start of "0001-01-01" or "0001-01-01T00:00:00" may indicate ''now''. See User Guide.
+        E.g. a USAGE payload simply contains a usage value, an
 
-        A duration of "P9999Y" may indicate infinity. See User Guide.
-
-        A randomizeStart indicates absolute range of client applied offset to start. See User Guide.
+        associated descriptor provides necessary context such as units and data quality.
 
         '
+      required:
+      - objectType
+      - payloadType
       properties:
-        start:
-          $ref: '#/components/schemas/dateTime_3'
-        duration:
-          $ref: '#/components/schemas/duration_3'
-        randomizeStart:
-          $ref: '#/components/schemas/duration_3'
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - REPORT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: 'Represents the nature of values.
+
+
+            See enumerations in Definitions for defined string values, or use privately defined strings
+
+            '
+          minLength: 1
+          maxLength: 128
+          example: USAGE
+        readingType:
+          $ref: '#/components/schemas/readingType'
+        units:
+          $ref: '#/components/schemas/units'
+        accuracy:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: A quantification of the accuracy of a set of payload values.
+          example: 0.0
+          default: null
+        confidence:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+          maximum: 100
+          description: A quantification of the confidence in a set of payload values.
+          example: 100
+          default: null
+    ven_3:
+      type: object
+      description: Server provided representation of ven
+      allOf:
+      - $ref: '#/components/schemas/objectMetadata'
+      - $ref: '#/components/schemas/BlVenRequest'
+    programRequest:
+      type: object
+      description: Client provided description of program
+      required:
+      - programName
+      properties:
+        programName:
+          type: string
+          description: Short name to uniquely identify program.
+          minLength: 1
+          maxLength: 128
+          example: ResTOU
+        intervalPeriod:
+          $ref: '#/components/schemas/intervalPeriod_3'
+        programDescriptions:
+          type:
+          - array
+          - 'null'
+          description: A list of programDescriptions
+          items:
+            required:
+            - URL
+            properties:
+              URL:
+                type: string
+                format: uri
+                minLength: 2
+                maxLength: 8000
+                description: A human or machine readable program description
+                example: https://www.myCorporation.com/myProgramDescription
+          default: null
+        payloadDescriptors:
+          type:
+          - array
+          - 'null'
+          description: A list of payloadDescriptors.
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/eventPayloadDescriptor_3'
+            - $ref: '#/components/schemas/reportPayloadDescriptor_3'
+            discriminator:
+              propertyName: objectType
+          default: null
+        attributes:
+          type:
+          - array
+          - 'null'
+          description: A list of valuesMap objects describing attributes.
+          items:
+            $ref: '#/components/schemas/valuesMap_3'
+          default: null
+        targets:
+          type:
+          - array
+          - 'null'
+          description: A list of targets.
+          items:
+            $ref: '#/components/schemas/target'
+          default: null
     subscriptionRequest:
       type: object
       description: 'An object created by a client to receive notification of operations on objects.
@@ -2421,173 +2554,40 @@ components:
           items:
             $ref: '#/components/schemas/target'
           default: null
-    notification_2:
-      type: object
-      description: 'VTN generated object included in request to subscription callbackUrl.
+    clientID:
+      type: string
+      description: 'ClientID as provisioned by Auhtentication Service and associated with client''s bearer token
 
         '
-      required:
-      - objectType
-      - operation
-      - object
-      properties:
-        objectType:
-          $ref: '#/components/schemas/objectTypes'
-        operation:
-          type: string
-          description: the operation on on object that triggered the notification.
-          example: UPDATE
-          enum:
-          - CREATE
-          - READ
-          - UPDATE
-          - DELETE
-        object:
-          type: object
-          description: the object that is the subject of the notification.
-          example: {}
-          oneOf:
-          - $ref: '#/components/schemas/program_3'
-          - $ref: '#/components/schemas/report_3'
-          - $ref: '#/components/schemas/event_3'
-          - $ref: '#/components/schemas/subscription_3'
-          - $ref: '#/components/schemas/ven_3'
-          - $ref: '#/components/schemas/resource_3'
-          discriminator:
-            propertyName: objectType
-        targets:
-          type:
-          - array
-          - 'null'
-          description: A list of targets.
-          items:
-            $ref: '#/components/schemas/target'
-          default: null
-    clientName:
-      type: string
-      description: User generated identifier, may be VEN identifier provisioned out-of-band.
       minLength: 1
       maxLength: 128
-      example: VEN-999
-    units:
+      example: 249rj49jiej
+    report_3:
+      type: object
+      description: Server provided representation of report
+      allOf:
+      - $ref: '#/components/schemas/objectMetadata'
+      - $ref: '#/components/schemas/reportRequest'
+      - type: object
+        required:
+        - clientID
+        properties:
+          clientID:
+            $ref: '#/components/schemas/clientID'
+    readingType:
       type:
       - string
       - 'null'
-      description: Units of measure.
-      example: KWH
-      default: null
+      description: 'Represents the type of reading.
+
+
+        See enumerations in Definitions for defined string values, or use privately defined strings
+
+        '
+      example: DIRECT_READ
       minLength: 1
       maxLength: 128
-    reportRequest:
-      type: object
-      description: report object.
-      required:
-      - eventID
-      - clientName
-      - resources
-      properties:
-        eventID:
-          $ref: '#/components/schemas/objectID'
-        clientName:
-          $ref: '#/components/schemas/clientName'
-        reportName:
-          type:
-          - string
-          - 'null'
-          description: User defined string for use in debugging or User Interface.
-          example: Battery_usage_04112023
-          default: null
-        payloadDescriptors:
-          type:
-          - array
-          - 'null'
-          description: A list of reportPayloadDescriptors.
-          items:
-            $ref: '#/components/schemas/reportPayloadDescriptor_3'
-          default: null
-        resources:
-          type: array
-          description: A list of objects containing report data for a set of resources.
-          items:
-            type: object
-            description: Report data associated with a resource.
-            required:
-            - resourceName
-            - intervals
-            properties:
-              resourceName:
-                $ref: '#/components/schemas/resourceName'
-              intervalPeriod:
-                $ref: '#/components/schemas/intervalPeriod_3'
-              intervals:
-                type: array
-                description: A list of interval objects.
-                items:
-                  $ref: '#/components/schemas/interval'
-    programRequest:
-      type: object
-      description: Client provided description of program
-      required:
-      - programName
-      properties:
-        programName:
-          type: string
-          description: Short name to uniquely identify program.
-          minLength: 1
-          maxLength: 128
-          example: ResTOU
-        intervalPeriod:
-          $ref: '#/components/schemas/intervalPeriod_3'
-        programDescriptions:
-          type:
-          - array
-          - 'null'
-          description: A list of programDescriptions
-          items:
-            required:
-            - URL
-            properties:
-              URL:
-                type: string
-                format: uri
-                minLength: 2
-                maxLength: 8000
-                description: A human or machine readable program description
-                example: https://www.myCorporation.com/myProgramDescription
-          default: null
-        payloadDescriptors:
-          type:
-          - array
-          - 'null'
-          description: A list of payloadDescriptors.
-          items:
-            anyOf:
-            - $ref: '#/components/schemas/eventPayloadDescriptor_3'
-            - $ref: '#/components/schemas/reportPayloadDescriptor_3'
-            discriminator:
-              propertyName: objectType
-          default: null
-        attributes:
-          type:
-          - array
-          - 'null'
-          description: A list of valuesMap objects describing attributes.
-          items:
-            $ref: '#/components/schemas/valuesMap_3'
-          default: null
-        targets:
-          type:
-          - array
-          - 'null'
-          description: A list of targets.
-          items:
-            $ref: '#/components/schemas/target'
-          default: null
-    dateTime_3:
-      type: string
-      format: date-time
-      description: datetime in RFC 3339 format
-      example: 2023-06-15 09:30:00+00:00
+      default: null
     valuesMap_3:
       type: object
       description: 'Represents one or more values associated with a type.
@@ -2624,26 +2624,8 @@ components:
             - type: boolean
             - $ref: '#/components/schemas/point_3'
   responses:
-    badRequest:
-      description: The request is malformed or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_2'
-    conflict:
-      description: Conflict. Could for example be a violation of a foreign key constraint or of a unique constraint on a name or id.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_2'
     notFound:
       description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_2'
-    forbidden:
-      description: Forbidden
       content:
         application/json:
           schema:
@@ -2654,8 +2636,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/problem_2'
+    badRequest:
+      description: The request is malformed or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
     internalServerError:
       description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
+    conflict:
+      description: Conflict. Could for example be a violation of a foreign key constraint or of a unique constraint on a name or id.
       content:
         application/json:
           schema:

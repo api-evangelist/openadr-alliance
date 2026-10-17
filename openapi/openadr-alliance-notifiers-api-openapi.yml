@@ -34,6 +34,17 @@ paths:
                 $ref: '#/components/schemas/notifiersResponse'
 components:
   schemas:
+    mqttNotifierAuthenticationAnonymous:
+      type: object
+      description: MQTT broker anonymous authentication details
+      required:
+      - method
+      properties:
+        method:
+          type: string
+          enum:
+          - ANONYMOUS
+          description: Specifies anonymous authentication
     mqttNotifierAuthenticationOauth2BearerToken:
       type: object
       description: MQTT broker OAuth2 Bearer Token authentication details
@@ -49,18 +60,6 @@ components:
         username:
           type: string
           description: Either the distinguished string "{clientID}", or any other literal string
-    notifiersResponse:
-      type: object
-      description: Provides details of each notifier binding supported
-      required:
-      - WEBHOOK
-      properties:
-        WEBHOOK:
-          type: boolean
-          description: Currently MUST be true
-          example: true
-        MQTT:
-          $ref: '#/components/schemas/mqttNotifierBindingObject'
     mqttNotifierBindingObject:
       type: object
       description: Details of MQTT binding for messaging protocol support
@@ -87,17 +86,18 @@ components:
           - $ref: '#/components/schemas/mqttNotifierAuthenticationOauth2BearerToken'
           - $ref: '#/components/schemas/mqttNotifierAuthenticationCertificate'
           description: Authentication method supported for connection to MQTT broker
-    mqttNotifierAuthenticationAnonymous:
+    notifiersResponse:
       type: object
-      description: MQTT broker anonymous authentication details
+      description: Provides details of each notifier binding supported
       required:
-      - method
+      - WEBHOOK
       properties:
-        method:
-          type: string
-          enum:
-          - ANONYMOUS
-          description: Specifies anonymous authentication
+        WEBHOOK:
+          type: boolean
+          description: Currently MUST be true
+          example: true
+        MQTT:
+          $ref: '#/components/schemas/mqttNotifierBindingObject'
     mqttNotifierAuthenticationCertificate:
       type: object
       description: MQTT broker mTLS client certificate authentication details

@@ -268,6 +268,124 @@ paths:
       url: http://localhost:8081/openadr3
 components:
   schemas:
+    dateTime:
+      type:
+      - string
+      - 'null'
+      description: datetime in ISO 8601 format
+      example: 2023-06-15 09:30:00+00:00
+      default: null
+    eventPayloadDescriptor:
+      type: object
+      description: 'Contextual information used to interpret event valuesMap values.
+
+        E.g. a PRICE payload simply contains a price value, an
+
+        associated descriptor provides necessary context such as units and currency.
+
+        '
+      required:
+      - payloadType
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator, e.g. program.payloadDescriptors
+          default: EVENT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: Enumerated or private string signifying the nature of values.
+          example: PRICE
+        units:
+          type: string
+          description: Units of measure.
+          example: KWH
+          default: KWH
+        currency:
+          type: string
+          description: Currency of price payload.
+          example: USD
+          default: USD
+    reportPayloadDescriptor:
+      type: object
+      description: 'Contextual information used to interpret report payload values.
+
+        E.g. a USAGE payload simply contains a usage value, an
+
+        associated descriptor provides necessary context such as units and data quality.
+
+        '
+      required:
+      - payloadType
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator, e.g. program.payloadDescriptors
+          default: REPORT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: Enumerated or private string signifying the nature of values.
+          example: USAGE
+        readingType:
+          type: string
+          description: Enumerated or private string signifying the type of reading.
+          example: DIRECT_READ
+          default: DIRECT_READ
+        units:
+          type: string
+          description: Units of measure.
+          example: KWH
+          default: KWH
+        accuracy:
+          type: number
+          format: float
+          description: A quantification of the accuracy of a set of payload values.
+          example: 0.0
+          default: 0.0
+        confidence:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+          description: A quantification of the confidence in a set of payload values.
+          example: 100
+          default: 100
+    point:
+      type: object
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
+      required:
+      - x
+      - y
+      properties:
+        x:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+          default: null
+        y:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+          default: null
+    duration:
+      type:
+      - string
+      - 'null'
+      description: duration in ISO 8601 format
+      example: PT1H
+      default: null
+    objectID:
+      type: string
+      pattern: ^[a-zA-Z0-9_-]*$
+      minLength: 1
+      maxLength: 128
+      description: URL safe VTN assigned object ID.
+      example: object-999
     program:
       type: object
       description: Provides program specific metadata from VTN to VEN.
@@ -380,27 +498,6 @@ components:
           default: null
           items:
             $ref: '#/components/schemas/valuesMap'
-    dateTime:
-      type:
-      - string
-      - 'null'
-      description: datetime in ISO 8601 format
-      example: 2023-06-15 09:30:00+00:00
-      default: null
-    duration:
-      type:
-      - string
-      - 'null'
-      description: duration in ISO 8601 format
-      example: PT1H
-      default: null
-    objectID:
-      type: string
-      pattern: ^[a-zA-Z0-9_-]*$
-      minLength: 1
-      maxLength: 128
-      description: URL safe VTN assigned object ID.
-      example: object-999
     problem:
       type: object
       description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
@@ -473,103 +570,6 @@ components:
           $ref: '#/components/schemas/duration'
         randomizeStart:
           $ref: '#/components/schemas/duration'
-    reportPayloadDescriptor:
-      type: object
-      description: 'Contextual information used to interpret report payload values.
-
-        E.g. a USAGE payload simply contains a usage value, an
-
-        associated descriptor provides necessary context such as units and data quality.
-
-        '
-      required:
-      - payloadType
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator, e.g. program.payloadDescriptors
-          default: REPORT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: Enumerated or private string signifying the nature of values.
-          example: USAGE
-        readingType:
-          type: string
-          description: Enumerated or private string signifying the type of reading.
-          example: DIRECT_READ
-          default: DIRECT_READ
-        units:
-          type: string
-          description: Units of measure.
-          example: KWH
-          default: KWH
-        accuracy:
-          type: number
-          format: float
-          description: A quantification of the accuracy of a set of payload values.
-          example: 0.0
-          default: 0.0
-        confidence:
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 100
-          description: A quantification of the confidence in a set of payload values.
-          example: 100
-          default: 100
-    eventPayloadDescriptor:
-      type: object
-      description: 'Contextual information used to interpret event valuesMap values.
-
-        E.g. a PRICE payload simply contains a price value, an
-
-        associated descriptor provides necessary context such as units and currency.
-
-        '
-      required:
-      - payloadType
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator, e.g. program.payloadDescriptors
-          default: EVENT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: Enumerated or private string signifying the nature of values.
-          example: PRICE
-        units:
-          type: string
-          description: Units of measure.
-          example: KWH
-          default: KWH
-        currency:
-          type: string
-          description: Currency of price payload.
-          example: USD
-          default: USD
-    point:
-      type: object
-      description: A pair of floats typically used as a point on a 2 dimensional grid.
-      required:
-      - x
-      - y
-      properties:
-        x:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: A value on an x axis.
-          example: 1.0
-          default: null
-        y:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: A value on a y axis.
-          example: 2.0
-          default: null
     valuesMap:
       type: object
       description: 'Represents one or more values associated with a type.
@@ -601,6 +601,126 @@ components:
             - type: string
             - type: boolean
             - $ref: '#/components/schemas/point'
+    dateTime_2:
+      type: string
+      format: date-time
+      description: datetime in ISO 8601 format
+      example: 2023-06-15 09:30:00+00:00
+    eventPayloadDescriptor_2:
+      type: object
+      description: 'Contextual information used to interpret event valuesMap values.
+
+        E.g. a PRICE payload simply contains a price value, an
+
+        associated descriptor provides necessary context such as units and currency.
+
+        '
+      required:
+      - payloadType
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - EVENT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: Enumerated or private string signifying the nature of values.
+          minLength: 1
+          maxLength: 128
+          example: PRICE
+        units:
+          type:
+          - string
+          - 'null'
+          description: Units of measure.
+          example: KWH
+          default: null
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Currency of price payload.
+          example: USD
+          default: null
+    reportPayloadDescriptor_2:
+      type: object
+      description: 'Contextual information used to interpret report payload values.
+
+        E.g. a USAGE payload simply contains a usage value, an
+
+        associated descriptor provides necessary context such as units and data quality.
+
+        '
+      required:
+      - payloadType
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - REPORT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: Enumerated or private string signifying the nature of values.
+          minLength: 1
+          maxLength: 128
+          example: USAGE
+        readingType:
+          type:
+          - string
+          - 'null'
+          description: Enumerated or private string signifying the type of reading.
+          example: DIRECT_READ
+          default: null
+        units:
+          type:
+          - string
+          - 'null'
+          description: Units of measure.
+          example: KWH
+          default: null
+        accuracy:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: A quantification of the accuracy of a set of payload values.
+          example: 0.0
+          default: null
+        confidence:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+          maximum: 100
+          description: A quantification of the confidence in a set of payload values.
+          example: 100
+          default: null
+    point_2:
+      type: object
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
+      required:
+      - x
+      - y
+      properties:
+        x:
+          type: number
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+        y:
+          type: number
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+    duration_2:
+      type: string
+      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
+      description: duration in ISO 8601 format
+      example: PT1H
+      default: PT0S
     program_2:
       type: object
       description: Provides program specific metadata from VTN to VEN.
@@ -719,17 +839,6 @@ components:
           items:
             $ref: '#/components/schemas/valuesMap_2'
           default: null
-    dateTime_2:
-      type: string
-      format: date-time
-      description: datetime in ISO 8601 format
-      example: 2023-06-15 09:30:00+00:00
-    duration_2:
-      type: string
-      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
-      description: duration in ISO 8601 format
-      example: PT1H
-      default: PT0S
     intervalPeriod_2:
       type: object
       description: 'Defines temporal aspects of intervals.
@@ -748,115 +857,6 @@ components:
           $ref: '#/components/schemas/duration_2'
         randomizeStart:
           $ref: '#/components/schemas/duration_2'
-    reportPayloadDescriptor_2:
-      type: object
-      description: 'Contextual information used to interpret report payload values.
-
-        E.g. a USAGE payload simply contains a usage value, an
-
-        associated descriptor provides necessary context such as units and data quality.
-
-        '
-      required:
-      - payloadType
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - REPORT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: Enumerated or private string signifying the nature of values.
-          minLength: 1
-          maxLength: 128
-          example: USAGE
-        readingType:
-          type:
-          - string
-          - 'null'
-          description: Enumerated or private string signifying the type of reading.
-          example: DIRECT_READ
-          default: null
-        units:
-          type:
-          - string
-          - 'null'
-          description: Units of measure.
-          example: KWH
-          default: null
-        accuracy:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: A quantification of the accuracy of a set of payload values.
-          example: 0.0
-          default: null
-        confidence:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          minimum: 0
-          maximum: 100
-          description: A quantification of the confidence in a set of payload values.
-          example: 100
-          default: null
-    eventPayloadDescriptor_2:
-      type: object
-      description: 'Contextual information used to interpret event valuesMap values.
-
-        E.g. a PRICE payload simply contains a price value, an
-
-        associated descriptor provides necessary context such as units and currency.
-
-        '
-      required:
-      - payloadType
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - EVENT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: Enumerated or private string signifying the nature of values.
-          minLength: 1
-          maxLength: 128
-          example: PRICE
-        units:
-          type:
-          - string
-          - 'null'
-          description: Units of measure.
-          example: KWH
-          default: null
-        currency:
-          type:
-          - string
-          - 'null'
-          description: Currency of price payload.
-          example: USD
-          default: null
-    point_2:
-      type: object
-      description: A pair of floats typically used as a point on a 2 dimensional grid.
-      required:
-      - x
-      - y
-      properties:
-        x:
-          type: number
-          format: float
-          description: A value on an x axis.
-          example: 1.0
-        y:
-          type: number
-          format: float
-          description: A value on a y axis.
-          example: 2.0
     valuesMap_2:
       type: object
       description: 'Represents one or more values associated with a type.
@@ -890,161 +890,46 @@ components:
             - type: string
             - type: boolean
             - $ref: '#/components/schemas/point_2'
-    objectMetadata:
-      type: object
-      description: metadata common to all addressable objects. Values provided by VTN on object creation.
-      required:
-      - id
-      - createdDateTime
-      - modificationDateTime
-      - objectType
-      properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime_3'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime_3'
-        objectType:
-          $ref: '#/components/schemas/objectTypes'
-    readingType:
-      type:
-      - string
-      - 'null'
-      description: 'Represents the type of reading.
-
-
-        See enumerations in Definitions for defined string values, or use privately defined strings
-
-        '
-      example: DIRECT_READ
-      minLength: 1
-      maxLength: 128
-      default: null
-    reportPayloadDescriptor_3:
-      type: object
-      description: 'Contextual information used to interpret report payload values.
-
-        E.g. a USAGE payload simply contains a usage value, an
-
-        associated descriptor provides necessary context such as units and data quality.
-
-        '
-      required:
-      - objectType
-      - payloadType
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - REPORT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: 'Represents the nature of values.
-
-
-            See enumerations in Definitions for defined string values, or use privately defined strings
-
-            '
-          minLength: 1
-          maxLength: 128
-          example: USAGE
-        readingType:
-          $ref: '#/components/schemas/readingType'
-        units:
-          $ref: '#/components/schemas/units'
-        accuracy:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: A quantification of the accuracy of a set of payload values.
-          example: 0.0
-          default: null
-        confidence:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          minimum: 0
-          maximum: 100
-          description: A quantification of the confidence in a set of payload values.
-          example: 100
-          default: null
-    eventPayloadDescriptor_3:
-      type: object
-      description: 'Contextual information used to interpret event valuesMap values.
-
-        E.g. a PRICE payload simply contains a price value, an
-
-        associated descriptor provides necessary context such as units and currency.
-
-        '
-      required:
-      - objectType
-      - payloadType
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - EVENT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: 'Represents the nature of values.
-
-
-            See enumerations in Definitions for defined string values, or use privately defined strings
-
-            '
-          minLength: 1
-          maxLength: 128
-          example: PRICE
-        units:
-          $ref: '#/components/schemas/units'
-        currency:
-          type:
-          - string
-          - 'null'
-          description: Currency of price payload.
-          example: USD
-          default: null
-    target:
+    objectTypes:
       type: string
-      minLength: 1
-      maxLength: 128
-      description: User generated target string.
-      example: group-1
-    point_3:
+      description: Types of objects addressable through API.
+      example: EVENT
+      enum:
+      - PROGRAM
+      - EVENT
+      - REPORT
+      - SUBSCRIPTION
+      - VEN
+      - RESOURCE
+    intervalPeriod_3:
       type: object
-      description: A pair of floats typically used as a point on a 2 dimensional grid.
-      required:
-      - x
-      - y
+      description: 'Defines temporal aspects of intervals.
+
+        A start of "0001-01-01" or "0001-01-01T00:00:00" may indicate ''now''. See User Guide.
+
+        A duration of "P9999Y" may indicate infinity. See User Guide.
+
+        A randomizeStart indicates absolute range of client applied offset to start. See User Guide.
+
+        '
       properties:
-        x:
-          type: number
-          format: float
-          description: A value on an x axis.
-          example: 1.0
-        y:
-          type: number
-          format: float
-          description: A value on a y axis.
-          example: 2.0
+        start:
+          $ref: '#/components/schemas/dateTime_3'
+        duration:
+          $ref: '#/components/schemas/duration_3'
+        randomizeStart:
+          $ref: '#/components/schemas/duration_3'
+    dateTime_3:
+      type: string
+      format: date-time
+      description: datetime in RFC 3339 format
+      example: 2023-06-15 09:30:00+00:00
     program_3:
       type: object
       description: Server provided representation of program
       allOf:
       - $ref: '#/components/schemas/objectMetadata'
       - $ref: '#/components/schemas/programRequest'
-    duration_3:
-      type: string
-      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
-      description: duration in ISO 8601 format
-      example: PT1H
-      default: PT0S
     problem_2:
       type: object
       description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
@@ -1103,24 +988,150 @@ components:
             It may or may not yield further information if dereferenced.
 
             '
-    intervalPeriod_3:
+    target:
+      type: string
+      minLength: 1
+      maxLength: 128
+      description: User generated target string.
+      example: group-1
+    point_3:
       type: object
-      description: 'Defines temporal aspects of intervals.
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
+      required:
+      - x
+      - y
+      properties:
+        x:
+          type: number
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+        y:
+          type: number
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+    duration_3:
+      type: string
+      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
+      description: duration in ISO 8601 format
+      example: PT1H
+      default: PT0S
+    units:
+      type:
+      - string
+      - 'null'
+      description: Units of measure.
+      example: KWH
+      default: null
+      minLength: 1
+      maxLength: 128
+    eventPayloadDescriptor_3:
+      type: object
+      description: 'Contextual information used to interpret event valuesMap values.
 
-        A start of "0001-01-01" or "0001-01-01T00:00:00" may indicate ''now''. See User Guide.
+        E.g. a PRICE payload simply contains a price value, an
 
-        A duration of "P9999Y" may indicate infinity. See User Guide.
-
-        A randomizeStart indicates absolute range of client applied offset to start. See User Guide.
+        associated descriptor provides necessary context such as units and currency.
 
         '
+      required:
+      - objectType
+      - payloadType
       properties:
-        start:
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - EVENT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: 'Represents the nature of values.
+
+
+            See enumerations in Definitions for defined string values, or use privately defined strings
+
+            '
+          minLength: 1
+          maxLength: 128
+          example: PRICE
+        units:
+          $ref: '#/components/schemas/units'
+        currency:
+          type:
+          - string
+          - 'null'
+          description: Currency of price payload.
+          example: USD
+          default: null
+    objectMetadata:
+      type: object
+      description: metadata common to all addressable objects. Values provided by VTN on object creation.
+      required:
+      - id
+      - createdDateTime
+      - modificationDateTime
+      - objectType
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
           $ref: '#/components/schemas/dateTime_3'
-        duration:
-          $ref: '#/components/schemas/duration_3'
-        randomizeStart:
-          $ref: '#/components/schemas/duration_3'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime_3'
+        objectType:
+          $ref: '#/components/schemas/objectTypes'
+    reportPayloadDescriptor_3:
+      type: object
+      description: 'Contextual information used to interpret report payload values.
+
+        E.g. a USAGE payload simply contains a usage value, an
+
+        associated descriptor provides necessary context such as units and data quality.
+
+        '
+      required:
+      - objectType
+      - payloadType
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - REPORT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: 'Represents the nature of values.
+
+
+            See enumerations in Definitions for defined string values, or use privately defined strings
+
+            '
+          minLength: 1
+          maxLength: 128
+          example: USAGE
+        readingType:
+          $ref: '#/components/schemas/readingType'
+        units:
+          $ref: '#/components/schemas/units'
+        accuracy:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: A quantification of the accuracy of a set of payload values.
+          example: 0.0
+          default: null
+        confidence:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+          maximum: 100
+          description: A quantification of the confidence in a set of payload values.
+          example: 100
+          default: null
     programRequest:
       type: object
       description: Client provided description of program
@@ -1180,31 +1191,20 @@ components:
           items:
             $ref: '#/components/schemas/target'
           default: null
-    units:
+    readingType:
       type:
       - string
       - 'null'
-      description: Units of measure.
-      example: KWH
-      default: null
+      description: 'Represents the type of reading.
+
+
+        See enumerations in Definitions for defined string values, or use privately defined strings
+
+        '
+      example: DIRECT_READ
       minLength: 1
       maxLength: 128
-    dateTime_3:
-      type: string
-      format: date-time
-      description: datetime in RFC 3339 format
-      example: 2023-06-15 09:30:00+00:00
-    objectTypes:
-      type: string
-      description: Types of objects addressable through API.
-      example: EVENT
-      enum:
-      - PROGRAM
-      - EVENT
-      - REPORT
-      - SUBSCRIPTION
-      - VEN
-      - RESOURCE
+      default: null
     valuesMap_3:
       type: object
       description: 'Represents one or more values associated with a type.
@@ -1241,26 +1241,8 @@ components:
             - type: boolean
             - $ref: '#/components/schemas/point_3'
   responses:
-    badRequest:
-      description: The request is malformed or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_2'
-    conflict:
-      description: Conflict. Could for example be a violation of a foreign key constraint or of a unique constraint on a name or id.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_2'
     notFound:
       description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_2'
-    forbidden:
-      description: Forbidden
       content:
         application/json:
           schema:
@@ -1271,8 +1253,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/problem_2'
+    badRequest:
+      description: The request is malformed or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
     internalServerError:
       description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
+    conflict:
+      description: Conflict. Could for example be a violation of a foreign key constraint or of a unique constraint on a name or id.
       content:
         application/json:
           schema:

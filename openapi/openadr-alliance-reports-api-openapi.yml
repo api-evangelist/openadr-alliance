@@ -270,13 +270,6 @@ paths:
       url: http://localhost:8081/openadr3
 components:
   schemas:
-    duration:
-      type:
-      - string
-      - 'null'
-      description: duration in ISO 8601 format
-      example: PT1H
-      default: null
     interval:
       type: object
       description: 'An object defining a temporal window and a list of valuesMaps.
@@ -300,24 +293,87 @@ components:
           description: A list of valuesMap objects.
           items:
             $ref: '#/components/schemas/valuesMap'
-    intervalPeriod:
+    dateTime:
+      type:
+      - string
+      - 'null'
+      description: datetime in ISO 8601 format
+      example: 2023-06-15 09:30:00+00:00
+      default: null
+    reportPayloadDescriptor:
       type: object
-      description: 'Defines temporal aspects of intervals.
+      description: 'Contextual information used to interpret report payload values.
 
-        A duration of default null indicates infinity.
+        E.g. a USAGE payload simply contains a usage value, an
 
-        A randomizeStart of default null indicates no randomization.
+        associated descriptor provides necessary context such as units and data quality.
 
         '
       required:
-      - start
+      - payloadType
       properties:
-        start:
-          $ref: '#/components/schemas/dateTime'
-        duration:
-          $ref: '#/components/schemas/duration'
-        randomizeStart:
-          $ref: '#/components/schemas/duration'
+        objectType:
+          type: string
+          description: Used as discriminator, e.g. program.payloadDescriptors
+          default: REPORT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: Enumerated or private string signifying the nature of values.
+          example: USAGE
+        readingType:
+          type: string
+          description: Enumerated or private string signifying the type of reading.
+          example: DIRECT_READ
+          default: DIRECT_READ
+        units:
+          type: string
+          description: Units of measure.
+          example: KWH
+          default: KWH
+        accuracy:
+          type: number
+          format: float
+          description: A quantification of the accuracy of a set of payload values.
+          example: 0.0
+          default: 0.0
+        confidence:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+          description: A quantification of the confidence in a set of payload values.
+          example: 100
+          default: 100
+    point:
+      type: object
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
+      required:
+      - x
+      - y
+      properties:
+        x:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+          default: null
+        y:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+          default: null
+    duration:
+      type:
+      - string
+      - 'null'
+      description: duration in ISO 8601 format
+      example: PT1H
+      default: null
     objectID:
       type: string
       pattern: ^[a-zA-Z0-9_-]*$
@@ -379,50 +435,24 @@ components:
             It may or may not yield further information if dereferenced.
 
             '
-    reportPayloadDescriptor:
+    intervalPeriod:
       type: object
-      description: 'Contextual information used to interpret report payload values.
+      description: 'Defines temporal aspects of intervals.
 
-        E.g. a USAGE payload simply contains a usage value, an
+        A duration of default null indicates infinity.
 
-        associated descriptor provides necessary context such as units and data quality.
+        A randomizeStart of default null indicates no randomization.
 
         '
       required:
-      - payloadType
+      - start
       properties:
-        objectType:
-          type: string
-          description: Used as discriminator, e.g. program.payloadDescriptors
-          default: REPORT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: Enumerated or private string signifying the nature of values.
-          example: USAGE
-        readingType:
-          type: string
-          description: Enumerated or private string signifying the type of reading.
-          example: DIRECT_READ
-          default: DIRECT_READ
-        units:
-          type: string
-          description: Units of measure.
-          example: KWH
-          default: KWH
-        accuracy:
-          type: number
-          format: float
-          description: A quantification of the accuracy of a set of payload values.
-          example: 0.0
-          default: 0.0
-        confidence:
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 100
-          description: A quantification of the confidence in a set of payload values.
-          example: 100
-          default: 100
+        start:
+          $ref: '#/components/schemas/dateTime'
+        duration:
+          $ref: '#/components/schemas/duration'
+        randomizeStart:
+          $ref: '#/components/schemas/duration'
     report:
       type: object
       description: report object.
@@ -493,36 +523,6 @@ components:
                 description: A list of interval objects.
                 items:
                   $ref: '#/components/schemas/interval'
-    dateTime:
-      type:
-      - string
-      - 'null'
-      description: datetime in ISO 8601 format
-      example: 2023-06-15 09:30:00+00:00
-      default: null
-    point:
-      type: object
-      description: A pair of floats typically used as a point on a 2 dimensional grid.
-      required:
-      - x
-      - y
-      properties:
-        x:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: A value on an x axis.
-          example: 1.0
-          default: null
-        y:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: A value on a y axis.
-          example: 2.0
-          default: null
     valuesMap:
       type: object
       description: 'Represents one or more values associated with a type.
@@ -554,30 +554,11 @@ components:
             - type: string
             - type: boolean
             - $ref: '#/components/schemas/point'
-    duration_2:
+    dateTime_2:
       type: string
-      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
-      description: duration in ISO 8601 format
-      example: PT1H
-      default: PT0S
-    intervalPeriod_2:
-      type: object
-      description: 'Defines temporal aspects of intervals.
-
-        A duration of default PT0S indicates instantaneous or infinity, depending on payloadType.
-
-        A randomizeStart of default null indicates no randomization.
-
-        '
-      required:
-      - start
-      properties:
-        start:
-          $ref: '#/components/schemas/dateTime_2'
-        duration:
-          $ref: '#/components/schemas/duration_2'
-        randomizeStart:
-          $ref: '#/components/schemas/duration_2'
+      format: date-time
+      description: datetime in ISO 8601 format
+      example: 2023-06-15 09:30:00+00:00
     reportPayloadDescriptor_2:
       type: object
       description: 'Contextual information used to interpret report payload values.
@@ -633,6 +614,47 @@ components:
           description: A quantification of the confidence in a set of payload values.
           example: 100
           default: null
+    point_2:
+      type: object
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
+      required:
+      - x
+      - y
+      properties:
+        x:
+          type: number
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+        y:
+          type: number
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+    duration_2:
+      type: string
+      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
+      description: duration in ISO 8601 format
+      example: PT1H
+      default: PT0S
+    intervalPeriod_2:
+      type: object
+      description: 'Defines temporal aspects of intervals.
+
+        A duration of default PT0S indicates instantaneous or infinity, depending on payloadType.
+
+        A randomizeStart of default null indicates no randomization.
+
+        '
+      required:
+      - start
+      properties:
+        start:
+          $ref: '#/components/schemas/dateTime_2'
+        duration:
+          $ref: '#/components/schemas/duration_2'
+        randomizeStart:
+          $ref: '#/components/schemas/duration_2'
     report_2:
       type: object
       description: report object.
@@ -701,28 +723,6 @@ components:
                 description: A list of interval objects.
                 items:
                   $ref: '#/components/schemas/interval'
-    dateTime_2:
-      type: string
-      format: date-time
-      description: datetime in ISO 8601 format
-      example: 2023-06-15 09:30:00+00:00
-    point_2:
-      type: object
-      description: A pair of floats typically used as a point on a 2 dimensional grid.
-      required:
-      - x
-      - y
-      properties:
-        x:
-          type: number
-          format: float
-          description: A value on an x axis.
-          example: 1.0
-        y:
-          type: number
-          format: float
-          description: A value on a y axis.
-          example: 2.0
     valuesMap_2:
       type: object
       description: 'Represents one or more values associated with a type.
@@ -756,131 +756,40 @@ components:
             - type: string
             - type: boolean
             - $ref: '#/components/schemas/point_2'
-    objectMetadata:
-      type: object
-      description: metadata common to all addressable objects. Values provided by VTN on object creation.
-      required:
-      - id
-      - createdDateTime
-      - modificationDateTime
-      - objectType
-      properties:
-        id:
-          $ref: '#/components/schemas/objectID'
-        createdDateTime:
-          $ref: '#/components/schemas/dateTime_3'
-        modificationDateTime:
-          $ref: '#/components/schemas/dateTime_3'
-        objectType:
-          $ref: '#/components/schemas/objectTypes'
-    readingType:
-      type:
-      - string
-      - 'null'
-      description: 'Represents the type of reading.
-
-
-        See enumerations in Definitions for defined string values, or use privately defined strings
-
-        '
-      example: DIRECT_READ
-      minLength: 1
-      maxLength: 128
-      default: null
-    reportPayloadDescriptor_3:
-      type: object
-      description: 'Contextual information used to interpret report payload values.
-
-        E.g. a USAGE payload simply contains a usage value, an
-
-        associated descriptor provides necessary context such as units and data quality.
-
-        '
-      required:
-      - objectType
-      - payloadType
-      properties:
-        objectType:
-          type: string
-          description: Used as discriminator.
-          enum:
-          - REPORT_PAYLOAD_DESCRIPTOR
-        payloadType:
-          type: string
-          description: 'Represents the nature of values.
-
-
-            See enumerations in Definitions for defined string values, or use privately defined strings
-
-            '
-          minLength: 1
-          maxLength: 128
-          example: USAGE
-        readingType:
-          $ref: '#/components/schemas/readingType'
-        units:
-          $ref: '#/components/schemas/units'
-        accuracy:
-          type:
-          - number
-          - 'null'
-          format: float
-          description: A quantification of the accuracy of a set of payload values.
-          example: 0.0
-          default: null
-        confidence:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          minimum: 0
-          maximum: 100
-          description: A quantification of the confidence in a set of payload values.
-          example: 100
-          default: null
-    report_3:
-      type: object
-      description: Server provided representation of report
-      allOf:
-      - $ref: '#/components/schemas/objectMetadata'
-      - $ref: '#/components/schemas/reportRequest'
-      - type: object
-        required:
-        - clientID
-        properties:
-          clientID:
-            $ref: '#/components/schemas/clientID'
-    point_3:
-      type: object
-      description: A pair of floats typically used as a point on a 2 dimensional grid.
-      required:
-      - x
-      - y
-      properties:
-        x:
-          type: number
-          format: float
-          description: A value on an x axis.
-          example: 1.0
-        y:
-          type: number
-          format: float
-          description: A value on a y axis.
-          example: 2.0
-    duration_3:
+    objectTypes:
       type: string
-      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
-      description: duration in ISO 8601 format
-      example: PT1H
-      default: PT0S
-    clientID:
-      type: string
-      description: 'ClientID as provisioned by Auhtentication Service and associated with client''s bearer token
+      description: Types of objects addressable through API.
+      example: EVENT
+      enum:
+      - PROGRAM
+      - EVENT
+      - REPORT
+      - SUBSCRIPTION
+      - VEN
+      - RESOURCE
+    intervalPeriod_3:
+      type: object
+      description: 'Defines temporal aspects of intervals.
+
+        A start of "0001-01-01" or "0001-01-01T00:00:00" may indicate ''now''. See User Guide.
+
+        A duration of "P9999Y" may indicate infinity. See User Guide.
+
+        A randomizeStart indicates absolute range of client applied offset to start. See User Guide.
 
         '
-      minLength: 1
-      maxLength: 128
-      example: 249rj49jiej
+      properties:
+        start:
+          $ref: '#/components/schemas/dateTime_3'
+        duration:
+          $ref: '#/components/schemas/duration_3'
+        randomizeStart:
+          $ref: '#/components/schemas/duration_3'
+    dateTime_3:
+      type: string
+      format: date-time
+      description: datetime in RFC 3339 format
+      example: 2023-06-15 09:30:00+00:00
     problem_2:
       type: object
       description: 'reusable error response. From https://opensource.zalando.com/problem/schema.yaml.
@@ -939,45 +848,6 @@ components:
             It may or may not yield further information if dereferenced.
 
             '
-    resourceName:
-      type: string
-      minLength: 1
-      maxLength: 128
-      description: User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data
-      example: RESOURCE-999
-    intervalPeriod_3:
-      type: object
-      description: 'Defines temporal aspects of intervals.
-
-        A start of "0001-01-01" or "0001-01-01T00:00:00" may indicate ''now''. See User Guide.
-
-        A duration of "P9999Y" may indicate infinity. See User Guide.
-
-        A randomizeStart indicates absolute range of client applied offset to start. See User Guide.
-
-        '
-      properties:
-        start:
-          $ref: '#/components/schemas/dateTime_3'
-        duration:
-          $ref: '#/components/schemas/duration_3'
-        randomizeStart:
-          $ref: '#/components/schemas/duration_3'
-    clientName:
-      type: string
-      description: User generated identifier, may be VEN identifier provisioned out-of-band.
-      minLength: 1
-      maxLength: 128
-      example: VEN-999
-    units:
-      type:
-      - string
-      - 'null'
-      description: Units of measure.
-      example: KWH
-      default: null
-      minLength: 1
-      maxLength: 128
     reportRequest:
       type: object
       description: report object.
@@ -1024,22 +894,152 @@ components:
                 description: A list of interval objects.
                 items:
                   $ref: '#/components/schemas/interval'
-    dateTime_3:
+    point_3:
+      type: object
+      description: A pair of floats typically used as a point on a 2 dimensional grid.
+      required:
+      - x
+      - y
+      properties:
+        x:
+          type: number
+          format: float
+          description: A value on an x axis.
+          example: 1.0
+        y:
+          type: number
+          format: float
+          description: A value on a y axis.
+          example: 2.0
+    duration_3:
       type: string
-      format: date-time
-      description: datetime in RFC 3339 format
-      example: 2023-06-15 09:30:00+00:00
-    objectTypes:
+      pattern: ^(-?)P(?=\d|T\d)(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)([DW]))?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?)?$
+      description: duration in ISO 8601 format
+      example: PT1H
+      default: PT0S
+    units:
+      type:
+      - string
+      - 'null'
+      description: Units of measure.
+      example: KWH
+      default: null
+      minLength: 1
+      maxLength: 128
+    resourceName:
       type: string
-      description: Types of objects addressable through API.
-      example: EVENT
-      enum:
-      - PROGRAM
-      - EVENT
-      - REPORT
-      - SUBSCRIPTION
-      - VEN
-      - RESOURCE
+      minLength: 1
+      maxLength: 128
+      description: User generated identifier. A value of AGGREGATED_REPORT indicates an aggregation of more that one resource's data
+      example: RESOURCE-999
+    clientName:
+      type: string
+      description: User generated identifier, may be VEN identifier provisioned out-of-band.
+      minLength: 1
+      maxLength: 128
+      example: VEN-999
+    objectMetadata:
+      type: object
+      description: metadata common to all addressable objects. Values provided by VTN on object creation.
+      required:
+      - id
+      - createdDateTime
+      - modificationDateTime
+      - objectType
+      properties:
+        id:
+          $ref: '#/components/schemas/objectID'
+        createdDateTime:
+          $ref: '#/components/schemas/dateTime_3'
+        modificationDateTime:
+          $ref: '#/components/schemas/dateTime_3'
+        objectType:
+          $ref: '#/components/schemas/objectTypes'
+    reportPayloadDescriptor_3:
+      type: object
+      description: 'Contextual information used to interpret report payload values.
+
+        E.g. a USAGE payload simply contains a usage value, an
+
+        associated descriptor provides necessary context such as units and data quality.
+
+        '
+      required:
+      - objectType
+      - payloadType
+      properties:
+        objectType:
+          type: string
+          description: Used as discriminator.
+          enum:
+          - REPORT_PAYLOAD_DESCRIPTOR
+        payloadType:
+          type: string
+          description: 'Represents the nature of values.
+
+
+            See enumerations in Definitions for defined string values, or use privately defined strings
+
+            '
+          minLength: 1
+          maxLength: 128
+          example: USAGE
+        readingType:
+          $ref: '#/components/schemas/readingType'
+        units:
+          $ref: '#/components/schemas/units'
+        accuracy:
+          type:
+          - number
+          - 'null'
+          format: float
+          description: A quantification of the accuracy of a set of payload values.
+          example: 0.0
+          default: null
+        confidence:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          minimum: 0
+          maximum: 100
+          description: A quantification of the confidence in a set of payload values.
+          example: 100
+          default: null
+    clientID:
+      type: string
+      description: 'ClientID as provisioned by Auhtentication Service and associated with client''s bearer token
+
+        '
+      minLength: 1
+      maxLength: 128
+      example: 249rj49jiej
+    report_3:
+      type: object
+      description: Server provided representation of report
+      allOf:
+      - $ref: '#/components/schemas/objectMetadata'
+      - $ref: '#/components/schemas/reportRequest'
+      - type: object
+        required:
+        - clientID
+        properties:
+          clientID:
+            $ref: '#/components/schemas/clientID'
+    readingType:
+      type:
+      - string
+      - 'null'
+      description: 'Represents the type of reading.
+
+
+        See enumerations in Definitions for defined string values, or use privately defined strings
+
+        '
+      example: DIRECT_READ
+      minLength: 1
+      maxLength: 128
+      default: null
     valuesMap_3:
       type: object
       description: 'Represents one or more values associated with a type.
@@ -1076,26 +1076,8 @@ components:
             - type: boolean
             - $ref: '#/components/schemas/point_3'
   responses:
-    badRequest:
-      description: The request is malformed or invalid
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_2'
-    conflict:
-      description: Conflict. Could for example be a violation of a foreign key constraint or of a unique constraint on a name or id.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_2'
     notFound:
       description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/problem_2'
-    forbidden:
-      description: Forbidden
       content:
         application/json:
           schema:
@@ -1106,8 +1088,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/problem_2'
+    badRequest:
+      description: The request is malformed or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
     internalServerError:
       description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/problem_2'
+    conflict:
+      description: Conflict. Could for example be a violation of a foreign key constraint or of a unique constraint on a name or id.
       content:
         application/json:
           schema:
