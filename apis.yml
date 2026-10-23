@@ -378,6 +378,8 @@ apis:
   - type: MCPCandidate
     url: mcp/openadr-alliance-mcp.yml
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/openadr-alliance/overview
 - type: CapabilityMap
   url: capabilities/openadr-alliance-capability-edges.yml
   name: OpenADR Alliance Business Capability Map
