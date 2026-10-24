@@ -1,0 +1,1605 @@
+{
+  "info": {
+    "_postman_id": "13c02418-866f-4bdb-9a36-f59798df32bd",
+    "name": "Openadr Alliance Programs API",
+    "description": "Operations tagged programs across 3 of this provider's published API definitions: openadr-3-0-0-openapi.yaml, openadr-3-0-1-openapi.yaml, openadr-3-1-0-openapi.yaml. Each path carries the servers of the definition it was published in.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:16:38.000Z",
+    "updatedAt": "2026-10-21T21:16:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-13c02418-866f-4bdb-9a36-f59798df32bd"
+  },
+  "item": [
+    {
+      "name": "programs",
+      "item": [
+        {
+          "name": "{programID}",
+          "item": [
+            {
+              "name": "searches programs by program ID",
+              "id": "b69b44ca-fbe8-446f-a8ab-44fb1eb57ebb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "auth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/programs/:programID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "programs",
+                    ":programID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "678c3a5b-9b01-426b-9d8a-f56027853963",
+                      "key": "programID",
+                      "value": " ",
+                      "description": "(Required) Object ID of the program object."
+                    }
+                  ]
+                },
+                "description": "Fetch the program specified by the programID in path."
+              },
+              "response": [
+                {
+                  "id": "4c395eba-fb7a-467c-ad17-990902a19dd8",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/programs/:programID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "programs",
+                        ":programID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "programID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"programName\": \"<string>\",\n  \"id\": \"AA1P\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"PROGRAM\",\n  \"programLongName\": null,\n  \"retailerName\": null,\n  \"retailerLongName\": null,\n  \"programType\": null,\n  \"country\": null,\n  \"principalSubdivision\": null,\n  \"timeZoneOffset\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  },\n  \"programDescriptions\": null,\n  \"bindingEvents\": false,\n  \"localPrice\": false,\n  \"payloadDescriptors\": null,\n  \"targets\": null\n}",
+                  "createdAt": "2026-10-21T21:16:39.000Z",
+                  "updatedAt": "2026-10-21T21:16:39.000Z",
+                  "uid": "35240-4c395eba-fb7a-467c-ad17-990902a19dd8"
+                },
+                {
+                  "id": "88316ff0-db47-492e-ab15-c8fe8dee3bd0",
+                  "name": "Bad Request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/programs/:programID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "programs",
+                        ":programID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "programID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:39.000Z",
+                  "updatedAt": "2026-10-21T21:16:39.000Z",
+                  "uid": "35240-88316ff0-db47-492e-ab15-c8fe8dee3bd0"
+                },
+                {
+                  "id": "0e189a99-ba0d-4621-a619-f000f5927a09",
+                  "name": "Forbidden.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/programs/:programID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "programs",
+                        ":programID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "programID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:39.000Z",
+                  "updatedAt": "2026-10-21T21:16:39.000Z",
+                  "uid": "35240-0e189a99-ba0d-4621-a619-f000f5927a09"
+                },
+                {
+                  "id": "3a33a9b5-1f6f-4277-8f39-d6f820ca0e52",
+                  "name": "Internal Server Error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/programs/:programID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "programs",
+                        ":programID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "programID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:39.000Z",
+                  "updatedAt": "2026-10-21T21:16:39.000Z",
+                  "uid": "35240-3a33a9b5-1f6f-4277-8f39-d6f820ca0e52"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:39.000Z",
+              "updatedAt": "2026-10-21T21:16:39.000Z",
+              "uid": "35240-b69b44ca-fbe8-446f-a8ab-44fb1eb57ebb"
+            },
+            {
+              "name": "update a program",
+              "id": "b6595254-2647-4903-9e16-553b07ad878e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "auth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programName\": \"<string>\",\n  \"id\": \"AA1P\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"PROGRAM\",\n  \"programLongName\": null,\n  \"retailerName\": null,\n  \"retailerLongName\": null,\n  \"programType\": null,\n  \"country\": null,\n  \"principalSubdivision\": null,\n  \"timeZoneOffset\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  },\n  \"programDescriptions\": null,\n  \"bindingEvents\": false,\n  \"localPrice\": false,\n  \"payloadDescriptors\": null,\n  \"targets\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/programs/:programID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "programs",
+                    ":programID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "6d33a255-5664-4d2d-a205-3ccbf3cb281d",
+                      "key": "programID",
+                      "value": " ",
+                      "description": "(Required) Object ID of the program object."
+                    }
+                  ]
+                },
+                "description": "Update an existing program with the programID in path."
+              },
+              "response": [
+                {
+                  "id": "9fa35827-c320-40a6-95b4-45752ec68e1d",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"programName\": \"<string>\",\n  \"id\": \"AA1P\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"PROGRAM\",\n  \"programLongName\": null,\n  \"retailerName\": null,\n  \"retailerLongName\": null,\n  \"programType\": null,\n  \"country\": null,\n  \"principalSubdivision\": null,\n  \"timeZoneOffset\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  },\n  \"programDescriptions\": null,\n  \"bindingEvents\": false,\n  \"localPrice\": false,\n  \"payloadDescriptors\": null,\n  \"targets\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/programs/:programID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "programs",
+                        ":programID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "programID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"programName\": \"<string>\",\n  \"id\": \"AA1P\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"PROGRAM\",\n  \"programLongName\": null,\n  \"retailerName\": null,\n  \"retailerLongName\": null,\n  \"programType\": null,\n  \"country\": null,\n  \"principalSubdivision\": null,\n  \"timeZoneOffset\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  },\n  \"programDescriptions\": null,\n  \"bindingEvents\": false,\n  \"localPrice\": false,\n  \"payloadDescriptors\": null,\n  \"targets\": null\n}",
+                  "createdAt": "2026-10-21T21:16:39.000Z",
+                  "updatedAt": "2026-10-21T21:16:39.000Z",
+                  "uid": "35240-9fa35827-c320-40a6-95b4-45752ec68e1d"
+                },
+                {
+                  "id": "3e5a92cb-252a-48f7-b683-309f0ac01939",
+                  "name": "Bad Request.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"programName\": \"<string>\",\n  \"id\": \"AA1P\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"PROGRAM\",\n  \"programLongName\": null,\n  \"retailerName\": null,\n  \"retailerLongName\": null,\n  \"programType\": null,\n  \"country\": null,\n  \"principalSubdivision\": null,\n  \"timeZoneOffset\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  },\n  \"programDescriptions\": null,\n  \"bindingEvents\": false,\n  \"localPrice\": false,\n  \"payloadDescriptors\": null,\n  \"targets\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/programs/:programID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "programs",
+                        ":programID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "programID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:39.000Z",
+                  "updatedAt": "2026-10-21T21:16:39.000Z",
+                  "uid": "35240-3e5a92cb-252a-48f7-b683-309f0ac01939"
+                },
+                {
+                  "id": "d060c3bb-16f8-4601-b0cc-841dd38e559d",
+                  "name": "Forbidden.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"programName\": \"<string>\",\n  \"id\": \"AA1P\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"PROGRAM\",\n  \"programLongName\": null,\n  \"retailerName\": null,\n  \"retailerLongName\": null,\n  \"programType\": null,\n  \"country\": null,\n  \"principalSubdivision\": null,\n  \"timeZoneOffset\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  },\n  \"programDescriptions\": null,\n  \"bindingEvents\": false,\n  \"localPrice\": false,\n  \"payloadDescriptors\": null,\n  \"targets\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/programs/:programID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "programs",
+                        ":programID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "programID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:39.000Z",
+                  "updatedAt": "2026-10-21T21:16:39.000Z",
+                  "uid": "35240-d060c3bb-16f8-4601-b0cc-841dd38e559d"
+                },
+                {
+                  "id": "014229f2-5de8-41ea-a9c2-c71de3c04850",
+                  "name": "Conflict. Implementation dependent response if program with the same programName exists.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"programName\": \"<string>\",\n  \"id\": \"AA1P\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"PROGRAM\",\n  \"programLongName\": null,\n  \"retailerName\": null,\n  \"retailerLongName\": null,\n  \"programType\": null,\n  \"country\": null,\n  \"principalSubdivision\": null,\n  \"timeZoneOffset\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  },\n  \"programDescriptions\": null,\n  \"bindingEvents\": false,\n  \"localPrice\": false,\n  \"payloadDescriptors\": null,\n  \"targets\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/programs/:programID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "programs",
+                        ":programID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "programID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:39.000Z",
+                  "updatedAt": "2026-10-21T21:16:39.000Z",
+                  "uid": "35240-014229f2-5de8-41ea-a9c2-c71de3c04850"
+                },
+                {
+                  "id": "01ee1386-901e-45d3-a7d2-b7db0a548f3b",
+                  "name": "Internal Server Error.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"programName\": \"<string>\",\n  \"id\": \"AA1P\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"PROGRAM\",\n  \"programLongName\": null,\n  \"retailerName\": null,\n  \"retailerLongName\": null,\n  \"programType\": null,\n  \"country\": null,\n  \"principalSubdivision\": null,\n  \"timeZoneOffset\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  },\n  \"programDescriptions\": null,\n  \"bindingEvents\": false,\n  \"localPrice\": false,\n  \"payloadDescriptors\": null,\n  \"targets\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/programs/:programID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "programs",
+                        ":programID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "programID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:39.000Z",
+                  "updatedAt": "2026-10-21T21:16:39.000Z",
+                  "uid": "35240-01ee1386-901e-45d3-a7d2-b7db0a548f3b"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:39.000Z",
+              "updatedAt": "2026-10-21T21:16:39.000Z",
+              "uid": "35240-b6595254-2647-4903-9e16-553b07ad878e"
+            },
+            {
+              "name": "delete a program",
+              "id": "0b455cf9-887b-4524-9e70-1352acafba6b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "auth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/programs/:programID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "programs",
+                    ":programID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "e0972f0c-0e02-42c2-9e8b-72c95d34e9cc",
+                      "key": "programID",
+                      "value": " ",
+                      "description": "(Required) Object ID of the program object."
+                    }
+                  ]
+                },
+                "description": "Delete an existing program with the programID in path."
+              },
+              "response": [
+                {
+                  "id": "de6e229e-a36f-4b97-a62e-53bc05244bdc",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/programs/:programID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "programs",
+                        ":programID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "programID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"programName\": \"<string>\",\n  \"id\": \"AA1P\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"PROGRAM\",\n  \"programLongName\": null,\n  \"retailerName\": null,\n  \"retailerLongName\": null,\n  \"programType\": null,\n  \"country\": null,\n  \"principalSubdivision\": null,\n  \"timeZoneOffset\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  },\n  \"programDescriptions\": null,\n  \"bindingEvents\": false,\n  \"localPrice\": false,\n  \"payloadDescriptors\": null,\n  \"targets\": null\n}",
+                  "createdAt": "2026-10-21T21:16:39.000Z",
+                  "updatedAt": "2026-10-21T21:16:39.000Z",
+                  "uid": "35240-de6e229e-a36f-4b97-a62e-53bc05244bdc"
+                },
+                {
+                  "id": "36eba3b3-30bc-4327-9155-a718eaa4cdae",
+                  "name": "Bad Request.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/programs/:programID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "programs",
+                        ":programID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "programID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:39.000Z",
+                  "updatedAt": "2026-10-21T21:16:39.000Z",
+                  "uid": "35240-36eba3b3-30bc-4327-9155-a718eaa4cdae"
+                },
+                {
+                  "id": "d1ed7794-a39f-4a6f-995b-7da3ee38834f",
+                  "name": "Forbidden.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/programs/:programID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "programs",
+                        ":programID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "programID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:39.000Z",
+                  "updatedAt": "2026-10-21T21:16:39.000Z",
+                  "uid": "35240-d1ed7794-a39f-4a6f-995b-7da3ee38834f"
+                },
+                {
+                  "id": "7e712920-1ce4-472a-b06d-246deafc3384",
+                  "name": "Internal Server Error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/programs/:programID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "programs",
+                        ":programID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "programID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:39.000Z",
+                  "updatedAt": "2026-10-21T21:16:39.000Z",
+                  "uid": "35240-7e712920-1ce4-472a-b06d-246deafc3384"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:39.000Z",
+              "updatedAt": "2026-10-21T21:16:39.000Z",
+              "uid": "35240-0b455cf9-887b-4524-9e70-1352acafba6b"
+            }
+          ],
+          "id": "7898e948-5975-4aed-8813-ed9e6644a476",
+          "createdAt": "2026-10-21T21:16:39.000Z",
+          "updatedAt": "2026-10-21T21:16:39.000Z",
+          "uid": "35240-7898e948-5975-4aed-8813-ed9e6644a476"
+        },
+        {
+          "name": "searches all programs",
+          "id": "99e296db-77e0-4255-969e-144ff39f9b42",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/programs?targetType=<string>&targetValues=<string>&targetValues=<string>&skip=<integer>&limit=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "programs"
+              ],
+              "query": [
+                {
+                  "description": "Indicates targeting type, e.g. GROUP",
+                  "key": "targetType",
+                  "value": "<string>"
+                },
+                {
+                  "description": "List of target values, e.g. group names",
+                  "key": "targetValues",
+                  "value": "<string>"
+                },
+                {
+                  "description": "List of target values, e.g. group names",
+                  "key": "targetValues",
+                  "value": "<string>"
+                },
+                {
+                  "description": "number of records to skip for pagination.",
+                  "key": "skip",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "maximum number of records to return.",
+                  "key": "limit",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "List all programs known to the server.\nUse skip and pagination query params to limit response size."
+          },
+          "response": [
+            {
+              "id": "ce026b51-b14f-4c71-95e9-b3034b5c220b",
+              "name": "OK.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/programs?targetType=<string>&targetValues=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "programs"
+                  ],
+                  "query": [
+                    {
+                      "description": "Indicates targeting type, e.g. GROUP",
+                      "key": "targetType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of target values, e.g. group names",
+                      "key": "targetValues",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"programName\": \"<string>\",\n    \"id\": \"gS1Ir88\",\n    \"createdDateTime\": null,\n    \"modificationDateTime\": null,\n    \"objectType\": \"PROGRAM\",\n    \"programLongName\": null,\n    \"retailerName\": null,\n    \"retailerLongName\": null,\n    \"programType\": null,\n    \"country\": null,\n    \"principalSubdivision\": null,\n    \"timeZoneOffset\": null,\n    \"intervalPeriod\": {\n      \"start\": null,\n      \"duration\": null,\n      \"randomizeStart\": null\n    },\n    \"programDescriptions\": null,\n    \"bindingEvents\": false,\n    \"localPrice\": false,\n    \"payloadDescriptors\": null,\n    \"targets\": null\n  },\n  {\n    \"programName\": \"<string>\",\n    \"id\": \" \",\n    \"createdDateTime\": null,\n    \"modificationDateTime\": null,\n    \"objectType\": \"PROGRAM\",\n    \"programLongName\": null,\n    \"retailerName\": null,\n    \"retailerLongName\": null,\n    \"programType\": null,\n    \"country\": null,\n    \"principalSubdivision\": null,\n    \"timeZoneOffset\": null,\n    \"intervalPeriod\": {\n      \"start\": null,\n      \"duration\": null,\n      \"randomizeStart\": null\n    },\n    \"programDescriptions\": null,\n    \"bindingEvents\": false,\n    \"localPrice\": false,\n    \"payloadDescriptors\": null,\n    \"targets\": null\n  }\n]",
+              "createdAt": "2026-10-21T21:16:39.000Z",
+              "updatedAt": "2026-10-21T21:16:39.000Z",
+              "uid": "35240-ce026b51-b14f-4c71-95e9-b3034b5c220b"
+            },
+            {
+              "id": "5b62e0a0-0e01-4c19-b502-9fc7ff0ba498",
+              "name": "Bad Request.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/programs?targetType=<string>&targetValues=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "programs"
+                  ],
+                  "query": [
+                    {
+                      "description": "Indicates targeting type, e.g. GROUP",
+                      "key": "targetType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of target values, e.g. group names",
+                      "key": "targetValues",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:39.000Z",
+              "updatedAt": "2026-10-21T21:16:39.000Z",
+              "uid": "35240-5b62e0a0-0e01-4c19-b502-9fc7ff0ba498"
+            },
+            {
+              "id": "c2f2b48b-7553-493e-bc57-957aed2d8c7f",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/programs?targetType=<string>&targetValues=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "programs"
+                  ],
+                  "query": [
+                    {
+                      "description": "Indicates targeting type, e.g. GROUP",
+                      "key": "targetType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of target values, e.g. group names",
+                      "key": "targetValues",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:39.000Z",
+              "updatedAt": "2026-10-21T21:16:39.000Z",
+              "uid": "35240-c2f2b48b-7553-493e-bc57-957aed2d8c7f"
+            },
+            {
+              "id": "1dc9d129-52da-4a51-95bb-72458f17fe6f",
+              "name": "Internal Server Error.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/programs?targetType=<string>&targetValues=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "programs"
+                  ],
+                  "query": [
+                    {
+                      "description": "Indicates targeting type, e.g. GROUP",
+                      "key": "targetType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of target values, e.g. group names",
+                      "key": "targetValues",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:39.000Z",
+              "updatedAt": "2026-10-21T21:16:39.000Z",
+              "uid": "35240-1dc9d129-52da-4a51-95bb-72458f17fe6f"
+            }
+          ],
+          "createdAt": "2026-10-21T21:16:39.000Z",
+          "updatedAt": "2026-10-21T21:16:39.000Z",
+          "uid": "35240-99e296db-77e0-4255-969e-144ff39f9b42"
+        },
+        {
+          "name": "create a program",
+          "id": "72121fa7-1f7d-4355-9a6f-68ef83fb00db",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"programName\": \"<string>\",\n  \"id\": \"AA1P\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"PROGRAM\",\n  \"programLongName\": null,\n  \"retailerName\": null,\n  \"retailerLongName\": null,\n  \"programType\": null,\n  \"country\": null,\n  \"principalSubdivision\": null,\n  \"timeZoneOffset\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  },\n  \"programDescriptions\": null,\n  \"bindingEvents\": false,\n  \"localPrice\": false,\n  \"payloadDescriptors\": null,\n  \"targets\": null\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/programs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "programs"
+              ]
+            },
+            "description": "Create a new program in the server."
+          },
+          "response": [
+            {
+              "id": "384d1efa-6475-4640-8733-02d992d5a9b0",
+              "name": "Created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programName\": \"<string>\",\n  \"id\": \"AA1P\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"PROGRAM\",\n  \"programLongName\": null,\n  \"retailerName\": null,\n  \"retailerLongName\": null,\n  \"programType\": null,\n  \"country\": null,\n  \"principalSubdivision\": null,\n  \"timeZoneOffset\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  },\n  \"programDescriptions\": null,\n  \"bindingEvents\": false,\n  \"localPrice\": false,\n  \"payloadDescriptors\": null,\n  \"targets\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/programs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "programs"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"programName\": \"<string>\",\n  \"id\": \"AA1P\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"PROGRAM\",\n  \"programLongName\": null,\n  \"retailerName\": null,\n  \"retailerLongName\": null,\n  \"programType\": null,\n  \"country\": null,\n  \"principalSubdivision\": null,\n  \"timeZoneOffset\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  },\n  \"programDescriptions\": null,\n  \"bindingEvents\": false,\n  \"localPrice\": false,\n  \"payloadDescriptors\": null,\n  \"targets\": null\n}",
+              "createdAt": "2026-10-21T21:16:39.000Z",
+              "updatedAt": "2026-10-21T21:16:39.000Z",
+              "uid": "35240-384d1efa-6475-4640-8733-02d992d5a9b0"
+            },
+            {
+              "id": "4d17f282-b0b6-4728-ad06-97c11d87385e",
+              "name": "Bad Request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programName\": \"<string>\",\n  \"id\": \"AA1P\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"PROGRAM\",\n  \"programLongName\": null,\n  \"retailerName\": null,\n  \"retailerLongName\": null,\n  \"programType\": null,\n  \"country\": null,\n  \"principalSubdivision\": null,\n  \"timeZoneOffset\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  },\n  \"programDescriptions\": null,\n  \"bindingEvents\": false,\n  \"localPrice\": false,\n  \"payloadDescriptors\": null,\n  \"targets\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/programs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "programs"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:39.000Z",
+              "updatedAt": "2026-10-21T21:16:39.000Z",
+              "uid": "35240-4d17f282-b0b6-4728-ad06-97c11d87385e"
+            },
+            {
+              "id": "d2e5bc7a-3ea1-4411-a3ab-9698dec3117c",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programName\": \"<string>\",\n  \"id\": \"AA1P\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"PROGRAM\",\n  \"programLongName\": null,\n  \"retailerName\": null,\n  \"retailerLongName\": null,\n  \"programType\": null,\n  \"country\": null,\n  \"principalSubdivision\": null,\n  \"timeZoneOffset\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  },\n  \"programDescriptions\": null,\n  \"bindingEvents\": false,\n  \"localPrice\": false,\n  \"payloadDescriptors\": null,\n  \"targets\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/programs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "programs"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:39.000Z",
+              "updatedAt": "2026-10-21T21:16:39.000Z",
+              "uid": "35240-d2e5bc7a-3ea1-4411-a3ab-9698dec3117c"
+            },
+            {
+              "id": "d6da8e02-21a3-487b-9645-33b471d48410",
+              "name": "Conflict. Implementation dependent response if program with the same programName exists.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programName\": \"<string>\",\n  \"id\": \"AA1P\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"PROGRAM\",\n  \"programLongName\": null,\n  \"retailerName\": null,\n  \"retailerLongName\": null,\n  \"programType\": null,\n  \"country\": null,\n  \"principalSubdivision\": null,\n  \"timeZoneOffset\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  },\n  \"programDescriptions\": null,\n  \"bindingEvents\": false,\n  \"localPrice\": false,\n  \"payloadDescriptors\": null,\n  \"targets\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/programs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "programs"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:39.000Z",
+              "updatedAt": "2026-10-21T21:16:39.000Z",
+              "uid": "35240-d6da8e02-21a3-487b-9645-33b471d48410"
+            },
+            {
+              "id": "87d00a3a-d0e8-4c6b-a451-4187a97d553e",
+              "name": "Internal Server Error.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programName\": \"<string>\",\n  \"id\": \"AA1P\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"PROGRAM\",\n  \"programLongName\": null,\n  \"retailerName\": null,\n  \"retailerLongName\": null,\n  \"programType\": null,\n  \"country\": null,\n  \"principalSubdivision\": null,\n  \"timeZoneOffset\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  },\n  \"programDescriptions\": null,\n  \"bindingEvents\": false,\n  \"localPrice\": false,\n  \"payloadDescriptors\": null,\n  \"targets\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/programs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "programs"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:39.000Z",
+              "updatedAt": "2026-10-21T21:16:39.000Z",
+              "uid": "35240-87d00a3a-d0e8-4c6b-a451-4187a97d553e"
+            }
+          ],
+          "createdAt": "2026-10-21T21:16:39.000Z",
+          "updatedAt": "2026-10-21T21:16:39.000Z",
+          "uid": "35240-72121fa7-1f7d-4355-9a6f-68ef83fb00db"
+        }
+      ],
+      "id": "d72818e1-34c3-4e2c-8ee7-f0256f973742",
+      "createdAt": "2026-10-21T21:16:39.000Z",
+      "updatedAt": "2026-10-21T21:16:39.000Z",
+      "uid": "35240-d72818e1-34c3-4e2c-8ee7-f0256f973742"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8081/openadr3"
+    }
+  ]
+}

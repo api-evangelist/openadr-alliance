@@ -1,0 +1,1630 @@
+{
+  "info": {
+    "_postman_id": "5bbccf6b-117f-4892-b805-1c5f8ee43250",
+    "name": "Openadr Alliance Events API",
+    "description": "Operations tagged events across 3 of this provider's published API definitions: openadr-3-0-0-openapi.yaml, openadr-3-0-1-openapi.yaml, openadr-3-1-0-openapi.yaml. Each path carries the servers of the definition it was published in.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:16:19.000Z",
+    "updatedAt": "2026-10-21T21:16:19.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5bbccf6b-117f-4892-b805-1c5f8ee43250"
+  },
+  "item": [
+    {
+      "name": "events",
+      "item": [
+        {
+          "name": "{eventID}",
+          "item": [
+            {
+              "name": "search events by ID",
+              "id": "fe5f709c-2465-4ee9-b291-5da45eb88922",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "auth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/events/:eventID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events",
+                    ":eventID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8844a6a3-9868-4ff2-a90c-ed6091fa042c",
+                      "key": "eventID",
+                      "value": "p8Kw8",
+                      "description": "(Required) object ID of event."
+                    }
+                  ]
+                },
+                "description": "Fetch event associated with the eventID in path."
+              },
+              "response": [
+                {
+                  "id": "ea4fa92b-2b34-40af-8cbc-cb4cd6dfb3a2",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"programID\": \"LCP\",\n    \"intervals\": [\n      {\n        \"id\": \"<integer>\",\n        \"payloads\": [\n          {\n            \"type\": \"<string>\",\n            \"values\": [\n              \"<number>\",\n              \"<number>\"\n            ]\n          },\n          {\n            \"type\": \"<string>\",\n            \"values\": [\n              \"<number>\",\n              \"<number>\"\n            ]\n          }\n        ],\n        \"intervalPeriod\": {\n          \"start\": null,\n          \"duration\": null,\n          \"randomizeStart\": null\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"payloads\": [\n          {\n            \"type\": \"<string>\",\n            \"values\": [\n              \"<number>\",\n              \"<number>\"\n            ]\n          },\n          {\n            \"type\": \"<string>\",\n            \"values\": [\n              \"<number>\",\n              \"<number>\"\n            ]\n          }\n        ],\n        \"intervalPeriod\": {\n          \"start\": null,\n          \"duration\": null,\n          \"randomizeStart\": null\n        }\n      }\n    ],\n    \"id\": \"Pg\",\n    \"createdDateTime\": null,\n    \"modificationDateTime\": null,\n    \"objectType\": \"EVENT\",\n    \"eventName\": null,\n    \"priority\": null,\n    \"targets\": null,\n    \"reportDescriptors\": null,\n    \"payloadDescriptors\": null,\n    \"intervalPeriod\": {\n      \"start\": null,\n      \"duration\": null,\n      \"randomizeStart\": null\n    }\n  },\n  {\n    \"programID\": \"0xmN_G6C\",\n    \"intervals\": [\n      {\n        \"id\": \"<integer>\",\n        \"payloads\": [\n          {\n            \"type\": \"<string>\",\n            \"values\": [\n              \"<number>\",\n              \"<number>\"\n            ]\n          },\n          {\n            \"type\": \"<string>\",\n            \"values\": [\n              \"<number>\",\n              \"<number>\"\n            ]\n          }\n        ],\n        \"intervalPeriod\": {\n          \"start\": null,\n          \"duration\": null,\n          \"randomizeStart\": null\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"payloads\": [\n          {\n            \"type\": \"<string>\",\n            \"values\": [\n              \"<number>\",\n              \"<number>\"\n            ]\n          },\n          {\n            \"type\": \"<string>\",\n            \"values\": [\n              \"<number>\",\n              \"<number>\"\n            ]\n          }\n        ],\n        \"intervalPeriod\": {\n          \"start\": null,\n          \"duration\": null,\n          \"randomizeStart\": null\n        }\n      }\n    ],\n    \"id\": \"jpLD\",\n    \"createdDateTime\": null,\n    \"modificationDateTime\": null,\n    \"objectType\": \"EVENT\",\n    \"eventName\": null,\n    \"priority\": null,\n    \"targets\": null,\n    \"reportDescriptors\": null,\n    \"payloadDescriptors\": null,\n    \"intervalPeriod\": {\n      \"start\": null,\n      \"duration\": null,\n      \"randomizeStart\": null\n    }\n  }\n]",
+                  "createdAt": "2026-10-21T21:16:19.000Z",
+                  "updatedAt": "2026-10-21T21:16:19.000Z",
+                  "uid": "35240-ea4fa92b-2b34-40af-8cbc-cb4cd6dfb3a2"
+                },
+                {
+                  "id": "43febc3a-520f-497e-af75-399a34265093",
+                  "name": "Bad Request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:19.000Z",
+                  "updatedAt": "2026-10-21T21:16:19.000Z",
+                  "uid": "35240-43febc3a-520f-497e-af75-399a34265093"
+                },
+                {
+                  "id": "1bc2c94c-da5a-41d7-86de-5d42da20b0e7",
+                  "name": "Forbidden.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:19.000Z",
+                  "updatedAt": "2026-10-21T21:16:19.000Z",
+                  "uid": "35240-1bc2c94c-da5a-41d7-86de-5d42da20b0e7"
+                },
+                {
+                  "id": "91e6253b-6d48-45f3-9c0e-4862988d91c1",
+                  "name": "Internal Server Error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:19.000Z",
+                  "updatedAt": "2026-10-21T21:16:19.000Z",
+                  "uid": "35240-91e6253b-6d48-45f3-9c0e-4862988d91c1"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:19.000Z",
+              "updatedAt": "2026-10-21T21:16:19.000Z",
+              "uid": "35240-fe5f709c-2465-4ee9-b291-5da45eb88922"
+            },
+            {
+              "name": "update an event",
+              "id": "b1b685af-1bd6-4d73-90ff-2f1d084f72ab",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "auth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programID\": \"1ycnIlGKD\",\n  \"intervals\": [\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \" \",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"EVENT\",\n  \"eventName\": null,\n  \"priority\": null,\n  \"targets\": null,\n  \"reportDescriptors\": null,\n  \"payloadDescriptors\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/events/:eventID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events",
+                    ":eventID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8a92c504-ebef-454c-a14e-d18fa0d65d74",
+                      "key": "eventID",
+                      "value": "p8Kw8",
+                      "description": "(Required) object ID of event."
+                    }
+                  ]
+                },
+                "description": "Update the event specified by the eventID in path."
+              },
+              "response": [
+                {
+                  "id": "9301a8b9-6b42-4d82-9eac-466a01a5783e",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"programID\": \"1ycnIlGKD\",\n  \"intervals\": [\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \" \",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"EVENT\",\n  \"eventName\": null,\n  \"priority\": null,\n  \"targets\": null,\n  \"reportDescriptors\": null,\n  \"payloadDescriptors\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"programID\": \"1ycnIlGKD\",\n  \"intervals\": [\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \" \",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"EVENT\",\n  \"eventName\": null,\n  \"priority\": null,\n  \"targets\": null,\n  \"reportDescriptors\": null,\n  \"payloadDescriptors\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  }\n}",
+                  "createdAt": "2026-10-21T21:16:19.000Z",
+                  "updatedAt": "2026-10-21T21:16:19.000Z",
+                  "uid": "35240-9301a8b9-6b42-4d82-9eac-466a01a5783e"
+                },
+                {
+                  "id": "cc3a96cf-88d1-46ac-9e62-080808abd272",
+                  "name": "Bad Request.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"programID\": \"1ycnIlGKD\",\n  \"intervals\": [\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \" \",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"EVENT\",\n  \"eventName\": null,\n  \"priority\": null,\n  \"targets\": null,\n  \"reportDescriptors\": null,\n  \"payloadDescriptors\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:19.000Z",
+                  "updatedAt": "2026-10-21T21:16:19.000Z",
+                  "uid": "35240-cc3a96cf-88d1-46ac-9e62-080808abd272"
+                },
+                {
+                  "id": "cdd934f7-efce-4fbc-8725-c7b4a41bddff",
+                  "name": "Forbidden.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"programID\": \"1ycnIlGKD\",\n  \"intervals\": [\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \" \",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"EVENT\",\n  \"eventName\": null,\n  \"priority\": null,\n  \"targets\": null,\n  \"reportDescriptors\": null,\n  \"payloadDescriptors\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:19.000Z",
+                  "updatedAt": "2026-10-21T21:16:19.000Z",
+                  "uid": "35240-cdd934f7-efce-4fbc-8725-c7b4a41bddff"
+                },
+                {
+                  "id": "d481a438-6fc5-4cfd-9829-5c468dfd1a64",
+                  "name": "Conflict. Implementation dependent response if program with the same programName exists.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"programID\": \"1ycnIlGKD\",\n  \"intervals\": [\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \" \",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"EVENT\",\n  \"eventName\": null,\n  \"priority\": null,\n  \"targets\": null,\n  \"reportDescriptors\": null,\n  \"payloadDescriptors\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:19.000Z",
+                  "updatedAt": "2026-10-21T21:16:19.000Z",
+                  "uid": "35240-d481a438-6fc5-4cfd-9829-5c468dfd1a64"
+                },
+                {
+                  "id": "daf5d7ed-771b-44eb-a52e-81426bf0b841",
+                  "name": "Internal Server Error.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"programID\": \"1ycnIlGKD\",\n  \"intervals\": [\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \" \",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"EVENT\",\n  \"eventName\": null,\n  \"priority\": null,\n  \"targets\": null,\n  \"reportDescriptors\": null,\n  \"payloadDescriptors\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:19.000Z",
+                  "updatedAt": "2026-10-21T21:16:19.000Z",
+                  "uid": "35240-daf5d7ed-771b-44eb-a52e-81426bf0b841"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:19.000Z",
+              "updatedAt": "2026-10-21T21:16:19.000Z",
+              "uid": "35240-b1b685af-1bd6-4d73-90ff-2f1d084f72ab"
+            },
+            {
+              "name": "delete an event",
+              "id": "2a9071c5-c7d9-48a1-af05-36a0a3a87100",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "auth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/events/:eventID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events",
+                    ":eventID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "3c115571-2d33-445e-9537-9defef9f272c",
+                      "key": "eventID",
+                      "value": "p8Kw8",
+                      "description": "(Required) object ID of event."
+                    }
+                  ]
+                },
+                "description": "Delete the event specified by the eventID in path."
+              },
+              "response": [
+                {
+                  "id": "86b78f16-97ab-4ccf-a41d-f8147b4dad95",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"programID\": \"1ycnIlGKD\",\n  \"intervals\": [\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \" \",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"EVENT\",\n  \"eventName\": null,\n  \"priority\": null,\n  \"targets\": null,\n  \"reportDescriptors\": null,\n  \"payloadDescriptors\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  }\n}",
+                  "createdAt": "2026-10-21T21:16:19.000Z",
+                  "updatedAt": "2026-10-21T21:16:19.000Z",
+                  "uid": "35240-86b78f16-97ab-4ccf-a41d-f8147b4dad95"
+                },
+                {
+                  "id": "15c1c62c-4416-40c4-9221-4637c6146fc0",
+                  "name": "Bad Request.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:19.000Z",
+                  "updatedAt": "2026-10-21T21:16:19.000Z",
+                  "uid": "35240-15c1c62c-4416-40c4-9221-4637c6146fc0"
+                },
+                {
+                  "id": "f5017cf5-2763-40de-812c-38500ac3cf01",
+                  "name": "Forbidden.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:19.000Z",
+                  "updatedAt": "2026-10-21T21:16:19.000Z",
+                  "uid": "35240-f5017cf5-2763-40de-812c-38500ac3cf01"
+                },
+                {
+                  "id": "87571723-4932-4cd7-a339-c0bdb53d867d",
+                  "name": "Internal Server Error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:19.000Z",
+                  "updatedAt": "2026-10-21T21:16:19.000Z",
+                  "uid": "35240-87571723-4932-4cd7-a339-c0bdb53d867d"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:19.000Z",
+              "updatedAt": "2026-10-21T21:16:19.000Z",
+              "uid": "35240-2a9071c5-c7d9-48a1-af05-36a0a3a87100"
+            }
+          ],
+          "id": "9e6b163f-f38c-44e7-a3d4-e0af69a9a607",
+          "createdAt": "2026-10-21T21:16:19.000Z",
+          "updatedAt": "2026-10-21T21:16:19.000Z",
+          "uid": "35240-9e6b163f-f38c-44e7-a3d4-e0af69a9a607"
+        },
+        {
+          "name": "searches all events",
+          "id": "cf775c20-03df-4640-8739-fffee1f1fd88",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/events?programID=p8Kw8&targetType=<string>&targetValues=<string>&targetValues=<string>&skip=<integer>&limit=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "events"
+              ],
+              "query": [
+                {
+                  "description": "filter results to events with programID.",
+                  "key": "programID",
+                  "value": "p8Kw8"
+                },
+                {
+                  "description": "Indicates targeting type, e.g. GROUP",
+                  "key": "targetType",
+                  "value": "<string>"
+                },
+                {
+                  "description": "List of target values, e.g. group names",
+                  "key": "targetValues",
+                  "value": "<string>"
+                },
+                {
+                  "description": "List of target values, e.g. group names",
+                  "key": "targetValues",
+                  "value": "<string>"
+                },
+                {
+                  "description": "number of records to skip for pagination.",
+                  "key": "skip",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "maximum number of records to return.",
+                  "key": "limit",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "List all events known to the server. May filter results by programID query param.\nUse skip and pagination query params to limit response size."
+          },
+          "response": [
+            {
+              "id": "dcddd1fd-a4fe-4086-ba85-f259da14d809",
+              "name": "OK.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/events?programID=p8Kw8&targetType=<string>&targetValues=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ],
+                  "query": [
+                    {
+                      "description": "filter results to events with programID.",
+                      "key": "programID",
+                      "value": "p8Kw8"
+                    },
+                    {
+                      "description": "Indicates targeting type, e.g. GROUP",
+                      "key": "targetType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of target values, e.g. group names",
+                      "key": "targetValues",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"programID\": \"LCP\",\n    \"intervals\": [\n      {\n        \"id\": \"<integer>\",\n        \"payloads\": [\n          {\n            \"type\": \"<string>\",\n            \"values\": [\n              \"<number>\",\n              \"<number>\"\n            ]\n          },\n          {\n            \"type\": \"<string>\",\n            \"values\": [\n              \"<number>\",\n              \"<number>\"\n            ]\n          }\n        ],\n        \"intervalPeriod\": {\n          \"start\": null,\n          \"duration\": null,\n          \"randomizeStart\": null\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"payloads\": [\n          {\n            \"type\": \"<string>\",\n            \"values\": [\n              \"<number>\",\n              \"<number>\"\n            ]\n          },\n          {\n            \"type\": \"<string>\",\n            \"values\": [\n              \"<number>\",\n              \"<number>\"\n            ]\n          }\n        ],\n        \"intervalPeriod\": {\n          \"start\": null,\n          \"duration\": null,\n          \"randomizeStart\": null\n        }\n      }\n    ],\n    \"id\": \"Pg\",\n    \"createdDateTime\": null,\n    \"modificationDateTime\": null,\n    \"objectType\": \"EVENT\",\n    \"eventName\": null,\n    \"priority\": null,\n    \"targets\": null,\n    \"reportDescriptors\": null,\n    \"payloadDescriptors\": null,\n    \"intervalPeriod\": {\n      \"start\": null,\n      \"duration\": null,\n      \"randomizeStart\": null\n    }\n  },\n  {\n    \"programID\": \"0xmN_G6C\",\n    \"intervals\": [\n      {\n        \"id\": \"<integer>\",\n        \"payloads\": [\n          {\n            \"type\": \"<string>\",\n            \"values\": [\n              \"<number>\",\n              \"<number>\"\n            ]\n          },\n          {\n            \"type\": \"<string>\",\n            \"values\": [\n              \"<number>\",\n              \"<number>\"\n            ]\n          }\n        ],\n        \"intervalPeriod\": {\n          \"start\": null,\n          \"duration\": null,\n          \"randomizeStart\": null\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"payloads\": [\n          {\n            \"type\": \"<string>\",\n            \"values\": [\n              \"<number>\",\n              \"<number>\"\n            ]\n          },\n          {\n            \"type\": \"<string>\",\n            \"values\": [\n              \"<number>\",\n              \"<number>\"\n            ]\n          }\n        ],\n        \"intervalPeriod\": {\n          \"start\": null,\n          \"duration\": null,\n          \"randomizeStart\": null\n        }\n      }\n    ],\n    \"id\": \"jpLD\",\n    \"createdDateTime\": null,\n    \"modificationDateTime\": null,\n    \"objectType\": \"EVENT\",\n    \"eventName\": null,\n    \"priority\": null,\n    \"targets\": null,\n    \"reportDescriptors\": null,\n    \"payloadDescriptors\": null,\n    \"intervalPeriod\": {\n      \"start\": null,\n      \"duration\": null,\n      \"randomizeStart\": null\n    }\n  }\n]",
+              "createdAt": "2026-10-21T21:16:19.000Z",
+              "updatedAt": "2026-10-21T21:16:19.000Z",
+              "uid": "35240-dcddd1fd-a4fe-4086-ba85-f259da14d809"
+            },
+            {
+              "id": "473c1b1a-d508-4c0d-bc8d-f351f7e5b60a",
+              "name": "Bad Request.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/events?programID=p8Kw8&targetType=<string>&targetValues=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ],
+                  "query": [
+                    {
+                      "description": "filter results to events with programID.",
+                      "key": "programID",
+                      "value": "p8Kw8"
+                    },
+                    {
+                      "description": "Indicates targeting type, e.g. GROUP",
+                      "key": "targetType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of target values, e.g. group names",
+                      "key": "targetValues",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:19.000Z",
+              "updatedAt": "2026-10-21T21:16:19.000Z",
+              "uid": "35240-473c1b1a-d508-4c0d-bc8d-f351f7e5b60a"
+            },
+            {
+              "id": "1473c215-dfbf-408e-a876-81efabb0ae93",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/events?programID=p8Kw8&targetType=<string>&targetValues=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ],
+                  "query": [
+                    {
+                      "description": "filter results to events with programID.",
+                      "key": "programID",
+                      "value": "p8Kw8"
+                    },
+                    {
+                      "description": "Indicates targeting type, e.g. GROUP",
+                      "key": "targetType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of target values, e.g. group names",
+                      "key": "targetValues",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:19.000Z",
+              "updatedAt": "2026-10-21T21:16:19.000Z",
+              "uid": "35240-1473c215-dfbf-408e-a876-81efabb0ae93"
+            },
+            {
+              "id": "aab0137a-c440-4431-9d23-42f74615a4ea",
+              "name": "Internal Server Error.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/events?programID=p8Kw8&targetType=<string>&targetValues=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ],
+                  "query": [
+                    {
+                      "description": "filter results to events with programID.",
+                      "key": "programID",
+                      "value": "p8Kw8"
+                    },
+                    {
+                      "description": "Indicates targeting type, e.g. GROUP",
+                      "key": "targetType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of target values, e.g. group names",
+                      "key": "targetValues",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:19.000Z",
+              "updatedAt": "2026-10-21T21:16:19.000Z",
+              "uid": "35240-aab0137a-c440-4431-9d23-42f74615a4ea"
+            }
+          ],
+          "createdAt": "2026-10-21T21:16:19.000Z",
+          "updatedAt": "2026-10-21T21:16:19.000Z",
+          "uid": "35240-cf775c20-03df-4640-8739-fffee1f1fd88"
+        },
+        {
+          "name": "create an event",
+          "id": "8a78c2f7-ac9f-4baf-9278-10fe2c40210b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"programID\": \"1ycnIlGKD\",\n  \"intervals\": [\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \" \",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"EVENT\",\n  \"eventName\": null,\n  \"priority\": null,\n  \"targets\": null,\n  \"reportDescriptors\": null,\n  \"payloadDescriptors\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "events"
+              ]
+            },
+            "description": "Create a new event in the server."
+          },
+          "response": [
+            {
+              "id": "01316e7a-2722-4c76-bd91-96a153dcfecd",
+              "name": "Created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programID\": \"1ycnIlGKD\",\n  \"intervals\": [\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \" \",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"EVENT\",\n  \"eventName\": null,\n  \"priority\": null,\n  \"targets\": null,\n  \"reportDescriptors\": null,\n  \"payloadDescriptors\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/events",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"programID\": \"1ycnIlGKD\",\n  \"intervals\": [\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \" \",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"EVENT\",\n  \"eventName\": null,\n  \"priority\": null,\n  \"targets\": null,\n  \"reportDescriptors\": null,\n  \"payloadDescriptors\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  }\n}",
+              "createdAt": "2026-10-21T21:16:19.000Z",
+              "updatedAt": "2026-10-21T21:16:19.000Z",
+              "uid": "35240-01316e7a-2722-4c76-bd91-96a153dcfecd"
+            },
+            {
+              "id": "dc69fb3d-46f6-4a3f-85d5-b372240bb96d",
+              "name": "Bad Request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programID\": \"1ycnIlGKD\",\n  \"intervals\": [\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \" \",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"EVENT\",\n  \"eventName\": null,\n  \"priority\": null,\n  \"targets\": null,\n  \"reportDescriptors\": null,\n  \"payloadDescriptors\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/events",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:19.000Z",
+              "updatedAt": "2026-10-21T21:16:19.000Z",
+              "uid": "35240-dc69fb3d-46f6-4a3f-85d5-b372240bb96d"
+            },
+            {
+              "id": "c4a6d72f-54bd-4744-a567-81aec796822c",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programID\": \"1ycnIlGKD\",\n  \"intervals\": [\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \" \",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"EVENT\",\n  \"eventName\": null,\n  \"priority\": null,\n  \"targets\": null,\n  \"reportDescriptors\": null,\n  \"payloadDescriptors\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/events",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:19.000Z",
+              "updatedAt": "2026-10-21T21:16:19.000Z",
+              "uid": "35240-c4a6d72f-54bd-4744-a567-81aec796822c"
+            },
+            {
+              "id": "614a6440-7da8-47eb-a940-58139135e955",
+              "name": "Conflict. Implementation dependent response if event with  same name already exists.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programID\": \"1ycnIlGKD\",\n  \"intervals\": [\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \" \",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"EVENT\",\n  \"eventName\": null,\n  \"priority\": null,\n  \"targets\": null,\n  \"reportDescriptors\": null,\n  \"payloadDescriptors\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/events",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:19.000Z",
+              "updatedAt": "2026-10-21T21:16:19.000Z",
+              "uid": "35240-614a6440-7da8-47eb-a940-58139135e955"
+            },
+            {
+              "id": "9b6d19a4-46dc-430a-9060-af645d0cb660",
+              "name": "Internal Server Error.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programID\": \"1ycnIlGKD\",\n  \"intervals\": [\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"payloads\": [\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"values\": [\n            \"<number>\",\n            \"<number>\"\n          ]\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \" \",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"EVENT\",\n  \"eventName\": null,\n  \"priority\": null,\n  \"targets\": null,\n  \"reportDescriptors\": null,\n  \"payloadDescriptors\": null,\n  \"intervalPeriod\": {\n    \"start\": null,\n    \"duration\": null,\n    \"randomizeStart\": null\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/events",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:19.000Z",
+              "updatedAt": "2026-10-21T21:16:19.000Z",
+              "uid": "35240-9b6d19a4-46dc-430a-9060-af645d0cb660"
+            }
+          ],
+          "createdAt": "2026-10-21T21:16:19.000Z",
+          "updatedAt": "2026-10-21T21:16:19.000Z",
+          "uid": "35240-8a78c2f7-ac9f-4baf-9278-10fe2c40210b"
+        }
+      ],
+      "id": "f469eb7d-7ad2-4d59-a104-079a9114102f",
+      "createdAt": "2026-10-21T21:16:19.000Z",
+      "updatedAt": "2026-10-21T21:16:19.000Z",
+      "uid": "35240-f469eb7d-7ad2-4d59-a104-079a9114102f"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8081/openadr3"
+    }
+  ]
+}

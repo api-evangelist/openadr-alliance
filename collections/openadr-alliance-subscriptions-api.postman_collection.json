@@ -1,0 +1,1685 @@
+{
+  "info": {
+    "_postman_id": "be747572-c3eb-4319-a0df-7ea37fdebc2c",
+    "name": "Openadr Alliance Subscriptions API",
+    "description": "Operations tagged subscriptions across 3 of this provider's published API definitions: openadr-3-0-0-openapi.yaml, openadr-3-0-1-openapi.yaml, openadr-3-1-0-openapi.yaml. Each path carries the servers of the definition it was published in.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:16:57.000Z",
+    "updatedAt": "2026-10-21T21:16:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-be747572-c3eb-4319-a0df-7ea37fdebc2c"
+  },
+  "item": [
+    {
+      "name": "subscriptions",
+      "item": [
+        {
+          "name": "{subscriptionID}",
+          "item": [
+            {
+              "name": "search subscriptions by ID",
+              "id": "0fe8d730-7c33-4074-afea-e9b68b75f420",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "auth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions/:subscriptionID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "3f8d2127-c113-4899-bf0a-b08376300bd0",
+                      "key": "subscriptionID",
+                      "value": "wor-X",
+                      "description": "(Required) object ID of the associated subscription."
+                    }
+                  ]
+                },
+                "description": "Return the subscription specified by subscriptionID specified in path."
+              },
+              "response": [
+                {
+                  "id": "fc6acec0-ce7f-441f-9e5b-862164f1521d",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:subscriptionID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":subscriptionID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"clientName\": null,\n  \"programID\": \"v4o2uQK\",\n  \"objectOperations\": [\n    {\n      \"objects\": [\n        \"SUBSCRIPTION\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"DELETE\",\n        \"GET\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    },\n    {\n      \"objects\": [\n        \"EVENT\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"PUT\",\n        \"DELETE\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    }\n  ],\n  \"id\": \"JFkll\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"SUBSCRIPTION\",\n  \"targets\": null\n}",
+                  "createdAt": "2026-10-21T21:16:58.000Z",
+                  "updatedAt": "2026-10-21T21:16:58.000Z",
+                  "uid": "35240-fc6acec0-ce7f-441f-9e5b-862164f1521d"
+                },
+                {
+                  "id": "d671f08a-ba74-4acd-adf6-d3b4f66ca1c0",
+                  "name": "Bad Request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:subscriptionID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":subscriptionID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:58.000Z",
+                  "updatedAt": "2026-10-21T21:16:58.000Z",
+                  "uid": "35240-d671f08a-ba74-4acd-adf6-d3b4f66ca1c0"
+                },
+                {
+                  "id": "2b0ced34-ec62-440a-a04b-9cb7e53e69a7",
+                  "name": "Forbidden.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:subscriptionID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":subscriptionID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:58.000Z",
+                  "updatedAt": "2026-10-21T21:16:58.000Z",
+                  "uid": "35240-2b0ced34-ec62-440a-a04b-9cb7e53e69a7"
+                },
+                {
+                  "id": "839a0255-127f-4d6b-a18f-5317002fb8c2",
+                  "name": "Internal Server Error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:subscriptionID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":subscriptionID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:58.000Z",
+                  "updatedAt": "2026-10-21T21:16:58.000Z",
+                  "uid": "35240-839a0255-127f-4d6b-a18f-5317002fb8c2"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:58.000Z",
+              "updatedAt": "2026-10-21T21:16:58.000Z",
+              "uid": "35240-0fe8d730-7c33-4074-afea-e9b68b75f420"
+            },
+            {
+              "name": "update subscription",
+              "id": "d7c62d54-5784-4cd2-9733-3daf4c1c3dae",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "auth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": null,\n  \"programID\": \"v4o2uQK\",\n  \"objectOperations\": [\n    {\n      \"objects\": [\n        \"SUBSCRIPTION\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"DELETE\",\n        \"GET\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    },\n    {\n      \"objects\": [\n        \"EVENT\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"PUT\",\n        \"DELETE\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    }\n  ],\n  \"id\": \"JFkll\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"SUBSCRIPTION\",\n  \"targets\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions/:subscriptionID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d404a5bd-931a-4a96-856e-a617179ec683",
+                      "key": "subscriptionID",
+                      "value": "wor-X",
+                      "description": "(Required) object ID of the associated subscription."
+                    }
+                  ]
+                },
+                "description": "Update the subscription specified by subscriptionID specified in path."
+              },
+              "response": [
+                {
+                  "id": "6e006b86-369e-4676-9b92-b3f8a6cef774",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"clientName\": null,\n  \"programID\": \"v4o2uQK\",\n  \"objectOperations\": [\n    {\n      \"objects\": [\n        \"SUBSCRIPTION\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"DELETE\",\n        \"GET\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    },\n    {\n      \"objects\": [\n        \"EVENT\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"PUT\",\n        \"DELETE\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    }\n  ],\n  \"id\": \"JFkll\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"SUBSCRIPTION\",\n  \"targets\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:subscriptionID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":subscriptionID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"clientName\": null,\n  \"programID\": \"v4o2uQK\",\n  \"objectOperations\": [\n    {\n      \"objects\": [\n        \"SUBSCRIPTION\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"DELETE\",\n        \"GET\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    },\n    {\n      \"objects\": [\n        \"EVENT\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"PUT\",\n        \"DELETE\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    }\n  ],\n  \"id\": \"JFkll\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"SUBSCRIPTION\",\n  \"targets\": null\n}",
+                  "createdAt": "2026-10-21T21:16:58.000Z",
+                  "updatedAt": "2026-10-21T21:16:58.000Z",
+                  "uid": "35240-6e006b86-369e-4676-9b92-b3f8a6cef774"
+                },
+                {
+                  "id": "58bc45bc-069d-481c-abba-6f377cfd81ed",
+                  "name": "Bad Request.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"clientName\": null,\n  \"programID\": \"v4o2uQK\",\n  \"objectOperations\": [\n    {\n      \"objects\": [\n        \"SUBSCRIPTION\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"DELETE\",\n        \"GET\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    },\n    {\n      \"objects\": [\n        \"EVENT\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"PUT\",\n        \"DELETE\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    }\n  ],\n  \"id\": \"JFkll\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"SUBSCRIPTION\",\n  \"targets\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:subscriptionID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":subscriptionID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:58.000Z",
+                  "updatedAt": "2026-10-21T21:16:58.000Z",
+                  "uid": "35240-58bc45bc-069d-481c-abba-6f377cfd81ed"
+                },
+                {
+                  "id": "e9c2b990-ce43-4526-bfba-c4f33beb3cf7",
+                  "name": "Forbidden.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"clientName\": null,\n  \"programID\": \"v4o2uQK\",\n  \"objectOperations\": [\n    {\n      \"objects\": [\n        \"SUBSCRIPTION\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"DELETE\",\n        \"GET\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    },\n    {\n      \"objects\": [\n        \"EVENT\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"PUT\",\n        \"DELETE\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    }\n  ],\n  \"id\": \"JFkll\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"SUBSCRIPTION\",\n  \"targets\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:subscriptionID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":subscriptionID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:58.000Z",
+                  "updatedAt": "2026-10-21T21:16:58.000Z",
+                  "uid": "35240-e9c2b990-ce43-4526-bfba-c4f33beb3cf7"
+                },
+                {
+                  "id": "f53b5337-b29f-43ee-aaca-08553634da8b",
+                  "name": "Conflict. Implementation dependent response if program with the same programName exists.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"clientName\": null,\n  \"programID\": \"v4o2uQK\",\n  \"objectOperations\": [\n    {\n      \"objects\": [\n        \"SUBSCRIPTION\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"DELETE\",\n        \"GET\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    },\n    {\n      \"objects\": [\n        \"EVENT\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"PUT\",\n        \"DELETE\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    }\n  ],\n  \"id\": \"JFkll\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"SUBSCRIPTION\",\n  \"targets\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:subscriptionID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":subscriptionID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:58.000Z",
+                  "updatedAt": "2026-10-21T21:16:58.000Z",
+                  "uid": "35240-f53b5337-b29f-43ee-aaca-08553634da8b"
+                },
+                {
+                  "id": "18d1899a-c839-4262-b25f-0a9b78e2d6f3",
+                  "name": "Internal Server Error.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"clientName\": null,\n  \"programID\": \"v4o2uQK\",\n  \"objectOperations\": [\n    {\n      \"objects\": [\n        \"SUBSCRIPTION\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"DELETE\",\n        \"GET\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    },\n    {\n      \"objects\": [\n        \"EVENT\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"PUT\",\n        \"DELETE\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    }\n  ],\n  \"id\": \"JFkll\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"SUBSCRIPTION\",\n  \"targets\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:subscriptionID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":subscriptionID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:58.000Z",
+                  "updatedAt": "2026-10-21T21:16:58.000Z",
+                  "uid": "35240-18d1899a-c839-4262-b25f-0a9b78e2d6f3"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:58.000Z",
+              "updatedAt": "2026-10-21T21:16:58.000Z",
+              "uid": "35240-d7c62d54-5784-4cd2-9733-3daf4c1c3dae"
+            },
+            {
+              "name": "delete subscription",
+              "id": "8217ff52-69a0-46f8-8a37-0a9e2bcbf550",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "auth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions/:subscriptionID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f1bc4c44-f0ad-4ee9-b66e-70f1a403ce3a",
+                      "key": "subscriptionID",
+                      "value": "wor-X",
+                      "description": "(Required) object ID of the associated subscription."
+                    }
+                  ]
+                },
+                "description": "Delete the subscription specified by subscriptionID specified in path."
+              },
+              "response": [
+                {
+                  "id": "6541a3c7-c0ec-4312-84b4-a5289cdc3061",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:subscriptionID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":subscriptionID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"clientName\": null,\n  \"programID\": \"v4o2uQK\",\n  \"objectOperations\": [\n    {\n      \"objects\": [\n        \"SUBSCRIPTION\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"DELETE\",\n        \"GET\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    },\n    {\n      \"objects\": [\n        \"EVENT\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"PUT\",\n        \"DELETE\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    }\n  ],\n  \"id\": \"JFkll\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"SUBSCRIPTION\",\n  \"targets\": null\n}",
+                  "createdAt": "2026-10-21T21:16:58.000Z",
+                  "updatedAt": "2026-10-21T21:16:58.000Z",
+                  "uid": "35240-6541a3c7-c0ec-4312-84b4-a5289cdc3061"
+                },
+                {
+                  "id": "4b46c2d3-c8e3-472d-a53e-d25d2d04af30",
+                  "name": "Bad Request.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:subscriptionID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":subscriptionID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:58.000Z",
+                  "updatedAt": "2026-10-21T21:16:58.000Z",
+                  "uid": "35240-4b46c2d3-c8e3-472d-a53e-d25d2d04af30"
+                },
+                {
+                  "id": "205d00d3-8516-4577-afa5-9bd22f81a16f",
+                  "name": "Forbidden.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:subscriptionID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":subscriptionID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:58.000Z",
+                  "updatedAt": "2026-10-21T21:16:58.000Z",
+                  "uid": "35240-205d00d3-8516-4577-afa5-9bd22f81a16f"
+                },
+                {
+                  "id": "5bd3591d-d445-4e96-8a7c-e6bc1622ab27",
+                  "name": "Internal Server Error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:subscriptionID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":subscriptionID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:58.000Z",
+                  "updatedAt": "2026-10-21T21:16:58.000Z",
+                  "uid": "35240-5bd3591d-d445-4e96-8a7c-e6bc1622ab27"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:58.000Z",
+              "updatedAt": "2026-10-21T21:16:58.000Z",
+              "uid": "35240-8217ff52-69a0-46f8-8a37-0a9e2bcbf550"
+            }
+          ],
+          "id": "f6153a2c-0498-480e-871d-d190be941b8d",
+          "createdAt": "2026-10-21T21:16:58.000Z",
+          "updatedAt": "2026-10-21T21:16:58.000Z",
+          "uid": "35240-f6153a2c-0498-480e-871d-d190be941b8d"
+        },
+        {
+          "name": "search subscriptions",
+          "id": "527e0fdc-3ba8-4a2f-b6ab-503c8cb4a2e0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/subscriptions?programID=wor-X&clientName=<string>&targetType=<string>&targetValues=<string>&targetValues=<string>&objects=SUBSCRIPTION&objects=SUBSCRIPTION&skip=<integer>&limit=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "subscriptions"
+              ],
+              "query": [
+                {
+                  "description": "filter results to subscriptions with programID.",
+                  "key": "programID",
+                  "value": "wor-X"
+                },
+                {
+                  "description": "filter results to subscriptions with clientName.",
+                  "key": "clientName",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Indicates targeting type, e.g. GROUP",
+                  "key": "targetType",
+                  "value": "<string>"
+                },
+                {
+                  "description": "List of target values, e.g. group names",
+                  "key": "targetValues",
+                  "value": "<string>"
+                },
+                {
+                  "description": "List of target values, e.g. group names",
+                  "key": "targetValues",
+                  "value": "<string>"
+                },
+                {
+                  "description": "list of objects to subscribe to.",
+                  "key": "objects",
+                  "value": "SUBSCRIPTION"
+                },
+                {
+                  "description": "list of objects to subscribe to.",
+                  "key": "objects",
+                  "value": "SUBSCRIPTION"
+                },
+                {
+                  "description": "number of records to skip for pagination.",
+                  "key": "skip",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "maximum number of records to return.",
+                  "key": "limit",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "List all subscriptions.\nMay filter results by programID and clientID as query params.\nMay filter results by objects as query param. See objectTypes schema.\nUse skip and pagination query params to limit response size."
+          },
+          "response": [
+            {
+              "id": "54156a28-c319-4c36-8807-b0b8b883a0dc",
+              "name": "OK.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions?programID=wor-X&clientName=<string>&targetType=<string>&targetValues=<string>&objects=SUBSCRIPTION&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "description": "filter results to subscriptions with programID.",
+                      "key": "programID",
+                      "value": "wor-X"
+                    },
+                    {
+                      "description": "filter results to subscriptions with clientName.",
+                      "key": "clientName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates targeting type, e.g. GROUP",
+                      "key": "targetType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of target values, e.g. group names",
+                      "key": "targetValues",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "list of objects to subscribe to.",
+                      "key": "objects",
+                      "value": "SUBSCRIPTION"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"clientName\": null,\n    \"programID\": \"2hoyh0L0Ad\",\n    \"objectOperations\": [\n      {\n        \"objects\": [\n          \"REPORT\",\n          \"PROGRAM\"\n        ],\n        \"operations\": [\n          \"POST\",\n          \"GET\"\n        ],\n        \"callbackUrl\": \"<uri>\",\n        \"bearerToken\": null\n      },\n      {\n        \"objects\": [\n          \"EVENT\",\n          \"SUBSCRIPTION\"\n        ],\n        \"operations\": [\n          \"DELETE\",\n          \"DELETE\"\n        ],\n        \"callbackUrl\": \"<uri>\",\n        \"bearerToken\": null\n      }\n    ],\n    \"id\": \"u\",\n    \"createdDateTime\": null,\n    \"modificationDateTime\": null,\n    \"objectType\": \"SUBSCRIPTION\",\n    \"targets\": null\n  },\n  {\n    \"clientName\": null,\n    \"programID\": \"206eFrvb-M\",\n    \"objectOperations\": [\n      {\n        \"objects\": [\n          \"VEN\",\n          \"SUBSCRIPTION\"\n        ],\n        \"operations\": [\n          \"PUT\",\n          \"PUT\"\n        ],\n        \"callbackUrl\": \"<uri>\",\n        \"bearerToken\": null\n      },\n      {\n        \"objects\": [\n          \"REPORT\",\n          \"REPORT\"\n        ],\n        \"operations\": [\n          \"GET\",\n          \"PUT\"\n        ],\n        \"callbackUrl\": \"<uri>\",\n        \"bearerToken\": null\n      }\n    ],\n    \"id\": \"bgI\",\n    \"createdDateTime\": null,\n    \"modificationDateTime\": null,\n    \"objectType\": \"SUBSCRIPTION\",\n    \"targets\": null\n  }\n]",
+              "createdAt": "2026-10-21T21:16:58.000Z",
+              "updatedAt": "2026-10-21T21:16:58.000Z",
+              "uid": "35240-54156a28-c319-4c36-8807-b0b8b883a0dc"
+            },
+            {
+              "id": "aa6737da-bd83-401f-b74f-8cf5f69481fd",
+              "name": "Bad Request.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions?programID=wor-X&clientName=<string>&targetType=<string>&targetValues=<string>&objects=SUBSCRIPTION&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "description": "filter results to subscriptions with programID.",
+                      "key": "programID",
+                      "value": "wor-X"
+                    },
+                    {
+                      "description": "filter results to subscriptions with clientName.",
+                      "key": "clientName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates targeting type, e.g. GROUP",
+                      "key": "targetType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of target values, e.g. group names",
+                      "key": "targetValues",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "list of objects to subscribe to.",
+                      "key": "objects",
+                      "value": "SUBSCRIPTION"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:58.000Z",
+              "updatedAt": "2026-10-21T21:16:58.000Z",
+              "uid": "35240-aa6737da-bd83-401f-b74f-8cf5f69481fd"
+            },
+            {
+              "id": "01ff0b33-3b3d-45f5-9d99-f3afcc467f04",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions?programID=wor-X&clientName=<string>&targetType=<string>&targetValues=<string>&objects=SUBSCRIPTION&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "description": "filter results to subscriptions with programID.",
+                      "key": "programID",
+                      "value": "wor-X"
+                    },
+                    {
+                      "description": "filter results to subscriptions with clientName.",
+                      "key": "clientName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates targeting type, e.g. GROUP",
+                      "key": "targetType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of target values, e.g. group names",
+                      "key": "targetValues",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "list of objects to subscribe to.",
+                      "key": "objects",
+                      "value": "SUBSCRIPTION"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:58.000Z",
+              "updatedAt": "2026-10-21T21:16:58.000Z",
+              "uid": "35240-01ff0b33-3b3d-45f5-9d99-f3afcc467f04"
+            },
+            {
+              "id": "58d57412-61ac-44e0-b36a-8e26b82a61b0",
+              "name": "Internal Server Error.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions?programID=wor-X&clientName=<string>&targetType=<string>&targetValues=<string>&objects=SUBSCRIPTION&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "description": "filter results to subscriptions with programID.",
+                      "key": "programID",
+                      "value": "wor-X"
+                    },
+                    {
+                      "description": "filter results to subscriptions with clientName.",
+                      "key": "clientName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates targeting type, e.g. GROUP",
+                      "key": "targetType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "List of target values, e.g. group names",
+                      "key": "targetValues",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "list of objects to subscribe to.",
+                      "key": "objects",
+                      "value": "SUBSCRIPTION"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:58.000Z",
+              "updatedAt": "2026-10-21T21:16:58.000Z",
+              "uid": "35240-58d57412-61ac-44e0-b36a-8e26b82a61b0"
+            }
+          ],
+          "createdAt": "2026-10-21T21:16:58.000Z",
+          "updatedAt": "2026-10-21T21:16:58.000Z",
+          "uid": "35240-527e0fdc-3ba8-4a2f-b6ab-503c8cb4a2e0"
+        },
+        {
+          "name": "create subscription",
+          "id": "67cb368b-8adf-404a-a24a-4533c6b913d7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientName\": null,\n  \"programID\": \"v4o2uQK\",\n  \"objectOperations\": [\n    {\n      \"objects\": [\n        \"SUBSCRIPTION\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"DELETE\",\n        \"GET\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    },\n    {\n      \"objects\": [\n        \"EVENT\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"PUT\",\n        \"DELETE\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    }\n  ],\n  \"id\": \"JFkll\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"SUBSCRIPTION\",\n  \"targets\": null\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/subscriptions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "subscriptions"
+              ]
+            },
+            "description": "Create a new subscription."
+          },
+          "response": [
+            {
+              "id": "f558b766-3b7c-4b0e-be3a-aba921fe92d3",
+              "name": "Created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": null,\n  \"programID\": \"v4o2uQK\",\n  \"objectOperations\": [\n    {\n      \"objects\": [\n        \"SUBSCRIPTION\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"DELETE\",\n        \"GET\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    },\n    {\n      \"objects\": [\n        \"EVENT\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"PUT\",\n        \"DELETE\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    }\n  ],\n  \"id\": \"JFkll\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"SUBSCRIPTION\",\n  \"targets\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"clientName\": null,\n  \"programID\": \"v4o2uQK\",\n  \"objectOperations\": [\n    {\n      \"objects\": [\n        \"SUBSCRIPTION\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"DELETE\",\n        \"GET\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    },\n    {\n      \"objects\": [\n        \"EVENT\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"PUT\",\n        \"DELETE\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    }\n  ],\n  \"id\": \"JFkll\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"SUBSCRIPTION\",\n  \"targets\": null\n}",
+              "createdAt": "2026-10-21T21:16:58.000Z",
+              "updatedAt": "2026-10-21T21:16:58.000Z",
+              "uid": "35240-f558b766-3b7c-4b0e-be3a-aba921fe92d3"
+            },
+            {
+              "id": "a06beac7-f64e-4ef7-9a27-2ca161ac5e12",
+              "name": "Bad Request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": null,\n  \"programID\": \"v4o2uQK\",\n  \"objectOperations\": [\n    {\n      \"objects\": [\n        \"SUBSCRIPTION\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"DELETE\",\n        \"GET\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    },\n    {\n      \"objects\": [\n        \"EVENT\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"PUT\",\n        \"DELETE\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    }\n  ],\n  \"id\": \"JFkll\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"SUBSCRIPTION\",\n  \"targets\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:58.000Z",
+              "updatedAt": "2026-10-21T21:16:58.000Z",
+              "uid": "35240-a06beac7-f64e-4ef7-9a27-2ca161ac5e12"
+            },
+            {
+              "id": "e86e1827-78c0-43b8-b0c4-835f6587b24b",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": null,\n  \"programID\": \"v4o2uQK\",\n  \"objectOperations\": [\n    {\n      \"objects\": [\n        \"SUBSCRIPTION\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"DELETE\",\n        \"GET\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    },\n    {\n      \"objects\": [\n        \"EVENT\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"PUT\",\n        \"DELETE\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    }\n  ],\n  \"id\": \"JFkll\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"SUBSCRIPTION\",\n  \"targets\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:58.000Z",
+              "updatedAt": "2026-10-21T21:16:58.000Z",
+              "uid": "35240-e86e1827-78c0-43b8-b0c4-835f6587b24b"
+            },
+            {
+              "id": "e648a6e5-1893-41e0-9499-a5bedfcbdb32",
+              "name": "Conflict. Implementation dependent response if identical object already exists.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": null,\n  \"programID\": \"v4o2uQK\",\n  \"objectOperations\": [\n    {\n      \"objects\": [\n        \"SUBSCRIPTION\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"DELETE\",\n        \"GET\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    },\n    {\n      \"objects\": [\n        \"EVENT\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"PUT\",\n        \"DELETE\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    }\n  ],\n  \"id\": \"JFkll\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"SUBSCRIPTION\",\n  \"targets\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:58.000Z",
+              "updatedAt": "2026-10-21T21:16:58.000Z",
+              "uid": "35240-e648a6e5-1893-41e0-9499-a5bedfcbdb32"
+            },
+            {
+              "id": "108caa33-8ff8-4da2-b04e-f384cb6ae721",
+              "name": "Internal Server Error.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientName\": null,\n  \"programID\": \"v4o2uQK\",\n  \"objectOperations\": [\n    {\n      \"objects\": [\n        \"SUBSCRIPTION\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"DELETE\",\n        \"GET\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    },\n    {\n      \"objects\": [\n        \"EVENT\",\n        \"SUBSCRIPTION\"\n      ],\n      \"operations\": [\n        \"PUT\",\n        \"DELETE\"\n      ],\n      \"callbackUrl\": \"<uri>\",\n      \"bearerToken\": null\n    }\n  ],\n  \"id\": \"JFkll\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"SUBSCRIPTION\",\n  \"targets\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:58.000Z",
+              "updatedAt": "2026-10-21T21:16:58.000Z",
+              "uid": "35240-108caa33-8ff8-4da2-b04e-f384cb6ae721"
+            }
+          ],
+          "createdAt": "2026-10-21T21:16:58.000Z",
+          "updatedAt": "2026-10-21T21:16:58.000Z",
+          "uid": "35240-67cb368b-8adf-404a-a24a-4533c6b913d7"
+        }
+      ],
+      "id": "0bbf1055-7320-4183-b389-b984c9fa5435",
+      "createdAt": "2026-10-21T21:16:58.000Z",
+      "updatedAt": "2026-10-21T21:16:58.000Z",
+      "uid": "35240-0bbf1055-7320-4183-b389-b984c9fa5435"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8081/openadr3"
+    }
+  ]
+}

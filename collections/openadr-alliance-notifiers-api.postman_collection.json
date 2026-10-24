@@ -1,0 +1,122 @@
+{
+  "info": {
+    "_postman_id": "f48f3744-34fc-4ab5-ab40-2f2dae5a499a",
+    "name": "OpenADR 3 Notifiers API",
+    "description": "The OpenADR 3 API supports energy retailer to energy customer Demand Response programs.\n\nContact Support:\n Email: info@openadr.org",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:16:30.000Z",
+    "updatedAt": "2026-10-21T21:16:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f48f3744-34fc-4ab5-ab40-2f2dae5a499a"
+  },
+  "item": [
+    {
+      "name": "notifiers",
+      "item": [
+        {
+          "name": "List all notifier bindings",
+          "id": "5338dce3-aa0d-420f-b3ef-a85df3290891",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read_all read_targets read_ven_objects write_programs write_events write_reports write_subscriptions write_vens",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/notifiers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifiers"
+              ]
+            },
+            "description": "List all notifier bindings supported by the server"
+          },
+          "response": [
+            {
+              "id": "b5dd8d71-733c-4e86-b457-977c386e6f03",
+              "name": "OK.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/notifiers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "notifiers"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"WEBHOOK\": \"<boolean>\",\n  \"MQTT\": {\n    \"URIS\": [\n      \"<uri>\",\n      \"<uri>\"\n    ],\n    \"serialization\": \"JSON\",\n    \"authentication\": {\n      \"method\": \"ANONYMOUS\"\n    }\n  }\n}",
+              "createdAt": "2026-10-21T21:16:30.000Z",
+              "updatedAt": "2026-10-21T21:16:30.000Z",
+              "uid": "35240-b5dd8d71-733c-4e86-b457-977c386e6f03"
+            }
+          ],
+          "createdAt": "2026-10-21T21:16:30.000Z",
+          "updatedAt": "2026-10-21T21:16:30.000Z",
+          "uid": "35240-5338dce3-aa0d-420f-b3ef-a85df3290891"
+        }
+      ],
+      "id": "39a12040-8eec-4d00-9775-3b76bb6ecd47",
+      "createdAt": "2026-10-21T21:16:30.000Z",
+      "updatedAt": "2026-10-21T21:16:30.000Z",
+      "uid": "35240-39a12040-8eec-4d00-9775-3b76bb6ecd47"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0"
+    }
+  ]
+}

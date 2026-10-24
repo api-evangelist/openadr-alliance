@@ -1,0 +1,1600 @@
+{
+  "info": {
+    "_postman_id": "aa017cef-7a57-4b57-88fd-98277418d700",
+    "name": "Openadr Alliance Reports API",
+    "description": "Operations tagged reports across 3 of this provider's published API definitions: openadr-3-0-0-openapi.yaml, openadr-3-0-1-openapi.yaml, openadr-3-1-0-openapi.yaml. Each path carries the servers of the definition it was published in.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:16:44.000Z",
+    "updatedAt": "2026-10-21T21:16:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-aa017cef-7a57-4b57-88fd-98277418d700"
+  },
+  "item": [
+    {
+      "name": "reports",
+      "item": [
+        {
+          "name": "{reportID}",
+          "item": [
+            {
+              "name": "searches reports by reportID",
+              "id": "6b997928-9034-4800-a2c7-d5851ea8f5b4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "auth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports/:reportID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports",
+                    ":reportID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "572e07ee-459c-4314-9a53-feb711938416",
+                      "key": "reportID",
+                      "value": "gnrZMbiG",
+                      "description": "(Required) object ID of a report."
+                    }
+                  ]
+                },
+                "description": "Fetch the report specified by the reportID in path."
+              },
+              "response": [
+                {
+                  "id": "99994393-9f84-4ce0-8139-cef3c9707028",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"programID\": \" \",\n  \"eventID\": \"U9viPNwow\",\n  \"clientName\": null,\n  \"resources\": [\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \"YR556rHsMU\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"REPORT\",\n  \"reportName\": null,\n  \"payloadDescriptors\": null\n}",
+                  "createdAt": "2026-10-21T21:16:44.000Z",
+                  "updatedAt": "2026-10-21T21:16:44.000Z",
+                  "uid": "35240-99994393-9f84-4ce0-8139-cef3c9707028"
+                },
+                {
+                  "id": "b9b2cfd5-3961-4151-8e9d-026d3518fb79",
+                  "name": "Bad Request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:44.000Z",
+                  "updatedAt": "2026-10-21T21:16:44.000Z",
+                  "uid": "35240-b9b2cfd5-3961-4151-8e9d-026d3518fb79"
+                },
+                {
+                  "id": "3cf067c1-4585-46c5-8e8c-0255fa0d8141",
+                  "name": "Forbidden.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:44.000Z",
+                  "updatedAt": "2026-10-21T21:16:44.000Z",
+                  "uid": "35240-3cf067c1-4585-46c5-8e8c-0255fa0d8141"
+                },
+                {
+                  "id": "109af25c-f225-48dc-a100-607bbcbb39dc",
+                  "name": "Internal Server Error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:44.000Z",
+                  "updatedAt": "2026-10-21T21:16:44.000Z",
+                  "uid": "35240-109af25c-f225-48dc-a100-607bbcbb39dc"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:44.000Z",
+              "updatedAt": "2026-10-21T21:16:44.000Z",
+              "uid": "35240-6b997928-9034-4800-a2c7-d5851ea8f5b4"
+            },
+            {
+              "name": "update a report",
+              "id": "4d32d1d7-7e3d-4df0-b701-a40a54a69048",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "auth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programID\": \" \",\n  \"eventID\": \"U9viPNwow\",\n  \"clientName\": null,\n  \"resources\": [\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \"YR556rHsMU\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"REPORT\",\n  \"reportName\": null,\n  \"payloadDescriptors\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reports/:reportID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports",
+                    ":reportID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d31c5719-7b99-4062-b37e-7aa624461a1c",
+                      "key": "reportID",
+                      "value": "gnrZMbiG",
+                      "description": "(Required) object ID of a report."
+                    }
+                  ]
+                },
+                "description": "Update the report specified by the reportID in path."
+              },
+              "response": [
+                {
+                  "id": "5f313735-af04-4ed1-9e14-af9a000747a0",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"programID\": \" \",\n  \"eventID\": \"U9viPNwow\",\n  \"clientName\": null,\n  \"resources\": [\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \"YR556rHsMU\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"REPORT\",\n  \"reportName\": null,\n  \"payloadDescriptors\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"programID\": \" \",\n  \"eventID\": \"U9viPNwow\",\n  \"clientName\": null,\n  \"resources\": [\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \"YR556rHsMU\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"REPORT\",\n  \"reportName\": null,\n  \"payloadDescriptors\": null\n}",
+                  "createdAt": "2026-10-21T21:16:44.000Z",
+                  "updatedAt": "2026-10-21T21:16:44.000Z",
+                  "uid": "35240-5f313735-af04-4ed1-9e14-af9a000747a0"
+                },
+                {
+                  "id": "7bd62bb0-66e4-494c-bf7c-10f0a3399f65",
+                  "name": "Bad Request.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"programID\": \" \",\n  \"eventID\": \"U9viPNwow\",\n  \"clientName\": null,\n  \"resources\": [\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \"YR556rHsMU\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"REPORT\",\n  \"reportName\": null,\n  \"payloadDescriptors\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:44.000Z",
+                  "updatedAt": "2026-10-21T21:16:44.000Z",
+                  "uid": "35240-7bd62bb0-66e4-494c-bf7c-10f0a3399f65"
+                },
+                {
+                  "id": "d55abf1f-aefe-4ad0-9e62-a0e4e3b8e284",
+                  "name": "Forbidden.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"programID\": \" \",\n  \"eventID\": \"U9viPNwow\",\n  \"clientName\": null,\n  \"resources\": [\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \"YR556rHsMU\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"REPORT\",\n  \"reportName\": null,\n  \"payloadDescriptors\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:44.000Z",
+                  "updatedAt": "2026-10-21T21:16:44.000Z",
+                  "uid": "35240-d55abf1f-aefe-4ad0-9e62-a0e4e3b8e284"
+                },
+                {
+                  "id": "a4c4b199-e667-4418-9154-87ef2ec4b8cc",
+                  "name": "Conflict. Implementation dependent response if program with the same programName exists.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"programID\": \" \",\n  \"eventID\": \"U9viPNwow\",\n  \"clientName\": null,\n  \"resources\": [\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \"YR556rHsMU\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"REPORT\",\n  \"reportName\": null,\n  \"payloadDescriptors\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:44.000Z",
+                  "updatedAt": "2026-10-21T21:16:44.000Z",
+                  "uid": "35240-a4c4b199-e667-4418-9154-87ef2ec4b8cc"
+                },
+                {
+                  "id": "5715b1c9-14c7-4058-a51b-fe749fe52d2d",
+                  "name": "Internal Server Error.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"programID\": \" \",\n  \"eventID\": \"U9viPNwow\",\n  \"clientName\": null,\n  \"resources\": [\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \"YR556rHsMU\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"REPORT\",\n  \"reportName\": null,\n  \"payloadDescriptors\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:44.000Z",
+                  "updatedAt": "2026-10-21T21:16:44.000Z",
+                  "uid": "35240-5715b1c9-14c7-4058-a51b-fe749fe52d2d"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:44.000Z",
+              "updatedAt": "2026-10-21T21:16:44.000Z",
+              "uid": "35240-4d32d1d7-7e3d-4df0-b701-a40a54a69048"
+            },
+            {
+              "name": "delete a report",
+              "id": "632043df-1c39-4803-9a0f-0e71dc0060ca",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "auth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports/:reportID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports",
+                    ":reportID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "3e6b9f1b-4e2f-4f13-835d-79a6f6634aef",
+                      "key": "reportID",
+                      "value": "gnrZMbiG",
+                      "description": "(Required) object ID of a report."
+                    }
+                  ]
+                },
+                "description": "Delete the program specified by the reportID in path."
+              },
+              "response": [
+                {
+                  "id": "e25c3d72-6200-4b07-9f61-aab047680b34",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"programID\": \" \",\n  \"eventID\": \"U9viPNwow\",\n  \"clientName\": null,\n  \"resources\": [\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \"YR556rHsMU\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"REPORT\",\n  \"reportName\": null,\n  \"payloadDescriptors\": null\n}",
+                  "createdAt": "2026-10-21T21:16:44.000Z",
+                  "updatedAt": "2026-10-21T21:16:44.000Z",
+                  "uid": "35240-e25c3d72-6200-4b07-9f61-aab047680b34"
+                },
+                {
+                  "id": "985092ff-f6d3-4221-b8dc-09b0efffab8a",
+                  "name": "Bad Request.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:44.000Z",
+                  "updatedAt": "2026-10-21T21:16:44.000Z",
+                  "uid": "35240-985092ff-f6d3-4221-b8dc-09b0efffab8a"
+                },
+                {
+                  "id": "c0766ed0-3101-4bde-bc5e-6308480b5142",
+                  "name": "Forbidden.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:44.000Z",
+                  "updatedAt": "2026-10-21T21:16:44.000Z",
+                  "uid": "35240-c0766ed0-3101-4bde-bc5e-6308480b5142"
+                },
+                {
+                  "id": "74cc0459-a87a-4e3a-a877-7c66272c7bd5",
+                  "name": "Internal Server Error.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reportID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:44.000Z",
+                  "updatedAt": "2026-10-21T21:16:44.000Z",
+                  "uid": "35240-74cc0459-a87a-4e3a-a877-7c66272c7bd5"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:44.000Z",
+              "updatedAt": "2026-10-21T21:16:44.000Z",
+              "uid": "35240-632043df-1c39-4803-9a0f-0e71dc0060ca"
+            }
+          ],
+          "id": "d6ab6d25-dcb2-4efc-a9cd-4abc60ff3750",
+          "createdAt": "2026-10-21T21:16:44.000Z",
+          "updatedAt": "2026-10-21T21:16:44.000Z",
+          "uid": "35240-d6ab6d25-dcb2-4efc-a9cd-4abc60ff3750"
+        },
+        {
+          "name": "searches all reports",
+          "id": "bad5cfba-7ecb-424f-a968-617248ccfc9d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/reports?programID=gnrZMbiG&clientName=<string>&skip=<integer>&limit=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reports"
+              ],
+              "query": [
+                {
+                  "description": "filter results to reports with programID.",
+                  "key": "programID",
+                  "value": "gnrZMbiG"
+                },
+                {
+                  "description": "filter results to reports with clientName.",
+                  "key": "clientName",
+                  "value": "<string>"
+                },
+                {
+                  "description": "number of records to skip for pagination.",
+                  "key": "skip",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "maximum number of records to return.",
+                  "key": "limit",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "List all reports known to the server.\nMay filter results by programID and clientName as query param.\nUse skip and pagination query params to limit response size."
+          },
+          "response": [
+            {
+              "id": "44b9990f-ade3-49bd-ba3d-1ed362aefda5",
+              "name": "OK.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports?programID=gnrZMbiG&clientName=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ],
+                  "query": [
+                    {
+                      "description": "filter results to reports with programID.",
+                      "key": "programID",
+                      "value": "gnrZMbiG"
+                    },
+                    {
+                      "description": "filter results to reports with clientName.",
+                      "key": "clientName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"programID\": \" \",\n    \"eventID\": \"uI\",\n    \"clientName\": null,\n    \"resources\": [\n      {\n        \"resourceName\": null,\n        \"intervals\": [\n          {\n            \"id\": \"<integer>\",\n            \"payloads\": [\n              {\n                \"type\": \"<string>\",\n                \"values\": [\n                  \"<number>\",\n                  \"<number>\"\n                ]\n              },\n              {\n                \"type\": \"<string>\",\n                \"values\": [\n                  \"<number>\",\n                  \"<number>\"\n                ]\n              }\n            ],\n            \"intervalPeriod\": {\n              \"start\": null,\n              \"duration\": null,\n              \"randomizeStart\": null\n            }\n          },\n          {\n            \"id\": \"<integer>\",\n            \"payloads\": [\n              {\n                \"type\": \"<string>\",\n                \"values\": [\n                  \"<number>\",\n                  \"<number>\"\n                ]\n              },\n              {\n                \"type\": \"<string>\",\n                \"values\": [\n                  \"<number>\",\n                  \"<number>\"\n                ]\n              }\n            ],\n            \"intervalPeriod\": {\n              \"start\": null,\n              \"duration\": null,\n              \"randomizeStart\": null\n            }\n          }\n        ],\n        \"intervalPeriod\": {\n          \"start\": null,\n          \"duration\": null,\n          \"randomizeStart\": null\n        }\n      },\n      {\n        \"resourceName\": null,\n        \"intervals\": [\n          {\n            \"id\": \"<integer>\",\n            \"payloads\": [\n              {\n                \"type\": \"<string>\",\n                \"values\": [\n                  \"<number>\",\n                  \"<number>\"\n                ]\n              },\n              {\n                \"type\": \"<string>\",\n                \"values\": [\n                  \"<number>\",\n                  \"<number>\"\n                ]\n              }\n            ],\n            \"intervalPeriod\": {\n              \"start\": null,\n              \"duration\": null,\n              \"randomizeStart\": null\n            }\n          },\n          {\n            \"id\": \"<integer>\",\n            \"payloads\": [\n              {\n                \"type\": \"<string>\",\n                \"values\": [\n                  \"<number>\",\n                  \"<number>\"\n                ]\n              },\n              {\n                \"type\": \"<string>\",\n                \"values\": [\n                  \"<number>\",\n                  \"<number>\"\n                ]\n              }\n            ],\n            \"intervalPeriod\": {\n              \"start\": null,\n              \"duration\": null,\n              \"randomizeStart\": null\n            }\n          }\n        ],\n        \"intervalPeriod\": {\n          \"start\": null,\n          \"duration\": null,\n          \"randomizeStart\": null\n        }\n      }\n    ],\n    \"id\": \"2vXe4\",\n    \"createdDateTime\": null,\n    \"modificationDateTime\": null,\n    \"objectType\": \"REPORT\",\n    \"reportName\": null,\n    \"payloadDescriptors\": null\n  },\n  {\n    \"programID\": \"ixo4Ass\",\n    \"eventID\": \"mmboM\",\n    \"clientName\": null,\n    \"resources\": [\n      {\n        \"resourceName\": null,\n        \"intervals\": [\n          {\n            \"id\": \"<integer>\",\n            \"payloads\": [\n              {\n                \"type\": \"<string>\",\n                \"values\": [\n                  \"<number>\",\n                  \"<number>\"\n                ]\n              },\n              {\n                \"type\": \"<string>\",\n                \"values\": [\n                  \"<number>\",\n                  \"<number>\"\n                ]\n              }\n            ],\n            \"intervalPeriod\": {\n              \"start\": null,\n              \"duration\": null,\n              \"randomizeStart\": null\n            }\n          },\n          {\n            \"id\": \"<integer>\",\n            \"payloads\": [\n              {\n                \"type\": \"<string>\",\n                \"values\": [\n                  \"<number>\",\n                  \"<number>\"\n                ]\n              },\n              {\n                \"type\": \"<string>\",\n                \"values\": [\n                  \"<number>\",\n                  \"<number>\"\n                ]\n              }\n            ],\n            \"intervalPeriod\": {\n              \"start\": null,\n              \"duration\": null,\n              \"randomizeStart\": null\n            }\n          }\n        ],\n        \"intervalPeriod\": {\n          \"start\": null,\n          \"duration\": null,\n          \"randomizeStart\": null\n        }\n      },\n      {\n        \"resourceName\": null,\n        \"intervals\": [\n          {\n            \"id\": \"<integer>\",\n            \"payloads\": [\n              {\n                \"type\": \"<string>\",\n                \"values\": [\n                  \"<number>\",\n                  \"<number>\"\n                ]\n              },\n              {\n                \"type\": \"<string>\",\n                \"values\": [\n                  \"<number>\",\n                  \"<number>\"\n                ]\n              }\n            ],\n            \"intervalPeriod\": {\n              \"start\": null,\n              \"duration\": null,\n              \"randomizeStart\": null\n            }\n          },\n          {\n            \"id\": \"<integer>\",\n            \"payloads\": [\n              {\n                \"type\": \"<string>\",\n                \"values\": [\n                  \"<number>\",\n                  \"<number>\"\n                ]\n              },\n              {\n                \"type\": \"<string>\",\n                \"values\": [\n                  \"<number>\",\n                  \"<number>\"\n                ]\n              }\n            ],\n            \"intervalPeriod\": {\n              \"start\": null,\n              \"duration\": null,\n              \"randomizeStart\": null\n            }\n          }\n        ],\n        \"intervalPeriod\": {\n          \"start\": null,\n          \"duration\": null,\n          \"randomizeStart\": null\n        }\n      }\n    ],\n    \"id\": \"n3\",\n    \"createdDateTime\": null,\n    \"modificationDateTime\": null,\n    \"objectType\": \"REPORT\",\n    \"reportName\": null,\n    \"payloadDescriptors\": null\n  }\n]",
+              "createdAt": "2026-10-21T21:16:44.000Z",
+              "updatedAt": "2026-10-21T21:16:44.000Z",
+              "uid": "35240-44b9990f-ade3-49bd-ba3d-1ed362aefda5"
+            },
+            {
+              "id": "42e83403-fa3a-4ef4-b585-fb46ce6b108c",
+              "name": "Bad Request.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports?programID=gnrZMbiG&clientName=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ],
+                  "query": [
+                    {
+                      "description": "filter results to reports with programID.",
+                      "key": "programID",
+                      "value": "gnrZMbiG"
+                    },
+                    {
+                      "description": "filter results to reports with clientName.",
+                      "key": "clientName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:44.000Z",
+              "updatedAt": "2026-10-21T21:16:44.000Z",
+              "uid": "35240-42e83403-fa3a-4ef4-b585-fb46ce6b108c"
+            },
+            {
+              "id": "b3e95366-7fe1-4c20-829b-e3cd1cebdd2d",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports?programID=gnrZMbiG&clientName=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ],
+                  "query": [
+                    {
+                      "description": "filter results to reports with programID.",
+                      "key": "programID",
+                      "value": "gnrZMbiG"
+                    },
+                    {
+                      "description": "filter results to reports with clientName.",
+                      "key": "clientName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:44.000Z",
+              "updatedAt": "2026-10-21T21:16:44.000Z",
+              "uid": "35240-b3e95366-7fe1-4c20-829b-e3cd1cebdd2d"
+            },
+            {
+              "id": "06c7a07f-a81c-4fd5-99b0-f54f40fdc563",
+              "name": "Internal Server Error.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports?programID=gnrZMbiG&clientName=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ],
+                  "query": [
+                    {
+                      "description": "filter results to reports with programID.",
+                      "key": "programID",
+                      "value": "gnrZMbiG"
+                    },
+                    {
+                      "description": "filter results to reports with clientName.",
+                      "key": "clientName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:44.000Z",
+              "updatedAt": "2026-10-21T21:16:44.000Z",
+              "uid": "35240-06c7a07f-a81c-4fd5-99b0-f54f40fdc563"
+            }
+          ],
+          "createdAt": "2026-10-21T21:16:44.000Z",
+          "updatedAt": "2026-10-21T21:16:44.000Z",
+          "uid": "35240-bad5cfba-7ecb-424f-a968-617248ccfc9d"
+        },
+        {
+          "name": "add a report",
+          "id": "64fc69b8-b8e9-4617-935f-bd20eee2da48",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read_all write_programs write_events write_reports write_subscriptions write_vens",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"programID\": \" \",\n  \"eventID\": \"U9viPNwow\",\n  \"clientName\": null,\n  \"resources\": [\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \"YR556rHsMU\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"REPORT\",\n  \"reportName\": null,\n  \"payloadDescriptors\": null\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reports",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reports"
+              ]
+            },
+            "description": "Create a new report in the server."
+          },
+          "response": [
+            {
+              "id": "705a7ae1-d4ab-4987-95fe-94904a3eb0f1",
+              "name": "Created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programID\": \" \",\n  \"eventID\": \"U9viPNwow\",\n  \"clientName\": null,\n  \"resources\": [\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \"YR556rHsMU\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"REPORT\",\n  \"reportName\": null,\n  \"payloadDescriptors\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"programID\": \" \",\n  \"eventID\": \"U9viPNwow\",\n  \"clientName\": null,\n  \"resources\": [\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \"YR556rHsMU\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"REPORT\",\n  \"reportName\": null,\n  \"payloadDescriptors\": null\n}",
+              "createdAt": "2026-10-21T21:16:44.000Z",
+              "updatedAt": "2026-10-21T21:16:44.000Z",
+              "uid": "35240-705a7ae1-d4ab-4987-95fe-94904a3eb0f1"
+            },
+            {
+              "id": "05fa9072-eb83-4c24-a22e-b8cdd64daffe",
+              "name": "Bad Request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programID\": \" \",\n  \"eventID\": \"U9viPNwow\",\n  \"clientName\": null,\n  \"resources\": [\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \"YR556rHsMU\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"REPORT\",\n  \"reportName\": null,\n  \"payloadDescriptors\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:44.000Z",
+              "updatedAt": "2026-10-21T21:16:44.000Z",
+              "uid": "35240-05fa9072-eb83-4c24-a22e-b8cdd64daffe"
+            },
+            {
+              "id": "97f6038a-5f03-47ee-b61c-8ee9de44a3d9",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programID\": \" \",\n  \"eventID\": \"U9viPNwow\",\n  \"clientName\": null,\n  \"resources\": [\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \"YR556rHsMU\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"REPORT\",\n  \"reportName\": null,\n  \"payloadDescriptors\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:44.000Z",
+              "updatedAt": "2026-10-21T21:16:44.000Z",
+              "uid": "35240-97f6038a-5f03-47ee-b61c-8ee9de44a3d9"
+            },
+            {
+              "id": "93748525-e113-44d9-b014-d5a622fb5f19",
+              "name": "Conflict. Implementation dependent response if identical report exists.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programID\": \" \",\n  \"eventID\": \"U9viPNwow\",\n  \"clientName\": null,\n  \"resources\": [\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \"YR556rHsMU\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"REPORT\",\n  \"reportName\": null,\n  \"payloadDescriptors\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:44.000Z",
+              "updatedAt": "2026-10-21T21:16:44.000Z",
+              "uid": "35240-93748525-e113-44d9-b014-d5a622fb5f19"
+            },
+            {
+              "id": "a1c03ea7-ea83-4ca5-8aae-e3f0835100fc",
+              "name": "Internal Server Error.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"programID\": \" \",\n  \"eventID\": \"U9viPNwow\",\n  \"clientName\": null,\n  \"resources\": [\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    },\n    {\n      \"resourceName\": null,\n      \"intervals\": [\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"payloads\": [\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"values\": [\n                \"<number>\",\n                \"<number>\"\n              ]\n            }\n          ],\n          \"intervalPeriod\": {\n            \"start\": null,\n            \"duration\": null,\n            \"randomizeStart\": null\n          }\n        }\n      ],\n      \"intervalPeriod\": {\n        \"start\": null,\n        \"duration\": null,\n        \"randomizeStart\": null\n      }\n    }\n  ],\n  \"id\": \"YR556rHsMU\",\n  \"createdDateTime\": null,\n  \"modificationDateTime\": null,\n  \"objectType\": \"REPORT\",\n  \"reportName\": null,\n  \"payloadDescriptors\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:44.000Z",
+              "updatedAt": "2026-10-21T21:16:44.000Z",
+              "uid": "35240-a1c03ea7-ea83-4ca5-8aae-e3f0835100fc"
+            }
+          ],
+          "createdAt": "2026-10-21T21:16:44.000Z",
+          "updatedAt": "2026-10-21T21:16:44.000Z",
+          "uid": "35240-64fc69b8-b8e9-4617-935f-bd20eee2da48"
+        }
+      ],
+      "id": "9d1d8c1c-26b3-4217-b6dd-3b4af6e0200d",
+      "createdAt": "2026-10-21T21:16:44.000Z",
+      "updatedAt": "2026-10-21T21:16:44.000Z",
+      "uid": "35240-9d1d8c1c-26b3-4217-b6dd-3b4af6e0200d"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8081/openadr3"
+    }
+  ]
+}

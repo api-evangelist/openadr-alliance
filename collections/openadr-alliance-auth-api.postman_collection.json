@@ -1,0 +1,718 @@
+{
+  "info": {
+    "_postman_id": "4f90f2d2-bcab-4a20-82ea-b0c836f6b6ab",
+    "name": "Openadr Alliance Auth API",
+    "description": "Operations tagged Auth across 3 of this provider's published API definitions: openadr-3-0-0-openapi.yaml, openadr-3-0-1-openapi.yaml, openadr-3-1-0-openapi.yaml. Each path carries the servers of the definition it was published in.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:16:14.000Z",
+    "updatedAt": "2026-10-21T21:16:14.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4f90f2d2-bcab-4a20-82ea-b0c836f6b6ab"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "token",
+          "item": [
+            {
+              "name": "fetch a token",
+              "id": "3a47da93-0dd7-4808-bb2c-c1a679fea743",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) client ID to exchange for bearer token.",
+                    "key": "clientID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) client secret to exchange for bearer token.",
+                    "key": "clientSecret",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/token",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "token"
+                  ]
+                },
+                "description": "Return an access token based on clientID and clientSecret."
+              },
+              "response": [
+                {
+                  "id": "bd0b0cf0-1161-40dc-98d7-0b91dc115af6",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) client ID to exchange for bearer token.",
+                        "key": "clientID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) client secret to exchange for bearer token.",
+                        "key": "clientSecret",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>",
+                  "createdAt": "2026-10-21T21:16:14.000Z",
+                  "updatedAt": "2026-10-21T21:16:14.000Z",
+                  "uid": "35240-bd0b0cf0-1161-40dc-98d7-0b91dc115af6"
+                },
+                {
+                  "id": "789ccd99-304d-45c2-ba4d-0b2e7f6eb5f2",
+                  "name": "Bad Request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) client ID to exchange for bearer token.",
+                        "key": "clientID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) client secret to exchange for bearer token.",
+                        "key": "clientSecret",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:14.000Z",
+                  "updatedAt": "2026-10-21T21:16:14.000Z",
+                  "uid": "35240-789ccd99-304d-45c2-ba4d-0b2e7f6eb5f2"
+                },
+                {
+                  "id": "b95750c5-f505-4332-9ce7-4689a5676b93",
+                  "name": "Forbidden.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) client ID to exchange for bearer token.",
+                        "key": "clientID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) client secret to exchange for bearer token.",
+                        "key": "clientSecret",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:14.000Z",
+                  "updatedAt": "2026-10-21T21:16:14.000Z",
+                  "uid": "35240-b95750c5-f505-4332-9ce7-4689a5676b93"
+                },
+                {
+                  "id": "a157b8a5-cb75-4acd-8ef0-7854f8ea68f5",
+                  "name": "Internal Server Error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) client ID to exchange for bearer token.",
+                        "key": "clientID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) client secret to exchange for bearer token.",
+                        "key": "clientSecret",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:14.000Z",
+                  "updatedAt": "2026-10-21T21:16:14.000Z",
+                  "uid": "35240-a157b8a5-cb75-4acd-8ef0-7854f8ea68f5"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:14.000Z",
+              "updatedAt": "2026-10-21T21:16:14.000Z",
+              "uid": "35240-3a47da93-0dd7-4808-bb2c-c1a679fea743"
+            },
+            {
+              "name": "fetch a token",
+              "id": "0df1fda2-da00-4899-ae1b-15f6897e664c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) OAuth2 grant type, must be 'client_credentials'",
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    },
+                    {
+                      "description": "(Required) client ID to exchange for bearer token.",
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) client secret to exchange for bearer token.",
+                      "key": "client_secret",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "application defined scope.",
+                      "key": "scope",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/token",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "token"
+                  ]
+                },
+                "description": "Return an access token based on clientID and clientSecret."
+              },
+              "response": [
+                {
+                  "id": "3f5c8c8e-af2d-4df5-8cc9-6ba719dd5c45",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) OAuth2 grant type, must be 'client_credentials'",
+                          "key": "grant_type",
+                          "value": "client_credentials"
+                        },
+                        {
+                          "description": "(Required) client ID to exchange for bearer token.",
+                          "key": "client_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) client secret to exchange for bearer token.",
+                          "key": "client_secret",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "application defined scope.",
+                          "key": "scope",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"access_token\": \"<string>\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": \"<integer>\",\n  \"refresh_token\": \"<string>\",\n  \"scope\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T21:16:14.000Z",
+                  "updatedAt": "2026-10-21T21:16:14.000Z",
+                  "uid": "35240-3f5c8c8e-af2d-4df5-8cc9-6ba719dd5c45"
+                },
+                {
+                  "id": "a6e4d15a-ba04-450f-abb1-b053475b544d",
+                  "name": "Bad Request.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) OAuth2 grant type, must be 'client_credentials'",
+                          "key": "grant_type",
+                          "value": "client_credentials"
+                        },
+                        {
+                          "description": "(Required) client ID to exchange for bearer token.",
+                          "key": "client_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) client secret to exchange for bearer token.",
+                          "key": "client_secret",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "application defined scope.",
+                          "key": "scope",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"unauthorized_client\",\n  \"error_description\": \"<string>\",\n  \"error_uri\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:14.000Z",
+                  "updatedAt": "2026-10-21T21:16:14.000Z",
+                  "uid": "35240-a6e4d15a-ba04-450f-abb1-b053475b544d"
+                },
+                {
+                  "id": "b2f996d1-714e-4dac-8792-e30f12f28699",
+                  "name": "Forbidden.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) OAuth2 grant type, must be 'client_credentials'",
+                          "key": "grant_type",
+                          "value": "client_credentials"
+                        },
+                        {
+                          "description": "(Required) client ID to exchange for bearer token.",
+                          "key": "client_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) client secret to exchange for bearer token.",
+                          "key": "client_secret",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "application defined scope.",
+                          "key": "scope",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:14.000Z",
+                  "updatedAt": "2026-10-21T21:16:14.000Z",
+                  "uid": "35240-b2f996d1-714e-4dac-8792-e30f12f28699"
+                },
+                {
+                  "id": "09122bac-01df-43e2-8b18-26e0521a73a1",
+                  "name": "Internal Server Error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) OAuth2 grant type, must be 'client_credentials'",
+                          "key": "grant_type",
+                          "value": "client_credentials"
+                        },
+                        {
+                          "description": "(Required) client ID to exchange for bearer token.",
+                          "key": "client_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) client secret to exchange for bearer token.",
+                          "key": "client_secret",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "application defined scope.",
+                          "key": "scope",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:14.000Z",
+                  "updatedAt": "2026-10-21T21:16:14.000Z",
+                  "uid": "35240-09122bac-01df-43e2-8b18-26e0521a73a1"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:14.000Z",
+              "updatedAt": "2026-10-21T21:16:14.000Z",
+              "uid": "35240-0df1fda2-da00-4899-ae1b-15f6897e664c"
+            }
+          ],
+          "id": "a6c3f979-5c88-408c-8c1b-c39021f643ea",
+          "createdAt": "2026-10-21T21:16:14.000Z",
+          "updatedAt": "2026-10-21T21:16:14.000Z",
+          "uid": "35240-a6c3f979-5c88-408c-8c1b-c39021f643ea"
+        },
+        {
+          "name": "server",
+          "item": [
+            {
+              "name": "fetch server info",
+              "id": "38a4387b-2726-4457-b06a-a1b7a067a78c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/auth/server",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "server"
+                  ]
+                },
+                "description": "Return the URL of the token endpoint."
+              },
+              "response": [
+                {
+                  "id": "d7a64cda-b8f9-479b-896f-77f1ecf4efb9",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/server",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "server"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"tokenURL\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:14.000Z",
+                  "updatedAt": "2026-10-21T21:16:14.000Z",
+                  "uid": "35240-d7a64cda-b8f9-479b-896f-77f1ecf4efb9"
+                },
+                {
+                  "id": "fc50726a-464a-493a-9081-1776b126b58b",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/server",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "server"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:14.000Z",
+                  "updatedAt": "2026-10-21T21:16:14.000Z",
+                  "uid": "35240-fc50726a-464a-493a-9081-1776b126b58b"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:14.000Z",
+              "updatedAt": "2026-10-21T21:16:14.000Z",
+              "uid": "35240-38a4387b-2726-4457-b06a-a1b7a067a78c"
+            }
+          ],
+          "id": "93499ad4-b6c4-40c8-b7de-ae1fb7b541ab",
+          "createdAt": "2026-10-21T21:16:14.000Z",
+          "updatedAt": "2026-10-21T21:16:14.000Z",
+          "uid": "35240-93499ad4-b6c4-40c8-b7de-ae1fb7b541ab"
+        }
+      ],
+      "id": "2a2f7dc2-a123-44a1-8680-6fa3ee5dfbd9",
+      "createdAt": "2026-10-21T21:16:14.000Z",
+      "updatedAt": "2026-10-21T21:16:14.000Z",
+      "uid": "35240-2a2f7dc2-a123-44a1-8680-6fa3ee5dfbd9"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8081/openadr3"
+    }
+  ]
+}

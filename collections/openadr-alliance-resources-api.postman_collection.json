@@ -1,0 +1,2196 @@
+{
+  "info": {
+    "_postman_id": "07baa35b-d56b-45a1-a9e0-f85b7cfcdc3a",
+    "name": "OpenADR 3 Resources API",
+    "description": "The OpenADR 3 API supports energy retailer to energy customer Demand Response programs.\n\nContact Support:\n Email: info@openadr.org",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:16:49.000Z",
+    "updatedAt": "2026-10-21T21:16:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-07baa35b-d56b-45a1-a9e0-f85b7cfcdc3a"
+  },
+  "item": [
+    {
+      "name": "resources",
+      "item": [
+        {
+          "name": "{resourceID}",
+          "item": [
+            {
+              "name": "search ven resources by ID",
+              "id": "d02236d1-923c-49a4-94ba-d060881ee8f3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "read_all read_targets read_ven_objects write_programs write_events write_reports write_subscriptions write_vens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "auth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/resources/:resourceID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources",
+                    ":resourceID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "97499138-3d22-489a-b4a0-5df486621876",
+                      "key": "resourceID",
+                      "value": "N62fs",
+                      "description": "(Required) object ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Return the ven resource specified by venID and resourceID specified in path."
+              },
+              "response": [
+                {
+                  "id": "ae875d2f-d5f2-4510-a94f-7581bc10e31e",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"clientID\": \"<string>\",\n  \"createdDateTime\": \"<dateTime>\",\n  \"id\": \"t2d5V3bj\",\n  \"modificationDateTime\": \"<dateTime>\",\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"huGTdidU5\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-ae875d2f-d5f2-4510-a94f-7581bc10e31e"
+                },
+                {
+                  "id": "d3904621-8038-4b13-bc54-b89f1bfb552a",
+                  "name": "The request is malformed or invalid",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-d3904621-8038-4b13-bc54-b89f1bfb552a"
+                },
+                {
+                  "id": "552d6d28-9399-48bb-85a4-e74252266650",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-552d6d28-9399-48bb-85a4-e74252266650"
+                },
+                {
+                  "id": "d9f4ff8f-6451-4051-852d-8bc749c725a0",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-d9f4ff8f-6451-4051-852d-8bc749c725a0"
+                },
+                {
+                  "id": "afbbc7cf-bb94-4c24-80f9-e505ad25189a",
+                  "name": "The specified resource was not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-afbbc7cf-bb94-4c24-80f9-e505ad25189a"
+                },
+                {
+                  "id": "284da350-a773-43fb-8026-93971fa8637b",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-284da350-a773-43fb-8026-93971fa8637b"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:50.000Z",
+              "updatedAt": "2026-10-21T21:16:50.000Z",
+              "uid": "35240-d02236d1-923c-49a4-94ba-d060881ee8f3"
+            },
+            {
+              "name": "update ven resource",
+              "id": "6147e54e-4981-4e4f-91a3-eb59dabca600",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "read_all read_targets read_ven_objects write_programs write_events write_reports write_subscriptions write_vens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "auth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"clientID\": \"<string>\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"DHOujV\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/resources/:resourceID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources",
+                    ":resourceID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "823b3ce3-a76e-4a76-8202-4bc5dec3a0a0",
+                      "key": "resourceID",
+                      "value": "N62fs",
+                      "description": "(Required) object ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Update the ven resource specified by venID and resourceID specified in path."
+              },
+              "response": [
+                {
+                  "id": "39493806-9673-4dea-b4da-57af05c8c226",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"clientID\": \"<string>\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"DHOujV\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"clientID\": \"<string>\",\n  \"createdDateTime\": \"<dateTime>\",\n  \"id\": \"t2d5V3bj\",\n  \"modificationDateTime\": \"<dateTime>\",\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"huGTdidU5\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-39493806-9673-4dea-b4da-57af05c8c226"
+                },
+                {
+                  "id": "00304459-57a0-4d39-83dd-0c943fdd78cd",
+                  "name": "The request is malformed or invalid",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"clientID\": \"<string>\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"DHOujV\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-00304459-57a0-4d39-83dd-0c943fdd78cd"
+                },
+                {
+                  "id": "00ed783f-bc44-4439-a258-ac4f3cab3c2f",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"clientID\": \"<string>\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"DHOujV\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-00ed783f-bc44-4439-a258-ac4f3cab3c2f"
+                },
+                {
+                  "id": "0ea12cce-621d-4701-989a-be288f5178d1",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"clientID\": \"<string>\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"DHOujV\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-0ea12cce-621d-4701-989a-be288f5178d1"
+                },
+                {
+                  "id": "dc995351-7d58-427e-a9b4-f2f8ff48c190",
+                  "name": "The specified resource was not found",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"clientID\": \"<string>\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"DHOujV\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-dc995351-7d58-427e-a9b4-f2f8ff48c190"
+                },
+                {
+                  "id": "1fbdec90-77a8-4840-9f11-e459644bb0e7",
+                  "name": "Conflict. Could for example be a violation of a foreign key constraint or of a unique constraint on a name or id.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"clientID\": \"<string>\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"DHOujV\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-1fbdec90-77a8-4840-9f11-e459644bb0e7"
+                },
+                {
+                  "id": "c3c7cdc4-2aa7-4f19-b5ef-9a72138abbd0",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"clientID\": \"<string>\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"DHOujV\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-c3c7cdc4-2aa7-4f19-b5ef-9a72138abbd0"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:50.000Z",
+              "updatedAt": "2026-10-21T21:16:50.000Z",
+              "uid": "35240-6147e54e-4981-4e4f-91a3-eb59dabca600"
+            },
+            {
+              "name": "delete ven resource",
+              "id": "b33c165e-40b1-453b-96a5-17310cdc44a2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "read_all read_targets read_ven_objects write_programs write_events write_reports write_subscriptions write_vens",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "auth/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/resources/:resourceID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources",
+                    ":resourceID"
+                  ],
+                  "variable": [
+                    {
+                      "id": "c1671de1-3679-43ae-895c-bd5aaa55209d",
+                      "key": "resourceID",
+                      "value": "N62fs",
+                      "description": "(Required) object ID of the resource."
+                    }
+                  ]
+                },
+                "description": "Delete the ven resource specified by venID and resourceID specified in path."
+              },
+              "response": [
+                {
+                  "id": "6de05a5a-a72c-45ce-8c0a-59d7d3338035",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"clientID\": \"<string>\",\n  \"createdDateTime\": \"<dateTime>\",\n  \"id\": \"t2d5V3bj\",\n  \"modificationDateTime\": \"<dateTime>\",\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"huGTdidU5\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-6de05a5a-a72c-45ce-8c0a-59d7d3338035"
+                },
+                {
+                  "id": "4362e440-e564-4115-b68c-7b0b966afe19",
+                  "name": "The request is malformed or invalid",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-4362e440-e564-4115-b68c-7b0b966afe19"
+                },
+                {
+                  "id": "36de6a5b-0315-4e79-8b22-dbb06b379102",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-36de6a5b-0315-4e79-8b22-dbb06b379102"
+                },
+                {
+                  "id": "0d855b54-5e9e-4998-9ab7-fb886897fbb5",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-0d855b54-5e9e-4998-9ab7-fb886897fbb5"
+                },
+                {
+                  "id": "f339706a-efb6-4ee1-8817-761ed7027c8c",
+                  "name": "The specified resource was not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-f339706a-efb6-4ee1-8817-761ed7027c8c"
+                },
+                {
+                  "id": "67bf8be1-e352-438c-a22c-0dda5c8dea8f",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/resources/:resourceID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "resources",
+                        ":resourceID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "resourceID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+                  "createdAt": "2026-10-21T21:16:50.000Z",
+                  "updatedAt": "2026-10-21T21:16:50.000Z",
+                  "uid": "35240-67bf8be1-e352-438c-a22c-0dda5c8dea8f"
+                }
+              ],
+              "createdAt": "2026-10-21T21:16:50.000Z",
+              "updatedAt": "2026-10-21T21:16:50.000Z",
+              "uid": "35240-b33c165e-40b1-453b-96a5-17310cdc44a2"
+            }
+          ],
+          "id": "6625a9bf-2fb2-4893-b5f1-9d25e9499144",
+          "createdAt": "2026-10-21T21:16:50.000Z",
+          "updatedAt": "2026-10-21T21:16:50.000Z",
+          "uid": "35240-6625a9bf-2fb2-4893-b5f1-9d25e9499144"
+        },
+        {
+          "name": "search ven resources",
+          "id": "88bbfda3-0b98-4c73-af5d-3a794d0b8363",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read_all read_targets read_ven_objects write_programs write_events write_reports write_subscriptions write_vens",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/resources?resourceName=<string>&venID=N62fs&targets=<string>&targets=<string>&skip=<integer>&limit=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resources"
+              ],
+              "query": [
+                {
+                  "description": "Indicates resource objects with resourceName",
+                  "key": "resourceName",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Indicates resource objects with venID",
+                  "key": "venID",
+                  "value": "N62fs"
+                },
+                {
+                  "description": "Indicates targets",
+                  "key": "targets",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Indicates targets",
+                  "key": "targets",
+                  "value": "<string>"
+                },
+                {
+                  "description": "number of records to skip for pagination.",
+                  "key": "skip",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "maximum number of records to return.",
+                  "key": "limit",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "List all ven resources associated with ven with specified venID.\nMay filter results by resourceName as query params.\nMay filter results by targets params.\nUse skip and pagination query params to limit response size."
+          },
+          "response": [
+            {
+              "id": "fa774c85-3d47-47b6-931a-bb58b7552060",
+              "name": "OK.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/resources?resourceName=<string>&venID=N62fs&targets=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources"
+                  ],
+                  "query": [
+                    {
+                      "description": "Indicates resource objects with resourceName",
+                      "key": "resourceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates resource objects with venID",
+                      "key": "venID",
+                      "value": "N62fs"
+                    },
+                    {
+                      "description": "Indicates targets",
+                      "key": "targets",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"clientID\": \"<string>\",\n    \"createdDateTime\": \"<dateTime>\",\n    \"id\": \"50r7y\",\n    \"modificationDateTime\": \"<dateTime>\",\n    \"objectType\": \"RESOURCE\",\n    \"resourceName\": \"<string>\",\n    \"venID\": \"Z10Yw9hjGW\",\n    \"targets\": null,\n    \"attributes\": null\n  },\n  {\n    \"clientID\": \"<string>\",\n    \"createdDateTime\": \"<dateTime>\",\n    \"id\": \"zyuD1KP\",\n    \"modificationDateTime\": \"<dateTime>\",\n    \"objectType\": \"RESOURCE\",\n    \"resourceName\": \"<string>\",\n    \"venID\": \"NVrYWH\",\n    \"targets\": null,\n    \"attributes\": null\n  }\n]",
+              "createdAt": "2026-10-21T21:16:50.000Z",
+              "updatedAt": "2026-10-21T21:16:50.000Z",
+              "uid": "35240-fa774c85-3d47-47b6-931a-bb58b7552060"
+            },
+            {
+              "id": "4c29e6c4-af57-442b-b15f-86a72d4562a1",
+              "name": "The request is malformed or invalid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/resources?resourceName=<string>&venID=N62fs&targets=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources"
+                  ],
+                  "query": [
+                    {
+                      "description": "Indicates resource objects with resourceName",
+                      "key": "resourceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates resource objects with venID",
+                      "key": "venID",
+                      "value": "N62fs"
+                    },
+                    {
+                      "description": "Indicates targets",
+                      "key": "targets",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:50.000Z",
+              "updatedAt": "2026-10-21T21:16:50.000Z",
+              "uid": "35240-4c29e6c4-af57-442b-b15f-86a72d4562a1"
+            },
+            {
+              "id": "b74eec33-de97-45fe-9b4a-389b20fc90af",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/resources?resourceName=<string>&venID=N62fs&targets=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources"
+                  ],
+                  "query": [
+                    {
+                      "description": "Indicates resource objects with resourceName",
+                      "key": "resourceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates resource objects with venID",
+                      "key": "venID",
+                      "value": "N62fs"
+                    },
+                    {
+                      "description": "Indicates targets",
+                      "key": "targets",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:50.000Z",
+              "updatedAt": "2026-10-21T21:16:50.000Z",
+              "uid": "35240-b74eec33-de97-45fe-9b4a-389b20fc90af"
+            },
+            {
+              "id": "45329ec9-7fb3-41db-9169-a8cb103cb751",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/resources?resourceName=<string>&venID=N62fs&targets=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources"
+                  ],
+                  "query": [
+                    {
+                      "description": "Indicates resource objects with resourceName",
+                      "key": "resourceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates resource objects with venID",
+                      "key": "venID",
+                      "value": "N62fs"
+                    },
+                    {
+                      "description": "Indicates targets",
+                      "key": "targets",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:50.000Z",
+              "updatedAt": "2026-10-21T21:16:50.000Z",
+              "uid": "35240-45329ec9-7fb3-41db-9169-a8cb103cb751"
+            },
+            {
+              "id": "4d9ed76a-2df4-458f-8a92-45828b5ac252",
+              "name": "The specified resource was not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/resources?resourceName=<string>&venID=N62fs&targets=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources"
+                  ],
+                  "query": [
+                    {
+                      "description": "Indicates resource objects with resourceName",
+                      "key": "resourceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates resource objects with venID",
+                      "key": "venID",
+                      "value": "N62fs"
+                    },
+                    {
+                      "description": "Indicates targets",
+                      "key": "targets",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:50.000Z",
+              "updatedAt": "2026-10-21T21:16:50.000Z",
+              "uid": "35240-4d9ed76a-2df4-458f-8a92-45828b5ac252"
+            },
+            {
+              "id": "d0f35be9-9476-4b17-b48f-b274ac72816f",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/resources?resourceName=<string>&venID=N62fs&targets=<string>&skip=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources"
+                  ],
+                  "query": [
+                    {
+                      "description": "Indicates resource objects with resourceName",
+                      "key": "resourceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Indicates resource objects with venID",
+                      "key": "venID",
+                      "value": "N62fs"
+                    },
+                    {
+                      "description": "Indicates targets",
+                      "key": "targets",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "number of records to skip for pagination.",
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "maximum number of records to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:50.000Z",
+              "updatedAt": "2026-10-21T21:16:50.000Z",
+              "uid": "35240-d0f35be9-9476-4b17-b48f-b274ac72816f"
+            }
+          ],
+          "createdAt": "2026-10-21T21:16:50.000Z",
+          "updatedAt": "2026-10-21T21:16:50.000Z",
+          "uid": "35240-88bbfda3-0b98-4c73-af5d-3a794d0b8363"
+        },
+        {
+          "name": "create resource",
+          "id": "4d1bfa20-6b9b-4061-b74d-8a2849f2a9ef",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "read_all read_targets read_ven_objects write_programs write_events write_reports write_subscriptions write_vens",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "auth/token",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"clientID\": \"<string>\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"DHOujV\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/resources",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resources"
+              ]
+            },
+            "description": "Create a new resource."
+          },
+          "response": [
+            {
+              "id": "8183ef78-4681-4d6a-80d7-6180613f322e",
+              "name": "Created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"clientID\": \"<string>\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"DHOujV\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/resources",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"clientID\": \"<string>\",\n  \"createdDateTime\": \"<dateTime>\",\n  \"id\": \"t2d5V3bj\",\n  \"modificationDateTime\": \"<dateTime>\",\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"huGTdidU5\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+              "createdAt": "2026-10-21T21:16:50.000Z",
+              "updatedAt": "2026-10-21T21:16:50.000Z",
+              "uid": "35240-8183ef78-4681-4d6a-80d7-6180613f322e"
+            },
+            {
+              "id": "619c77f0-fd1f-48b7-b732-beb594f9a457",
+              "name": "The request is malformed or invalid",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"clientID\": \"<string>\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"DHOujV\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/resources",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:50.000Z",
+              "updatedAt": "2026-10-21T21:16:50.000Z",
+              "uid": "35240-619c77f0-fd1f-48b7-b732-beb594f9a457"
+            },
+            {
+              "id": "d52d3760-623d-49ca-853e-1145ae73a592",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"clientID\": \"<string>\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"DHOujV\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/resources",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:50.000Z",
+              "updatedAt": "2026-10-21T21:16:50.000Z",
+              "uid": "35240-d52d3760-623d-49ca-853e-1145ae73a592"
+            },
+            {
+              "id": "d035cbc1-040a-4e13-bace-c228d79cd527",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"clientID\": \"<string>\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"DHOujV\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/resources",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:50.000Z",
+              "updatedAt": "2026-10-21T21:16:50.000Z",
+              "uid": "35240-d035cbc1-040a-4e13-bace-c228d79cd527"
+            },
+            {
+              "id": "b21d6165-3ab5-4442-9cf6-62035537b585",
+              "name": "The specified resource was not found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"clientID\": \"<string>\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"DHOujV\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/resources",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:50.000Z",
+              "updatedAt": "2026-10-21T21:16:50.000Z",
+              "uid": "35240-b21d6165-3ab5-4442-9cf6-62035537b585"
+            },
+            {
+              "id": "8aaafead-d1d4-4aaa-bc2d-cc6416b1de0f",
+              "name": "Conflict. Could for example be a violation of a foreign key constraint or of a unique constraint on a name or id.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"clientID\": \"<string>\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"DHOujV\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/resources",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:50.000Z",
+              "updatedAt": "2026-10-21T21:16:50.000Z",
+              "uid": "35240-8aaafead-d1d4-4aaa-bc2d-cc6416b1de0f"
+            },
+            {
+              "id": "a2d4ba21-b44f-448c-94d6-18e37f5fd14c",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"objectType\": \"BL_RESOURCE_REQUEST\",\n  \"clientID\": \"<string>\",\n  \"resourceName\": \"<string>\",\n  \"venID\": \"DHOujV\",\n  \"targets\": null,\n  \"attributes\": null\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/resources",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "resources"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"detail\": \"<string>\",\n  \"instance\": \"<uri>\"\n}",
+              "createdAt": "2026-10-21T21:16:50.000Z",
+              "updatedAt": "2026-10-21T21:16:50.000Z",
+              "uid": "35240-a2d4ba21-b44f-448c-94d6-18e37f5fd14c"
+            }
+          ],
+          "createdAt": "2026-10-21T21:16:50.000Z",
+          "updatedAt": "2026-10-21T21:16:50.000Z",
+          "uid": "35240-4d1bfa20-6b9b-4061-b74d-8a2849f2a9ef"
+        }
+      ],
+      "id": "efcddd06-d67a-4f9c-8be9-f12e37fd3dc6",
+      "createdAt": "2026-10-21T21:16:50.000Z",
+      "updatedAt": "2026-10-21T21:16:50.000Z",
+      "uid": "35240-efcddd06-d67a-4f9c-8be9-f12e37fd3dc6"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://virtserver.swaggerhub.com/OPENADR3_1/openADR3.1.0/1.0.0"
+    }
+  ]
+}
