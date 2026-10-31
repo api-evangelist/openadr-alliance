@@ -1,4 +1,4 @@
-# OpenADR Alliance (openadr-alliance)
+# OpenADR Alliance
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,127 +64,158 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-The OpenADR Alliance is a San Ramon, California mutual-benefit membership corporation that develops, certifies, and promotes OpenADR, the open information-exchange model utilities, ISOs/RTOs, aggregators, and device makers use to automate demand response and dispatch distributed energy resources. It is a standards body, not a service operator: it publishes the OpenADR 2.0a/2.0b profile specifications (approved by the IEC as IEC/PAS 62746-10-1) and OpenADR 3.0/3.1, which abandoned the SOAP-era design and is now defined entirely by an OpenAPI 3.0 contract. It also runs the OpenADR and EcoPort (CTA-2045-B) certification programmes and their public certified-product databases.
+The OpenADR Alliance is a San Ramon, California mutual-benefit membership corporation that develops, certifies, and promotes OpenADR, the open information-exchange model utilities, ISOs/RTOs, aggregators, and device makers use to automate demand response and dispatch distributed energy resources. It is a standards body, not a service operator: it publishes the OpenADR 2.0a/2.0b profile specifications (approved by the IEC as IEC/PAS 62746-10-1) and OpenADR 3.0/3.1, which abandoned the SOAP-era design and is now defined entirely by an OpenAPI 3.0 contract covering programs, events, reports, subscriptions, VENs, and resources, secured with OAuth 2.0 client credentials. It also runs the OpenADR and EcoPort (CTA-2045-B) certification programmes and their public certified-product databases. Its API posture is honest but narrow: the OpenADR 3 OpenAPI is a genuine, parseable machine-readable contract, and the specifications are license-free, but the Alliance itself operates no developer portal, no api./developer./docs. subdomain, and no hosted API — its canonical specification repository (github.com/oadr3-org) has zero public repositories and requires membership, and the public route to the spec is a registration form that emails download links under terms and conditions. It publishes no consumer energy data and no open grid or market data; it defines the protocol that other parties implement. Home market is the United States, with adoption across Europe, Japan, Korea, and Australia.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/openadr-alliance/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/openadr-alliance/refs/heads/main/apis.yml)
+**Areas:** Energy · United States · Utilities · Electricity · Demand Response · Grid · DER · OpenADR · Standards · Smart Grid · EV Charging · Certification
 
-## Tags
+## OpenADR Alliance on APIs.io
 
-- Energy
-- United States
-- Utilities
-- Electricity
-- Demand Response
-- Grid
-- DER
-- OpenADR
-- Standards
-- Smart Grid
-- EV Charging
-- Certification
+Everything profiled for OpenADR Alliance is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/openadr-alliance/](https://apis.io/providers/openadr-alliance/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (9)
 
-- **Created:** 2026-07-27
-- **Modified:** 2026-07-27
+- [OpenADR Alliance Auth API](https://apis.io/apis/openadr-alliance/openadr-alliance-auth-api/) — The Auth API from OpenADR Alliance — 2 operation(s) for auth.
+- [OpenADR Alliance Events API](https://apis.io/apis/openadr-alliance/openadr-alliance-events-api/) — The events API from OpenADR Alliance — 2 operation(s) for events.
+- [OpenADR Alliance MQTT Notifier API](https://apis.io/apis/openadr-alliance/openadr-alliance-mqtt-notifier-api/) — The MQTT_notifier API from OpenADR Alliance — 12 operation(s) for mqtt_notifier.
+- [OpenADR Alliance Notifiers API](https://apis.io/apis/openadr-alliance/openadr-alliance-notifiers-api/) — The notifiers API from OpenADR Alliance — 1 operation(s) for notifiers.
+- [OpenADR Alliance Programs API](https://apis.io/apis/openadr-alliance/openadr-alliance-programs-api/) — The programs API from OpenADR Alliance — 2 operation(s) for programs.
+- [OpenADR Alliance Reports API](https://apis.io/apis/openadr-alliance/openadr-alliance-reports-api/) — The reports API from OpenADR Alliance — 2 operation(s) for reports.
+- [OpenADR Alliance Resources API](https://apis.io/apis/openadr-alliance/openadr-alliance-resources-api/) — The resources API from OpenADR Alliance — 2 operation(s) for resources.
+- [OpenADR Alliance Subscriptions API](https://apis.io/apis/openadr-alliance/openadr-alliance-subscriptions-api/) — The subscriptions API from OpenADR Alliance — 2 operation(s) for subscriptions.
+- [OpenADR Alliance Vens API](https://apis.io/apis/openadr-alliance/openadr-alliance-vens-api/) — The vens API from OpenADR Alliance — 4 operation(s) for vens.
 
-## APIs
+### Published properties
 
-### OpenADR 3 API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-OpenADR 3 is the RESTful third generation of the OpenADR protocol, defined in full by a single OpenAPI 3.0 document published by the OpenADR Alliance. It supports energy-retailer-to-energy-customer demand response programs through operations to create, update, delete, and search programs, events, reports, subscriptions, VENs (Virtual End Nodes), and VEN resources, plus an `/auth/token` endpoint. Version 3.1.0 adds MQTT notifier topics, VEN-scoped topics for object privacy, and VTN discovery. Security is OAuth 2.0 client credentials with JWT bearer tokens and role-scoped grants that separate what a Business Logic (BL/VTN) client may write from what a VEN may write.
+#### Arazzo workflows (2)
 
-This is a protocol contract, not an Alliance-hosted service. Every implementer — a utility, aggregator, or vendor VTN — stands up its own base URL, so no single `baseURL` exists.
+Multi-step workflows that chain operations into a business task.
 
-- **Human URL:** [https://www.openadr.org/specification](https://www.openadr.org/specification)
-- **Base URL:** none — implementer-hosted
+- [Publish a program and dispatch a demand response event](https://apis.io/arazzos/openadr-alliance/openadr-alliance-dispatch-event/)
+- [Onboard a VEN, attach a resource, and subscribe to event notifications](https://apis.io/arazzos/openadr-alliance/openadr-alliance-ven-onboard-and-subscribe/)
 
-#### Tags
+#### AsyncAPI (2)
 
-- Demand Response
-- OpenADR
-- Energy
-- DER
+Event-driven and webhook contracts.
 
-#### Properties
+- [OpenADR 3 Object Operation Notifications](https://apis.io/asyncapis/openadr-alliance/openadr-alliance-notifications-asyncapi/)
+- [Openadr Alliance Webhooks](https://apis.io/asyncapis/openadr-alliance/openadr-alliance-webhooks/)
 
-- [OpenAPI](openapi/openadr-3-1-1-openapi.yaml) — OpenADR 3.1.1 (development), 27 paths / 45 operations
-- [OpenAPI](openapi/openadr-3-1-0-openapi.yaml) — OpenADR 3.1.0 (released), 27 paths / 45 operations
-- [OpenAPI](openapi/openadr-3-0-1-openapi.yaml) — OpenADR 3.0.1 (released), 13 paths / 31 operations
-- [OpenAPI](openapi/openadr-3-0-0-openapi.yaml) — OpenADR 3.0.0 (released), 13 paths / 31 operations
-- [Documentation](https://www.openadr.org/specification)
-- [Documentation](https://www.openadr.org/how-to-build-a-product)
-- [Conformance](https://www.openadr.org/openadr-3-certification)
-- [Source Code](https://github.com/grid-coordination/openadr3-specification)
-- [AsyncAPI](asyncapi/openadr-alliance-notifications-asyncapi.yml) — derived event surface (webhook + MQTT)
-- [Webhooks](asyncapi/openadr-alliance-webhooks.yml) — notification catalog
-- [JSON Schema](json-schema/_index.yml) — the six Alliance-published 3.1.1 enumeration schemas
-- [Examples](examples/openadr-alliance-examples.yml)
-- [Data Model](data-model/openadr-alliance-data-model.yml)
-- [Error Catalog](errors/openadr-alliance-problem-types.yml)
-- [Tool Crosswalk](mcp/openadr-alliance-tool-crosswalk.yml)
-- [Overlays](overlays/) — one per specification release
+#### Event channels (2)
 
-## Common Properties
+Individual events and webhooks the provider emits.
+
+- [{callbackUrl}](https://apis.io/channels/openadr-alliance/callbackurl/)
+- [{topic}](https://apis.io/channels/openadr-alliance/topic/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Openadr Alliance Agentic Access](https://apis.io/agentic-access/openadr-alliance/openadr-alliance-agentic-access/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Openadr Alliance Vocabulary](https://apis.io/vocabularies/openadr-alliance/openadr-alliance-vocabulary/)
+
+#### Overlays (4)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Openadr Alliance Openadr 3 0 0 Overlay](https://apis.io/overlays/openadr-alliance/openadr-alliance-openadr-3-0-0-overlay/)
+- [Openadr Alliance Openadr 3 0 1 Overlay](https://apis.io/overlays/openadr-alliance/openadr-alliance-openadr-3-0-1-overlay/)
+- [Openadr Alliance Openadr 3 1 0 Overlay](https://apis.io/overlays/openadr-alliance/openadr-alliance-openadr-3-1-0-overlay/)
+- [Openadr Alliance Openadr 3 1 1 Overlay](https://apis.io/overlays/openadr-alliance/openadr-alliance-openadr-3-1-1-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Openadr Alliance Authentication](https://apis.io/security/openadr-alliance/openadr-alliance-authentication/)
+- [Openadr Alliance Domain Security](https://apis.io/security/openadr-alliance/openadr-alliance-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Openadr Alliance Scopes](https://apis.io/scopes/openadr-alliance/openadr-alliance-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Openadr Alliance Plans](https://apis.io/plans/openadr-alliance/openadr-alliance-plans/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.openadr.org/)
 - [Documentation](https://www.openadr.org/specification)
-- [Portal](https://www.openadr.org/specification-download)
-- [API Reference](https://www.openadr.org/specification)
-- [Getting Started](https://www.openadr.org/how-to-build-a-product)
-- [Conformance](https://www.openadr.org/openadr-3-certification)
-- [Tools](https://test-tool.openadr.org/)
-- [Tools](https://www.openadr.org/openadr-test-tool-store) — test tool store
-- [Directory](https://products.openadr.org/) — OpenADR certified product database
-- [Directory](https://ecoport.openadr.org/) — EcoPort (CTA-2045-B) certified product database
-- [Pricing](https://www.openadr.org/join) — membership dues
-- [Sign Up](https://www.openadr.org/join)
-- [Terms of Service](https://www.openadr.org/assets/docs/OpenADR%20Alliance%20Bylaws%20%26%20Member%20Agreement.zip) — bylaws, membership agreement, IPR policy
+- [Getting started](https://www.openadr.org/how-to-build-a-product)
+- [API reference](https://www.openadr.org/specification)
+- [Pricing](https://www.openadr.org/join)
+- [Sign up](https://www.openadr.org/join)
 - [Support](https://www.openadr.org/faq)
 - [Blog](https://www.openadr.org/openadr-alliance-blog)
-- [GitHub Organization](https://github.com/oadr3-org)
-- [LinkedIn](https://www.linkedin.com/company/openadr-alliance)
-- [Login](https://www.openadr.org/login)
-- [Privacy Policy](https://www.openadr.org/privacy-policy)
-- [Support](https://www.openadr.org/contact-us)
+- [Terms of service](https://www.openadr.org/assets/docs/OpenADR%20Alliance%20Bylaws%20%26%20Member%20Agreement.zip)
+- [Privacy policy](https://www.openadr.org/privacy-policy)
+- [GitHub](https://github.com/oadr3-org)
 
-## Enrichment Artifacts
+## API Evangelist rating
 
-Round 2026-07-27. Provenance is recorded in each file's frontmatter (`method: searched | generated | derived | probed`).
+**Kin Score 55.3** — strong · rubric 0.25.0 · scored 2026-10-23
 
-| Artifact | Method | Note |
-|---|---|---|
-| [`json-schema/`](json-schema/_index.yml) | searched | The six enumeration schemas shipped with OpenADR 3.1.1 — event interval payloads (38), report payloads (24), program attributes, VEN/resource attributes, reading types, units. Saved verbatim. |
-| [`changelog/`](changelog/openadr-alliance-changelog.yml) | searched | Structured from the Alliance `changeLog.md` and `VERSIONS.yaml`. 3.1.0 is explicitly **not** backwards compatible with 3.0.1. |
-| [`packages/`](packages/openadr-alliance-packages.yml) | searched | Seven third-party libraries; **zero first-party SDKs**. `github.com/oadr3-org` has no public repositories. |
-| [`plans/`](plans/openadr-alliance-plans.yml) | searched | Membership dues (revenue-banded $1.5k–$40k/yr), test tool licences, consulting packages. The specification itself is free. |
-| [`sandbox/`](sandbox/openadr-alliance-sandbox.yml) | searched | Online test tool, downloadable CI test assets, free Eonti test PKI certificates, SwaggerHub mock. No magic test values are published. |
-| [`conformance/`](conformance/openadr-alliance-conformance.yml) | searched | IEC/PAS 62746-10-1, OASIS Energy Interoperation, NIST Smart Grid, CTA-2045-B, ANSI-SCTE 267, MQTT, RFC 3339/8601. RFC 7807 is *partial* — right members, wrong media type. |
-| [`lifecycle/`](lifecycle/openadr-alliance-lifecycle.yml) | searched | Semver on the specification; no Sunset/Deprecation headers and no deprecation policy. The real transition commitment is the six-month certification grace period. |
-| [`well-known/`](well-known/openadr-alliance-well-known.yml) | probed | **Zero discovery documents.** Every 200 on `www.openadr.org` and `test-tool.openadr.org` is a soft-200 HTML catch-all. |
-| [`security/`](security/openadr-alliance-domain-security.yml) | probed | TLS 1.3 + HSTS on the website; no DNSSEC, no CAA, DMARC `p=none`. No security.txt, no VDP, no trust center. |
-| [`authentication/`](authentication/openadr-alliance-authentication.yml) · [`scopes/`](scopes/openadr-alliance-scopes.yml) | derived | OAuth 2.0 client credentials + JWT bearer; 9 role-encoded scopes in 3.1.1 (6 in 3.0.x). |
-| [`conventions/`](conventions/openadr-alliance-conventions.yml) | derived | skip/limit pagination capped at 50, no total, no next link. **No idempotency key anywhere** — a retried `createEvent` dispatches twice. No rate-limit contract and no 429. |
-| [`errors/`](errors/openadr-alliance-problem-types.yml) | derived | Zalando `problem` envelope on `application/json`; `authError` (RFC 6749 §5.2) on the token endpoint only. |
-| [`data-model/`](data-model/openadr-alliance-data-model.yml) | derived | Six addressable objects plus the value structures they compose. |
-| [`vocabulary/`](vocabulary/openadr-alliance-vocabulary.yml) | derived | 127 terms across 10 groups — objects, roles, operations, payload types, attributes, reading types, units. |
-| [`asyncapi/`](asyncapi/openadr-alliance-notifications-asyncapi.yml) | derived | AsyncAPI 3.0.0 for the webhook and MQTT notifier surface. **Not a normative Alliance artifact** — the Alliance publishes no AsyncAPI. |
-| [`examples/`](examples/openadr-alliance-examples.yml) | derived | 25 payloads assembled from the specification's own inline example values. |
-| [`overlays/`](overlays/) | generated | One Overlay 1.0.0 per release; declares the tag block missing from 3.0.0/3.0.1/3.1.0 and flags the non-production `servers[]` entry. |
-| [`skills/`](skills/_index.yml) | generated | Five Agent Skills — authenticate, dispatch an event, register a VEN, subscribe to notifications, report telemetry. Every step grounded in a real `operationId`. |
-| [`arazzo/`](arazzo/_index.yml) | generated | Two native workflows: BL-side dispatch, VEN-side onboard-and-subscribe. |
-| [`llms/`](llms/openadr-alliance-llms.txt) | generated | `https://www.openadr.org/llms.txt` returns 404. |
-| [`mcp/`](mcp/openadr-alliance-tool-crosswalk.yml) | derived | No Alliance-hosted MCP server exists. A 45-tool *candidate* surface is derived from 3.1.1 and crosswalked one-to-one to its backing operations. |
-| [`agentic-access/`](agentic-access/openadr-alliance-agentic-access.yml) | generated | 152 operations classified into recommended `x-agentic-access` contracts. |
+| Facet | Score |
+|---|---|
+| Discoverability | 63.4 |
+| Contract quality | 66.3 |
+| Contract governance | 22.0 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 70.4 |
+| Access clarity | 76.3 |
 
-## Access Posture
+**Agent readiness 33.5** — agent-ready
 
-The OpenADR 3 OpenAPI is a genuine, parseable machine-readable contract, and the Alliance describes its specifications as license-free. But the Alliance operates no developer portal: `developer.`, `developers.`, `api.`, `docs.`, and `data.` subdomains of openadr.org do not resolve, and `/openapi.json`, `/swagger.json`, and `/api-docs` all return 404. The canonical specification repository, `github.com/oadr3-org`, publishes zero public repositories and is membership-gated. The public route to the spec is a registration form at `/specification-download` that emails download links under terms and conditions. The online certification test tool at `test-tool.openadr.org` is a member login behind a paid licence (USD $1,250 per certification test).
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | — |
 
-The Alliance publishes no consumer energy data and no open grid or market data. It defines the protocol; other parties implement and operate it.
+**Regulatory alignment 36.5** — Energy & Utilities
 
-See [review.yml](review.yml) for the full probe log and mandate assessment.
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/openadr-alliance/](https://apis.io/providers/openadr-alliance/).
 
-## Maintainers
+## How this profile is made
 
-- Kin Lane — kin@apievangelist.com
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for OpenADR Alliance: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/openadr-alliance/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
